@@ -1,0 +1,66 @@
+.checkout-page {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.billing-details {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.order-summary {
+  flex: 1;
+  margin-top: 15px;
+}
+
+.billing-form {
+  margin-top: 10px;
+}
+
+.form-row {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.half-width {
+  width: calc(50% - 5px); /* Adjust width as per your design */
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.order-table th,
+.order-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.order-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.proceed-checkout-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.proceed-checkout-btn:hover {
+  background-color: #0056b3;
+}
+
+.billing {
+  font-size: 24px;
+  font-family: 'Roboto';
+  font-weight: 600;
+  color: #363636;
+}
