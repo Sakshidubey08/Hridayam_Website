@@ -574,7 +574,6 @@ break;
           <Link to='/acrylic'> <div class="submenu-item">Acrylic Photo frame</div></Link> 
           </div>
         </div>
-        <button class="menu-heading">Contact Us</button>
       </div>
       <div className='swiper-background relative top-4'>
         <img src={group} alt="" className='group hidden md:block' />

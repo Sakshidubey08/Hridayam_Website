@@ -1,5 +1,5 @@
-.container {
-    width: 80%;
+/* .container {
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -26,7 +26,7 @@
 
 
 /* Icon styling */
-.user-icons {
+/* .user-icons {
     display: flex;
     gap: 10px;
    
@@ -37,11 +37,11 @@
     height: 60px;
    
     border: 3px solid transparent; /* Transparent border to avoid size shifting */
-    cursor: pointer;
-}
+    /* cursor: pointer;
+} */
 
 /* Icon colors */
-.icon-black { border-color: black; }
+/* .icon-black { border-color: black; }
 .icon-blue { border-color: blue; }
 .icon-yellow { border-color: yellow; }
 .icon-green { border-color: green; }
@@ -55,9 +55,9 @@
   
   .image-container {
     width: 100%;
-    height: 300px;
+    height: 500px;
     overflow: hidden;
-    border: 4px solid #ccc;
+    
     border-radius: 5px;
   }
   
@@ -84,7 +84,7 @@
   }
   
   .option {
-    background-color: #6774BE; /* Green */
+    background-color: #6774BE; 
     border: none;
     color: white;
     padding: 10px 20px;
@@ -93,12 +93,13 @@
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
+    
     cursor: pointer;
     border-radius: 5px;
-  }
+  } */
 
   
-  .shape-options {
+  /* .shape-options {
     display: flex;
     gap: 10px;
   }
@@ -207,47 +208,47 @@
     justify-content: center;
     align-items: center;
  
-    flex-wrap: wrap; /* Allows wrapping of SVGs if the screen is too narrow */
+    flex-wrap: wrap; 
 }
 
 .shape-svg {
-    width: 50px; /* Width of the SVG container */
-    height: 50px; /* Height of the SVG container */
-    flex-shrink: 0; /* Prevent shrinking of the SVGs */
+    width: 50px; 
+    height: 50px; 
+    flex-shrink: 0; 
 
 }
 .shape-svg1 {
-    width: 50px; /* Width of the SVG container */
-    height: 50px; /* Height of the SVG container */
-    flex-shrink: 0; /* Prevent shrinking of the SVGs */
+    width: 50px; 
+    height: 50px; 
+    flex-shrink: 0; 
   margin-right: 38.8rem;
   margin-bottom: 17px;
-}
-.shape-svg2 {
-    width: 50px; /* Width of the SVG container */
-    height: 50px; /* Height of the SVG container */
-    flex-shrink: 0; /* Prevent shrinking of the SVGs */
+} */
+/* .shape-svg2 {
+    width: 50px; 
+    height: 50px;
+    flex-shrink: 0; 
   margin-right: 33.4rem;
-}
+} 
 .shape-svg3 {
-    width: 50px; /* Width of the SVG container */
-    height: 50px; /* Height of the SVG container */
-    flex-shrink: 0; /* Prevent shrinking of the SVGs */
+    width: 50px; 
+    height: 50px; 
+    flex-shrink: 0; 
   margin-right: 29rem;
   margin-bottom: 16px;
 }
 .shape-svg4 {
-    width: 50px; /* Width of the SVG container */
-    height: 50px; /* Height of the SVG container */
-    flex-shrink: 0; /* Prevent shrinking of the SVGs */
+    width: 50px; 
+    height: 50px; 
+    flex-shrink: 0; 
   margin-right: 23.4rem;
   margin-bottom: 16px;
-}
-.shape-svg1, .shape-svg2, .shape-svg3, .shape-svg4 {
+} */
+/* .shape-svg1, .shape-svg2, .shape-svg3, .shape-svg4 {
     cursor: pointer;
    
-    width: 80px; /* Adjust the size */
-    height: 80px; /* Adjust the size */
+    width: 80px; 
+    height: 80px; 
 }
 
 .shape-svg1.selected, 
@@ -255,9 +256,9 @@
 .shape-svg3.selected, 
 .shape-svg4.selected {
     transform: scale(1.1); 
-}
+} */
 
-.image-preview {
+/* .image-preview {
     display: flex;
     justify-content: center;
     margin-top: 20px;
@@ -274,9 +275,9 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
+} */
 
-.image-container.rectangle {
+/* .image-container.rectangle {
   width: 100%;
   height: auto;
 }
@@ -314,9 +315,9 @@
 .image-container.square {
     border-radius: 0;
     border: 5px solid;
-}
+} */
 
-.shape-svg1.selected, .shape-svg2.selected, .shape-svg3.selected, .shape-svg4.selected {
+/* .shape-svg1.selected, .shape-svg2.selected, .shape-svg3.selected, .shape-svg4.selected {
     stroke: var(--border-color);
 }
 .image-container .overlay-text {
@@ -324,8 +325,8 @@
     top: 45%;
     left: 45%;
     
-    color: white; /* Adjust text color as needed */
-    font-size: 24px; /* Adjust text size as needed */
+    color: white; 
+    font-size: 24px; 
      color: black;
     padding: 5px;
     border-radius: 3px;
@@ -338,12 +339,12 @@
 .size{
   font-family: 'Poppins';
     font-weight: bold;
-}
+} */
 
-.thickness{
+/* .thickness{
   font-family: 'Poppins';
     font-weight: bold;
-}
+} */
 
 /* .container {
   display: flex;
@@ -371,18 +372,216 @@
   height: 30px;
 } */
 
-.change-photo {
+/* .change-photo {
   background-color: red;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
+} */
+/* 
 .terms {
   font-size: 12px;
   text-align: center;
   margin-top: 10px;
+}  */
+
+/* App.css */
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
 }
 
+h1 {
+  margin-bottom: 20px;
+}
+
+.profile-pictures {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.preview {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.image-container {
+  width: 400px;
+  height: 530px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-text {
+  margin-left: 20px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-button {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.upload-button input[type="file"] {
+  display: none;
+}
+
+.upload-button button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.shapes {
+  margin-bottom: 20px;
+}
+
+.shape-options {
+  display: flex;
+  justify-content: center;
+}
+
+.shape {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ccc;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.shape.selected {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.size-options {
+  margin-bottom: 20px;
+}
+
+.size-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.size-button {
+  background-color: #ccc;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.size-button.active {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.thickness-options {
+  margin-bottom: 20px;
+}
+
+.thickness-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.thickness-button {
+  background-color: #ccc;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.thickness-button.active {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.price {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.details {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.buy-now {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.size-guide {
+  margin-top: 20px;
+}
+
+.shape-svg {
+  width: 50px; 
+  height: 50px; 
+  flex-shrink: 0; 
+
+}
+.shape-svg1 {
+  width: 50px; 
+  height: 50px; 
+  flex-shrink: 0; 
+margin-right: 38.8rem;
+margin-bottom: 17px;
+} 
+.shape-svg2 {
+  width: 50px; 
+  height: 50px;
+  flex-shrink: 0; 
+margin-right: 33.4rem;
+} 
+.shape-svg3 {
+  width: 50px; 
+  height: 50px; 
+  flex-shrink: 0; 
+margin-right: 29rem;
+margin-bottom: 16px;
+}
+.shape-svg4 {
+  width: 50px; 
+  height: 50px; 
+  flex-shrink: 0; 
+margin-right: 23.4rem;
+margin-bottom: 16px;
+} 
