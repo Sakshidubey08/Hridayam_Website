@@ -20,7 +20,7 @@ import image12 from '../images/image 13 (3).png'
 import image14 from '../images/image15.png'
 import image15 from '../images/image 16.png'
 import image17 from '../images/image 124.png'
-
+import Header from '../Header';
 import '../Home.css'
 import './Product3.css'
 
@@ -135,38 +135,7 @@ const Product1 = () => {
   
     return (
         <>
-            <div className="home-container">
-                <div className="blue-background">
-                    <div className="images-container">
-                        <img src={pinterest} alt="Image 1" className="image" />
-                        <img src={instagram} alt="Image 2" className="image" />
-                        <img src={facebook} alt="Image 3" className="image" />
-                        <img src={XLogo} alt="Image 4" className="image" />
-                    </div>
-                    <div className="center-text">
-                        Free Shipping On All Us Orders Over Rs 499
-                    </div>
-                    <div className="locate-store">
-                        <img src={location} alt="Locate Icon" className="icon" />
-                        <span className='locate'>Locate Store</span>
-                    </div>
-                </div>
-            </div>
-            <div className="navbar-container">
-                <div className="logo-container">
-                    <img src={logo} alt="Logo" className="logo" />
-                </div>
-                <div className="search-container">
-                    <img src={search} alt="Search Icon" className="search-icon" />
-                    <input type="text" className="search-input" placeholder="Search product..." />
-                </div>
-                <div className="nav-img">
-                    <img src={heart} alt="heart" className="image" />
-                    <Link to='/profile'>
-                        <img src={icon2} alt="icon" className="image" /></Link>
-                    <img src={icon3} alt="icon 3" className="image" />
-                </div>
-            </div>
+            <Header/>
             <div className="product-detail">
                 <div className="breadcrumb">Home / {product.name}</div>
                

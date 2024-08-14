@@ -17,30 +17,98 @@
   display: flex;
   margin-bottom: 20px;
   gap: 20px;
+  flex-wrap: wrap; /* Allow wrapping for responsiveness */
 }
 
 .form-row input {
-  width: 100%;
+  flex: 1; /* Ensure all inputs take up equal space */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
   height: 40px; /* Ensure all inputs have the same height */
+  min-width: 0; /* Prevent inputs from growing too large */
+}
+
+.password-container {
+  position: relative;
+  flex: 1; /* Ensure the password container takes up equal space */
+}
+
+.password-container input {
+  width: 100%; /* Full width of the container */
+  padding: 10px;
+  padding-right: 40px; /* Add space for the eye icon */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%); /* Center the icon vertically */
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
 }
 
 .signup-button {
-  width: 100%;
+  width: 50%;
   padding: 10px;
   background-color: #23387A;
   color: white;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 14px;
   border: none;
   cursor: pointer;
-}
-
-.signup-button:hover {
-  background-color: #0056b3;
+  display: block;
+  margin: 15px auto;
+  text-align: center;
 }
 
 .center-text {
   text-align: center;
+  color: #23387A;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.signup {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+
+.signup-heading1 {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: #9E9E9E;
+  font-family: 'Roboto';
+  font-weight: 500;
+  margin-top: -22px;
+}
+
+.cancel {
+  font-size: 13px;
+  color: #787878;
+  margin-left: 19.8rem;
+  margin-top: -9px;
+  font-family: 'Roboto';
+  font-weight: 400;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+}
+.success-text{
+  color: green;
+  font-size: 14px;
 }

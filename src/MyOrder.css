@@ -1,0 +1,30 @@
+.order-table-container {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 52px;
+  }
+  
+  .table-header {
+    background-color: #23387A;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+  
+  .header-cell {
+    font-weight: bold;
+    text-align: center;
+    color: white;
+  }
+  
+  .table-body {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .no-order-found {
+    font-size: 16px;
+    color: #777;
+  }

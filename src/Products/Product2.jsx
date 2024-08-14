@@ -19,15 +19,18 @@ import image12 from '../images/image 13 (3).png';
 import '../Home.css';
 import './Product1.css';
 import './Product2.css';
-
-
-
+import rect1 from '../images/RECTANGLE FRAME 2(1).jpg'
+import rect2 from '../images/RECTANGLE FEAME(1).jpg'
+import square1 from '../images/SQUARE FRAME.jpg'
+import oval from '../images/OVAL FRAME(1).jpg'
+import circle from '../images/CIRCLE FRAME.jpg'
+import Header from '../Header';
 const shapeImages = {
-    Normal: ['https://i.pinimg.com/564x/4e/6f/93/4e6f9310cba419df4b2b8c9dc998721c.jpg', 'https://i.pinimg.com/736x/ed/8d/91/ed8d91cdec950913c306c665646ded2b.jpg', 'https://i.pinimg.com/564x/6e/3b/39/6e3b39fe55af275d228bc362892a846d.jpg', 'https://i.pinimg.com/564x/1c/06/94/1c069442f31d4bc27fd7828e22ab5aac.jpg'],
+    Normal: [rect1, rect2],
     RoundEdge: ['round1.jpg', 'round2.jpg', 'round3.jpg', 'round4.jpg'],
-    Circle: ['https://i.pinimg.com/564x/5c/b7/3e/5cb73e2bed22e7755cacb62bdf4d0324.jpg', 'circle2.jpg', 'circle3.jpg', 'circle4.jpg'],
-    Oval: ['oval1.jpg', 'oval2.jpg', 'oval3.jpg', 'oval4.jpg'],
-    Square: ['square1.jpg', 'square2.jpg', 'square3.jpg', 'square4.jpg'],
+    Circle: [ 'circle2.jpg', 'circle3.jpg', 'circle4.jpg'],
+    Oval: [oval, 'oval2.jpg', 'oval3.jpg', 'oval4.jpg'],
+    Square: [square1, 'square2.jpg', 'square3.jpg', 'square4.jpg'],
     RoundEdgeSquare: ['roundSquare1.jpg', 'roundSquare2.jpg', 'roundSquare3.jpg', 'roundSquare4.jpg'],
 };
 
@@ -167,38 +170,7 @@ const Product1 = () => {
 
     return (
         <>
-            <div className="home-container">
-                <div className="blue-background">
-                    <div className="images-container">
-                        <img src={pinterest} alt="Image 1" className="image" />
-                        <img src={instagram} alt="Image 2" className="image" />
-                        <img src={facebook} alt="Image 3" className="image" />
-                        <img src={XLogo} alt="Image 4" className="image" />
-                    </div>
-                    <div className="center-text">
-                        Free Shipping On All Us Orders Over Rs 499
-                    </div>
-                    <div className="locate-store">
-                        <img src={location} alt="Locate Icon" className="icon" />
-                        <span className='locate'>Locate Store</span>
-                    </div>
-                </div>
-            </div>
-            <div className="navbar-container">
-                <div className="logo-container">
-                    <img src={logo} alt="Logo" className="logo" />
-                </div>
-                <div className="search-container">
-                    <img src={search} alt="Search Icon" className="search-icon" />
-                    <input type="text" className="search-input" placeholder="Search product..." />
-                </div>
-                <div className="nav-img">
-                    <img src={heart} alt="heart" className="image" />
-                    <Link to='/profile'>
-                        <img src={icon2} alt="icon" className="image" /></Link>
-                    <img src={icon3} alt="icon 3" className="image" />
-                </div>
-            </div>
+            <Header/>
             <div className="product-detail">
                 <div className="breadcrumb">Home / {product.name}</div>
                 <div className="content">
@@ -258,8 +230,6 @@ const Product1 = () => {
                             <label htmlFor="imageUpload" className="select-photo-button" style={{ position: 'absolute', top: 0, left: 0, zIndex: '4', cursor: 'pointer' }}>Select Photo</label>
                         </div>
                     </div>
-
-
 
                     <div className="scrollable-content2">
                         <div className="product-info">

@@ -1,0 +1,90 @@
+.dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    width: 200px;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown-item {
+    padding: 4px;
+    
+  }
+  
+  .dropdown-item:last-child {
+    border-bottom: none;
+  }
+  .dropdown-item:first-child{
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Roboto';
+    
+  }
+
+  
+  .dropdown-item button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .dropdown-item button:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Icon styles */
+  .feather-user {
+    width: 24px;
+    height: 24px;
+    fill: #666;
+    cursor: pointer;
+  }
+  
+  .feather-user:hover {
+    fill: #333;
+  }
+  .dropdown-item1{
+    padding-bottom: 20px;
+    padding-left: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Roboto';
+    color:  #858585;
+  }
+  .dropdown-item2{
+    border: 1px solid #23387A;
+    padding: 6px;
+    margin-left: 5px;
+    color: white;
+    font-family: 'Poppins';
+    background-color: #23387A;
+  }
+  .dropdown-item2:hover {
+    background-color: #2C4FB0; /* Lighter blue color on hover */
+    border-color: #2C4FB0; /* Adjust border color on hover */
+    color: white; /* Optional: Change text color on hover */
+}
+  .dropdown-item3{
+    padding: 10px;
+    margin-top: 6px;
+    margin-left: -5px;
+  }
+  .dropdown-item4{
+
+    margin-top: 5px;
+    margin-left: 4px;
+  }
+
+  .dropdown-item5{
+
+    margin-left: 4px;
+  }

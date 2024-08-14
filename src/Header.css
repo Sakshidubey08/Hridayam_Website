@@ -8,8 +8,7 @@
     justify-content: space-between;
     padding: 0 10px;
     box-sizing: border-box;
-  }
-  
+  } 
   .images-container {
     display: flex;
     gap: 18px;
@@ -31,6 +30,7 @@
     font-family: 'Poppins', sans-serif;
     text-align: center;
     flex-grow: 1;
+    
   }
   
   .locate-store {
@@ -325,5 +325,139 @@
    padding-top: 10px;
    font-family: 'Poppins';
    font-size: 14px;
+   font-weight: 500;
     
   }
+  .hamburger-container {
+    display: none; /* Hide by default */
+  }
+  @media only screen and (max-width: 768px) {
+    .blue-background {
+      height: 30px; /* Reduce height for mobile view */
+      padding: 0 5px; /* Reduce padding for mobile view */
+      width: 100vw; /* Take full width of the viewport */
+      margin: 0; /* Remove any margins */
+      background-color: #23387A; /* Ensure background color is applied */
+      flex-direction: row; /* Ensure items are aligned horizontally */
+      align-items: center; /* Center items vertically */
+    }
+  
+    .logo-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; /* Align logo to the left */
+      padding: 0 10px; /* Add some padding for spacing */
+    }
+  
+    .logo {
+      height: 30px; /* Adjust height for mobile view */
+      padding-left: 0; /* Remove left padding */
+    }
+  
+    .nav-img {
+      display: flex;
+      gap: 10px; /* Adjust gap for mobile view */
+      flex: 1;
+      padding-right: 0; /* Remove right padding for mobile view */
+      justify-content: flex-end; /* Align nav items to the right */
+    }
+  
+    .nav-img img {
+      height: 24px; /* Adjust height of nav images for mobile view */
+    }
+  
+    .hamburger-container {
+      display: flex; /* Show hamburger icon */
+      align-items: center;
+      justify-content: center; /* Center hamburger icon vertically */
+      margin-right: 10px; /* Add margin to space out from the logo */
+      margin-right: 23px;
+    }
+  
+    .hamburger-icon {
+      color: white; /* Set hamburger icon color */
+      font-size: 24px; /* Adjust size as needed */
+    }
+  }
+  
+  
+  /* Media query for smaller mobile view */
+ /* Media query for smaller mobile view */
+@media only screen and (max-width: 480px) {
+  .blue-background {
+    flex-direction: column; /* Stack items vertically for smaller screens */
+    align-items: center; /* Center align items */
+    padding: 0; /* Remove padding */
+    height: auto; /* Allow height to adjust dynamically */
+    background-color: #23387A; /* Ensure background color is applied */
+  }
+
+  .navbar-container {
+    background-color: #23387A; /* Ensure background color for navbar */
+    display: flex;
+    align-items: center;
+    width: 100%; /* Ensure full width */
+    padding: 0 10px; /* Add padding to avoid content touching edges */
+    box-sizing: border-box;
+  }
+  .search-container{
+    margin-top: 12rem;
+    margin-left: -26rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex: 2;
+  }
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .search-input {
+    padding: 10px 10px 10px 40px; 
+    border: 1px solid #DDDDDD;
+    flex-grow: 1;
+    border-radius: 4px;
+    max-width: 90%; /* Full width for mobile view */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+  
+  }
+  .hamburger-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Add margin to space out from logo */
+  }
+
+  .hamburger-icon {
+    color: white; /* Set hamburger icon color */
+    font-size: 24px; /* Adjust size as needed */
+    margin-right: 15rem;
+  }
+
+  .logo-container {
+    width: auto; /* Adjust width for logo container */
+    flex: 1; /* Allow logo container to take up remaining space */
+    display: flex;
+    justify-content: center; /* Center the logo horizontally */
+  }
+
+  .logo {
+    height: 30px; /* Adjust height for smaller screens */
+    padding-left: 0; /* Remove left padding */
+  }
+
+  .nav-img {
+    display: flex;
+    width: 100%; /* Ensure nav items take full width */
+    padding-right: 0; /* Remove right padding */
+    justify-content: center; /* Center nav items horizontally */
+    gap: 10px; /* Adjust gap for mobile view */
+  }
+
+  .nav-img img {
+    height: 24px; /* Adjust height of nav images for mobile view */
+  }
+}

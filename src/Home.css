@@ -151,18 +151,24 @@ body {
   left: 0;
   background-color: #fff;
   border: 1px solid #ccc;
-  width: 150px;
+  width: 170px;
   z-index: 1000;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins';
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .submenu-item {
   padding: 10px;
   border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .submenu-item:last-child {
   border-bottom: none;
+  width: 190px;
 }
 
 .menu-item:hover .submenu {
@@ -332,6 +338,7 @@ body {
  padding-top: 10px;
  font-family: 'Poppins';
  font-size: 14px;
+ font-weight: 400;
   
 }
 
@@ -397,11 +404,19 @@ body {
 }
 .image-description {
   font-size: 14px;
+  font-weight: 500;
   text-align: left;
   font-family: 'Roboto';
   color: #363636;
 }
-
+.image-description1 {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  font-family: 'Roboto';
+  color: #363636;
+  width: 150px;
+}
 .image-box {
   @apply h-24 md:h-28 w-full md:w-3/4 bg-white flex justify-around items-center z-10 absolute top-[13.3rem] md:top-[13.3rem];
 }
@@ -490,20 +505,27 @@ body {
   color: #363636;
   text-align: center;
   margin-top: 1rem;
+  font-size: 32px;
+  font-weight: 600;
 }
 .best2{
   color: #23387A;
   text-align: center;
   margin-top: 7rem;
+  font-size: 15px;
+  font-weight: 500;
 }
 .top3{
   color: #363636;
   text-align: center;
+  font-size: 32px;
+  font-weight: 600;
 }
 .best3{
   color: #23387A;
   text-align: center;
-  
+  font-size: 15px;
+  font-weight: 500;
 }
 .card-container {
   display: grid;
@@ -533,12 +555,12 @@ body {
 
 }
 
-.card-image1 {
+/* .card-image1 {
 
  padding-left: 25px;
  padding-top: 32px;
   height: 230px;
-}
+} */
 
 .favorite-btn {
   position: absolute;
@@ -769,7 +791,6 @@ input[type="email"] {
   text-align: center;
   font-size: 12px;
   font-weight: 400;
-  margin-bottom: 20px;
   color:  #9E9E9E;
   font-family: 'Roboto';
   font-weight: 500;
@@ -801,7 +822,7 @@ input[type="email"] {
 }
 
 .forgot-password {
-  font-size: 12px;
+  font-size: 13px;
   color:  #787878;
   
   margin-left: 16rem;
@@ -823,13 +844,15 @@ input[type="email"] {
   font-weight: 400;
   font-size: 14px;
 }
-.create-account-button{
-  padding: 12px 50px;
-  border: none;
-  width: 100%;
-  border-radius: 4px;
+.create-account{
+  margin-left: 8.5rem;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Roboto';
+  color: #23387A;
 }
 .login-button {
   background-color: #23387A;

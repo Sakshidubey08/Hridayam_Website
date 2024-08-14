@@ -1,12 +1,12 @@
 import React from 'react';
 import Frame from './images/image 7365.png';
 import './Footer.css';
-
+import { NavLink } from 'react-router-dom';
 function Footer() {
     return (
         
         <footer className="footer">
-            <div className="container">
+            <div className="container1">
                 <div className="footer-section">
                     <img className="footer-logo" src={Frame} alt="Logo" />
                     <p className="footer-description">
@@ -27,12 +27,25 @@ function Footer() {
                 <div className="footer-section">
                     <h4 className="footer-title">Company</h4>
                     <ul className="footer-links">
-                        <li><a href="#" className="footer-link">About Us</a></li>
-                        <li><a href="#" className="footer-link">Contact Us</a></li>
-                        <li><a href="#" className="footer-link">Terms And Condition</a></li>
-                        <li><a href="#" className="footer-link">Privacy Policy</a></li>
-                        <li><a href="#" className="footer-link">Refer Policy</a></li>
-                    </ul>
+        <li>
+          <NavLink to="/all-products" className="footer-link">All Products</NavLink>
+        </li>
+        <li>
+          <NavLink to="/about-us" className="footer-link">About Us</NavLink>
+        </li>
+        <li>
+          <NavLink to="/contact-us" className="footer-link">Contact Us</NavLink>
+        </li>
+        <li>
+          <NavLink to="/terms-and-conditions" className="footer-link">Terms And Conditions</NavLink>
+        </li>
+        <li>
+          <NavLink to="/privacy-policy" className="footer-link">Privacy Policy</NavLink>
+        </li>
+        <li>
+          <NavLink to="/refer-policy" className="footer-link">Refer Policy</NavLink>
+        </li>
+      </ul>
                 </div>
                 <div className="footer-section">
                     <h4 className="footer-title">Help</h4>

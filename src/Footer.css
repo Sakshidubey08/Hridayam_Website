@@ -23,7 +23,7 @@
 }
 
 
-.container {
+.container1 {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -44,7 +44,7 @@
 }
 
 .footer-description {
-    font-size: 0.875rem;
+    font-size: 0.995rem;
 }
 
 .footer-title {
@@ -83,7 +83,7 @@
 }
 
 .footer-address {
-    margin: 0;
+    margin: -2px;
 }
 
 .footer-bottom {

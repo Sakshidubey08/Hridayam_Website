@@ -1,6 +1,7 @@
 .product-image3{
-    height: 36rem;
+    height: 30rem;
     padding-left: 110px;
+    margin-top: 67px;
 }
 .product-image4{
     height: 29rem;
@@ -20,3 +21,34 @@
     padding-top: 30px;
     margin-top: 140px;
 }
+
+.price1{
+    margin-top: -7px;
+}
+.quantity-box {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #FFA500; /* Orange color */
+    color: #fff;
+    border-radius: 5px;
+    margin-left: 18rem;
+    margin-top: -3rem;
+    width: 80px;
+    text-align: center;
+  }
+  
+  .wantmore{
+    width: 130px;
+    height: 40px;
+    background-color: #23387A;
+    color: #FFFFFF;
+    text-align: center;
+    padding-top: 8px;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .offer{
+    font-family: 'Roboto';
+    font-weight: bold;
+  }

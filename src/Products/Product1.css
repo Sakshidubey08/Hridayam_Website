@@ -3,22 +3,33 @@
     flex-direction: column;
     padding: 20px;
   }
-  
+  .product-detail1 {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    margin-left: 29px;
+    margin-top: -82px;
+  }
   .breadcrumb {
     margin-bottom: 20px;
     font-size: 16px;
     color: #555;
     margin-left: 85px;
   }
-  
+  .breadcrumb1 {
+   margin-top: 32px;
+    font-size: 16px;
+    color: #555;
+    margin-left: 120px;
+  }
   .content {
     display: flex;
     align-items: flex-start;
   }
   .image2{
     background-color: #F2F2F2;
-    width: 660px;
-    height:600px ;
+    width: 500px;
+    height:500px ;
     align-items: center;
     margin-left: 62px;
   }
@@ -30,7 +41,7 @@
   }
   .product-image2 {
     width: 640px;
-    height: 500px;
+    height: 400px;
     margin-left: 20px;
     object-fit: cover;
     margin-top: 32px;
@@ -54,6 +65,14 @@
     font-size: 24px;
   }
   
+  .product-info .price1 {
+    margin-top: -17px;
+    font-size: 20px;
+    color: #6B6B6B;
+    font-family: 'Roboto';
+    font-size: 20px;
+    font-weight: 700;
+  }
   .product-info .price {
     margin-bottom: 20px;
     font-size: 20px;
@@ -64,6 +83,13 @@
   }
   .selected{
     margin-top: 19px;
+    color:  #363636;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Roboto';
+  }
+  .selected1{
+    margin-top: 10px;
     color:  #363636;
     font-size: 18px;
     font-weight: 600;
@@ -80,8 +106,13 @@
   .colors {
     display: flex;
     gap: 10px;
+    
   }
-  
+  .colors1 {
+    display: flex;
+    gap: 10px;
+    
+  }
   .color-circle {
     width: 30px;
     height: 30px;
@@ -154,7 +185,12 @@
     align-items: center;
     margin-top: 20px;
   }
-  
+ 
+  .pincode-checker1 {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  } 
   .pincode-input {
     padding: 5px 10px;
     font-size: 14px;
@@ -227,4 +263,16 @@
   font-size: 32px;
   font-weight: 600;
   margin-left: 95px;
+}
+.similar1{
+  font-family: 'Roboto';
+  font-size: 32px;
+  font-weight: 600;
+  margin-left: 95px;
+  margin-top: 52px;
+}
+.free{
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 16px;
 }

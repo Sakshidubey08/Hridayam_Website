@@ -1,3 +1,144 @@
+// import React, { useContext } from 'react';
+// import { CartContext } from './CartContext';
+// import { FaTrash } from 'react-icons/fa';
+// import { Link } from 'react-router-dom';
+// import './CartPage.css';
+// import Footer from './Footer';
+// import Header from './Header';
+// const CartPage = () => {
+//   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
+
+//   console.log('Cart Items:', cartItems);
+
+//   const handleIncrement = (productId) => {
+//     // Find the cart item by productId
+//     const itemToUpdate = cartItems.find(item => item.product_id === productId);
+  
+//     if (itemToUpdate) {
+//       // Increment the quantity
+//       const newQuantity = itemToUpdate.quantity + 1;
+//       // Pass the complete product object
+//       updateQuantity(itemToUpdate, newQuantity);
+//     } else {
+//       console.error('Item not found in cart for productId:', productId);
+//     }
+//   };
+  
+  
+  
+//   const handleDecrement = (productId) => {
+//     const itemToUpdate = cartItems.find(item => item.product_id === productId);
+  
+//     if (itemToUpdate) {
+    
+//       const newQuantity = itemToUpdate.quantity > 1 ? itemToUpdate.quantity - 1 : 1;
+//       updateQuantity(itemToUpdate, newQuantity);
+//     } else {
+//       console.error('Item not found in cart for productId:', productId);
+//     }
+//   };
+  
+
+
+
+//   const calculateSubtotal = () => {
+//     return cartItems.reduce((acc, item) => {
+//       const price = parseFloat(item.product.price) || 0;
+//       const quantity = parseInt(item.quantity) || 0;
+//       return acc + price * quantity;
+//     }, 0);
+//   };
+
+//   const calculateTotal = () => {
+//     return calculateSubtotal();
+//   };
+
+//   if (cartItems.length === 0) {
+//     return <div>Your cart is empty</div>;
+//   }
+
+//   return (
+//     <> 
+//       <Header/>
+//       <div className="cart-container">
+//         <table className="cart-table">
+//           <thead>
+//             <tr>
+//               <th>Product Image</th>
+//               <th>Product Name</th>
+//               <th>Price</th>
+//               <th>Quantity</th>
+//               <th>Total Price</th>
+//               <th>Action</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {cartItems.map(item => (
+//               <tr key={item.id}>
+//               <td>
+//                 <div className="cart-item-image">
+//                   <img
+//                     src={item.product.default_color_image || 'default-image.jpg'}
+//                     alt={item.product.name || 'Product'}
+//                     style={{ width: '50px', height: '50px' }}
+//                   />
+//                 </div>
+//               </td>
+//               <td>
+//                 <div className="cart-item-name">
+//                   {item.product.name || 'Unnamed Product'}
+//                 </div>
+//               </td>
+//               <td>{item.product.price}</td>
+//               <td>
+//                 <button onClick={() => handleDecrement(item.product_id)}>
+//                   -
+//                 </button>
+//                 <span>{item.quantity}</span>
+//                 <button onClick={() => handleIncrement(item.product._id)}>
+//                   +
+//                 </button>
+//               </td>
+//               <td>
+//                 &#8377;{(item.product.price || 0) * (item.quantity || 1)}
+//               </td>
+//               <td>
+//               <button onClick={() => {
+//     console.log('Removing item with _id:', item._id);
+//     removeFromCart(item._id);
+//   }}>
+//                   <FaTrash />
+//                 </button>
+//               </td>
+//             </tr>
+            
+//             ))}
+//           </tbody>
+//         </table>
+//         <div className="cart-summary">
+//           <h2 className="cart-total">Cart Total</h2>
+//           <div className="summary-box">
+//             <div className="summary-item1">
+//               <span>Subtotal</span>
+//               <span>&#8377;{calculateSubtotal()}</span>
+//             </div>
+//             <hr />
+//             <div className="summary-item2">
+//               <span>Total</span>
+//               <span>&#8377;{calculateTotal()}</span>
+//             </div>
+//           </div>
+//           <Link to="/checkout">
+//             <button className="proceed-checkout-btn">Proceed to Checkout</button>
+//           </Link>
+//         </div>
+//       </div>
+//       <Footer />
+//     </>
+//   );
+// };
+
+// export default CartPage;
 import React, { useContext } from 'react';
 import { CartContext } from './CartContext';
 import { FaTrash } from 'react-icons/fa';
@@ -14,6 +155,7 @@ import heart from './images/Heart.png';
 import icon2 from './images/icon2.png';
 import icon3 from './images/icon3.png';
 import Footer from './Footer';
+import Header from './Header';
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
@@ -41,49 +183,23 @@ const CartPage = () => {
   };
 
   if (cartItems.length === 0) {
-    return <div>Your cart is empty</div>;
+    return (
+      <>
+        <Header />
+        <div className='empty-wishlist-card'>Your cart is empty</div>
+      </>
+    );
   }
 
   return (
     <>
-      <div className="home-container">
-        <div className="blue-background">
-          <div className="images-container">
-            <img src={pinterest} alt="Pinterest" className="image" />
-            <img src={instagram} alt="Instagram" className="image" />
-            <img src={facebook} alt="Facebook" className="image" />
-            <img src={XLogo} alt="XLogo" className="image" />
-          </div>
-          <div className="center-text">
-            Free Shipping On All Us Orders Over Rs 499
-          </div>
-          <div className="locate-store">
-            <img src={location} alt="Locate Icon" className="icon" />
-            <span className="locate">Locate Store</span>
-          </div>
-        </div>
-      </div>
-      <div className="navbar-container">
-        <div className="logo-container">
-          <img src={logo} alt="Logo" className="logo" />
-        </div>
-        <div className="search-container">
-          <img src={search} alt="Search Icon" className="search-icon" />
-          <input type="text" className="search-input" placeholder="Search product..." />
-        </div>
-        <div className="nav-img">
-          <img src={heart} alt="heart" className="image" />
-          <Link to="/profile">
-            <img src={icon2} alt="icon" className="image" />
-          </Link>
-          <img src={icon3} alt="icon 3" className="image" />
-        </div>
-      </div>
+      <Header/>
       <div className="cart-container">
         <table className="cart-table">
           <thead>
             <tr>
               <th>Product Name</th>
+              <th>Product Image</th>
               <th>Price</th>
               <th>Quantity</th>
               <th>Total Price</th>
@@ -93,19 +209,20 @@ const CartPage = () => {
           <tbody>
             {cartItems.map(item => (
               <tr key={item.id}>
+                <td>{item.name}</td>
                 <td>
                   <div
                     className="cart-item-image"
-                    style={item.id.endsWith('_product1') ? {
-                      width: `${item.borderSize.split(' ')[0] * 10}px`,
-                      height: `${item.borderSize.split(' ')[2] * 10}px`,
-                      border: `5px solid ${item.borderColor}`,
-                    } : {}}
+                    // style={item.id.endsWith('_product1') ? {
+                    //   width: `${item.borderSize.split(' ')[0] * 3}px`,
+                    //   height: `${item.borderSize.split(' ')[2] * 4}px`,
+                      
+                    // } : {}}
                   >
                     <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%' }} />
                   </div>
-                  {item.name}
                 </td>
+                
                 <td>&#8377;{item.price}</td>
                 <td>
                   <button onClick={() => handleDecrement(item.id)}>-</button>
@@ -113,10 +230,12 @@ const CartPage = () => {
                   <button onClick={() => handleIncrement(item.id)}>+</button>
                 </td>
                 <td>&#8377;{item.price * item.quantity}</td>
-                <td>
-                  <button onClick={() => removeFromCart(item.id)}>
-                    <FaTrash />
-                  </button>
+                <td className="action-column">
+                  <div className="action-button">
+                    <button onClick={() => removeFromCart(item.id)}>
+                      <FaTrash />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

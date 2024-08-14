@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
 import group from './images/Group2.png'
@@ -8,14 +8,6 @@ import slider2 from './images/image 123.png'
 import icon5 from './images/icon5.png'
 import icon6 from './images/icon6.png'
 import icon7 from './images/icon7.png'
-import image1 from './images/image 2.png'
-import image2 from './images/image 3.png'
-import image3 from './images/image 4.png'
-import image4 from './images/image 6.png'
-import image5 from './images/image 7.png'
-import image6 from './images/image 8.png'
-import image7 from './images/image 5.png'
-import image8 from './images/image 9.png'
 import image9 from './images/image 13.png'
 import image10 from './images/image 14.png'
 import image11 from './images/image15.png'
@@ -55,23 +47,36 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './Slider.css';
 import Header from './Header.jsx';
-
-
-
+import Catalog from './Catalog/Catalog.jsx';
+import { WishlistContext } from './WishlistContext';
+import axios from 'axios';
 
 const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 }) => {
-  const cardsData = [
-    { id: 1, title: 'OUTDOOR <br/> DECOR', imageUrl: image1 },
-    { id: 2, title: 'WALL <br/> DECOR', imageUrl: image2 },
-    { id: 3, title: 'KITCHEN <br/> DECOR', imageUrl: image3 },
-    { id: 4, title: 'BATHROOM <br/> DECOR', imageUrl: image4 },
-    { id: 5, title: 'PRAYER <br/>  ESSENTIALS', imageUrl: image5 },
-    { id: 6, title: 'WALL LIGHT <br/> DECOR', imageUrl: image6 },
-    { id: 7, title: 'CORPORATE <br/>GIFTS', imageUrl: image7 },
-    { id: 8, title: 'ACRYLIC <br/> FRAME', imageUrl: image8 }
-  ];
 
-
+  // const [cards, setCards] = useState([]);
+  // useEffect(() => {
+  //   axios.get('http://91.108.104.122/api/getbestsellingproduct')
+  //     .then(response => {
+  //       const { data } = response;
+  //       if (data.status) {
+  //         // Format the data as required
+  //         const formattedCards = data.data.map(product => ({
+  //           id: product._id,
+  //           imageUrl: product.image,
+  //           price: `&#8377;${parseFloat(product.price).toFixed(2)}`,
+  //           description: product.product_details,
+  //           height: '160px' // Adjust height if necessary
+  //         }));
+  //         setCards(formattedCards);
+  //       } else {
+  //         // Handle error or empty state
+  //         console.error('No data found');
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }, []);
   const [cards, setCards] = useState([
     { id: 1, imageUrl: image9, price: '&#8377;1,200', description: "Veneer Wall Light" },
     { id: 2, imageUrl: image10, price: '&#8377;4,200', description: "Brass Diya" },
@@ -82,8 +87,21 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     { id: 7, imageUrl: image16, price: '&#8377;200', description: "Mug, dark turquoise" },
     { id: 8, imageUrl: image17, price: '&#8377;1,400', description: "Decor Fountain" },
   ]);
-  const navigate = useNavigate();
+  const [favoriteCards, setFavoriteCards] = useState(() => {
+    // Load favoriteCards from localStorage when the component mounts
+    const storedFavorites = localStorage.getItem('favoriteCards');
+    return storedFavorites ? JSON.parse(storedFavorites) : {};
+  });
 
+  
+
+  useEffect(() => {
+    // Store favoriteCards in localStorage whenever it changes
+    localStorage.setItem('favoriteCards', JSON.stringify(favoriteCards));
+  }, [favoriteCards]);
+
+  const navigate = useNavigate();
+  const { addToWishlist, wishlistItems, removeFromWishlist } = useContext(WishlistContext);
   const handleCardClick = (id) => {
     switch (id) {
       case 1:
@@ -102,7 +120,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         navigate('/product6');
         break;
       case 6:
-        navigate('/product2');
+        navigate('/acrylic');
         break;
       case 7:
         navigate('/product7');
@@ -111,6 +129,82 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         navigate('/product8');
         break;
       default:
+        break;
+    }
+  };
+  const handleCardClick1 = (id) => {
+    switch (id) {
+      case 1:
+        navigate('/prebook');
+        break;
+      case 2:
+          navigate('/prebook1');
+      break;  
+      case 3:
+        navigate('/prebook2');
+    break;  
+    case 4:
+      navigate('/prebook3');
+  break;  
+  case 5:
+    navigate('/prebook4');
+break;  
+    }
+  };
+  const handleCardClick2 = (id) => {
+    switch (id) {
+      case 1:
+        navigate('/customize1');
+        break;
+        case 2:
+        navigate('/customize');
+        break;
+        case 3:
+        navigate('/customize3');
+        break;
+        case 4:
+        navigate('/customize4');
+        break;
+        case 5:
+        navigate('/customize5');
+        break;
+        case 6:
+        navigate('/customize');
+        break;
+        case 7:
+        navigate('/customize1');
+        break;
+        case 8:
+        navigate('/customize');
+        break;
+    }
+  };
+ 
+  const handleCardClick4 = (id) => {
+    switch (id) {
+      case 1:
+        navigate('/discover1');
+        break;
+        case 2:
+        navigate('/discover2');
+        break;
+        case 3:
+        navigate('/discover3');
+        break;
+        case 4:
+        navigate('/discover4');
+        break;
+        case 5:
+        navigate('/customize1');
+        break;
+        case 6:
+        navigate('/customize');
+        break;
+        case 7:
+        navigate('/customize1');
+        break;
+        case 8:
+        navigate('/customize');
         break;
     }
   };
@@ -126,15 +220,39 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     { id: 8, imageUrl: image17, price: '&#8377;1,400', description: "Decor Fountain" },
   ]);
   const [cards2, setCards2] = useState([
-    { id: 1, imageUrl: image24, price: '&#8377;1,200', height: '200px', description: "Double Canopy Umbrella" },
-    { id: 2, imageUrl: image25, price: '&#8377;4,200', description: "Water Bottle" },
-    { id: 3, imageUrl: image26, price: '&#8377;800', description: "Fogg Deodorant Men" },
-    { id: 4, imageUrl: image27, price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
-    { id: 5, imageUrl: image28, price: '&#8377;80', description: "Men White Shoes" },
+    { id: 1, imageUrl: 'https://i.pinimg.com/564x/ca/e6/9c/cae69c9b3349585dbaf4361bdfbbcba4.jpg', price: '&#8377;1,200', height: '200px', description: "Personalize Mugs" },
+    { id: 2, imageUrl: 'https://i.pinimg.com/736x/d2/77/47/d27747315ce2522594ef94de4cddce11.jpg', price: '&#8377;4,200', description: "Gift Hamper" },
+    { id: 3, imageUrl: 'https://i.pinimg.com/564x/d8/70/cc/d870ccde5b904a6373665143e31d50aa.jpg', price: '&#8377;800', description: "Fogg Deodorant Men" },
+    { id: 4, imageUrl: 'https://i.pinimg.com/564x/61/f6/8f/61f68f3bb8a99a46feb2c4d7250e92d6.jpg', price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
+    { id: 5, imageUrl: 'https://i.pinimg.com/564x/3f/1e/87/3f1e8712c53f32d0bb385b436d40004e.jpg', price: '&#8377;80', description: "Men White Shoes" },
     { id: 6, imageUrl: image29, price: '&#8377;1,500', description: "Brass Diya" },
     { id: 7, imageUrl: image30, price: '&#8377;200', height: '110px', description: "Skybags", position: 50 },
     { id: 8, imageUrl: image31, price: '&#8377;1,400', height: '150px', description: "Decor Fountain", position: 28 },
   ]);
+  // const [cards3, setCards3] = useState([]);
+  // useEffect(() => {
+  //   axios.get('http://91.108.104.122/api/getPreBook')
+  //     .then(response => {
+  //       const { data } = response;
+  //       if (data.status) {
+  //         const formattedCards = data.data.map(product => ({
+  //           id: product._id,
+  //           imageUrl: product.image,
+  //           price: `&#8377;${parseFloat(product.price).toFixed(2)}`,
+  //           description: product.product_details,
+  //           height: '150px',
+  //           position: 0,
+  //         }));
+  //         setCards3(formattedCards);
+  //       } else {
+  //         // Handle error or empty state
+  //         console.error('No data found');
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }, []);
   const [cards3, setCards3] = useState([
     { id: 1, imageUrl: image24, price: '&#8377;1,200', height: '200px', description: "Double Canopy Umbrella" },
     { id: 2, imageUrl: image25, price: '&#8377;4,200', description: "Water Bottle" },
@@ -146,19 +264,72 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     { id: 8, imageUrl: image31, price: '&#8377;1,400', height: '150px', description: "Decor Fountain", position: 28 },
   ]);
 
-  const [favoriteCards, setFavoriteCards] = useState({});
+
+    const [selectedColor1, setSelectedColor1] = useState('black');
   const [wishlist, setWishlist] = useState([]);
+  // const handleFavoriteButtonClick = (id, e) => {
+  //   e.stopPropagation();
+  //   setFavoriteCards((prev) => ({
+  //     ...prev,
+  //     [id]: !prev[id],
+  //   }));
+  //   e.preventDefault();
+  //   const selectedCard = cards.find(card => card.id === id);
+  //   if (selectedCard) {
+  //     setWishlist([...wishlist, selectedCard]);
+  //   }
+  //   const productToAdd = {
+  //     id: selectedColor1, 
+  //     name: product.name,
+  //     price: 1200, 
+  //     image: product.images[selectedColor1]
+  //   };
+  //   addToWishlist(productToAdd);
+  //   navigate('/wishlist')
+  // };
   const handleFavoriteButtonClick = (id, e) => {
-    e.stopPropagation(); // Prevent event propagation
-    setFavoriteCards((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+    e.stopPropagation();
+  
+    setFavoriteCards((prev) => {
+      const updatedFavorites = {
+        ...prev,
+        [id]: !prev[id],
+      };
+  
+      // Find the selected card based on the id
+      const selectedCard = cards.find((card) => card.id === id);
+  
+      if (selectedCard) {
+        if (updatedFavorites[id]) {
+          // If the heart is turning red (favoriting), add to the wishlist
+          const productToAdd = {
+            id: selectedColor1, // Replace with a unique identifier for the product
+            name: product.name,
+            price: 1200, // Adjust the price as needed
+            image: product.images[selectedColor1]
+          };
+          addToWishlist(productToAdd);
+          setWishlist([...wishlist, productToAdd]);
+        } else {
+          // If the heart is turning back to the default color (unfavoriting), remove from the wishlist
+          setWishlist(wishlist.filter((item) => item.id !== id));
+        }
+      }
+  
+      return updatedFavorites;
+    });
+  
     e.preventDefault();
-    const selectedCard = cards.find(card => card.id === id);
-    if (selectedCard) {
-      setWishlist([...wishlist, selectedCard]);
-    }
+  };
+  const product = {
+    name: 'Veneer Wall Light',
+    price: '&#8377;1,200',
+    images: {
+      black: image9,
+      
+      blue: 'path/to/blue-cap.jpg',
+      brown: 'path/to/brown-cap.jpg',
+    },
   };
   const [favoriteCards1, setFavoriteCards1] = useState({});
 
@@ -172,7 +343,10 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       handleFavoriteClick1(cardId);
     }
   };
-  const [favoriteCards2, setFavoriteCards2] = useState({});
+  const [favoriteCards2, setFavoriteCards2] = useState(() => {
+    const storedFavorites = localStorage.getItem('favoriteCards2');
+    return storedFavorites ? JSON.parse(storedFavorites) : {};
+  });
 
   const handleFavoriteButtonClick2 = (cardId) => {
     setFavoriteCards2((prevState) => ({
@@ -184,6 +358,39 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       handleFavoriteClick2(cardId);
     }
   };
+  // const handleFavoriteButtonClick2 = async (id) => {
+  //   // Log the ID to ensure it's correct
+  //   console.log(`Heart icon clicked with card id: ${id}`);
+
+  //   // Find the selected card
+  //   const selectedCard = cards3.find((card) => card.id === id);
+  //   if (!selectedCard) {
+  //     console.error('Card not found for id:', id);
+  //     return;
+  //   }
+
+  //   const isFavorite = favoriteCards2[id] || false;
+
+  //   try {
+  //     if (isFavorite) {
+  //       await removeFromWishlist(id);
+  //     } else {
+  //       await addToWishlist(selectedCard);
+  //     }
+
+  //     setFavoriteCards2((prev) => {
+  //       const updatedFavoriteCards = {
+  //         ...prev,
+  //         [id]: !prev[id],
+  //       };
+  //       localStorage.setItem('favoriteCards2', JSON.stringify(updatedFavoriteCards));
+  //       return updatedFavoriteCards;
+  //     });
+  //   } catch (error) {
+  //     console.error('Error managing wishlist:', error);
+  //   }
+  // };
+
   const [showLoadMore, setShowLoadMore] = useState(true);
 
   const handleLoadMore = () => {
@@ -196,7 +403,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       { id: 12, imageUrl: image9, price: '$80' },
 
     ]);
-    setShowLoadMore(false); // Disable load more button after adding cards (for demo)
+    setShowLoadMore(false);
   };
 
   const [showLoadMore1, setShowLoadMore1] = useState(true);
@@ -210,7 +417,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       { id: 12, imageUrl: image9, price: '$80' },
 
     ]);
-    setShowLoadMore1(false); // Disable load more button after adding cards (for demo)
+    setShowLoadMore1(false);
   };
   const [showLoadMore2, setShowLoadMore2] = useState(true);
 
@@ -237,7 +444,48 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     ]);
     setShowLoadMore3(false);
   };
+  const [slides, setSlides] = useState([]);
 
+
+  useEffect(() => {
+    const fetchSlides = async () => {
+      try {
+        const response = await fetch('https://hridayam.dasoclothings.in/api/BannersforUser', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+
+          }
+        });
+
+        if (!response.ok) {
+          console.error(`Error: ${response.status} ${response.statusText}`);
+          return;
+        }
+
+        const result = await response.json();
+
+
+
+        if (result && result.status && Array.isArray(result.data)) {
+          setSlides(result.data);
+        } else {
+          console.error('Fetched data is not in the expected format:', result);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchSlides();
+  });
+  const handleSlideClick = (index) => {
+    // Map the index to the specific route
+    const pageRoutes = ['/customize1', '/product3', '/catalog1']; // Add more routes as needed
+    if (index < pageRoutes.length) {
+      navigate(pageRoutes[index]);
+    }
+  };
   return (
     <>
       <Header />
@@ -323,9 +571,10 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         <div class="menu-item">
           <div class="menu-heading">Acrylic Photoframe</div>
           <div class="submenu">
-            <div class="submenu-item">Acrylic Photo frame</div>
+          <Link to='/acrylic'> <div class="submenu-item">Acrylic Photo frame</div></Link> 
           </div>
         </div>
+        <button class="menu-heading">Contact Us</button>
       </div>
       <div className='swiper-background relative top-4'>
         <img src={group} alt="" className='group hidden md:block' />
@@ -340,47 +589,81 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             modules={[Navigation, Pagination, Mousewheel, Keyboard]}
             className="mySwiper w-full h-full"
           >
-            <SwiperSlide>
-              <img src={slider} className="block w-full h-auto max-h-[60vh] object-cover" alt="slide1" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={slider1} className="block w-full h-auto max-h-[60vh] object-cover" alt="slide2" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={slider2} className="block w-full h-auto max-h-[60vh] object-cover" alt="slide3" />
-            </SwiperSlide>
+            {slides.map((slide, index) => (
+              <SwiperSlide key={index} onClick={() => handleSlideClick(index)}>
+                <img src={slide.image} className="block w-full h-auto  object-cover" alt={`slide${index + 1}`} />
+              </SwiperSlide>
+            ))}
           </Swiper>
-
-          <div className='image-box bg-white flex z-10 justify-around items-center absolute left-0 right-0 mx-auto md:left-auto md:right-auto top-[13.3rem] md:top-[13.3rem]'>
+          <div className='image-box bg-white flex z-10 justify-around items-center absolute left-0 right-0 mx-auto md:left-auto md:right-auto top-[13.3rem] md:top-[13.8rem]'>
             <div className='image-item'>
               <img src={icon5} alt="" className='box-image' />
-              <p className='image-description text-sm md:text-base'>1 million + customer</p>
+              <p className='image-description1 text-sm md:text-base mt-2'>1 Million + Customer</p>
             </div>
             <div className='image-item'>
               <img src={icon6} alt="" className='box-image' />
-              <p className='image-description text-sm md:text-base'>3 days return</p>
+              <p className='image-description1 text-sm md:text-base mt-2'>3 Days Return</p>
             </div>
             <div className='image-item'>
               <img src={icon7} alt="" className='box-image' />
-              <p className='image-description text-sm md:text-base'>Free Shipping</p>
+              <p className='image-description1 text-sm md:text-base mt-2'>Free Shipping</p>
             </div>
           </div>
         </div>
       </div>
 
+      <Catalog />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4 sm:mx-8 md:mx-20 mt-52">
-        {cardsData.map((card) => (
-          <div key={card.id} className="relative bg-gray-200 w-full h-52 sm:h-54 md:h-80 lg:h-82 lg:w-53">
-            <img  src={card.imageUrl} className="object-cover w-full h-full" alt={card.title} />
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <h5 style={{fontFamily:'Rosarivo'}} className="text-white text-center text-2xl pt-60" dangerouslySetInnerHTML={{ __html: card.title }}></h5>
+       {/* <div className='selling'>
+        <h1 className='best'>Best Selling</h1>
+        <h1 className='top'>Top Rated and Bestselling</h1>
+        <div className="card-container">
+          {cards.map(card => (
+            <Link
+            key={card.id}
+            to={`/card/${card.id}`}
+            className="card-link"
+            onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
+          >
+            <div key={card.id} className="card-wrapper" style={{ cursor: 'pointer' }}>
+              <div className="card1">
+                <div className="card-header">
+                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1" onClick={() => handleCardClick(card.id)} />
+                  <button
+                    className="favorite-btn"
+                    onClick={(e) => handleFavoriteButtonClick(card.id, e)}
+                    style={{
+                      cursor: 'pointer',
+                      border: 'none',
+                      background: 'none',
+                      padding: '5px',
+                    }}
+                  >
+                    <i
+                      className={`fa-heart ${favoriteCards[card.id] ? 'fas' : 'far'}`}
+                      style={{ color: favoriteCards[card.id] ? 'red' : '#23387A', fontSize: '24px' }}
+                    ></i>
+                  </button>
+                </div>
+              </div>
+              <div className="card-info">
+                <p className="image-description">{card.description}</p>
+                <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
+              </div>
             </div>
+            </Link>
+          ))}
+
+        </div>
+        {showLoadMore && (
+          <div className="load-more-container">
+            <button className="load-more-btn" onClick={handleLoadMore}>
+              Load More
+            </button>
           </div>
-        ))}
-      </div>
-
-
+          
+        )}
+      </div>  */}
       <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
@@ -426,7 +709,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       <div>
         <img src={group1} className="group1" alt="Group Image" /></div>
       <div className="relative ">
-        
+
         <div className="promo-content bg-[#9CA5C3] text-white p-6 md:p-8 lg:p-10 max-w-screen-lg mx-auto relative z-10">
           <div className="discount-text text-2xl md:text-3xl lg:text-4xl text-left mb-4 md:mb-6 lg:mb-8">
             Get Discount 20% off
@@ -443,15 +726,16 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         </div>
       </div>
 
-       <div className='selling mt-96'>
+      <div className='selling mt-96'>
         <h3 className='best'>New Arrivals</h3>
         <h1 className='top'>Discover the Latest Trends</h1>
         <div className="card-container">
           {cards1.map(card => (
+
             <div key={card.id} className="card-wrapper">
               <div className="card1">
                 <div className="card-header">
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1" />
+                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1"  onClick={() => handleCardClick4(card.id)}/>
                   <button
                     className="favorite-btn"
                     onClick={() => handleFavoriteButtonClick1(card.id)}
@@ -485,7 +769,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             </button>
           </div>
         )}
-      </div> 
+      </div>
       <div>
         <img src={group2} className='group2' />
         <div className='selling1'>
@@ -496,7 +780,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               <div key={card.id} className="card-wrapper">
                 <div className="card1">
                   <div className="card-header">
-                    <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1" />
+                    <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1" onClick={() => handleCardClick2(card.id)} />
                     <button
                       className="favorite-btn"
                       onClick={() => handleFavoriteButtonClick2(card.id)}
@@ -519,6 +803,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                   <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
                 </div>
               </div>
+
             ))}
           </div>
 
@@ -534,15 +819,63 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           <img src={group4} alt="" className='group4' />
         </div>
       </div>
+
       <div className='selling2 mt-24'>
         <h3 className='best'>Limited Period Offer</h3>
         <h1 className='top'>Coming Soon - Pre Book Now!</h1>
+
+
+
         <div className="card-container">
-          {cards2.map(card => (
+           {/*{cards3.map(card => (
+            <Link
+              key={card.id}
+              to={`/card/${card.id}`}
+              className="card-link"
+              onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
+            >
+              <div className="card-wrapper">
+                <div className="card1">
+                  <div className="card-header">
+                    <img
+                      src={card.imageUrl}
+                      alt="product"
+                      style={{ height: card.height, position: 'relative', top: `${card.position}px` }}
+                      className="card-image1"
+                    />
+                    <button
+                      className="favorite-btn"
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevent the default button behavior
+                        e.stopPropagation(); // Stop the event from propagating to the Link
+                        handleFavoriteButtonClick2(card.id, e);
+                      }}
+                      style={{
+                        cursor: 'pointer',
+                        border: 'none',
+                        background: 'none',
+                        padding: '5px',
+                      }}
+                    >
+                      <i
+                        className={`fa-heart ${favoriteCards2[card.id] ? 'fas' : 'far'}`}
+                        style={{ color: favoriteCards2[card.id] ? 'red' : '#23387A', fontSize: '24px' }}
+                      ></i>
+                    </button>
+                  </div>
+                </div>
+                <div className="card-info">
+                  <p className="image-description">{card.description}</p>
+                  <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
+                </div>
+              </div>
+            </Link>
+          ))} */}
+          {cards3.map(card => (
             <div key={card.id} className="card-wrapper">
               <div className="card1">
                 <div className="card-header">
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1" />
+                  <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1"  onClick={() => handleCardClick1(card.id)}/>
                   <button
                     className="favorite-btn"
                     onClick={() => handleFavoriteButtonClick2(card.id)}
@@ -576,8 +909,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             </button>
           </div>
         )}
-      </div>
-      <div>
+
         <img src={group} className='group6' />
         <Slider />
         <h3 className='best2'>Why Choose Us</h3>
@@ -616,7 +948,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       </div>
 
       {/* <img src={group5} className='group5' />  */}
-       <Footer /> 
+      <Footer />
 
     </>
   );

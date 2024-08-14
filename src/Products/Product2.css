@@ -8,6 +8,17 @@
     margin-top: 7rem;
     margin-left: 10rem;
   }
+  .image-placeholder1 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px; 
+    height: 300px;    
+    margin-top: 5rem;
+    margin-left: 8rem;
+   
+  }
   
   .image-placeholder svg {
     position: absolute;
@@ -86,6 +97,38 @@ select {
 }
 .image-list{
   position: absolute;
-  top: -12rem;
+  top: -20rem;
+  flex-wrap: wrap;
+    gap: 10px; /* Adjust the gap between images */
 
+}
+.image-item.highlighted {
+  border: 3px solid #007bff; /* Adjust color to fit your design */
+}
+.image-item {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  border-radius: 8px; /* Optional: adds rounded corners */
+  transition: border 0.3s ease;
+}
+
+.image-item.highlighted {
+  border: 3px solid black; /* Adjust color to fit your design */
+}
+.scrollable-content3 {
+  max-height: 460px; /* Adjust the height as needed */
+  overflow-y: scroll;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  
+  margin-top: 15px;
+}
+.scrollable-content4 {
+  max-height: 420px; /* Adjust the height as needed */
+  overflow-y: scroll;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  
+  margin-top: 16px;
 }
