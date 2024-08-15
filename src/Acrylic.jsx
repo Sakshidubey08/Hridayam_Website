@@ -463,13 +463,33 @@ function App() {
     const [selectedThickness, setSelectedThickness] = useState('3MM');
     const [selectedImage2, setSelectedImage2] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
+    //    const [selectedImage, setSelectedImage] = useState(false);
+        const [imageSelected, setImageSelected] = useState(false);
+            const [text, setText] = useState('');
+            const [showTextInput, setShowTextInput] = useState(false);
+    const handleTextChange = (e) => {
+        setText(e.target.value);
+    };
 
+    const handleTextSubmit = (e) => {
+        e.preventDefault();
+        setShowTextInput(false);
+    };
+    const handleTextClick = () => {
+        setShowTextInput(true);
+    };
     const handleImageClick = (image) => {
         setSelectedImage(image);
     };
-    const handleImageUpload = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            setSelectedImage(URL.createObjectURL(e.target.files[0]));
+       const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setSelectedImage(reader.result);
+                setImageSelected(true);
+            };
+            reader.readAsDataURL(file);
         }
     };
 
@@ -550,8 +570,29 @@ function App() {
                 </div>
                 <div className="options">
                     <div className="upload-button">
-                        <input type="file" accept="image/*" onChange={handleImageUpload} />
-                        <button>Select Photo</button>
+                    <button className="option" onClick={() => document.getElementById('fileInput').click()}>
+                        Select Photo
+                   </button>
+                   <button onClick={handleTextClick}>Text</button>
+                   {showTextInput && (
+                        <form onSubmit={handleTextSubmit} className="text-input-form">
+                            <input
+                                type="text"
+                                value={text}
+                                onChange={handleTextChange}
+                                placeholder="Enter your text"
+                                className="text-input"
+                            />
+                            <button type="submit">Add Text</button>
+                        </form>
+                    )}
+                   <input
+                        type="file"
+                        id="fileInput"
+                        style={{ display: 'none' }}
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                    />
                     </div>
                     <div className="shapes">
                         <h3>Acrylic Photo Shapes</h3>
@@ -614,7 +655,7 @@ function App() {
                             <button onClick={() => handleThicknessChange('8MM')} className={`thickness-button ${selectedThickness === '8MM' ? 'active' : ''}`}>8MM (Premium)</button>
                         </div>
                     </div>
-                    <div className="price">
+                    <div className="price1">
                         ₹699 ₹1,199
                     </div>
                     <div className="details">
