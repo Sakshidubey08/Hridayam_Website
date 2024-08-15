@@ -42,6 +42,7 @@ import Customize3 from './Products/Customize3'
 import Customize4 from './Products/Customize4'
 import Customize5 from './Products/Customize5'
 import Customize6 from './Products/Customize6'
+import Acylic2 from './Acylic2';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -98,7 +99,7 @@ const App = () => {
                     <Route path="/customize4" element={<Customize4 />} />
                     <Route path="/customize5" element={<Customize5 />} />
                     <Route path="/customize6" element={<Customize6 />} />
-
+                    <Route path='/Aycrlic2' element={<Acylic2></Acylic2>}></Route>
                 </Routes>
             </CartProvider>
         </AuthProvider>
