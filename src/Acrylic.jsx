@@ -12,6 +12,9 @@ import square1 from './images/SQUARE FRAME.jpg'
 import oval from './images/oval.png'
 import bag from './images/bag.png'
 
+import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
+
+
 
 const svgBorderPaths = {
     Normal: 'M 0,0 L 600,0 L 600,400 L 0,400 Z',
@@ -44,6 +47,8 @@ function App() {
     const [showTextInput, setShowTextInput] = useState(false);
     const [text, setText] = useState('');
     const [selectedSize, setSelectedSize] = useState('12x9'); // Default size
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [scale, setScale] = useState(1);
     useEffect(() => {
         const driverObj = driver({
             animate: false,
@@ -74,6 +79,13 @@ function App() {
     const handleThicknessClick = (thickness) => {
         setSelectedThickness(thickness);
     };
+
+    const handleSliderChange = (e) => {
+        setScale(e.target.value / 100);
+        console.log(scale)
+         // Convert range value to scale factor (0.2 to 1.0)
+    };
+
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
@@ -117,15 +129,19 @@ function App() {
 
 
     const { width, height } = getSizeDimensions(selectedSize);
-
+    const handleDrag = (e, data) => {
+        setPosition({ x: data.x, y: data.y });
+    };
     return (
         <>
             <Header />
+            
             <div className="container">
+            
                 <div className='home'>Home / Acrylic photo frame</div>
                 <div className="header" id="tour-example">
-                    <h1 className='photo'>Acrylic Photo Borders</h1>
-                    <br />
+                    <h1 className='photo font-sans'>Acrylic Photo Borders</h1>
+                    <br/>
                     <div className="shape-content" style={{ marginTop: '20px' }}>
                         {selectedShape === 'rectangle' && (
                             <div className="rectangle-section mt-8" style={{ display: 'flex', gap: '10px' }}>
@@ -214,7 +230,9 @@ function App() {
                         borderWidth: selectedThickness
                     }}>
                         {selectedImage2 && (
+                            
                             <img
+                            className=' z-50 border dragable-image'
                                 src={selectedImage2}
                                 alt="Selected 2"
                                 style={{
@@ -224,12 +242,24 @@ function App() {
                                     width: '100%',
                                     height: '100%',
                                     zIndex: 1
+                                    
                                 }}
                             />
                         )}
+                        
+                       
+                        <Draggable
+                        defaultPosition={{x: -176, y:-264}}
+                        onDrag={handleDrag}
+                        style={{touchAction:"none" , userSelect:"none" ,cursor:"move"}}
+                        
+        >
+      
+                      
                         <img
                             src={selectedImage}
                             alt="Default"
+                            className=' z-0 select-primary '
                             style={{
                                 position: 'absolute',
                                 top: '50%',
@@ -237,9 +267,17 @@ function App() {
                                 width: '72%',
                                 height: '86%',
                                 zIndex: 2,
-                                transform: 'translate(-50%, -50%)' // Centers the image horizontally and vertically
+                               
+                                
+                                
+                                
+                                transform: `translate(-50%, -50%) scale(${scale})`, // Apply scaling
                             }}
                         />
+                        
+                          </Draggable>
+                          
+                      
                         {!imageSelected && (
                             <div className="preview-text" style={{
                                 position: 'absolute',
@@ -265,11 +303,43 @@ function App() {
                         )}
                     </div>
                 </div>
+                <button className='  relative bg-[#6774BE] '>
+                    <svg  width={"30px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748ZM10 10V7H12V10H15V12H12V15H10V12H7V10H10Z"></path></svg>
 
+                </button>
+
+                {/* You can open the modal using document.getElementById('ID').showModal() method */}
+<button className=" text-black relative" onClick={()=>document.getElementById('my_modal_3').showModal()}>
+<svg  width={"30px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748ZM10 10V7H12V10H15V12H12V15H10V12H7V10H10Z"></path></svg>
+</button>
+<dialog id="my_modal_3" className="modal">
+  <div className="modal-box">
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <input
+     type="range"
+      min="20"
+       max="100" 
+        className="range range-primary"
+        value={scale * 100} // Convert scale factor back to percentage for the slider
+        onChange={handleSliderChange}
+         />
+  </div>
+</dialog>
+
+
+             
                 <div className="options">
-                    <button className="option" onClick={() => document.getElementById('fileInput').click()}>
+                
+
+                    <button  className="option" onClick={() => document.getElementById('fileInput').click()}>
                         Select Photo
                     </button>
+
+                    
+
                     <input
                         type="file"
                         id="fileInput"
