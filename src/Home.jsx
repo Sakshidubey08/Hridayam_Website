@@ -92,8 +92,78 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     const storedFavorites = localStorage.getItem('favoriteCards');
     return storedFavorites ? JSON.parse(storedFavorites) : {};
   });
-
   
+  const product = [
+    {
+      id: 'product41',
+      name: 'Veneer Wall Light',
+      price: 1200,
+      images: image9   
+    },
+    {
+      id: 'product42',
+      name: 'Brass Diya',
+      price: 1500,
+      images: image10
+    },
+    {
+      id: 'product43',
+      name: 'Structured Curved Bill Cap',
+      price: 1500,
+      images: image12
+    },
+    {
+      id: 'product44',
+      name: 'Personalized Notebooks',
+      price: 1500,
+      images: image13
+    },
+    {
+      id: 'product45',
+      name: 'Win Connect Ball Pen Blue',
+      price: 1500,
+      images: image14
+    },
+  ];
+  const handleFavoriteButtonClick = (id, e,description) => {
+    e.stopPropagation();
+
+    setFavoriteCards((prev) => {
+      const updatedFavorites = {
+        ...prev,
+        [id]: !prev[id],
+      };
+
+      const selectedCard = cards.find((card) => card.id === id);
+console.log(selectedCard.description +"slkdflsd")
+      if (selectedCard) {
+        const productToAdd = {
+          id: selectedCard.id, // Use selectedCard instead of product
+          name: description,
+          price: selectedCard.price,
+          image: selectedCard.imageUrl,
+        
+           // Use images if image is not defined
+        };
+  
+        if (updatedFavorites[id]) {
+          // Add to wishlist
+          addToWishlist(productToAdd);
+
+          setWishlist((prevWishlist) => [...prevWishlist, productToAdd]);
+        } else {
+          // Remove from wishlist
+          setWishlist((prevWishlist) => prevWishlist.filter((item) => item.id !== id));
+          
+        }
+      }
+      
+
+      return updatedFavorites;
+    });
+   
+    e.preventDefault();
+  };
 
   useEffect(() => {
     // Store favoriteCards in localStorage whenever it changes
@@ -287,50 +357,41 @@ break;
   //   addToWishlist(productToAdd);
   //   navigate('/wishlist')
   // };
-  const handleFavoriteButtonClick = (id, e) => {
-    e.stopPropagation();
+  // const handleFavoriteButtonClick = (id, e) => {
+  //   e.stopPropagation();
   
-    setFavoriteCards((prev) => {
-      const updatedFavorites = {
-        ...prev,
-        [id]: !prev[id],
-      };
+  //   setFavoriteCards((prev) => {
+  //     const updatedFavorites = {
+  //       ...prev,
+  //       [id]: !prev[id],
+  //     };
+  //     const selectedCard = cards.find((card) => card.id === id);
   
-      // Find the selected card based on the id
-      const selectedCard = cards.find((card) => card.id === id);
+  //     if (selectedCard) {
+  //       if (updatedFavorites[id]) {
+       
+  //         const productToAdd = {
+  //           id: product.id, 
+  //           name: product.name,
+  //           price: product.price, 
+  //           image: product.images
+  //         };
+  //         addToWishlist(productToAdd);
+  //         setWishlist([...wishlist, productToAdd]);
+  //       } else {
+  //         setWishlist(wishlist.filter((item) => item.id !== id));
+  //       }
+  //     }
   
-      if (selectedCard) {
-        if (updatedFavorites[id]) {
-          // If the heart is turning red (favoriting), add to the wishlist
-          const productToAdd = {
-            id: selectedColor1, // Replace with a unique identifier for the product
-            name: product.name,
-            price: 1200, // Adjust the price as needed
-            image: product.images[selectedColor1]
-          };
-          addToWishlist(productToAdd);
-          setWishlist([...wishlist, productToAdd]);
-        } else {
-          // If the heart is turning back to the default color (unfavoriting), remove from the wishlist
-          setWishlist(wishlist.filter((item) => item.id !== id));
-        }
-      }
+  //     return updatedFavorites;
+  //   });
   
-      return updatedFavorites;
-    });
+  //   e.preventDefault();
+  // };
   
-    e.preventDefault();
-  };
-  const product = {
-    name: 'Veneer Wall Light',
-    price: '&#8377;1,200',
-    images: {
-      black: image9,
-      
-      blue: 'path/to/blue-cap.jpg',
-      brown: 'path/to/brown-cap.jpg',
-    },
-  };
+  // };
+
+ 
   const [favoriteCards1, setFavoriteCards1] = useState({});
 
   const handleFavoriteButtonClick1 = (cardId) => {
@@ -675,7 +736,7 @@ break;
                   <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1" onClick={() => handleCardClick(card.id)} />
                   <button
                     className="favorite-btn"
-                    onClick={(e) => handleFavoriteButtonClick(card.id, e)}
+                    onClick={(e) => handleFavoriteButtonClick(card.id, e ,card.description)}
                     style={{
                       cursor: 'pointer',
                       border: 'none',

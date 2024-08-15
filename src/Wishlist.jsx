@@ -141,7 +141,7 @@ import './Wishlist.css';
 
 const WishlistPage = () => {
   const { wishlistItems, removeFromWishlist } = useContext(WishlistContext);
-
+  console.log(wishlistItems)
   return (
     <>
       <Header/>
@@ -157,7 +157,6 @@ const WishlistPage = () => {
                 <th>Select</th>
                 <th>Product Name</th>
                 <th>Price</th>
-               
                 <th>Product Image</th>
                 <th>Delete</th>
               </tr>
@@ -168,7 +167,7 @@ const WishlistPage = () => {
                   <td><input type="checkbox" /></td>
                   <td>{item.name}</td>
                   <td>&#8377;{item.price}</td>
-                  
+
                   <td><img src={item.image} alt={item.name} /></td>
                   <td>
                     <button onClick={() => removeFromWishlist(item.id)}>
