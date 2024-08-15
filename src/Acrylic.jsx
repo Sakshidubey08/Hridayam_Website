@@ -455,6 +455,7 @@ import rect1 from './images/rect6.png'
 import rect2 from './images/RECTANGLE FEAME(1).jpg'
 import rect7 from './images/rect7.jpg'
 import oval from './images/oval.png'
+import { AutoTextSize } from 'auto-text-size'
 function App() {
     const [selectedImage3, setSelectedImage3] = useState(null);
     const [selectedShape, setSelectedShape] = useState(null);
@@ -625,6 +626,9 @@ function App() {
                     <div className="size-guide">
                         Size guide?
                     </div>
+                    <div style={{ maxWidth: '60%', margin: '0 auto' }}>
+      <AutoTextSize>sdfsdfdsdfsdsdfsdsddsfsdfsddfsdf</AutoTextSize>
+    </div>
                 </div>
             </div>
         </>
