@@ -26,7 +26,7 @@ import oval from '../images/OVAL FRAME(1).jpg'
 import circle from '../images/CIRCLE FRAME.jpg'
 import Header from '../Header';
 const shapeImages = {
-    Normal: ['https://i.pinimg.com/564x/3f/1e/87/3f1e8712c53f32d0bb385b436d40004e.jpg', 'https://i.pinimg.com/564x/0a/03/72/0a037201533c78383bd2a0d4ac632541.jpg', 'https://i.pinimg.com/564x/b7/40/8d/b7408dd3e2456a06e612223158bc69a6.jpg', 'https://i.pinimg.com/564x/6c/c4/71/6cc47135ae86a109f91af95d65c2b6d0.jpg'],
+    Normal: ['https://i.pinimg.com/564x/7d/bd/72/7dbd72694da94b1bb2e3dc89b0a8adec.jpg', 'https://i.pinimg.com/564x/0a/03/72/0a037201533c78383bd2a0d4ac632541.jpg', 'https://i.pinimg.com/564x/b7/40/8d/b7408dd3e2456a06e612223158bc69a6.jpg', 'https://i.pinimg.com/564x/6c/c4/71/6cc47135ae86a109f91af95d65c2b6d0.jpg'],
     RoundEdge: ['round1.jpg', 'round2.jpg', 'round3.jpg', 'round4.jpg'],
     Circle: ['circle2.jpg', 'circle3.jpg', 'circle4.jpg'],
     Oval: [oval, 'oval2.jpg', 'oval3.jpg', 'oval4.jpg'],
