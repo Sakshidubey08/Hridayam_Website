@@ -458,6 +458,10 @@ import rect2 from './images/RECTANGLE FEAME(1).jpg'
 import rect7 from './images/rect7.jpg'
 import oval from './images/oval.png'
 import { AutoTextSize } from 'auto-text-size'
+import Draggable, {DraggableCore} from 'react-draggable';
+import AvatarEditor from 'react-avatar-editor' // Both at the same time
+import Editor from './Editer';
+import { StyledEditorBlock, TextEditorBlock } from "react-web-editor"
 function App() {
     const [selectedImage3, setSelectedImage3] = useState(null);
     const [selectedShape, setSelectedShape] = useState("rectangle");
@@ -466,11 +470,16 @@ function App() {
     const [selectedImage2, setSelectedImage2] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
     const [scale, setScale] = useState(0.8);
+    const parentStyle = { width: 27, height: 20.5 };
+
+    const [framtext, setFramText] = useState(''); // State for the text input
+  const [color, setColor] = useState('#000000'); // State for the color input
     //    const [selectedImage, setSelectedImage] = useState(false);
         const [imageSelected, setImageSelected] = useState(false);
             const [text, setText] = useState('');
             const [showTextInput, setShowTextInput] = useState(false);
-
+            const [position, setPosition] = useState({ x: 0, y: 0 });
+            const [isDraggable, setIsDraggable] = useState(false);
             const handleSliderChange = (e) => {
                 setScale(e.target.value / 100);
                 console.log(scale)
@@ -479,6 +488,18 @@ function App() {
     const handleTextChange = (e) => {
         setText(e.target.value);
     };
+
+    const handleFocus = () => {
+        setIsDraggable(true);
+      };
+
+      
+    
+      // Handle blur event to disable dragging
+      const handleBlur= () => {
+        setIsDraggable(false);
+      };
+     
 
     const handleTextSubmit = (e) => {
         e.preventDefault();
@@ -502,6 +523,9 @@ function App() {
         }
     };
 
+    const handleDrag = (e, data) => {
+        setPosition({ x: data.x, y: data.y });
+    };
     const handleShapeChange = (shape) => {
         setSelectedShape(shape);
     };
@@ -564,11 +588,33 @@ function App() {
                     <div className={` ${ selectedImage==null?"block":"hidden"}`}>
                    
                     <img  style={{zIndex:'0'}}  className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
-                    <div className={ `relative ${selectedImage2==null?"block":"hidden"}`}>
-                        <img style={{transform:`scale(${scale})`}}
-                         className=' shadow-2xl'
-                          src={PreviewImg}></img>
+                    
+                    <div     onMouseOver={()=>{handleFocus()}}
+       onMouseOut={handleBlur} className={ `relative ${selectedImage2==null?"block":"hidden"}`}>
+                    {isDraggable ? (
+        <Draggable
+          position={position}
+          onDrag={handleDrag}
+        >
+          <img
+            style={{ transform: `scale(${scale})` }} // You can apply scale here if needed
+            className='shadow-2xl'
+            src={PreviewImg}
+            alt="Draggable"
+          />
+        </Draggable>
+      ) : (
+        <img
+          style={{ transform: `scale(${scale})`, position:" relative",  // Positioning to match draggable
+            left: `${position.x}`,
+            top: `${position.y}`,}}
+          className='shadow-2xl'
+          src={PreviewImg}
+          alt="Not Draggable"
+        />
+      )}
                         {/* <div  className=' text-3xl text-white  border px-3 py-4  bg-black/30 rounded-md  absolute top-[30%] left-[35%]'>PREVIEW</div> */}
+                  
                     </div>
                      </div>
                     {selectedShape === 'rectangle' && selectedImage && (
@@ -581,13 +627,27 @@ function App() {
     }}></img>       
         <img width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
         {/* <p className=' relative text-black top-0 left-0'>Text</p> */}
-        <div className=' absolute text-4xl top-[50%] left-[50%]' style={{zIndex:"3"}}>sdfd</div>
+        <Draggable
+                        defaultPosition={{x: -176, y:-264}}
+                        // onDrag={handleDrag}
+                        
+                        
+        >  
+        <div  className=' absolute text-4xl top-[50%] left-[50%]' style={{zIndex:"3", color:`${color}`}}>{framtext}</div>
+        </Draggable>
          </div>
     )}
     {selectedShape === 'square' && selectedImage && (
         <div className=' relative'>   
-         <img className='z-0' src={selectedImage}></img>       
+         <img className='z-0' src={selectedImage}></img>  
+         <Draggable
+                        defaultPosition={{x: -176, y:-264}}
+                        // onDrag={handleDrag}
+                        
+                        
+        >     
         <img   className=' absolute  top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
+         </Draggable>
          </div>
     )}
     {selectedShape === 'circle' && selectedImage && (
@@ -657,10 +717,27 @@ function App() {
       {/* if there is a button in form, it will close the modal */}
       <button style={{background:"transparent", color:"black"}} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
-   <div className='border items-start'>
-    <label className=' content-start left-0'>Add Text</label><br></br>
-    <input type='text' placeholder='Enter Your Text here'/>
-   </div>
+
+   
+    <label style={{paddingRight:"400px"}} className=' '>Add Text</label><br></br>
+    <input
+     type='text'
+      className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
+       placeholder='Enter Your Text here'
+       value={framtext} // Bind the state to the input value
+       onChange={(e) => setFramText(e.target.value)} // Update state on change
+       />
+    <label style={{paddingRight:"400px"}} className=' text-nowrap'>Text Color</label><br></br>
+    <input
+     type='color'
+      className='border w-20  mr-96  px-3 my-4 py-2 rounded-md'
+       placeholder='Enter Your Text here'
+       value={color} // Bind the state to the input value
+       onChange={(e) => setColor(e.target.value)} // Update state on change
+       />
+    <div>
+
+    </div>
   </div>
 </dialog>
                    {/* {showTextInput && (
@@ -726,6 +803,7 @@ function App() {
                     <div className="size-options">
                         <br />
                         <br />
+                        
                         <h3>Size (Inch): {selectedSize}</h3>
                         <div className="size-buttons">
                             <button onClick={() => handleSizeChange('12x9')} className={`size-button ${selectedSize === '12x9' ? 'active' : ''}`}>12x9</button>
@@ -761,6 +839,11 @@ function App() {
     </div>
                 </div>
             </div>
+
+          <div>
+    </div>
+    
+
         </>
     );
 }

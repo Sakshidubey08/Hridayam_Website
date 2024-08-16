@@ -1005,6 +1005,7 @@ break;
         <h3 className='best3'>Offers</h3>
         <h1 className='top3'>Top Picks for Winters</h1>
         <TopPick />
+        
       </div>
 
       {/* <img src={group5} className='group5' />  */}
