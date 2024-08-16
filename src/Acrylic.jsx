@@ -452,21 +452,30 @@ import React, { useState } from 'react';
 import './Catalog.css'; // Import your CSS file
 import Header from './Header';
 import rect1 from './images/rect6.png'
+import PreviewImg from "./images/Preview.png"
+
 import rect2 from './images/RECTANGLE FEAME(1).jpg'
 import rect7 from './images/rect7.jpg'
 import oval from './images/oval.png'
 import { AutoTextSize } from 'auto-text-size'
 function App() {
     const [selectedImage3, setSelectedImage3] = useState(null);
-    const [selectedShape, setSelectedShape] = useState(null);
+    const [selectedShape, setSelectedShape] = useState("rectangle");
     const [selectedSize, setSelectedSize] = useState('12x9');
     const [selectedThickness, setSelectedThickness] = useState('3MM');
     const [selectedImage2, setSelectedImage2] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [scale, setScale] = useState(0.8);
     //    const [selectedImage, setSelectedImage] = useState(false);
         const [imageSelected, setImageSelected] = useState(false);
             const [text, setText] = useState('');
             const [showTextInput, setShowTextInput] = useState(false);
+
+            const handleSliderChange = (e) => {
+                setScale(e.target.value / 100);
+                console.log(scale)
+                 // Convert range value to scale factor (0.2 to 1.0)
+            };
     const handleTextChange = (e) => {
         setText(e.target.value);
     };
@@ -486,7 +495,7 @@ function App() {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setSelectedImage(reader.result);
+                setSelectedImage2(reader.result);
                 setImageSelected(true);
             };
             reader.readAsDataURL(file);
@@ -550,31 +559,111 @@ function App() {
                     </div>
                 </div>
                 <div className="preview">
-                    <div className="image-container">
+
+                    <div className="image-container ">
+                    <div className={` ${ selectedImage==null?"block":"hidden"}`}>
+                   
+                    <img  style={{zIndex:'0'}}  className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
+                    <div className={ `relative ${selectedImage2==null?"block":"hidden"}`}>
+                        <img style={{transform:`scale(${scale})`}}
+                         className=' shadow-2xl'
+                          src={PreviewImg}></img>
+                        {/* <div  className=' text-3xl text-white  border px-3 py-4  bg-black/30 rounded-md  absolute top-[30%] left-[35%]'>PREVIEW</div> */}
+                    </div>
+                     </div>
                     {selectedShape === 'rectangle' && selectedImage && (
-        <img src={selectedImage}  />
+         <div className=' relative'>   
+         <img className=' h-20 w-20' style={{zIndex:"1"}} src={selectedImage} 
+         style={{
+      width: '100%', // Adjust width as needed
+      height: 'auto'
+      ,position:"relative" // Maintain aspect ratio
+    }}></img>       
+        <img width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+        {/* <p className=' relative text-black top-0 left-0'>Text</p> */}
+        <div className=' absolute text-4xl top-[50%] left-[50%]' style={{zIndex:"3"}}>sdfd</div>
+         </div>
     )}
     {selectedShape === 'square' && selectedImage && (
-        <img src={selectedImage}  />
+        <div className=' relative'>   
+         <img className='z-0' src={selectedImage}></img>       
+        <img   className=' absolute  top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
+         </div>
     )}
     {selectedShape === 'circle' && selectedImage && (
-        <img src={selectedImage}  />
+        <div className=' relative'>   
+         <img className='z-0' src={selectedImage}></img>       
+        <img   className=' absolute  top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
+         </div>
     )}
     {selectedShape === 'oval' && selectedImage && (
-        <img src={selectedImage} />
+        <div className=' relative'>   
+         <img className='z-0' src={selectedImage}></img>       
+        <img   className=' absolute  top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
+         </div>
     )}
                     </div>
-                    <div className="preview-text">
+                    {/* <div className="preview-text">
                         <h2>PREVIEW</h2>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="options">
+                   
+                
                     <div className="upload-button">
+                    <div>
+                   
+                  
+                  
+                    <button className=" text-black relative" onClick={()=>document.getElementById('my_modal_3').showModal()}>
+                    
+                    🔍 Zoom 
+                
+</button>
+<dialog id="my_modal_3" className="modal">
+  <div className="modal-box">
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button style={{ background:"transparent", color:"black"}} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-0 pb-20 m-20 pl-20">✕</button>
+    </form>
+    <input
+     type="range"
+      min="20"
+       max="100" 
+        className="range range-primary h-3"
+        value={scale * 100} // Convert scale factor back to percentage for the slider
+        onChange={handleSliderChange}
+         />
+  </div>
+  <form method="dialog" className="modal-backdrop">
+    <button style={{color:"transparent" ,background:"transparent"}}>close</button>
+  </form>
+</dialog>
+
+
+                    </div>
                     <button className="option" onClick={() => document.getElementById('fileInput').click()}>
-                        Select Photo
+                    🖼️   Select Photo
                    </button>
-                   <button onClick={handleTextClick}>Text</button>
-                   {showTextInput && (
+                   
+
+                   {/* You can open the modal using document.getElementById('ID').showModal() method */}
+<button className="" onClick={()=>document.getElementById('my_modal_4').showModal()}>
+📝 Text
+</button>
+<dialog id="my_modal_4" className="modal">
+  <div className="modal-box">
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button style={{background:"transparent", color:"black"}} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+   <div className='border items-start'>
+    <label className=' content-start left-0'>Add Text</label><br></br>
+    <input type='text' placeholder='Enter Your Text here'/>
+   </div>
+  </div>
+</dialog>
+                   {/* {showTextInput && (
                         <form onSubmit={handleTextSubmit} className="text-input-form">
                             <input
                                 type="text"
@@ -585,7 +674,7 @@ function App() {
                             />
                             <button type="submit">Add Text</button>
                         </form>
-                    )}
+                    )} */}
                    <input
                         type="file"
                         id="fileInput"
