@@ -22,10 +22,10 @@ function App() {
       </div>
 
       {showDropdown && (
-        <div className="dropdown">
-          <div className="dropdown-item">Welcome</div>
-          <p className="dropdown-item1">To access account and manage order</p>
-          <button className="dropdown-item2"> <Link to="/login" className="dropdown-link">Login</Link> / 
+        <div className="dropdown1">
+          <div className="dropdown-item1">Welcome</div>
+          <p className="dropdown-item6">To access account and manage order</p>
+          <button className="dropdown-item2"> <Link to="/login" className="dropdown-link1">Login</Link> / 
           <Link to="/signup" className="dropdown-link">Signup</Link></button>
           <br/>          <br/>
 

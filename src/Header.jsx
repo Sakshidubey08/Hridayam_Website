@@ -52,6 +52,7 @@ const Header = () => {
           <Link to='/wishlist'>
             <img src={heart} alt="heart" className="image" />
           </Link>
+          
           <Dropdown />
             <Link to='/cart'>
           <img src={icon3} alt="icon 3" className="image" /></Link>

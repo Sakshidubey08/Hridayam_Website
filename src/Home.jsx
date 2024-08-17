@@ -652,7 +652,7 @@ break;
         <div class="menu-item">
           <div class="menu-heading">Acrylic Photoframe</div>
           <div class="submenu">
-          <Link to='/acrylic3'> <div class="submenu-item">Acrylic Photo frame</div></Link> 
+          <Link to='/acrylic3'> <div className="submenu-item ">Acrylic Photo frame</div></Link> 
           </div>
         </div>
         <div class="menu-item">

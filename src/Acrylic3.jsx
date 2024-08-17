@@ -342,6 +342,8 @@ import AvatarEditor from 'react-avatar-editor' // Both at the same time
 // import Editor from './Editer';
 import Tour from './Tour';
 import Footer from './Footer';
+import { Link } from 'react-router-dom';
+
 import backgroundImage from './images/Designer.png';
 import circle from './images/CIRCLE FRAME.jpg'
 import { StyledEditorBlock, TextEditorBlock } from "react-web-editor"
@@ -363,7 +365,7 @@ function App() {
     const [showTextInput, setShowTextInput] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isDraggable, setIsDraggable] = useState(false);
-    const [framTextfontfamilystate,setframTextfontfamilystate]=useState("");
+    const [framTextfontfamilystate, setframTextfontfamilystate] = useState("");
     const handleSliderChange = (e) => {
         setScale(e.target.value / 100);
         console.log(scale)
@@ -429,253 +431,253 @@ function App() {
     const [price, setPrice] = useState(699);
 
     const sizePriceMap = {
-      '12x9': 699,
-      '11x11': 799,
-      '16x12': 899,
-      '16x16': 999,
-      '21x15': 1199,
-      '35x23': 1499,
+        '12x9': 699,
+        '11x11': 799,
+        '16x12': 899,
+        '16x16': 999,
+        '21x15': 1199,
+        '35x23': 1499,
     };
-  
+
     const handleSizeChange1 = (size) => {
-      setSelectedSize(size);
-      setPrice(sizePriceMap[size]);
+        setSelectedSize(size);
+        setPrice(sizePriceMap[size]);
     };
 
     const framTextfontfamily = ["Permanent Marker", "Grey Qo", "Matemasie", "Edu VIC WA NT Beginner", "Bodoni Moda SC"];
     return (
         <>
             <Header />
-            <Tour/>
+            <Tour />
             <div className="container">
-            <div  style={{
-                
-                    
+                <div style={{
                     backgroundSize: 'cover', // or 'contain' depending on your requirement
                     backgroundPosition: 'center', // centers the image
                     backgroundRepeat: 'no-repeat', // prevents the image from repeating
-                }}>    
-                <h1 className='acrylic'>Acrylic Photo Borders</h1>
-          
-                <div className="profile-pictures">
-                    <div className="shape-content">
-                        {selectedShape === 'rectangle' && (
-                            <div className="rectangle-section mt-8" style={{ display: 'flex', gap: '10px' }}>
+                }}>
+                    <h1 className='acrylic'>Acrylic Photo Borders</h1>
 
-                                <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
-                                <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
-                            </div>
-                        )}
+                    <div className="profile-pictures">
+                        <div className="shape-content">
+                            {selectedShape === 'rectangle' && (
+                                <div className="rectangle-section mt-8" style={{ display: 'flex', gap: '10px' }}>
 
-                        {selectedShape === 'square' && (
-                            <div className="square-section" style={{ display: 'flex' }}>
-                                <img src={square} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(square)} />
-                                <img src={square1} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(square1)} />
+                                    <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
+                                    <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
+                                </div>
+                            )}
 
-                            </div>
-                        )}
+                            {selectedShape === 'square' && (
+                                <div className="square-section" style={{ display: 'flex' }}>
+                                    <img src={square} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(square)} />
+                                    <img src={square1} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(square1)} />
 
-                        {selectedShape === 'circle' && (
-                            <div className="circle-section" style={{ display: 'flex', gap: '10px' }}>
+                                </div>
+                            )}
 
-                                <img src={circle} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(circle)} />
-                                <img src={circle1} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(circle1)} />
+                            {selectedShape === 'circle' && (
+                                <div className="circle-section" style={{ display: 'flex', gap: '10px' }}>
 
-                            </div>
-                        )}
+                                    <img src={circle} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(circle)} />
+                                    <img src={circle1} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(circle1)} />
 
-                        {selectedShape === 'oval' && (
-                            <div className="oval-section" style={{ display: 'flex' }}>
+                                </div>
+                            )}
 
-                                <img src={oval} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(oval)} />
-                                <img src={oval1} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(oval1)} />
+                            {selectedShape === 'oval' && (
+                                <div className="oval-section" style={{ display: 'flex' }}>
 
-
-                            </div>
-                        )}
-                    </div>
-                </div>
-                <div className=' w-[1200px]' style={{backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    overflow:"hidden",
-    backgroundRepeat: 'no-repeat',}}>
-                <div className="preview" >
-
-                    <div className="image-container ">
-                        <div className={` ${selectedImage == null ? "block" : "hidden"}`}>
-
-                            <img style={{ zIndex: '0' }} className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }} />
-
-                            <div onMouseOver={() => { handleFocus() }}
-                                onMouseOut={handleBlur} className={`relative ${selectedImage2 == null ? "block" : "hidden"}`}>
-                                {isDraggable ? (
-                                    <Draggable
-                                        position={position}
-                                        onDrag={handleDrag}
-                                    >
-                                        <img
-                                            style={{ transform: `scale(${scale})` }} 
-                                            className='shadow-2xl cursor-move'
-                                            src={PreviewImg}
-                                            alt="Draggable"
-                                        />
-                                    </Draggable>
-                                ) : (
-                                    <img
-                                        style={{
-                                            transform: `scale(${scale})`, position: " relative",  // Positioning to match draggable
-                                            left: `${position.x}`,
-                                            top: `${position.y}`,
-                                        }}
-                                        className='shadow-2xl'
-                                        src={PreviewImg}
-                                        alt="Not Draggable"
-                                    />
-                                )}
-                                <Draggable
-                                    defaultPosition={{ x: -76, y: -44 }}
-                                // onDrag={handleDrag}
+                                    <img src={oval} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(oval)} />
+                                    <img src={oval1} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(oval1)} />
 
 
-                                >
-                                    <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily:`${framTextfontfamilystate}` }}>{framtext}</div>
-                                </Draggable>
-                                {/* <div  className=' text-3xl text-white  border px-3 py-4  bg-black/30 rounded-md  absolute top-[30%] left-[35%]'>PREVIEW</div> */}
-
-                            </div>
+                                </div>
+                            )}
                         </div>
-                        {selectedShape === 'rectangle' && selectedImage && (
-                            <div className=' relative'>
-                                <img className=' h-20 w-20' style={{ zIndex: "1" }} src={selectedImage}
-                                    style={{
-                                        width: '100%', // Adjust width as needed
-                                        height: 'auto'
-                                        , position: "relative" ,
-                                        // Maintain aspect ratio
-                                    }}></img>
-{isDraggable ? (
-            <Draggable
-          position={position}
-          onDrag={handleDrag}
-        >
-
-            <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 p-10 cursor-move top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
-            </Draggable>
-         )
-         :(
-            <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute p cursor-move z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
-
-         )
-         }
-                                {/* <p className=' relative text-black top-0 left-0'>Text</p> */}
-                                <Draggable
-                                    defaultPosition={{ x: -76, y: -44 }}
-                                // onDrag={handleDrag}
-
-
-                                >
-                                    <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily:`${framTextfontfamilystate}` }}>{framtext}</div>
-                                </Draggable>
-                            </div>
-                        )}
-                        {selectedShape === 'square' && selectedImage &&(
-                            <div className=' relative'>
-                                <img className='z-0' src={selectedImage}></img>
-                                {isDraggable ?(
-            <Draggable
-          position={position}
-          onDrag={handleDrag}
-        >
-
-            <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute cursor-move z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
-            </Draggable>
-         )
-         :(
-            <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute cursor-move z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
-
-         )
-         }
-          <Draggable
-                                    defaultPosition={{ x: -76, y: -44 }}
-                                // onDrag={handleDrag}
-
-
-                                >
-                                    <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily:`${framTextfontfamilystate}` }}>{framtext}</div>
-                                </Draggable>
-                                
-                            </div>
-                        )}
-                        {selectedShape === 'circle' && selectedImage && (
-                            <div className=' relative'>
-                                <img className='z-0' src={selectedImage}></img>
-                                {isDraggable ? (
-            <Draggable
-          position={position}
-          onDrag={handleDrag}
-        >
-
-            <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' rounded-full cursor-move absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
-            </Draggable>
-         )
-         :(
-            <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' rounded-full cursor-move absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
-
-         )
-         }
-          <Draggable
-                                    defaultPosition={{ x: -76, y: -44 }}
-                                // onDrag={handleDrag}
-
-
-                                >
-                                    <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily:`${framTextfontfamilystate}` }}>{framtext}</div>
-                                </Draggable>
-                            </div>
-                        )}
-                        {selectedShape === 'oval' && selectedImage && (
-                            <div className=' relative'>
-                                <img className='z-0' src={selectedImage}></img>
-                                {isDraggable ? (
-            <Draggable
-          position={position}
-          onDrag={handleDrag}
-        >
-
-            <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' ronded-full absolute cursor-move z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
-            </Draggable>
-         )
-         :(
-            <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' rounded-full absolute z-0 cursor-move top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
-
-         )
-         }
-
-<Draggable
-                                    defaultPosition={{ x: -76, y: -44 }}
-                                // onDrag={handleDrag}
-
-
-                                >
-                                    <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily:`${framTextfontfamilystate}` }}>{framtext}</div>
-                                </Draggable>
-
-                            </div>
-                        )}
                     </div>
+                    <div className=' w-[1200px]' style={{
+                        backgroundImage: `url(${backgroundImage})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        overflow: "hidden",
+                        backgroundRepeat: 'no-repeat',
+                    }}>
+                        <div className="preview" >
 
+                            <div className="image-container ">
+                                <div className={` ${selectedImage == null ? "block" : "hidden"}`}>
+
+                                    <img style={{ zIndex: '0' }} className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }} />
+
+                                    <div onMouseOver={() => { handleFocus() }}
+                                        onMouseOut={handleBlur} className={`relative ${selectedImage2 == null ? "block" : "hidden"}`}>
+                                        {isDraggable ? (
+                                            <Draggable
+                                                position={position}
+                                                onDrag={handleDrag}
+                                            >
+                                                <img
+                                                    style={{ transform: `scale(${scale})` }}
+                                                    className='shadow-2xl cursor-move'
+                                                    src={PreviewImg}
+                                                    alt="Draggable"
+                                                />
+                                            </Draggable>
+                                        ) : (
+                                            <img
+                                                style={{
+                                                    transform: `scale(${scale})`, position: " relative",  // Positioning to match draggable
+                                                    left: `${position.x}`,
+                                                    top: `${position.y}`,
+                                                }}
+                                                className='shadow-2xl'
+                                                src={PreviewImg}
+                                                alt="Not Draggable"
+                                            />
+                                        )}
+                                        <Draggable
+                                            defaultPosition={{ x: -76, y: -44 }}
+                                        // onDrag={handleDrag}
+
+
+                                        >
+                                            <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
+                                        </Draggable>
+                                        {/* <div  className=' text-3xl text-white  border px-3 py-4  bg-black/30 rounded-md  absolute top-[30%] left-[35%]'>PREVIEW</div> */}
+
+                                    </div>
+                                </div>
+                                {selectedShape === 'rectangle' && selectedImage && (
+                                    <div className=' relative'>
+                                        <img className=' h-20 w-20' style={{ zIndex: "1" }} src={selectedImage}
+                                            style={{
+                                                width: '100%', // Adjust width as needed
+                                                height: 'auto'
+                                                , position: "relative",
+                                                // Maintain aspect ratio
+                                            }}></img>
+                                        {isDraggable ? (
+                                            <Draggable
+                                                position={position}
+                                                onDrag={handleDrag}
+                                            >
+
+                                                <img onMouseOver={() => { handleFocus() }}
+                                                    onMouseOut={handleBlur} width={"100px"} height={"600px"} style={{ zIndex: '2' }} className=' absolute z-0 p-10 cursor-move top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }}  ></img>
+                                            </Draggable>
+                                        )
+                                            : (
+                                                <img onMouseOver={() => { handleFocus() }}
+                                                    onMouseOut={handleBlur} width={"100px"} height={"600px"} style={{ zIndex: '2' }} className=' absolute p cursor-move z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }}  ></img>
+
+                                            )
+                                        }
+                                        {/* <p className=' relative text-black top-0 left-0'>Text</p> */}
+                                        <Draggable
+                                            defaultPosition={{ x: -76, y: -44 }}
+                                        // onDrag={handleDrag}
+
+
+                                        >
+                                            <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
+                                        </Draggable>
+                                    </div>
+                                )}
+                                {selectedShape === 'square' && selectedImage && (
+                                    <div className=' relative'>
+                                        <img className='z-0' src={selectedImage}></img>
+                                        {isDraggable ? (
+                                            <Draggable
+                                                position={position}
+                                                onDrag={handleDrag}
+                                            >
+
+                                                <img onMouseOver={() => { handleFocus() }}
+                                                    onMouseOut={handleBlur} width={"100px"} height={"600px"} style={{ zIndex: '2' }} className=' absolute cursor-move z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }}  ></img>
+                                            </Draggable>
+                                        )
+                                            : (
+                                                <img onMouseOver={() => { handleFocus() }}
+                                                    onMouseOut={handleBlur} width={"100px"} height={"600px"} style={{ zIndex: '2' }} className=' absolute cursor-move z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }}  ></img>
+
+                                            )
+                                        }
+                                        <Draggable
+                                            defaultPosition={{ x: -76, y: -44 }}
+                                        // onDrag={handleDrag}
+
+
+                                        >
+                                            <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
+                                        </Draggable>
+
+                                    </div>
+                                )}
+                                {selectedShape === 'circle' && selectedImage && (
+                                    <div className=' relative'>
+                                        <img className='z-0' src={selectedImage}></img>
+                                        {isDraggable ? (
+                                            <Draggable
+                                                position={position}
+                                                onDrag={handleDrag}
+                                            >
+
+                                                <img onMouseOver={() => { handleFocus() }}
+                                                    onMouseOut={handleBlur} width={"100px"} height={"600px"} style={{ zIndex: '2' }} className=' rounded-full cursor-move absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }}  ></img>
+                                            </Draggable>
+                                        )
+                                            : (
+                                                <img onMouseOver={() => { handleFocus() }}
+                                                    onMouseOut={handleBlur} width={"100px"} height={"600px"} style={{ zIndex: '2' }} className=' rounded-full cursor-move absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }}  ></img>
+
+                                            )
+                                        }
+                                        <Draggable
+                                            defaultPosition={{ x: -76, y: -44 }}
+                                        // onDrag={handleDrag}
+
+
+                                        >
+                                            <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
+                                        </Draggable>
+                                    </div>
+                                )}
+                                {selectedShape === 'oval' && selectedImage && (
+                                    <div className=' relative'>
+                                        <img className='z-0' src={selectedImage}></img>
+                                        {isDraggable ? (
+                                            <Draggable
+                                                position={position}
+                                                onDrag={handleDrag}
+                                            >
+
+                                                <img onMouseOver={() => { handleFocus() }}
+                                                    onMouseOut={handleBlur} width={"100px"} height={"600px"} style={{ zIndex: '2' }} className=' ronded-full absolute cursor-move z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }}  ></img>
+                                            </Draggable>
+                                        )
+                                            : (
+                                                <img onMouseOver={() => { handleFocus() }}
+                                                    onMouseOut={handleBlur} width={"100px"} height={"600px"} style={{ zIndex: '2' }} className=' rounded-full absolute z-0 cursor-move top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }}  ></img>
+
+                                            )
+                                        }
+
+                                        <Draggable
+                                            defaultPosition={{ x: -76, y: -44 }}
+                                        // onDrag={handleDrag}
+
+
+                                        >
+                                            <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
+                                        </Draggable>
+
+                                    </div>
+                                )}
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                </div>  
-            </div>    
                 <div className="options">
 
 
@@ -683,7 +685,7 @@ function App() {
                         <div>
 
 
-
+                    
                             <button className=" rounded-md text-black relative" onClick={() => document.getElementById('my_modal_3').showModal()}>
 
                                 🔍 Zoom
@@ -697,14 +699,14 @@ function App() {
                                     </form>
                                     <div className=' flex items-center gap-7'>
                                         -
-                                    <input
-                                        type="range"
-                                        min="20"
-                                        max="100"
-                                        className="range range-primary h-3"
-                                        value={scale * 100} // Convert scale factor back to percentage for the slider
-                                        onChange={handleSliderChange}
-                                    /> +
+                                        <input
+                                            type="range"
+                                            min="20"
+                                            max="100"
+                                            className="range range-primary h-3"
+                                            value={scale * 100} // Convert scale factor back to percentage for the slider
+                                            onChange={handleSliderChange}
+                                        /> +
                                     </div>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
@@ -720,7 +722,7 @@ function App() {
 
 
                         {/* You can open the modal using document.getElementById('ID').showModal() method */}
-                        <button className="rounded-md" onClick={() => document.getElementById('my_modal_4').showModal()}>
+                        <button className="text rounded-md" onClick={() => document.getElementById('my_modal_4').showModal()}>
                             📝 Text
                         </button>
                         <dialog id="my_modal_4" className="modal">
@@ -748,25 +750,25 @@ function App() {
                                     onChange={(e) => setColor(e.target.value)} // Update state on change
                                 />
 
-                                <div className={`${framtext==""?"hidden":"block"}`}>
-                                <label style={{ paddingRight: "400px" }} className=' text-nowrap'>Text Style</label><br></br>
-                                 {
-                                    framTextfontfamily.map((text,index)=>(
-                                        <form method="dialog">
-                                            <p className='border my-3 text-2xl py-4 cursor-pointer' onClick={()=>{setframTextfontfamilystate(text)}} key={index} style={{fontFamily:`${text}`}}>{framtext}</p>
-                                        </form>
+                                <div className={`${framtext == "" ? "hidden" : "block"}`}>
+                                    <label style={{ paddingRight: "400px" }} className=' text-nowrap'>Text Style</label><br></br>
+                                    {
+                                        framTextfontfamily.map((text, index) => (
+                                            <form method="dialog">
+                                                <p className='border my-3 text-2xl py-4 cursor-pointer' onClick={() => { setframTextfontfamilystate(text) }} key={index} style={{ fontFamily: `${text}` }}>{framtext}</p>
+                                            </form>
                                         ))
-                                 }
-                               
-                                
+                                    }
+
+
                                 </div>
                                 <div>
 
                                 </div>
 
-                                <form method="dialog" className={`${framtext==""?"hidden":"block"}`}>
+                                <form method="dialog" className={`${framtext == "" ? "hidden" : "block"}`}>
                                     {/* if there is a button in form, it will close the modal */}
-                                    <button  style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
+                                    <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
                                 </form>
                             </div>
                         </dialog>
@@ -785,25 +787,26 @@ function App() {
                         <input
                             type="file"
                             id="fileInput"
-                            style={{ display: 'none'}}
+                            style={{ display: 'none' }}
                             accept="image/*"
                             onChange={handleImageUpload}
                         />
                     </div>
+                   
                     <div className="shapes">
                         <h3 className='acrylic'>Acrylic Photo Shapes</h3>
                         <div className="shape-options mt-2">
-                            
+                        
                             <svg
                                 viewBox="0 0 600 400"
-                                className={` shape-svg1 ${selectedShape === 'rectangle' ? 'border-blue' : '' } `}
+                                className={` shape-svg1 ${selectedShape === 'rectangle' ? 'border-blue' : ''} `}
                                 onClick={() => handleShapeClick('rectangle')}
                             >
                                 <rect x="10" y="10" width="480" height="280" fill="#c1995d" stroke="" strokeWidth="5" />
                             </svg>
                             <svg
                                 viewBox="0 0 400 400"
-                                className={`shape-svg2 ${selectedShape === 'square' ? 'border-blue' : '' }`}
+                                className={`shape-svg2 ${selectedShape === 'square' ? 'border-blue' : ''}`}
                                 onClick={() => handleShapeClick('square')}
                             >
                                 <rect x="10" y="10" width="280" height="280" fill="#c1995d" stroke="" strokeWidth="5" />
@@ -827,7 +830,8 @@ function App() {
                             >
                                 <ellipse cx="200" cy="200" rx="200" ry="100" fill="#c1995d" stroke="" strokeWidth="5" />
                             </svg>
-                        </div>
+                            </div>    
+                       
                     </div>
                     <div className="size-options">
                         <br />
@@ -842,15 +846,17 @@ function App() {
                             <button onClick={() => handleSizeChange('21x15')} className={`size-button ${selectedSize === '21x15' ? 'active' : ''}`}>21x15</button>
                             <button onClick={() => handleSizeChange('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''}`}>35x23</button>
                         </div> */}
+                        <div className='size'>
                         <h3 className='acrylic1 my-3'>Size (Inch): {selectedSize}</h3>
-      <div className="size-buttons">
-        <button onClick={() => handleSizeChange1('12x9')} className={`size-button ${selectedSize === '12x9' ? 'active' : ''}  rounded-md  ${selectedSize === '12x9' ? '' : 'hover:ring'}`}>12x9</button>
-        <button onClick={() => handleSizeChange1('11x11')} className={`size-button ${selectedSize === '11x11' ? 'active' : ''} rounded-md  ${selectedSize === '11x11' ? '' : 'hover:ring'}`}>11x11</button>
-        <button onClick={() => handleSizeChange1('16x12')} className={`size-button ${selectedSize === '16x12' ? 'active' : ''} rounded-md  ${selectedSize === '16x12' ? '' : 'hover:ring'}`}>16x12</button>
-        <button onClick={() => handleSizeChange1('16x16')} className={`size-button ${selectedSize === '16x16' ? 'active' : ''} rounded-md  ${selectedSize === '16x16' ? '' : 'hover:ring'}`}>16x16</button>
-        <button onClick={() => handleSizeChange1('21x15')} className={`size-button ${selectedSize === '21x15' ? 'active' : ''} rounded-md  ${selectedSize === '21x15' ? '' : 'hover:ring'}`}>21x15</button>
-        <button onClick={() => handleSizeChange1('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''} rounded-md  ${selectedSize === '35x23' ? '' : 'hover:ring'}`}>35x23</button>
-      </div>
+                        <div className="size-buttons">
+                            <button onClick={() => handleSizeChange1('12x9')} className={`size-button ${selectedSize === '12x9' ? 'active' : ''}  rounded-md  ${selectedSize === '12x9' ? '' : 'hover:ring'}`}>12x9</button>
+                            <button onClick={() => handleSizeChange1('11x11')} className={`size-button ${selectedSize === '11x11' ? 'active' : ''} rounded-md  ${selectedSize === '11x11' ? '' : 'hover:ring'}`}>11x11</button>
+                            <button onClick={() => handleSizeChange1('16x12')} className={`size-button ${selectedSize === '16x12' ? 'active' : ''} rounded-md  ${selectedSize === '16x12' ? '' : 'hover:ring'}`}>16x12</button>
+                            <button onClick={() => handleSizeChange1('16x16')} className={`size-button ${selectedSize === '16x16' ? 'active' : ''} rounded-md  ${selectedSize === '16x16' ? '' : 'hover:ring'}`}>16x16</button>
+                            <button onClick={() => handleSizeChange1('21x15')} className={`size-button ${selectedSize === '21x15' ? 'active' : ''} rounded-md  ${selectedSize === '21x15' ? '' : 'hover:ring'}`}>21x15</button>
+                            <button onClick={() => handleSizeChange1('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''} rounded-md  ${selectedSize === '35x23' ? '' : 'hover:ring'}`}>35x23</button>
+                        </div>
+                        </div>
 
                     </div>
                     <div className="thickness-options mr-48">
@@ -861,17 +867,16 @@ function App() {
                             <button onClick={() => handleThicknessChange('8MM')} className={`thickness-button rounded-md ${selectedThickness === '8MM' ? 'active' : ''} ${selectedThickness === '5MM' ? '' : 'hover:ring'}`}>8MM (Premium)</button>
                         </div>
                     </div>
-                    <hr className='border-dashed border-[1px] border-gray-100 mb-2 w-[1200px]'/>
-                     
-                    <div className="price1">
-                         ₹{price}
-                   </div>
-                    <div className="details">
-                        Only 8 Acrylic's left!
-                        Photo quality for 12x9 is Good
-                        Quick mount: OMGS® Adhesive hooks (Included)
+                    <hr className='border-dashed border-[1px] border-gray-200 mb-2 w-[1200px]' />
+
+                    <div className="price1 text-sm">
+                    <span className='text-xl'>₹{price} <span className=' line-through text-gray-300'>₹{price+1000}</span></span>
+                         <p>Only <span className='text-red-500'>8 Acrylic's</span> Left!</p>
+                         <p className='mt-6' style={{fontWeight:"300"}}>  Photo quality for <span style={{fontWeight:"600"}}>{selectedSize}</span> is <span className='text-green-500'>Good</span></p>
+                         <p><span style={{fontWeight:"300"}}>Quick mount:</span> <span className='text-bold text-balance'>Hridayam® Adhesive hooks (Included)</span></p>
                     </div>
-                    <button className="buy-now rounded-md">BUY IT NOW</button>
+                    
+                <Link to='/place-order'> <button className="buy-now rounded-md px-20">BUY IT NOW</button></Link>
 
                     <div style={{ maxWidth: '60%', margin: '-30px auto' }}>
 
@@ -881,7 +886,7 @@ function App() {
 
             <div>
             </div>
-        <Footer/>
+            <Footer />
 
         </>
     );
