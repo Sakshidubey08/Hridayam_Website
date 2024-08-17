@@ -340,6 +340,7 @@ import { AutoTextSize } from 'auto-text-size'
 import Draggable, { DraggableCore } from 'react-draggable';
 import AvatarEditor from 'react-avatar-editor' // Both at the same time
 // import Editor from './Editer';
+import Tour from './Tour';
 import Footer from './Footer';
 import backgroundImage from './images/Designer.png';
 import circle from './images/CIRCLE FRAME.jpg'
@@ -362,6 +363,7 @@ function App() {
     const [showTextInput, setShowTextInput] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isDraggable, setIsDraggable] = useState(false);
+    const [framTextfontfamilystate,setframTextfontfamilystate]=useState("");
     const handleSliderChange = (e) => {
         setScale(e.target.value / 100);
         console.log(scale)
@@ -439,9 +441,12 @@ function App() {
       setSelectedSize(size);
       setPrice(sizePriceMap[size]);
     };
+
+    const framTextfontfamily = ["Permanent Marker", "Grey Qo", "Matemasie", "Edu VIC WA NT Beginner", "Bodoni Moda SC"];
     return (
         <>
             <Header />
+            <Tour/>
             <div className="container">
             <div  style={{
                 
@@ -495,7 +500,7 @@ function App() {
     backgroundPosition: 'center',
     overflow:"hidden",
     backgroundRepeat: 'no-repeat',}}>
-                <div className="preview"  >
+                <div className="preview" >
 
                     <div className="image-container ">
                         <div className={` ${selectedImage == null ? "block" : "hidden"}`}>
@@ -528,6 +533,14 @@ function App() {
                                         alt="Not Draggable"
                                     />
                                 )}
+                                <Draggable
+                                    defaultPosition={{ x: -76, y: -44 }}
+                                // onDrag={handleDrag}
+
+
+                                >
+                                    <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily:`${framTextfontfamilystate}` }}>{framtext}</div>
+                                </Draggable>
                                 {/* <div  className=' text-3xl text-white  border px-3 py-4  bg-black/30 rounded-md  absolute top-[30%] left-[35%]'>PREVIEW</div> */}
 
                             </div>
@@ -559,19 +572,19 @@ function App() {
          }
                                 {/* <p className=' relative text-black top-0 left-0'>Text</p> */}
                                 <Draggable
-                                    defaultPosition={{ x: -176, y: -264 }}
+                                    defaultPosition={{ x: -76, y: -44 }}
                                 // onDrag={handleDrag}
 
 
                                 >
-                                    <div className=' absolute text-4xl top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}` }}>{framtext}</div>
+                                    <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily:`${framTextfontfamilystate}` }}>{framtext}</div>
                                 </Draggable>
                             </div>
                         )}
-                        {selectedShape === 'square' && selectedImage && (
+                        {selectedShape === 'square' && selectedImage &&(
                             <div className=' relative'>
                                 <img className='z-0' src={selectedImage}></img>
-                                {isDraggable ? (
+                                {isDraggable ?(
             <Draggable
           position={position}
           onDrag={handleDrag}
@@ -587,6 +600,14 @@ function App() {
 
          )
          }
+          <Draggable
+                                    defaultPosition={{ x: -76, y: -44 }}
+                                // onDrag={handleDrag}
+
+
+                                >
+                                    <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily:`${framTextfontfamilystate}` }}>{framtext}</div>
+                                </Draggable>
                                 
                             </div>
                         )}
@@ -609,6 +630,14 @@ function App() {
 
          )
          }
+          <Draggable
+                                    defaultPosition={{ x: -76, y: -44 }}
+                                // onDrag={handleDrag}
+
+
+                                >
+                                    <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily:`${framTextfontfamilystate}` }}>{framtext}</div>
+                                </Draggable>
                             </div>
                         )}
                         {selectedShape === 'oval' && selectedImage && (
@@ -631,6 +660,15 @@ function App() {
          )
          }
 
+<Draggable
+                                    defaultPosition={{ x: -76, y: -44 }}
+                                // onDrag={handleDrag}
+
+
+                                >
+                                    <div className=' absolute text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, fontFamily:`${framTextfontfamilystate}` }}>{framtext}</div>
+                                </Draggable>
+
                             </div>
                         )}
                     </div>
@@ -641,12 +679,12 @@ function App() {
                 <div className="options">
 
 
-                    <div className="upload-button">
+                    <div className="upload-button my-4">
                         <div>
 
 
 
-                            <button className=" text-black relative" onClick={() => document.getElementById('my_modal_3').showModal()}>
+                            <button className=" rounded-md text-black relative" onClick={() => document.getElementById('my_modal_3').showModal()}>
 
                                 🔍 Zoom
 
@@ -676,13 +714,13 @@ function App() {
 
 
                         </div>
-                        <button className="option" onClick={() => document.getElementById('fileInput').click()}>
+                        <button className="option rounded-md" onClick={() => document.getElementById('fileInput').click()}>
                             🖼️   Select Photo
                         </button>
 
 
                         {/* You can open the modal using document.getElementById('ID').showModal() method */}
-                        <button className="" onClick={() => document.getElementById('my_modal_4').showModal()}>
+                        <button className="rounded-md" onClick={() => document.getElementById('my_modal_4').showModal()}>
                             📝 Text
                         </button>
                         <dialog id="my_modal_4" className="modal">
@@ -693,7 +731,7 @@ function App() {
                                 </form>
 
 
-                                <label style={{ paddingRight: "400px" }} className=' '>Add Text</label><br></br>
+                                <label style={{ paddingRight: "400px" }} className=' text-nowrap '>Add Text</label><br></br>
                                 <input
                                     type='text'
                                     className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
@@ -709,9 +747,27 @@ function App() {
                                     value={color} // Bind the state to the input value
                                     onChange={(e) => setColor(e.target.value)} // Update state on change
                                 />
+
+                                <div className={`${framtext==""?"hidden":"block"}`}>
+                                <label style={{ paddingRight: "400px" }} className=' text-nowrap'>Text Style</label><br></br>
+                                 {
+                                    framTextfontfamily.map((text,index)=>(
+                                        <form method="dialog">
+                                            <p className='border my-3 text-2xl py-4 cursor-pointer' onClick={()=>{setframTextfontfamilystate(text)}} key={index} style={{fontFamily:`${text}`}}>{framtext}</p>
+                                        </form>
+                                        ))
+                                 }
+                               
+                                
+                                </div>
                                 <div>
 
                                 </div>
+
+                                <form method="dialog" className={`${framtext==""?"hidden":"block"}`}>
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button  style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
+                                </form>
                             </div>
                         </dialog>
                         {/* {showTextInput && (
@@ -729,17 +785,18 @@ function App() {
                         <input
                             type="file"
                             id="fileInput"
-                            style={{ display: 'none' }}
+                            style={{ display: 'none'}}
                             accept="image/*"
                             onChange={handleImageUpload}
                         />
                     </div>
                     <div className="shapes">
                         <h3 className='acrylic'>Acrylic Photo Shapes</h3>
-                        <div className="shape-options mt-2 ">
+                        <div className="shape-options mt-2">
+                            
                             <svg
                                 viewBox="0 0 600 400"
-                                className={`shape-svg1 ${selectedShape === 'rectangle' ? 'border-blue' : '' } `}
+                                className={` shape-svg1 ${selectedShape === 'rectangle' ? 'border-blue' : '' } `}
                                 onClick={() => handleShapeClick('rectangle')}
                             >
                                 <rect x="10" y="10" width="480" height="280" fill="#c1995d" stroke="" strokeWidth="5" />
@@ -785,26 +842,27 @@ function App() {
                             <button onClick={() => handleSizeChange('21x15')} className={`size-button ${selectedSize === '21x15' ? 'active' : ''}`}>21x15</button>
                             <button onClick={() => handleSizeChange('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''}`}>35x23</button>
                         </div> */}
-                        <h3 className='acrylic1'>Size (Inch): {selectedSize}</h3>
+                        <h3 className='acrylic1 my-3'>Size (Inch): {selectedSize}</h3>
       <div className="size-buttons">
-        <button onClick={() => handleSizeChange1('12x9')} className={`size-button ${selectedSize === '12x9' ? 'active' : ''}`}>12x9</button>
-        <button onClick={() => handleSizeChange1('11x11')} className={`size-button ${selectedSize === '11x11' ? 'active' : ''}`}>11x11</button>
-        <button onClick={() => handleSizeChange1('16x12')} className={`size-button ${selectedSize === '16x12' ? 'active' : ''}`}>16x12</button>
-        <button onClick={() => handleSizeChange1('16x16')} className={`size-button ${selectedSize === '16x16' ? 'active' : ''}`}>16x16</button>
-        <button onClick={() => handleSizeChange1('21x15')} className={`size-button ${selectedSize === '21x15' ? 'active' : ''}`}>21x15</button>
-        <button onClick={() => handleSizeChange1('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''}`}>35x23</button>
+        <button onClick={() => handleSizeChange1('12x9')} className={`size-button ${selectedSize === '12x9' ? 'active' : ''}  rounded-md  ${selectedSize === '12x9' ? '' : 'hover:ring'}`}>12x9</button>
+        <button onClick={() => handleSizeChange1('11x11')} className={`size-button ${selectedSize === '11x11' ? 'active' : ''} rounded-md  ${selectedSize === '11x11' ? '' : 'hover:ring'}`}>11x11</button>
+        <button onClick={() => handleSizeChange1('16x12')} className={`size-button ${selectedSize === '16x12' ? 'active' : ''} rounded-md  ${selectedSize === '16x12' ? '' : 'hover:ring'}`}>16x12</button>
+        <button onClick={() => handleSizeChange1('16x16')} className={`size-button ${selectedSize === '16x16' ? 'active' : ''} rounded-md  ${selectedSize === '16x16' ? '' : 'hover:ring'}`}>16x16</button>
+        <button onClick={() => handleSizeChange1('21x15')} className={`size-button ${selectedSize === '21x15' ? 'active' : ''} rounded-md  ${selectedSize === '21x15' ? '' : 'hover:ring'}`}>21x15</button>
+        <button onClick={() => handleSizeChange1('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''} rounded-md  ${selectedSize === '35x23' ? '' : 'hover:ring'}`}>35x23</button>
       </div>
 
                     </div>
                     <div className="thickness-options mr-48">
-                        <h3 className='acrylic1'>Thickness: {selectedThickness}</h3>
+                        <h3 className='acrylic1 my-3'>Thickness: {selectedThickness}</h3>
                         <div className="thickness-buttons">
-                            <button onClick={() => handleThicknessChange('3MM')} className={`thickness-button ${selectedThickness === '3MM' ? 'active' : ''}`}>3MM</button>
-                            <button onClick={() => handleThicknessChange('5MM')} className={`thickness-button ${selectedThickness === '5MM' ? 'active' : ''}`}>5MM</button>
-                            <button onClick={() => handleThicknessChange('8MM')} className={`thickness-button ${selectedThickness === '8MM' ? 'active' : ''}`}>8MM (Premium)</button>
+                            <button onClick={() => handleThicknessChange('3MM')} className={`thickness-button rounded-md ${selectedThickness === '3MM' ? 'active' : ''} ${selectedThickness === '3MM' ? '' : 'hover:ring'}`}>3MM</button>
+                            <button onClick={() => handleThicknessChange('5MM')} className={`thickness-button rounded-md ${selectedThickness === '5MM' ? 'active' : ''} ${selectedThickness === '5MM' ? '' : 'hover:ring'}`}>5MM</button>
+                            <button onClick={() => handleThicknessChange('8MM')} className={`thickness-button rounded-md ${selectedThickness === '8MM' ? 'active' : ''} ${selectedThickness === '5MM' ? '' : 'hover:ring'}`}>8MM (Premium)</button>
                         </div>
                     </div>
-
+                    <hr className='border-dashed border-[1px] border-gray-100 mb-2 w-[1200px]'/>
+                     
                     <div className="price1">
                          ₹{price}
                    </div>
@@ -813,7 +871,7 @@ function App() {
                         Photo quality for 12x9 is Good
                         Quick mount: OMGS® Adhesive hooks (Included)
                     </div>
-                    <button className="buy-now">BUY IT NOW</button>
+                    <button className="buy-now rounded-md">BUY IT NOW</button>
 
                     <div style={{ maxWidth: '60%', margin: '-30px auto' }}>
 
