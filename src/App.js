@@ -32,12 +32,17 @@ import Preebook3 from './Products/Preebook3';
 import Preebook4 from './Products/Preebook4';
 import Customize1 from './Products/Customize1'
 import Customize2 from './Products/Customize2'
+import Customize7 from './Products/Customize7'
+import Customize8 from './Products/Customize8'
 import Catalog1 from './Catalog/Catalog1'
 import Acrylic from './Acrylic'
 import Discover1 from './Products/Discover1'
 import Discover2 from './Products/Discover2'
 import Discover3 from './Products/Discover3'
 import Discover4 from './Products/Discover4'
+import Discover5 from './Products/Discover5'
+import Discover6 from './Products/Discover6'
+
 import Customize3 from './Products/Customize3'
 import Customize4 from './Products/Customize4'
 import Customize5 from './Products/Customize5'
@@ -91,11 +96,14 @@ const App = () => {
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/my-orders" element={<MyOrder />} />
                     <Route path="/catalog1" element={<Catalog1 />} />
-                    <Route path="/acrylic" element={<Acrylic />} />
+                    <Route path="/acrylic3" element={<Acrylic3 />} />
                     <Route path="/discover1" element={<Discover1 />} />
                     <Route path="/discover2" element={<Discover2 />} />
                     <Route path="/discover3" element={<Discover3 />} />
                     <Route path="/discover4" element={<Discover4 />} />
+                    <Route path="/discover5" element={<Discover5 />} />
+                    <Route path="/discover6" element={<Discover6 />} />
+
                     <Route path="/customize3" element={<Customize3 />} />
                     <Route path="/customize4" element={<Customize4 />} />
                     <Route path="/customize5" element={<Customize5 />} />

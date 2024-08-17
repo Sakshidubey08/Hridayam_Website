@@ -81,7 +81,6 @@ function App() {
 
     const handleDrag = (e, data) => {
         setPosition({ x: data.x, y: data.y });
-
     };
     const handleShapeChange = (shape) => {
         setSelectedShape(shape);

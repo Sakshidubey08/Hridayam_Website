@@ -17,6 +17,9 @@ import image14 from './images/image 16.png'
 import image15 from './images/transparent.png'
 import image16 from './images/image 15 1.png'
 import image17 from './images/image 124.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
 import image18 from './images/image19.png'
 import image19 from './images/image20.png'
 import image20 from './images/image21.png'
@@ -52,7 +55,7 @@ import { WishlistContext } from './WishlistContext';
 import axios from 'axios';
 
 const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 }) => {
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   // const [cards, setCards] = useState([]);
   // useEffect(() => {
   //   axios.get('http://91.108.104.122/api/getbestsellingproduct')
@@ -93,38 +96,6 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     return storedFavorites ? JSON.parse(storedFavorites) : {};
   });
   
-  const product = [
-    {
-      id: 'product41',
-      name: 'Veneer Wall Light',
-      price: 1200,
-      images: image9   
-    },
-    {
-      id: 'product42',
-      name: 'Brass Diya',
-      price: 1500,
-      images: image10
-    },
-    {
-      id: 'product43',
-      name: 'Structured Curved Bill Cap',
-      price: 1500,
-      images: image12
-    },
-    {
-      id: 'product44',
-      name: 'Personalized Notebooks',
-      price: 1500,
-      images: image13
-    },
-    {
-      id: 'product45',
-      name: 'Win Connect Ball Pen Blue',
-      price: 1500,
-      images: image14
-    },
-  ];
   const handleFavoriteButtonClick = (id, e,description) => {
     e.stopPropagation();
 
@@ -135,7 +106,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       };
 
       const selectedCard = cards.find((card) => card.id === id);
-console.log(selectedCard.description +"slkdflsd")
+      console.log(selectedCard.description +"slkdflsd")
       if (selectedCard) {
         const productToAdd = {
           id: selectedCard.id, // Use selectedCard instead of product
@@ -164,12 +135,61 @@ console.log(selectedCard.description +"slkdflsd")
    
     e.preventDefault();
   };
-
+  
   useEffect(() => {
     // Store favoriteCards in localStorage whenever it changes
     localStorage.setItem('favoriteCards', JSON.stringify(favoriteCards));
   }, [favoriteCards]);
+  
 
+
+  const [favoriteCards1, setFavoriteCards1] = useState(() => {
+    // Load favoriteCards from localStorage when the component mounts
+    const storedFavorites1 = localStorage.getItem('favoriteCards');
+    return storedFavorites1 ? JSON.parse(storedFavorites1) : {};
+  });
+  useEffect(() => {
+    // Store favoriteCards in localStorage whenever it changes
+    localStorage.setItem('favoriteCards', JSON.stringify(favoriteCards1));
+  }, [favoriteCards1]);
+  
+  const handleFavoriteButtonClick1 = (id, e,description) => {
+    e.stopPropagation();
+
+    setFavoriteCards1((prev) => {
+      const updatedFavorites = {
+        ...prev,
+        [id]: !prev[id],
+      };
+
+      const selectedCard = cards1.find((card) => card.id === id);
+      console.log(selectedCard.description +"slkdflsd")
+      if (selectedCard) {
+        const productToAdd = {
+          id: selectedCard.id, // Use selectedCard instead of product
+          name: description,
+          price: selectedCard.price,
+          image: selectedCard.imageUrl,
+        };
+  
+        if (updatedFavorites[id]) {
+          // Add to wishlist
+          addToWishlist(productToAdd);
+
+          setWishlist((prevWishlist) => [...prevWishlist, productToAdd]);
+        } else {
+          // Remove from wishlist
+          setWishlist((prevWishlist) => prevWishlist.filter((item) => item.id !== id));
+          
+        }
+      }
+      
+
+      return updatedFavorites;
+    });
+   
+    e.preventDefault();
+  };
   const navigate = useNavigate();
   const { addToWishlist, wishlistItems, removeFromWishlist } = useContext(WishlistContext);
   const handleCardClick = (id) => {
@@ -190,7 +210,7 @@ console.log(selectedCard.description +"slkdflsd")
         navigate('/product6');
         break;
       case 6:
-        navigate('/acrylic');
+        navigate('/acrylic3');
         break;
       case 7:
         navigate('/product7');
@@ -239,55 +259,55 @@ break;
         navigate('/customize5');
         break;
         case 6:
-        navigate('/customize');
+        navigate('/customize6');
         break;
         case 7:
-        navigate('/customize1');
+        navigate('/customize7');
         break;
         case 8:
-        navigate('/customize');
+        navigate('/customize8');
         break;
     }
   };
  
   const handleCardClick4 = (id) => {
     switch (id) {
-      case 1:
+      case 11:
         navigate('/discover1');
         break;
-        case 2:
+        case 12:
         navigate('/discover2');
         break;
-        case 3:
+        case 13:
         navigate('/discover3');
         break;
-        case 4:
+        case 14:
         navigate('/discover4');
         break;
-        case 5:
-        navigate('/customize1');
+        case 15:
+        navigate('/discover5');
         break;
-        case 6:
-        navigate('/customize');
+        case 16:
+        navigate('/product4');
         break;
-        case 7:
-        navigate('/customize1');
+        case 17:
+        navigate('/discover6');
         break;
-        case 8:
-        navigate('/customize');
+        case 18:
+        navigate('/product8');
         break;
     }
   };
 
   const [cards1, setCards1] = useState([
-    { id: 1, imageUrl: image18, price: '&#8377;1,200', height: '200px', description: "Double Canopy Umbrella" },
-    { id: 2, imageUrl: image19, price: '&#8377;4,200', description: "Water Bottle" },
-    { id: 3, imageUrl: image20, price: '&#8377;800', description: "Fogg Deodorant Men" },
-    { id: 4, imageUrl: image21, price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
-    { id: 5, imageUrl: image22, price: '&#8377;80', description: "Men White Shoes" },
-    { id: 6, imageUrl: image10, price: '&#8377;1,500', description: "Brass Diya" },
-    { id: 7, imageUrl: image23, price: '&#8377;200', description: "Skybags" },
-    { id: 8, imageUrl: image17, price: '&#8377;1,400', description: "Decor Fountain" },
+    { id: 11, imageUrl: image18, price: '&#8377;1,200', height: '200px', description: "Double Canopy Umbrella" },
+    { id: 12, imageUrl: image19, price: '&#8377;4,200', description: "Water Bottle" },
+    { id: 13, imageUrl: image20, price: '&#8377;800', description: "Fogg Deodorant Men" },
+    { id: 14, imageUrl: image21, price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
+    { id: 15, imageUrl: image22, price: '&#8377;80', description: "Men White Shoes" },
+    { id: 16, imageUrl: image10, price: '&#8377;1,500', description: "Brass Diya" },
+    { id: 17, imageUrl: image23, price: '&#8377;200', description: "Skybags" },
+    { id: 18, imageUrl: image17, price: '&#8377;1,400', description: "Decor Fountain" },
   ]);
   const [cards2, setCards2] = useState([
     { id: 1, imageUrl: 'https://i.pinimg.com/564x/ca/e6/9c/cae69c9b3349585dbaf4361bdfbbcba4.jpg', price: '&#8377;1,200', height: '200px', description: "Personalize Mugs" },
@@ -295,9 +315,9 @@ break;
     { id: 3, imageUrl: 'https://i.pinimg.com/564x/d8/70/cc/d870ccde5b904a6373665143e31d50aa.jpg', price: '&#8377;800', description: "Fogg Deodorant Men" },
     { id: 4, imageUrl: 'https://i.pinimg.com/564x/61/f6/8f/61f68f3bb8a99a46feb2c4d7250e92d6.jpg', price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
     { id: 5, imageUrl: 'https://i.pinimg.com/564x/3f/1e/87/3f1e8712c53f32d0bb385b436d40004e.jpg', price: '&#8377;80', description: "Men White Shoes" },
-    { id: 6, imageUrl: image29, price: '&#8377;1,500', description: "Brass Diya" },
-    { id: 7, imageUrl: image30, price: '&#8377;200', height: '110px', description: "Skybags", position: 50 },
-    { id: 8, imageUrl: image31, price: '&#8377;1,400', height: '150px', description: "Decor Fountain", position: 28 },
+    { id: 6, imageUrl: 'https://i.pinimg.com/564x/7d/bd/72/7dbd72694da94b1bb2e3dc89b0a8adec.jpg', price: '&#8377;1,500', description: "Brass Diya" },
+    { id: 7, imageUrl: 'https://i.pinimg.com/564x/49/e1/44/49e1441c079a80a664f48f839aeebed1.jpg', price: '&#8377;200', description: "Skybags" },
+    { id: 8, imageUrl: 'https://i.pinimg.com/564x/0d/78/a4/0d78a455237e6894ea6081881a3039ca.jpg', price: '&#8377;1,400', description: "Decor Fountain" },
   ]);
   // const [cards3, setCards3] = useState([]);
   // useEffect(() => {
@@ -392,22 +412,22 @@ break;
   // };
 
  
-  const [favoriteCards1, setFavoriteCards1] = useState({});
+  // const [favoriteCards1, setFavoriteCards1] = useState({});
+ const [favoriteCards2, setFavoriteCards2] = useState({});
+  // const handleFavoriteButtonClick1 = (cardId) => {
+  //   setFavoriteCards1((prevState) => ({
+  //     ...prevState,
+  //     [cardId]: !prevState[cardId],
+  //   }));
 
-  const handleFavoriteButtonClick1 = (cardId) => {
-    setFavoriteCards1((prevState) => ({
-      ...prevState,
-      [cardId]: !prevState[cardId],
-    }));
-
-    if (handleFavoriteClick1) {
-      handleFavoriteClick1(cardId);
-    }
-  };
-  const [favoriteCards2, setFavoriteCards2] = useState(() => {
-    const storedFavorites = localStorage.getItem('favoriteCards2');
-    return storedFavorites ? JSON.parse(storedFavorites) : {};
-  });
+  //   if (handleFavoriteClick1) {
+  //     handleFavoriteClick1(cardId);
+  //   }
+  // };
+  // const [favoriteCards1, setFavoriteCards1] = useState(() => {
+  //   const storedFavorites = localStorage.getItem('favoriteCards2');
+  //   return storedFavorites ? JSON.parse(storedFavorites) : {};
+  // });
 
   const handleFavoriteButtonClick2 = (cardId) => {
     setFavoriteCards2((prevState) => ({
@@ -541,7 +561,7 @@ break;
     fetchSlides();
   });
   const handleSlideClick = (index) => {
-    // Map the index to the specific route
+   
     const pageRoutes = ['/customize1', '/product3', '/catalog1']; // Add more routes as needed
     if (index < pageRoutes.length) {
       navigate(pageRoutes[index]);
@@ -634,6 +654,126 @@ break;
           <div class="submenu">
           <Link to='/acrylic3'> <div class="submenu-item">Acrylic Photo frame</div></Link> 
           </div>
+        </div>
+        <div class="menu-item">
+       <div class="menu-heading" onClick={() => setIsModalOpen(true)}>Contact Us</div>
+       {/* {isModalOpen && (
+        <div className="fixed z-10 inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+              <div className="sm:flex sm:items-start">
+                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left pl-20">
+                  <h3 className="text-center leading-6 font-medium text-gray-900">Contact Us</h3>
+                  <p className="text-center text-gray-400">Please Enter Your valid Email Id</p>
+                  <div className="mt-2">
+                    <form>
+                      <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                          Email
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Your email" />
+                      </div>
+                      <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
+                          Message
+                        </label>
+                        <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" placeholder="Your message"></textarea>
+                      </div>
+                      <button type="button" className="bg-[#23387A] w-full text-white font-bold py-2 px-4 rounded" onClick={() => setIsModalOpen(false)}>
+                        Send
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )} */}
+      {isModalOpen && (
+  <div className="fixed z-20 inset-0 overflow-y-auto">
+    <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+      <div className="fixed inset-0 transition-opacity">
+        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+      <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+        <div className="sm:flex sm:items-start">
+          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left pl-20 relative">
+            <h3 className="text-center leading-6 font-medium text-gray-900">
+              Contact Us
+              <button
+                type="button"
+                className="absolute right-[-12rem]  top-0 text-gray-500 hover:text-gray-700 focus:outline-none"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <FontAwesomeIcon icon={faTimes} size="lg" />
+              </button>
+            </h3>
+            <p className="text-center text-gray-400">Please Enter Your valid Email Id</p>
+            <div className="mt-2">
+              <form>
+              <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="email"
+                  >
+                    Name
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="name"
+                    type="name"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="email"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="email"
+                    type="email"
+                    placeholder="Your email"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="message"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="message"
+                    placeholder="Your message"
+                  ></textarea>
+                </div>
+                <button
+                  type="button"
+                  className="bg-[#23387A] w-full text-white font-bold py-2 px-4 rounded"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Send
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
         </div>
       </div>
       <div className='swiper-background relative top-4'>
@@ -798,7 +938,7 @@ break;
                   <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1"  onClick={() => handleCardClick4(card.id)}/>
                   <button
                     className="favorite-btn"
-                    onClick={() => handleFavoriteButtonClick1(card.id)}
+                    onClick={(e) => handleFavoriteButtonClick1(card.id, e ,card.description)}
                     style={{
                       cursor: 'pointer',
                       border: 'none',

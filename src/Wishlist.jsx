@@ -156,7 +156,7 @@ const WishlistPage = () => {
               <tr>
                 <th>Select</th>
                 <th>Product Name</th>
-                <th>Price</th>
+              
                 <th>Product Image</th>
                 <th>Delete</th>
               </tr>
@@ -166,7 +166,6 @@ const WishlistPage = () => {
                 <tr key={item.id}>
                   <td><input type="checkbox" /></td>
                   <td>{item.name}</td>
-                  <td>&#8377;{item.price}</td>
 
                   <td><img src={item.image} alt={item.name} /></td>
                   <td>

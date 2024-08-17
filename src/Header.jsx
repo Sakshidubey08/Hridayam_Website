@@ -13,6 +13,9 @@ import icon3 from './images/icon3.png'
 import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown'
 import { FaBars } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone } from '@fortawesome/free-solid-svg-icons'; // Use this if thin is not available
+
 const Header = () => {
   
   return (
@@ -52,6 +55,8 @@ const Header = () => {
           <Dropdown />
             <Link to='/cart'>
           <img src={icon3} alt="icon 3" className="image" /></Link>
+         
+
         </div>
       </div>
       </div>
