@@ -447,7 +447,7 @@ h1 {
 }
 
 .upload-button button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   border: none;
   color: white;
   padding: 10px 20px;
@@ -477,7 +477,7 @@ h1 {
 }
 
 .shape.selected {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   color: white;
 }
 
@@ -499,7 +499,7 @@ h1 {
 }
 
 .size-button.active {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   color: white;
 }
 
@@ -521,7 +521,7 @@ h1 {
 }
 
 .thickness-button.active {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   color: white;
 }
 
@@ -585,3 +585,24 @@ margin-bottom: 16px;
 margin-right: 23.4rem;
 margin-bottom: 16px;
 } 
+.acrylic{
+  text-align: center;
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: 500;
+}
+.acrylic1{
+  text-align: left;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+
+.border-blue {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+
+ 
+}

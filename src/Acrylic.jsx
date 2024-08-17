@@ -492,10 +492,7 @@ function App() {
     const handleFocus = () => {
         setIsDraggable(true);
       };
-
-      
     
-      // Handle blur event to disable dragging
       const handleBlur= () => {
         setIsDraggable(false);
       };
@@ -582,9 +579,10 @@ function App() {
                         )}
                     </div>
                 </div>
-                <div className="preview">
+                
+                <div className="preview p-20 " style={{borderImage:`url(${selectedImage}) 2 fill`}} >
 
-                    <div className="image-container ">
+                    <div className="image-container" >
                     <div className={` ${ selectedImage==null?"block":"hidden"}`}>
                    
                     <img  style={{zIndex:'0'}}  className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
@@ -619,13 +617,24 @@ function App() {
                      </div>
                     {selectedShape === 'rectangle' && selectedImage && (
          <div className=' relative'>   
-         <img className=' h-20 w-20' style={{zIndex:"1"}} src={selectedImage} 
-         style={{
-      width: '100%', // Adjust width as needed
-      height: 'auto'
-      ,position:"relative" // Maintain aspect ratio
-    }}></img>       
-        <img width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+               
+         {isDraggable ? (
+            <Draggable
+          position={position}
+          onDrag={handleDrag}
+        >
+
+            <img onMouseOver={()=>{handleFocus()}}
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+            </Draggable>
+         )
+         :(
+            <img onMouseOver={()=>{handleFocus()}}
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+
+         )
+         }
+       
         {/* <p className=' relative text-black top-0 left-0'>Text</p> */}
         <Draggable
                         defaultPosition={{x: -176, y:-264}}
@@ -639,28 +648,66 @@ function App() {
     )}
     {selectedShape === 'square' && selectedImage && (
         <div className=' relative'>   
-         <img className='z-0' src={selectedImage}></img>  
-         <Draggable
-                        defaultPosition={{x: -176, y:-264}}
-                        // onDrag={handleDrag}
-                        
-                        
-        >     
-        <img   className=' absolute  top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
-         </Draggable>
+         <img className='z-0 bg-cover' src={selectedImage}></img>  
+         {isDraggable ? (
+            <Draggable
+          position={position}
+          onDrag={handleDrag}
+        >
+
+            <img onMouseOver={()=>{handleFocus()}}
+       onMouseOut={handleBlur} width={"100px"} height={"600px"} st  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+            </Draggable>
+         )
+         :(
+            <img onMouseOver={()=>{handleFocus()}}
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+
+         )
+         }
          </div>
     )}
     {selectedShape === 'circle' && selectedImage && (
         <div className=' relative'>   
          <img className='z-0' src={selectedImage}></img>       
-        <img   className=' absolute  top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
+         {isDraggable ? (
+            <Draggable
+          position={position}
+          onDrag={handleDrag}
+        >
+
+            <img onMouseOver={()=>{handleFocus()}}
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+            </Draggable>
+         )
+         :(
+            <img onMouseOver={()=>{handleFocus()}}
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+
+         )
+         }
          </div>
     )}
     {selectedShape === 'oval' && selectedImage && (
         <div className=' relative'>   
-         <img className='z-0' src={selectedImage}></img>       
-        <img   className=' absolute  top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
-         </div>
+         <img className='z-0 ' src={selectedImage}></img>       
+         {isDraggable ? (
+            <Draggable
+          position={position}
+          onDrag={handleDrag}
+        >
+
+            <img onMouseOver={()=>{handleFocus()}}
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+            </Draggable>
+         )
+         :(
+            <img onMouseOver={()=>{handleFocus()}}
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+
+         )
+         }
+        </div>
     )}
                     </div>
                     {/* <div className="preview-text">
@@ -699,8 +746,6 @@ function App() {
     <button style={{color:"transparent" ,background:"transparent"}}>close</button>
   </form>
 </dialog>
-
-
                     </div>
                     <button className="option" onClick={() => document.getElementById('fileInput').click()}>
                     🖼️   Select Photo
