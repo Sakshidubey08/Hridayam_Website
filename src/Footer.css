@@ -99,7 +99,45 @@
 }
 
 @media (max-width: 768px) {
-    .footer-section1 {
-        flex: 1 1 100%;
+    .footer-description1 {
+        font-size: 0.995rem;
+        text-align: center;
     }
+    .footer-logo1 {
+        width: 10rem;
+        margin: auto;
+    }
+    .footer1::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+    
+        width: 100%;
+        height: 100%;
+        background-image: url('./images/group9.png'); /* Update the path to your background image */
+        background-size:contain;
+        background-position:bottom center;
+        background-repeat: no-repeat;
+        
+       
+        opacity: 0.3; /* Apply opacity to the background image */
+        z-index: -1; /* Ensures pseudo-element is behind the content */
+    }
+    .footer-section1 {
+        flex: 1 2 50%;
+    }
+
+    .footer-section2{
+       order: 3;
+    }
+    .footer-section3{
+        order: 1;
+     }
+     .footer-section4{
+        order: 4;
+     }
+     .footer-section5{
+        order: 2;
+     }
 }

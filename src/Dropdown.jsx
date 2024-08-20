@@ -3,6 +3,8 @@ import './Dropdown.css'
 import { Link } from 'react-router-dom';
 
 import icon2 from './images/icon2.png';
+import icon2_white from './images/user-white.png';
+
 function App() {
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -13,12 +15,20 @@ function App() {
   return (
     <div>
       <div onClick={handleIconClick}>
+      <div className='user-black'>
       <img 
     src={icon2} 
     alt="icon" 
     className="image" 
     style={{ cursor: 'pointer' }} 
-  />
+  /></div>
+<div className='user-white'>
+<img 
+    src={icon2_white} 
+    alt="icon" 
+    className="image" 
+    style={{ cursor: 'pointer'}} 
+  /></div>
       </div>
 
       {showDropdown && (

@@ -7,14 +7,16 @@ function Footer() {
         
         <footer className="footer1">
             <div className="container6">
-                <div className="footer-section1">
+           
+                <div className="footer-section1 ">
                     <img className="footer-logo1" src={Frame} alt="Logo" />
                     <p className="footer-description1">
                         Hridayam combines passion and innovation to bring real to customers' business
                     </p>
                 </div>
-                <div className="footer-section1">
-                    <h4 className="footer-title1">Contact</h4>
+                <div className='flex flex-wrap pl-4 md:pl-0 '>
+                <div className="footer-section1 footer-section2 my-3">
+                    <h4 className="footer-title1 font-bold">Contact</h4>
                     <div className="footer-contact1">
                         <i className="fas fa-map-marker-alt1"></i>
                         <p className="footer-address1">
@@ -24,8 +26,8 @@ function Footer() {
                         </p>
                     </div>
                 </div>
-                <div className="footer-section1">
-                    <h4 className="footer-title1">Company</h4>
+                <div className="footer-section1 footer-section3 my-3">
+                    <h4 className="footer-title1 font-bold">Company</h4>
                     <ul className="footer-links1">
         <li>
           <NavLink to="/all-products" className="footer-link1">All Products</NavLink>
@@ -47,15 +49,15 @@ function Footer() {
         </li>
       </ul>
                 </div>
-                <div className="footer-section1">
-                    <h4 className="footer-title1">Help</h4>
+                <div className="footer-section1 footer-section4 my-3">
+                    <h4 className="footer-title1 font-bold">Help</h4>
                     <ul className="footer-links1">
                         <li><a href="mailto:Lorem@gmail.com" className="footer-link1">Lorem@gmail.com</a></li>
                         <li><a href="#" className="footer-link1">FAQ</a></li>
                     </ul>
                 </div>
-                <div className="footer-section1">
-                    <h4 className="footer-title1">Product Categories</h4>
+                <div className="footer-section1 footer-section5 my-3">
+                    <h4 className="footer-title1 font-bold">Product Categories</h4>
                     <ul className="footer-links1">
                         <li><a href="#" className="footer-link1">Acrylic Painting </a></li>
                         <li><a href="#" className="footer-link1">Laptop Bags</a></li>
@@ -64,7 +66,7 @@ function Footer() {
                         <li><a href="#" className="footer-link1">T-Shirt</a></li>
                     </ul>
                 </div>
-            </div>
+            </div></div>
             <div className="footer-bottom1">
                 <p>© 2024 All rights reserved by Bellway Infotech</p>
             </div>

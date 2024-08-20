@@ -500,7 +500,7 @@ body {
 }
 .top{
   color: #363636;
-  font-size: 32px;
+  font-size: 23px;
   font-weight: bold;
 }
 .best{
@@ -512,7 +512,7 @@ body {
   color: #363636;
   text-align: center;
   margin-top: 1rem;
-  font-size: 32px;
+  font-size: 20px;
   font-weight: 600;
 }
 .best2{
@@ -525,7 +525,7 @@ body {
 .top3{
   color: #363636;
   text-align: center;
-  font-size: 32px;
+  font-size: 20px;
   font-weight: 600;
 }
 .best3{
@@ -536,9 +536,9 @@ body {
 }
 .card-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-  margin: 40px 100px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin: 5px 5px;
 }
 
 .card-wrapper {
@@ -566,7 +566,7 @@ body {
 
  padding-left: 25px;
  padding-top: 32px;
-  height: 230px;
+  height: 130px;
 } */
 
 .favorite-btn {
@@ -634,9 +634,11 @@ body {
 }
 
 @media (max-width: 600px) {
+ 
   .card-container {
     grid-template-columns: 1fr;
   }
+  
 }
 
 /* Tailwind CSS */
@@ -881,8 +883,38 @@ input[type="email"] {
   text-decoration: underline;
 }
 @media (min-width: 768px) {
+
+  .top{
+    color: #363636;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  .top3{
+    color: #363636;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  .top2{
+    color: #363636;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin: 40px 100px;
+  }
+
+  
   .group1 {
-    width: 30%; /* Adjust width for larger screens */
+    width: 50%; /* Adjust width for larger screens */
     height: 60rem;
     /* margin-left: 11rem;  */
     

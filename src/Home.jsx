@@ -570,7 +570,7 @@ break;
   return (
     <>
       <Header />
-      <div class="menu-container">
+      <div class="menu-container  hidden md:flex">
         <div class="menu-item">
           <div class="menu-heading">Corporate Gifting</div>
           <div class="submenu">
@@ -776,10 +776,10 @@ break;
 
         </div>
       </div>
-      <div className='swiper-background relative top-4'>
-        <img src={group} alt="" className='group hidden md:block' />
+      <div className='swiper-background    relative  md:top-5'>
+        <img src={group} alt="" className='group '/>
 
-        <div className="w-full max-w-[70rem] mx-auto px-4">
+        <div className="w-full max-w-[70rem] md:mx-auto px-3  mt-28 md:mt-2 md:px-4">
           <Swiper
             cssMode={true}
             navigation={true}
@@ -795,8 +795,8 @@ break;
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className='image-box bg-white flex z-10 justify-around items-center absolute left-0 right-0 mx-auto md:left-auto md:right-auto top-[13.3rem] md:top-[13.8rem]'>
-            <div className='image-item'>
+          <div className='image-box  bg-white flex z-10 justify-around items-center absolute left-0 right-0 mx-auto md:left-auto md:right-auto  top-[20.3rem] md:top-[14.3rem]'>
+            <div className='image-item '>
               <img src={icon5} alt="" className='box-image' />
               <p className='image-description1 text-sm md:text-base mt-2'>1 Million + Customer</p>
             </div>
@@ -811,8 +811,10 @@ break;
           </div>
         </div>
       </div>
-
+     <div className=' hidden md:flex'>
       <Catalog />
+     </div>
+      
 
        {/* <div className='selling'>
         <h1 className='best'>Best Selling</h1>
@@ -864,16 +866,16 @@ break;
           
         )}
       </div>  */}
-      <div className='selling'>
+      <div className='selling '>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
           {cards.map(card => (
             <div key={card.id} className="card-wrapper"
               style={{ cursor: 'pointer' }}>
-              <div className="card1">
+              <div className="card1 ">
                 <div className="card-header">
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1" onClick={() => handleCardClick(card.id)} />
+                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1  " onClick={() => handleCardClick(card.id)} />
                   <button
                     className="favorite-btn"
                     onClick={(e) => handleFavoriteButtonClick(card.id, e ,card.description)}
@@ -910,25 +912,25 @@ break;
         <img src={group1} className="group1" alt="Group Image" /></div>
       <div className="relative ">
 
-        <div className="promo-content bg-[#9CA5C3] text-white p-6 md:p-8 lg:p-10 max-w-screen-lg mx-auto relative z-10">
+        <div className="promo-content  bg-[#9CA5C3] text-white p-6 md:p-8 lg:p-10 max-w-screen-lg mx-auto relative z-10">
           <div className="discount-text text-2xl md:text-3xl lg:text-4xl text-left mb-4 md:mb-6 lg:mb-8">
             Get Discount 20% off
           </div>
-          <div className="subscribe-form flex flex-col md:flex-row items-left justify-start gap-4 mb-4 md:mb-6">
+          <div className="subscribe-form flex  flex-col md:flex-row items-left justify-start gap-4 mb-4 md:mb-6">
             <input type="email" placeholder="Enter your email address" className="w-full md:w-64 lg:w-80 h-10 px-4 border border-gray-300 text-gray-900" />
             <button className="subscribe-button h-10 px-6 bg-[#23387A] text-white    hover:bg-[#1d2a5f]">
               Subscribe
             </button>
           </div>
-          <p className="promo-paragraph text-sm md:text-base lg:text-lg leading-relaxed ml-[32rem] text-left">
+          <p className="promo-paragraph pt-32 text-center md:pt-0 text-sm md:text-base lg:text-lg leading-relaxed  md:ml-[32rem] md:text-left">
             The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers.
           </p>
         </div>
       </div>
 
       <div className='selling mt-96'>
-        <h3 className='best'>New Arrivals</h3>
-        <h1 className='top'>Discover the Latest Trends</h1>
+        <h3 className='best '>New Arrivals</h3>
+        <h1 className='top '>Discover the Latest Trends</h1>
         <div className="card-container">
           {cards1.map(card => (
 
@@ -972,7 +974,7 @@ break;
       </div>
       <div>
         <img src={group2} className='group2' />
-        <div className='selling1'>
+        <div className='selling1 '>
           <h3 className='best'>Customizable Products</h3>
           <h1 className='top'>Looking for Personal Touch</h1>
           <div className="card-container">
@@ -1020,7 +1022,7 @@ break;
         </div>
       </div>
 
-      <div className='selling2 mt-24'>
+      <div className='selling2  mt-24'>
         <h3 className='best'>Limited Period Offer</h3>
         <h1 className='top'>Coming Soon - Pre Book Now!</h1>
 
@@ -1111,11 +1113,11 @@ break;
         )}
 
         <img src={group} className='group6' />
-        <Slider />
+        <Slider/>
         <h3 className='best2'>Why Choose Us</h3>
         <h1 className='top2'>Trust and Quality You Can Rely On</h1>
       </div>
-      <div className="content">
+      <div className="content hidden">
         <img src={image32} className="leftImage" alt="Left Side" />
         <div className="rightContent">
           <div className="headingSection">

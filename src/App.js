@@ -50,6 +50,7 @@ import Customize6 from './Products/Customize6'
 import Acylic2 from './Acylic2';
 import Acrylic3 from './Acrylic3';
 import TextEditer from './TextEditer';
+import Header from './Header';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -111,7 +112,7 @@ const App = () => {
                     <Route path="/customize6" element={<Customize6 />} />
                     <Route path="/acrylic3" element={<Acrylic3 />} />
 
-                    <Route path='/acrylic5' element={<TextEditer></TextEditer>}></Route>
+                    <Route path='/acrylic5' element={<Header></Header>}></Route>
                 </Routes>
             </CartProvider>
         </AuthProvider>
