@@ -162,13 +162,18 @@ body {
 .submenu-item {
   padding: 10px;
   border-bottom: 1px solid #ccc;
-  font-size: 14px;
   font-weight: 500;
+  font-size: 15px;
+
+ 
+  color: #575757;
+  cursor: pointer;
 }
 
 .submenu-item:last-child {
   border-bottom: none;
-  width: 190px;
+  
+  
 }
 
 .menu-item:hover .submenu {
@@ -333,6 +338,8 @@ body {
   text-align: start;
   font-family: 'Poppins';
   font-size: 14px;
+  color: #242424;
+  
 }
 .sub-points{
  padding-top: 10px;
