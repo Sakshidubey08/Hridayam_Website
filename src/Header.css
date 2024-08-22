@@ -415,6 +415,8 @@
   }
   .heart-white{
     display: block;
+    /* height: 200px; */
+  
   }
 
   .user-black{
@@ -504,10 +506,17 @@
     width: 100%; /* Ensure nav items take full width */
     padding-right: 0; /* Remove right padding */
     justify-content: center; /* Center nav items horizontally */
-    gap: 10px; /* Adjust gap for mobile view */
+    gap: 3px; /* Adjust gap for mobile view */
   }
 
   .nav-img img {
-    height: 24px; /* Adjust height of nav images for mobile view */
+    height: 30px; /* Adjust height of nav images for mobile view */
   }
+  .nav-img .image {
+    display: inline-block;
+    margin-right: 2px;
+    /* margin-left: 30px; Adjust as needed */
+    border: 1px solid transparent; /* Add border for visual debugging */
+  }
+
 }

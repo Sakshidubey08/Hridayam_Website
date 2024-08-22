@@ -55,8 +55,13 @@ const Catalog = () => {
   };
 
   return (
+    <>
+
+   <div className='hidden md:block'>
+
+  
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4 sm:mx-8 md:mx-20 mt-52">
-      {cardsData.map((card) => (
+      {cardsData.map((card) =>(
         <div
           key={card.id}
           className="relative bg-gray-200 w-full h-52 sm:h-54 md:h-80 lg:h-82 lg:w-50 ml-3 cursor-pointer"
@@ -73,6 +78,31 @@ const Catalog = () => {
         </div>
       ))}
     </div>
+    </div>
+       
+       
+
+       
+        
+        
+  
+        <div className='text-sm mt-10  md:hidden scrollbar-none flex items-center h-52 w-full px-3 overflow-x-auto gap-4'>
+  {cardsData.map((index) => (
+    <div key={index.id}  onClick={() => handleCardClick(index.id)} className='text-center w-20 h-20 flex-shrink-0'>
+      <img 
+        className='w-20 h-20 rounded-full object-cover' 
+        src={index.imageUrl} 
+        alt="Photoframe"
+      />
+      <p className='mt-3 text-[12px] font-[650]'  dangerouslySetInnerHTML={{ __html: index.title }}></p>
+    </div>
+  ))}
+</div>
+
+
+
+    
+    </>
   );
 };
 

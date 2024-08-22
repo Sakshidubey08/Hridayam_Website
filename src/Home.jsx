@@ -38,6 +38,7 @@ import image32 from './images/Rectangle.png'
 import group2 from './images/Group (6).png'
 import group4 from './images/Group4.png'
 import group5 from './images/group9.png'
+import headerslider from "./images/headerslide.svg"
 import Footer from './Footer.jsx';
 import { Link } from 'react-router-dom';
 import group1 from './images/Group (5).png'
@@ -776,10 +777,13 @@ break;
 
         </div>
       </div>
-      <div className='swiper-background    relative  md:top-5'>
+      <div className=' md:hidden'>
+      <Catalog/>
+     </div>
+      <div style={{backgroundImage:`url(${group})`}} className='swiper-background  bg-left-top bg-no-repeat    relative  md:top-5'>
         <img src={group} alt="" className='group '/>
 
-        <div className="w-full max-w-[70rem] md:mx-auto px-3  mt-28 md:mt-2 md:px-4">
+        <div className="w-full max-w-[70rem]  md:mx-auto px-3  mt-14 md:mt-2 md:px-4">
           <Swiper
             cssMode={true}
             navigation={true}
@@ -787,32 +791,41 @@ break;
             mousewheel={true}
             keyboard={true}
             modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-            className="mySwiper w-full h-full"
+            className="mySwiper w-full "
+            
           >
             {slides.map((slide, index) => (
-              <SwiperSlide key={index} onClick={() => handleSlideClick(index)}>
-                <img src={slide.image} className="block w-full h-auto  object-cover" alt={`slide${index + 1}`} />
+              <SwiperSlide key={index}  onClick={() => handleSlideClick(index)}>
+              <div className='hidden md:block'>
+              <img src={slide.image} style={{display:"flex",height:"100%", width:"100%", objectFit:"cover"}} className="block w-full h-[800px] md:h-auto  object-cover" alt={`slide${index + 1}`} />
+
+              </div>
+                <div className=' md:hidden'>
+                <img src={ headerslider} style={{height:"100%", width:"100%", objectFit:"cover"}} className={" hidden w-full h-[800px] md:h-auto  object-cover"} alt={`slide${index + 1}`} />
+
+                </div>
+
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className='image-box  bg-white flex z-10 justify-around items-center absolute left-0 right-0 mx-auto md:left-auto md:right-auto  top-[20.3rem] md:top-[14.3rem]'>
-            <div className='image-item '>
-              <img src={icon5} alt="" className='box-image' />
-              <p className='image-description1 text-sm md:text-base mt-2'>1 Million + Customer</p>
+          <div className='image-box  bg-white px-10  flex z-10 justify-around items-center absolute left-0 right-0  md:mx-auto md:left-auto md:right-auto  top-[20.3rem] md:top-[14.3rem]'>
+            <div className='image-item   text-wrap'>
+              <img src={icon5} alt="" className='box-image'/>
+              <p className='image-description1     text-sm md:text-base mt-2'>1 Million <br className='block md:hidden'></br> + Customer</p>
             </div>
             <div className='image-item'>
               <img src={icon6} alt="" className='box-image' />
-              <p className='image-description1 text-sm md:text-base mt-2'>3 Days Return</p>
+              <p className='image-description1 text-sm md:text-base mt-2'>3 Days <br className='block md:hidden'></br> Return</p>
             </div>
             <div className='image-item'>
               <img src={icon7} alt="" className='box-image' />
-              <p className='image-description1 text-sm md:text-base mt-2'>Free Shipping</p>
+              <p className='image-description1 text-sm md:text-base mt-2'>Free <br className='block md:hidden'></br> Shipping</p>
             </div>
           </div>
         </div>
       </div>
-     <div className=' hidden md:flex'>
-      <Catalog />
+     <div className=' hidden md:block'>
+      <Catalog/>
      </div>
       
 
@@ -873,11 +886,11 @@ break;
           {cards.map(card => (
             <div key={card.id} className="card-wrapper"
               style={{ cursor: 'pointer' }}>
-              <div className="card1 ">
-                <div className="card-header">
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1  " onClick={() => handleCardClick(card.id)} />
+              <div className="card1-product  ">
+                <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0  " onClick={() => handleCardClick(card.id)} />
                   <button
-                    className="favorite-btn"
+                    className="favorite-btn m-4 md:m-0"
                     onClick={(e) => handleFavoriteButtonClick(card.id, e ,card.description)}
                     style={{
                       cursor: 'pointer',
@@ -935,11 +948,11 @@ break;
           {cards1.map(card => (
 
             <div key={card.id} className="card-wrapper">
-              <div className="card1">
-                <div className="card-header">
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1"  onClick={() => handleCardClick4(card.id)}/>
+              <div className="card1-product">
+                <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick4(card.id)}/>
                   <button
-                    className="favorite-btn"
+                    className="favorite-btn m-4 md:m-0"
                     onClick={(e) => handleFavoriteButtonClick1(card.id, e ,card.description)}
                     style={{
                       cursor: 'pointer',
@@ -980,11 +993,11 @@ break;
           <div className="card-container">
             {cards2.map(card => (
               <div key={card.id} className="card-wrapper">
-                <div className="card1">
-                  <div className="card-header">
-                    <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1" onClick={() => handleCardClick2(card.id)} />
+                <div className="card1-product">
+                  <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                    <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0" onClick={() => handleCardClick2(card.id)} />
                     <button
-                      className="favorite-btn"
+                      className="favorite-btn m-4 md:m-0"
                       onClick={() => handleFavoriteButtonClick2(card.id)}
                       style={{
                         cursor: 'pointer',
@@ -1075,11 +1088,11 @@ break;
           ))} */}
           {cards3.map(card => (
             <div key={card.id} className="card-wrapper">
-              <div className="card1">
-                <div className="card-header">
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1"  onClick={() => handleCardClick1(card.id)}/>
+              <div className="card1-product">
+                <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                  <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick1(card.id)}/>
                   <button
-                    className="favorite-btn"
+                    className="favorite-btn m-4 md:m-0"
                     onClick={() => handleFavoriteButtonClick2(card.id)}
                     style={{
                       cursor: 'pointer',
@@ -1117,7 +1130,7 @@ break;
         <h3 className='best2'>Why Choose Us</h3>
         <h1 className='top2'>Trust and Quality You Can Rely On</h1>
       </div>
-      <div className="content hidden">
+      <div className="content ">
         <img src={image32} className="leftImage" alt="Left Side" />
         <div className="rightContent">
           <div className="headingSection">

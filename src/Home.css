@@ -358,10 +358,13 @@ body {
   }
   .group6{
     height: 84rem;
-    width: 78rem;
-    margin-left: -29.6rem;
+    width: 100%;
+    object-fit: cover;
+    /* margin-left: -10rem; */
+    object-position:right;
+    /* padding-right: 4rem; */
     opacity: 0.3;
-   margin-top: -2rem;
+   margin-top: -0rem;
   }
  .mySwiper{
   margin-top: -90.2rem;
@@ -421,6 +424,7 @@ body {
   font-weight: 500;
   text-align: center;
   font-family: 'Roboto';
+  
   color: #363636;
   width: 150px;
 }
@@ -547,7 +551,7 @@ body {
   align-items: center;
 }
 
-.card1 {
+.card1-product {
   background-color: #e0e0e0;
   color: white;
   padding: 20px;
@@ -621,27 +625,7 @@ body {
   background-color: red; /* Ensure background color stays white */
   color: white; /* Ensure text color stays black */
 }
-@media (max-width: 1200px) {
-  .card-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
 
-@media (max-width: 900px) {
-  .card-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
- 
-  .card-container {
-    grid-template-columns: 1fr;
-  }
-  
-}
-
-/* Tailwind CSS */
 .group1 {
   position: absolute;
  
@@ -652,6 +636,48 @@ body {
   /* margin-top: -6rem; */
   right: 12rem;
 }
+@media (max-width: 1200px) {
+  .card-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  
+  .card1-product {
+    background-color: #e0e0e0;
+    color: white;
+    padding: 0px;
+  
+    position: relative;
+  }
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+ 
+  .card-container {
+    /* grid-template-columns: 1fr; */
+  }
+  .group1 {
+    position: absolute;
+   
+    width: 100%;
+    height: 50rem; /* Adjust based on your image aspect ratio */
+    object-fit: cover; /* Ensure the image covers the entire area */
+    opacity: 0.3;
+    /* margin-top: -6rem; */
+    right: 0rem;
+
+  }
+  
+  
+}
+
+/* Tailwind CSS */
+
 
 .promo-content {
   background-color: #9CA5C3;
@@ -708,18 +734,18 @@ input[type="email"] {
 
 .group2{
   height: 600px;
-  width: 600px;
+  width: 100%;
   margin-top: -15rem;
-  margin-left: -27rem;
+  margin-left: -14rem;
   opacity: 0.3;
 }
 .group4{
   height: 870px;
-  width: 600px;
+  width: 100%;
   margin-top: -18rem;
   opacity: 0.3;
   position: absolute;
-  right: 0.2rem;
+  right: 3rem;
   
 }
 
@@ -732,11 +758,12 @@ input[type="email"] {
 }
 
 .leftImage {
-  height: 805px;
+  height: 100%;
   width: 470px;
-  object-fit: cover;
+  object-fit: contain;
   z-index: 1;
-  margin-left: 6.6rem;
+  margin-left: 0rem;
+  border-radius: 0.9rem;
 }
 
 .rightContent {
@@ -884,6 +911,24 @@ input[type="email"] {
 }
 @media (min-width: 768px) {
 
+
+  .group{
+    height: 84rem;
+    width: 78rem;
+    margin-left: -29.6rem;
+    opacity: 0.3;
+   margin-top: 5rem;
+  }
+
+  .leftImage {
+    height: 805px;
+    width: 470px;
+    object-fit: cover;
+    z-index: 1;
+    margin-left: 6.6rem;
+  }
+
+  
   .top{
     color: #363636;
     font-size: 32px;
@@ -921,6 +966,32 @@ input[type="email"] {
     position: absolute;
     right: -0rem;
   }
+
+  .group2{
+    height: 600px;
+    width: 600px;
+    margin-top: -15rem;
+    margin-left: -27rem;
+    opacity: 0.3;
+  }
+
+  .group4{
+    height: 870px;
+    width: 600px;
+    margin-top: -18rem;
+    opacity: 0.3;
+    position: absolute;
+    right: 0rem;
+    
+  }
+  .group6{
+    height: 84rem;
+    width: 78rem;
+    margin-left: -29.6rem;
+    opacity: 0.3;
+   margin-top: -2rem;
+  }
+  
 }
 @media (min-width: 1024px) {
   .group1 {
@@ -932,10 +1003,11 @@ input[type="email"] {
   }
  
 }
-@media (max-width: 1024px) {
+@media (max-width: 1024px){
   .group4{
     position: absolute;
-    right: 14rem;
+    object-fit: cover;
+    right: 0rem;
   }
  
 }
@@ -949,7 +1021,7 @@ input[type="email"] {
   }
 }
 
-@media (min-width: 1728px) {
+@media (min-width: 1728px){
   .group1 {
     width: 30%;
     height: 80rem;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 import image1 from './images/image 117.png';
 import image2 from './images/image118.png';
@@ -14,9 +14,15 @@ export default function App() {
       <div style={{ width: '100vw', maxWidth: '80%', height: '30vh' }}>
         <Swiper
           slidesPerView={1}
+         
+          autoplay={true}
           spaceBetween={10}
           breakpoints={{
+            400:{
+                slidesPerView:1/2,
+            },
             640: {
+              
               slidesPerView: 2,
               spaceBetween: 20,
             },
@@ -25,25 +31,26 @@ export default function App() {
               spaceBetween: 30,
             },
             1024: {
-              slidesPerView: 2,
+              slidesPerView: 5/2,
               spaceBetween: 40,
+              
             },
           }}
-          modules={[Pagination]}
+          modules={[Pagination,Autoplay]}
           className="mySwiper mt-4 w-full"
         
         >
           <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <img src={image1} alt="Slide 1" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} />
+            <img src={image1} alt="Slide 1" style={{ width: '100%', height: '100%', objectFit: "contain", borderRadius: '10px' }} />
           </SwiperSlide>
           <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <img src={image2} alt="Slide 2" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} />
+            <img src={image2} alt="Slide 2" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '10px' }} />
           </SwiperSlide>
           <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <img src={image3} alt="Slide 3" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} />
+            <img src={image3} alt="Slide 3" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '10px' }} />
           </SwiperSlide>
           <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <img src={image3} alt="Slide 4" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} />
+            <img src={image3} alt="Slide 4" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '10px' }} />
           </SwiperSlide>
         </Swiper>
       </div>
