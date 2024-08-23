@@ -181,6 +181,10 @@ const Product1 = () => {
     const getShapePath = (shape) => {
         return svgBorderPaths[shape] || '';
     };
+    const [framtext, setFramText] = useState(''); // State for the text input
+    const [color, setColor] = useState('#000000'); // State for the color input
+    const framTextfontfamily = ["Permanent Marker", "Grey Qo", "Matemasie", "Edu VIC WA NT Beginner", "Bodoni Moda SC"];
+        const [framTextfontfamilystate, setframTextfontfamilystate] = useState("");
 
     return (
         <>
@@ -278,6 +282,48 @@ const Product1 = () => {
                                 />
                                 {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
                             </div>
+                            <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
+                            Add Text
+                        </button>
+                        <dialog id="my_modal_4" className="modal">
+                            <div className="modal-box">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "transparent", color: "black" }} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+
+
+                                <label style={{ paddingRight: "400px" }} className=' text-nowrap '>Add Text</label><br></br>
+                                <input
+                                    type='text'
+                                    className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
+                                    placeholder='Enter Your Text here'
+                                    value={framtext} // Bind the state to the input value
+                                    onChange={(e) => setFramText(e.target.value)} // Update state on change
+                                />
+                               
+                                <div className={`${framtext == "" ? "hidden" : "block"}`}>
+                                    <label style={{ paddingRight: "400px" }} className=' text-nowrap'>Text Style</label><br></br>
+                                    {
+                                        framTextfontfamily.map((text, index) => (
+                                            <form method="dialog">
+                                                <p className='border my-3 text-2xl py-4 cursor-pointer' onClick={() => { setframTextfontfamilystate(text) }} key={index} style={{ fontFamily: `${text}` }}>{framtext}</p>
+                                            </form>
+                                        ))
+                                    }
+
+
+                                </div>
+                            <div>
+
+                                </div>
+
+                                <form method="dialog" className={`${framtext == "" ? "hidden" : "block"}`}>
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
+                                </form>
+                            </div>
+                        </dialog>
                             <h3 className='free'>Free Delivery</h3>
                             <div className="buttons">
                                 <button className="wishlist-btn">

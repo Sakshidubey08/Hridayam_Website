@@ -521,7 +521,7 @@ function App() {
                                             >
                                                 <img
                                                     style={{ transform: `scale(${scale})` }}
-                                                    className={`shadow-2xl cursor-move  ${selectedShape === 'circle'?"rounded-full":""}`}
+                                                    className={`shadow-2xl cursor-move ${selectedShape === 'oval' ? 'rounded-[80%]' : ''} ${selectedShape === 'roundedSquare' ? 'rounded-[15%]' : ''} ${selectedShape === 'roundedRectangle' ? 'rounded-[10%]' : ''} ${selectedShape === 'circle'?"rounded-[50%]":""} `}
                                                     src={PreviewImg}
                                                     alt="Draggable"
                                                 />
@@ -533,7 +533,7 @@ function App() {
                                                     left: `${position.x}`,
                                                     top: `${position.y}`,
                                                 }}
-                                                className='shadow-2xl'
+                                                className={`shadow-2xl  ${selectedShape === 'oval' ? 'rounded-[80%]' : ''} ${selectedShape === 'roundedSquare' ? 'rounded-[15%]' : ''} ${selectedShape === 'roundedRectangle' ? 'rounded-[10%]' : ''} ${selectedShape === 'circle'?"rounded-[50%]":""} `}
                                                 src={PreviewImg}
                                                 alt="Not Draggable"
                                             />
@@ -915,7 +915,7 @@ function App() {
 
                     <Link to='/place-order'> <button className="buy-now rounded-md px-20">BUY IT NOW</button></Link>
 
-                    <div style={{ maxWidth: '60%', margin: '-30px auto' }}>
+                    <div style={{ maxWidth: '60%', margin: '-30px auto'}}>
 
                     </div>
                 </div>
@@ -930,4 +930,3 @@ function App() {
 }
 
 export default App;
-

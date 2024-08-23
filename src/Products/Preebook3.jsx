@@ -23,6 +23,8 @@ import '../Home.css'
 import './Product3.css'
 import Header from '../Header';
 import Footer from '../Footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 const Product1 = () => {
   const { addToCart, addToWishlist } = useContext(CartContext);
   const navigate = useNavigate();
@@ -172,6 +174,13 @@ const Product1 = () => {
                           <h3 className="text-center leading-6 font-medium text-gray-900">
                             Contact Us
                           </h3>
+                          <button
+                type="button"
+                className="absolute right-[-6rem]  top-[1rem] text-gray-500 hover:text-gray-700 focus:outline-none"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <FontAwesomeIcon icon={faTimes} size="lg" />
+              </button>
                           <p className='text-center text-gray-400'>Pleas Enter Your valid Email Id</p>
                           <div className="mt-2">
                             <form>
@@ -181,6 +190,12 @@ const Product1 = () => {
                                   Email
                                 </label>
                                 <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Your email" />
+                              </div>
+                              <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                                  Quantity you need
+                                </label>
+                                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="number" type="number" placeholder="Enter Quantity" />
                               </div>
                               <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">

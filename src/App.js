@@ -39,6 +39,7 @@ import Customize7 from './Products/Customize7'
 import Customize8 from './Products/Customize8'
 import Catalog1 from './Catalog/Catalog1'
 // import Acrylic from './Acrylic'
+import Products from './Catalog/Products'
 import Discover1 from './Products/Discover1'
 import Discover2 from './Products/Discover2'
 import Discover3 from './Products/Discover3'
@@ -101,6 +102,7 @@ const App = () => {
                     <Route path="all-products" element={<AllProducts />} />
                     <Route path="/card/:id" element={<Cardpage1 />} />
                     <Route path="/product/:id" element={<ProductDetail />} />
+                    <Route path="/products" element={<Products />} />
 
                     <Route path="/place-order" element={<PlaceOrder />} />
                     <Route path="/payment" element={<Payment />} />
