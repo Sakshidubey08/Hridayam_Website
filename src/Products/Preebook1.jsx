@@ -168,7 +168,7 @@ const Product1 = () => {
         <div className="content">
           <div className='image2'>
             <img src={product.images[selectedColor]} alt="Product" className="product-image6 h-3/4" style={{ marginTop: '55px', marginLeft: '-32px' }} /></div>
-          <div className="scrollable-content">
+          <div className="scrollable-content mt-5 md:mt-0">
             <div className="product-info">
               <h1 className='product-name'>{product.name}</h1>
               <div className="quantity-box">
@@ -296,8 +296,8 @@ const Product1 = () => {
           <div key={card.id} className="card-wrapper"
             style={{ cursor: 'pointer' }}>
             <div className="card1">
-              <div className="card-header">
-                <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1" />
+              <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0" />
               </div>
             </div>
             <div className="card-info">

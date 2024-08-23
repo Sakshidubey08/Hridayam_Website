@@ -160,6 +160,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Range, getTrackBackground } from 'react-range';
 import Header from '../Header';
+
 import '../AllP.css';
 const STEP = 1;
 const MIN = 0;
@@ -173,6 +174,7 @@ const CatalogProducts = () => {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedMaterials, setSelectedMaterials] = useState([]);
   const [selectedColor, setSelectedColor] = useState('');
+  const [mobileviewfiltter , setmobileviewfiltter] =useState(false);
   const handleMaterialChange = (material) => {
     if (selectedMaterials.includes(material)) {
         setSelectedMaterials(selectedMaterials.filter((m) => m !== material));
@@ -267,7 +269,7 @@ const handleColorChange = (color) => {
     <>
     <Header/>
         <div className="main-container">
-           <div className="filter-container">
+           <div className="filter-container hidden md:block">
                     <div className="filter-header">
                         <h2>Filters</h2>
                         <button className="clear-all" onClick={handleClearAll}>
@@ -388,7 +390,7 @@ const handleColorChange = (color) => {
                         </div>
                     </div>
                 </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-4 sm:mx-8 md:mx-20 mt-20">
+    <div onClick={()=>{setmobileviewfiltter(true)}}  className={`grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-4 sm:mx-8 md:mx-20 mt-20`}>
       {productsData.map((product) => (
         <div
           key={product._id}
@@ -407,6 +409,136 @@ const handleColorChange = (color) => {
         </div>
       ))}
     </div>
+    <div  className={ `fixed block md:hidden  transition-all duration-700 ease-in-out ${mobileviewfiltter==true ? 'translate-y-full' : 'translate-y-0'} ${mobileviewfiltter==false ? 'translate-y-0' : 'translate-y-full'}  bottom-0 z-50 ml-0 p-0  w-full h-screen`}>
+      <div onClick={()=>{setmobileviewfiltter(!mobileviewfiltter)}} className={`transition-all duration-75 ease-in ${mobileviewfiltter==true ? '' : 'bg-black/30'} ${mobileviewfiltter==false ? 'bg-black/30' : ''} h-full w-full `}></div>
+       <div  className={`w-full h-1/2 overflow-auto    bg-white  absolute rounded-t-3xl bottom-0 transition-transform duration-700 ease-in-out  ${mobileviewfiltter==true ? 'translate-y-full' : 'translate-y-0'} ${mobileviewfiltter==false ? 'translate-y-0' : 'translate-y-full'}`}>
+       <div onClick={()=>{setmobileviewfiltter(!mobileviewfiltter)}} className=' absolute right-4 top-4 bg-black/30 rounded-full flex items-center justify-center  h-7 w-7'>X</div>
+       <div className="filter-container m-0 mx-9 pt-20 p-0">
+                    <div className="filter-header">
+                        <h2>Filters</h2>
+                        <button className="clear-all" onClick={handleClearAll}>
+                            Clear All
+                        </button>
+                    </div>
+
+                    <div className="filter-option1">
+                        <label htmlFor="out-of-stock">Out of Stock</label>
+                        <div className="show-hide">
+                            <button>Show</button>
+                            <button>Hide</button>
+                        </div>
+                    </div>
+
+                    <div className="filter-option">
+                        <label htmlFor="price">Price</label>
+                        <div className="price-range">
+                            <input
+                                type="number"
+                                min="0"
+                                max={MAX}
+                                value={priceRange[0]}
+                                onChange={(event) =>
+                                    setPriceRange([parseInt(event.target.value, 10), priceRange[1]])
+                                }
+                            />
+                            <span>to</span>
+                            <input
+                                type="number"
+                                min="0"
+                                max={MAX}
+                                value={priceRange[1]}
+                                onChange={(event) =>
+                                    setPriceRange([priceRange[0], parseInt(event.target.value, 10)])
+                                }
+                            />
+                        </div>
+                        <div className="price-slider-container">
+                            <Range
+                                values={priceRange}
+                                step={STEP}
+                                min={MIN}
+                                max={MAX}
+                                onChange={(values) => setPriceRange(values)}
+                                renderTrack={({ props, children }) => (
+                                    <div
+                                        {...props}
+                                        style={{
+                                            ...props.style,
+                                            height: '6px',
+                                            width: '100%',
+                                            background: getTrackBackground({
+                                                values: priceRange,
+                                                colors: ['#ccc', '#548BF4', '#ccc'],
+                                                min: MIN,
+                                                max: MAX,
+                                            }),
+                                        }}
+                                    >
+                                        {children}
+                                    </div>
+                                )}
+                                renderThumb={({ index, props }) => (
+                                    <div
+                                        {...props}
+                                        style={{
+                                            ...props.style,
+                                            height: '24px',
+                                            width: '24px',
+                                            backgroundColor: '#FFF',
+                                            border: '1px solid #CCC',
+                                            borderRadius: '50%',
+                                        }}
+                                    >
+                                        <div style={{ position: 'absolute', top: '-28px', color: '#fff' }}>
+                                            {priceRange[index]}
+                                        </div>
+                                    </div>
+                                )}
+                            />
+                        </div>
+                        <br/>
+
+                    </div>
+                    <div className="filter-option">
+                        <label className="colors" htmlFor="colors">Colors</label>
+
+                        <div className="color-options">
+                            <div className="color-option" style={{ backgroundColor: 'red' }} onClick={() => handleColorChange('red')} />
+                            <div className="color-option" style={{ backgroundColor: 'yellow' }} onClick={() => handleColorChange('yellow')} />
+                            <div className="color-option" style={{ backgroundColor: 'black' }} onClick={() => handleColorChange('black')} />
+                            <div className="color-option" style={{ backgroundColor: 'blue' }} onClick={() => handleColorChange('blue')} />
+                            <div className="color-option" style={{ backgroundColor: 'maroon' }} onClick={() => handleColorChange('maroon')} />
+                        </div>
+                    </div>
+                    <br/>
+                    <div className="filter-option">
+                        <div className="section">
+                            <h3 className="section-title">Material</h3>
+                            <div className="material-options">
+                                <div className="material-option">
+
+                                    <label htmlFor="material-1">Available Only</label>
+                                    <input type="checkbox" id="material-1" onChange={() => handleMaterialChange('material-1')} />
+                                </div>
+                                <div className="material-option">
+                                    <label htmlFor="material-2">Available Only</label>
+                                    <input type="checkbox" id="material-2" onChange={() => handleMaterialChange('material-2')} />
+
+                                </div>
+                                <div className="material-option">
+                                    <label htmlFor="material-3">Available Only</label>
+                                    <input type="checkbox" id="material-3" onChange={() => handleMaterialChange('material-3')} />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+       </div>
+    </div>
+    
+
+
   </div>  
     </>
   );

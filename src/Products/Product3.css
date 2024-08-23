@@ -52,3 +52,43 @@
     font-family: 'Roboto';
     font-weight: bold;
   }
+
+  @media only screen and (max-width: 600px) {
+    .product-image3{
+        height: 20rem;
+        padding-left: 0px;
+        margin-top: 0px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .product-image4{
+        height: 20rem;
+        padding-left: 0px;
+        margin-top: 0px;
+        display: flex;
+        margin: 0;
+        align-items: center;
+        justify-content: center;
+    }
+    .product-image5{
+        height: 20rem;
+        padding-left: 0px;
+        margin-top: 0px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .product-image6{
+        height: 20rem;
+        padding-left: 0px;
+        margin-top: 0px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+  }

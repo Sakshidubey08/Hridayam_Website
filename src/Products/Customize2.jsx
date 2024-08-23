@@ -188,8 +188,8 @@ const Product1 = () => {
             <div className="breadcrumb1">Home / {product.name}</div>
             <div className="product-detail1">   
                 <div className="content">
-                    <div >
-                        <div className="image-placeholder1">
+                    <div className='' >
+                        <div className="image-placeholder1 ">
                             {selectedImage && (
                                 <img src={selectedImage} alt="Selected" />
                             )}
@@ -197,7 +197,7 @@ const Product1 = () => {
                                 <img src={selectedImage1} alt="Selected" />
                             )}
                         </div>
-                        <div className="image-options">
+                        <div className="image-options ">
                             {/* Removed SVG and image options */}
                             {selectedImage && (
                                 <div className="image-preview">

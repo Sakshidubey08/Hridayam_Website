@@ -521,7 +521,7 @@ function App() {
                                             >
                                                 <img
                                                     style={{ transform: `scale(${scale})` }}
-                                                    className={`shadow-2xl cursor-move  ${selectedShape === 'circle'?"rounded-full":""}`}
+                                                    className={`shadow-2xl cursor-move ${selectedShape === 'oval' ? 'rounded-[80%]' : ''} ${selectedShape === 'roundedSquare' ? 'rounded-[15%]' : ''} ${selectedShape === 'roundedRectangle' ? 'rounded-[10%]' : ''} ${selectedShape === 'circle'?"rounded-[50%]":""} `}
                                                     src={PreviewImg}
                                                     alt="Draggable"
                                                 />
@@ -533,7 +533,7 @@ function App() {
                                                     left: `${position.x}`,
                                                     top: `${position.y}`,
                                                 }}
-                                                className='shadow-2xl'
+                                                className={`shadow-2xl  ${selectedShape === 'oval' ? 'rounded-[80%]' : ''} ${selectedShape === 'roundedSquare' ? 'rounded-[15%]' : ''} ${selectedShape === 'roundedRectangle' ? 'rounded-[10%]' : ''} ${selectedShape === 'circle'?"rounded-[50%]":""} `}
                                                 src={PreviewImg}
                                                 alt="Not Draggable"
                                             />

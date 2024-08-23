@@ -1334,15 +1334,15 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           
         )}
       </div>  */}
-      <div className='selling '>
+      <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
           {cards.map(card => (
             <div key={card.id} className="card-wrapper"
               style={{ cursor: 'pointer' }}>
-              <div className="card1-product  ">
-                <div className="card-header w-32 h-56 md:h-72   md:w-full">
+              <div className="card1-product rounded-md  ">
+                <div className="card-header  w-32 h-56 md:h-72   md:w-full">
                   <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0  " onClick={() => handleCardClick(card.id)} />
                   <button
                     className="favorite-btn m-4 md:m-0"
@@ -1381,12 +1381,12 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       <div className="relative ">
 
         <div className="promo-content  bg-[#9CA5C3] text-white p-6 md:p-8 lg:p-10 max-w-screen-lg mx-auto relative z-10">
-          <div className="discount-text text-2xl md:text-3xl lg:text-4xl text-left mb-4 md:mb-6 lg:mb-8">
+          <div className="discount-text text-center text-2xl md:text-3xl lg:text-4xl md:text-left mb-4 md:mb-6 lg:mb-8">
             Get Discount 20% off
           </div>
           <div className="subscribe-form flex  flex-col md:flex-row items-left justify-start gap-4 mb-4 md:mb-6">
             <input type="email" placeholder="Enter your email address" className="w-full md:w-64 lg:w-80 h-10 px-4 border border-gray-300 text-gray-900" />
-            <button className="subscribe-button h-10 px-6 bg-[#23387A] text-white    hover:bg-[#1d2a5f]">
+            <button className="subscribe-button rounded-md h-10 px-6 bg-[#23387A] text-white    hover:bg-[#1d2a5f]">
               Subscribe
             </button>
           </div>
@@ -1403,7 +1403,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           {cards1.map(card => (
 
             <div key={card.id} className="card-wrapper">
-              <div className="card1-product">
+              <div className="card1-product rounded-md">
                 <div className="card-header w-32 h-56 md:h-72   md:w-full">
                   <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick4(card.id)}/>
                   <button
@@ -1448,7 +1448,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           <div className="card-container">
             {cards2.map(card => (
               <div key={card.id} className="card-wrapper">
-                <div className="card1-product">
+                <div className="card1-product rounded-md">
                   <div className="card-header w-32 h-56 md:h-72   md:w-full">
                     <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0" onClick={() => handleCardClick2(card.id)} />
                     <button
@@ -1543,7 +1543,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           ))} */}
           {cards3.map(card => (
             <div key={card.id} className="card-wrapper">
-              <div className="card1-product">
+              <div className="card1-product rounded-md">
                 <div className="card-header w-32 h-56 md:h-72   md:w-full">
                   <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick1(card.id)}/>
                   <button

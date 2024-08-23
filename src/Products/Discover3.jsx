@@ -143,7 +143,7 @@ const Product1 = () => {
         <div className="content">
           <div className='image2'>
             <img src={product.images[selectedColor1]} alt="Product" className="product-image5 " style={{marginLeft:'-20px'}} /></div>
-          <div className="scrollable-content">
+          <div className="scrollable-content mt-5 md:mt-0">
             <div className="product-info">
               <h1 className='product-name'>{product.name}</h1>
               <p className="price1" dangerouslySetInnerHTML={{ __html: product.price }}></p>
@@ -233,8 +233,8 @@ const Product1 = () => {
           <div key={card.id} className="card-wrapper"
             style={{ cursor: 'pointer' }}>
             <div className="card1">
-              <div className="card-header">
-                <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1" />
+              <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0" />
               </div>
             </div>
             <div className="card-info">

@@ -193,8 +193,9 @@ const Header = () => {
      </ul>
   </div>
 </details>
-
+ {/* <div className='ml-4 text-blue-800 font-bold'>Contact us</div> */}
     </div>
+   
 
     
 </div>

@@ -132,3 +132,15 @@ select {
   
   margin-top: 16px;
 }
+
+@media only screen and (max-width: 600px) {
+  .image-options {
+    position: relative;
+    display:block;
+    flex-direction:row;
+    align-items: flex-start; /* Adjust alignment as per your layout */
+    gap: 10px; /* Adjust spacing between elements */
+    padding: 10px; /* Adjust padding as needed */
+    
+  }
+}
