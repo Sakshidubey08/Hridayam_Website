@@ -163,9 +163,9 @@ const TextEditer = ({ text }) => {
     }, []);
 
     return (
-        <div className="">
+        <div className=" h-screen relative w-screen border-8 items-center justify-center">
 
-            <canvas className='border' ref={canvasRef}/>
+            <canvas className='border absolute top-20' ref={canvasRef}/>
         </div>
     );
 };
