@@ -276,3 +276,61 @@
   font-weight: 500;
   font-size: 16px;
 }
+.dialogs{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 5px;
+  width: 120px;
+  margin-left: 122px;
+  margin-top: -46px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: #23387A;
+  color: white;
+  font-family: 'Poppins', sans-serif; 
+}
+
+.product-detail1 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.image-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbnail:hover, .thumbnail:focus {
+  border: 2px solid #23387A;
+}
+
+.image-placeholder1 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-placeholder1 img {
+  max-width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+.scrollable-content4 {
+  max-width: 300px;
+}

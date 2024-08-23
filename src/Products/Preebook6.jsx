@@ -20,7 +20,8 @@ import image10 from '../images/image 14.png'
 import image12 from '../images/image 13 (3).png'
 import image28 from '../images/bag.png'
 import image31 from '../images/image 124 (1).png'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import '../Home.css'
 import './Product3.css'
 import Header from '../Header';
@@ -175,6 +176,19 @@ const Product1 = () => {
                           <h3 className="text-center leading-6 font-medium text-gray-900">
                             Contact Us
                           </h3>
+                          <button
+                type="button"
+                className="absolute right-[-6rem]  top-[1rem] text-gray-500 hover:text-gray-700 focus:outline-none"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <FontAwesomeIcon icon={faTimes} size="lg" />
+              </button>
+                          <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                                  Quantity you need
+                                </label>
+                                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="number" type="number" placeholder="Enter Quantity" />
+                              </div>
                           <p className='text-center text-gray-400'>Pleas Enter Your valid Email Id</p>
                           <div className="mt-2">
                             <form>

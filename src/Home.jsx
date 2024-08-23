@@ -616,7 +616,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   });
   const handleSlideClick = (index) => {
 
-    const pageRoutes = ['/customize1', '/product3', '/catalog1']; // Add more routes as needed
+    const pageRoutes = ['', '/product3', '/catalog1']; // Add more routes as needed
     if (index < pageRoutes.length) {
       navigate(pageRoutes[index]);
     }
