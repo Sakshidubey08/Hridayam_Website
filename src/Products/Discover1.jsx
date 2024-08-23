@@ -21,6 +21,7 @@ import image12 from '../images/image 13 (3).png'
 import image25 from '../images/image 125.png'
 import '../Home.css'
 import './Product3.css'
+import Footer from '../Footer';
 import image18 from '../images/image19.png'
 import Header from '../Header';
 const Product1 = () => {
@@ -250,6 +251,7 @@ const Product1 = () => {
           </button>
         </div>
       )}
+      <Footer/>
     </>
   )
 }

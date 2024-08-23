@@ -35,7 +35,7 @@ import image29 from './images/image 13 (4).png'
 import image30 from './images/image 24 (1).png'
 import image31 from './images/image 124 (1).png'
 import image32 from './images/Rectangle.png'
-import group2 from './images/Group (6).png'
+import group2 from './images/Group (8).png'
 import group4 from './images/Group4.png'
 import group5 from './images/group9.png'
 import Footer from './Footer.jsx';
@@ -95,8 +95,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     const storedFavorites = localStorage.getItem('favoriteCards');
     return storedFavorites ? JSON.parse(storedFavorites) : {};
   });
-  
-  const handleFavoriteButtonClick = (id, e,description) => {
+
+  const handleFavoriteButtonClick = (id, e, description) => {
     e.stopPropagation();
 
     setFavoriteCards((prev) => {
@@ -106,17 +106,17 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       };
 
       const selectedCard = cards.find((card) => card.id === id);
-      console.log(selectedCard.description +"slkdflsd")
+      console.log(selectedCard.description + "slkdflsd")
       if (selectedCard) {
         const productToAdd = {
           id: selectedCard.id, // Use selectedCard instead of product
           name: description,
           price: selectedCard.price,
           image: selectedCard.imageUrl,
-        
-           // Use images if image is not defined
+
+          // Use images if image is not defined
         };
-  
+
         if (updatedFavorites[id]) {
           // Add to wishlist
           addToWishlist(productToAdd);
@@ -125,22 +125,22 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         } else {
           // Remove from wishlist
           setWishlist((prevWishlist) => prevWishlist.filter((item) => item.id !== id));
-          
+
         }
       }
-      
+
 
       return updatedFavorites;
     });
-   
+
     e.preventDefault();
   };
-  
+
   useEffect(() => {
     // Store favoriteCards in localStorage whenever it changes
     localStorage.setItem('favoriteCards', JSON.stringify(favoriteCards));
   }, [favoriteCards]);
-  
+
 
 
   const [favoriteCards1, setFavoriteCards1] = useState(() => {
@@ -152,8 +152,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     // Store favoriteCards in localStorage whenever it changes
     localStorage.setItem('favoriteCards', JSON.stringify(favoriteCards1));
   }, [favoriteCards1]);
-  
-  const handleFavoriteButtonClick1 = (id, e,description) => {
+
+  const handleFavoriteButtonClick1 = (id, e, description) => {
     e.stopPropagation();
 
     setFavoriteCards1((prev) => {
@@ -163,7 +163,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       };
 
       const selectedCard = cards1.find((card) => card.id === id);
-      console.log(selectedCard.description +"slkdflsd")
+      console.log(selectedCard.description + "slkdflsd")
       if (selectedCard) {
         const productToAdd = {
           id: selectedCard.id, // Use selectedCard instead of product
@@ -171,7 +171,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           price: selectedCard.price,
           image: selectedCard.imageUrl,
         };
-  
+
         if (updatedFavorites[id]) {
           // Add to wishlist
           addToWishlist(productToAdd);
@@ -180,14 +180,14 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         } else {
           // Remove from wishlist
           setWishlist((prevWishlist) => prevWishlist.filter((item) => item.id !== id));
-          
+
         }
       }
-      
+
 
       return updatedFavorites;
     });
-   
+
     e.preventDefault();
   };
   const navigate = useNavigate();
@@ -228,17 +228,26 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         navigate('/prebook');
         break;
       case 2:
-          navigate('/prebook1');
-      break;  
+        navigate('/prebook1');
+        break;
       case 3:
         navigate('/prebook2');
-    break;  
-    case 4:
-      navigate('/prebook3');
-  break;  
-  case 5:
-    navigate('/prebook4');
-break;  
+        break;
+      case 4:
+        navigate('/prebook3');
+        break;
+      case 5:
+        navigate('/prebook4');
+        break;
+      case 6:
+        navigate('/prebook5');
+        break;
+      case 7:
+        navigate('/prebook7');
+        break;
+      case 8:
+        navigate('/prebook6');
+        break;
     }
   };
   const handleCardClick2 = (id) => {
@@ -246,54 +255,71 @@ break;
       case 1:
         navigate('/customize1');
         break;
-        case 2:
+      case 2:
         navigate('/customize');
         break;
-        case 3:
+      case 3:
         navigate('/customize3');
         break;
-        case 4:
+      case 4:
         navigate('/customize4');
         break;
-        case 5:
+      case 5:
         navigate('/customize5');
         break;
-        case 6:
+      case 6:
         navigate('/customize6');
         break;
-        case 7:
+      case 7:
         navigate('/customize7');
         break;
-        case 8:
+      case 8:
         navigate('/customize8');
         break;
     }
   };
- 
+  const [showOther, setShowOther] = useState(false);
+
+  const handleSelectChange = (event) => {
+    if (event.target.value === 'other') {
+      setShowOther(true);
+    } else {
+      setShowOther(false);
+    }
+  };
+  const [showOther1, setShowOther1] = useState(false);
+
+  const handleSelectChange1 = (event) => {
+    if (event.target.value === 'other') {
+      setShowOther1(true);
+    } else {
+      setShowOther1(false);
+    }
+  };
   const handleCardClick4 = (id) => {
     switch (id) {
       case 11:
         navigate('/discover1');
         break;
-        case 12:
+      case 12:
         navigate('/discover2');
         break;
-        case 13:
+      case 13:
         navigate('/discover3');
         break;
-        case 14:
+      case 14:
         navigate('/discover4');
         break;
-        case 15:
+      case 15:
         navigate('/discover5');
         break;
-        case 16:
+      case 16:
         navigate('/product4');
         break;
-        case 17:
+      case 17:
         navigate('/discover6');
         break;
-        case 18:
+      case 18:
         navigate('/product8');
         break;
     }
@@ -355,7 +381,7 @@ break;
   ]);
 
 
-    const [selectedColor1, setSelectedColor1] = useState('black');
+  const [selectedColor1, setSelectedColor1] = useState('black');
   const [wishlist, setWishlist] = useState([]);
   // const handleFavoriteButtonClick = (id, e) => {
   //   e.stopPropagation();
@@ -379,17 +405,17 @@ break;
   // };
   // const handleFavoriteButtonClick = (id, e) => {
   //   e.stopPropagation();
-  
+
   //   setFavoriteCards((prev) => {
   //     const updatedFavorites = {
   //       ...prev,
   //       [id]: !prev[id],
   //     };
   //     const selectedCard = cards.find((card) => card.id === id);
-  
+
   //     if (selectedCard) {
   //       if (updatedFavorites[id]) {
-       
+
   //         const productToAdd = {
   //           id: product.id, 
   //           name: product.name,
@@ -402,18 +428,18 @@ break;
   //         setWishlist(wishlist.filter((item) => item.id !== id));
   //       }
   //     }
-  
+
   //     return updatedFavorites;
   //   });
-  
+
   //   e.preventDefault();
   // };
-  
+
   // };
 
- 
+
   // const [favoriteCards1, setFavoriteCards1] = useState({});
- const [favoriteCards2, setFavoriteCards2] = useState({});
+  const [favoriteCards2, setFavoriteCards2] = useState({});
   // const handleFavoriteButtonClick1 = (cardId) => {
   //   setFavoriteCards1((prevState) => ({
   //     ...prevState,
@@ -502,6 +528,33 @@ break;
   };
   const [showLoadMore2, setShowLoadMore2] = useState(true);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Collect form data
+    const formData = {
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      email: e.target.email.value,
+      phone: e.target.phone.value,
+      city: e.target.city.value,
+      giftingFor: e.target.giftingFor.value,
+      budget: e.target.budget.value,
+      quantity: e.target.quantity.value,
+    };
+
+    // Process form data (e.g., send to a server or log to the console)
+    console.log('Form data:', formData);
+
+    // Simulate successful submission (replace this with your actual submission logic)
+    setTimeout(() => {
+      // After successful submission, redirect to the Thank You page
+      navigate('/thank-you');
+    }, 1000);
+
+    // Optionally, you can close the modal immediately or after submission
+    setIsModalOpen(false);
+  };
   const handleLoadMore2 = () => {
     setCards2(prevCards => [
       ...prevCards,
@@ -561,7 +614,7 @@ break;
     fetchSlides();
   });
   const handleSlideClick = (index) => {
-   
+
     const pageRoutes = ['/customize1', '/product3', '/catalog1']; // Add more routes as needed
     if (index < pageRoutes.length) {
       navigate(pageRoutes[index]);
@@ -652,13 +705,13 @@ break;
         <div class="menu-item">
           <div class="menu-heading">Acrylic Photoframe</div>
           <div class="submenu">
-          <Link to='/acrylic3'> <div className="submenu-item ">Acrylic Photo frame</div></Link> 
+            <Link to='/acrylic3'> <div className="submenu-item ">Acrylic Photo frame</div></Link>
           </div>
         </div>
         <div class="menu-item">
-       <div class="menu-heading" onClick={() => setIsModalOpen(true)}>Contact Us</div>
-       {/* {isModalOpen && (
-        <div className="fixed z-10 inset-0 overflow-y-auto">
+          <div class="menu-heading" onClick={() => setIsModalOpen(true)}>Contact Us</div>
+          {/* {isModalOpen && (
+         <div className="fixed z-10 inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -694,8 +747,8 @@ break;
           </div>
         </div>
       )} */}
-      {isModalOpen && (
-  <div className="fixed z-20 inset-0 overflow-y-auto">
+          {/* {isModalOpen && (
+   <div className="fixed z-20 inset-0 overflow-y-auto">
     <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
       <div className="fixed inset-0 transition-opacity">
         <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -772,7 +825,409 @@ break;
       </div>
     </div>
   </div>
+)} */}
+          {/* {isModalOpen && (
+            <div className="fixed z-20 inset-0 overflow-y-auto">
+              <div className="flex items-center justify-center min-h-screen  px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                <div className="inline-block align-bottom bg-white  px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+                  <div className="sm:flex sm:items-start">
+                    <div className="mt-3 text-center sm:mt-0  sm:ml-4 sm:text-left relative">
+                      <h1 className="text-center leading-6  font-medium text-gray-900" style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}>
+                        Talk to Our Corporate Gifting Experts
+                        <button
+                          type="button"
+                          className="absolute right-[-12rem] top-0 text-gray-500 hover:text-gray-700 focus:outline-none"
+                          onClick={() => setIsModalOpen(false)}
+                        >
+                          <FontAwesomeIcon icon={faTimes} size="lg" />
+                        </button>
+                      </h1>
+                      <div className="mt-6">
+                        <form>
+                          <div className="flex mb-4 space-x-4">
+                            <div className="w-1/2">
+
+                              <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="firstName"
+                                type="text"
+                                placeholder="First name"
+                              />
+                            </div>
+                            <div className="w-1/2">
+
+                              <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="lastName"
+                                type="text"
+                                placeholder="Last name"
+                              />
+                            </div>
+                          </div>
+                          <div className="flex mb-4 space-x-4">
+                            <div className="w-1/2">
+
+                              <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="email"
+
+                                placeholder="Your email"
+                                style={{ width: '100%' }}
+                              />
+                            </div>
+                            <div className="w-1/2">
+
+                              <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="phone"
+                                type="text"
+                                placeholder="Phone number"
+                                style={{ width: '100%' }}
+                              />
+                            </div>
+                          </div>
+                          <div className="flex mb-4 space-x-4">
+                            <div className="w-1/2">
+
+                              <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="lastName"
+                                type="text"
+                                placeholder="Enter your city"
+                              />
+                            </div>
+                            <div className="w-1/2">
+                              <select
+                                className="shadow   border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="giftingFor"
+                                style={{ width: '100%' }}
+                              >
+                                <option value="">Gifting For *</option>
+                                <option value="friend">Friend</option>
+                                <option value="family">Family</option>
+                                <option value="colleague">Colleague</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div className="flex mb-4 space-x-4">
+                            <div className="w-1/2">
+
+                              <select
+                                className="shadow  border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="budget"
+                                style={{ width: '100%' }}
+                              >
+                                <option value="">Budget Per Gift *</option>
+                                <option value="20">Below $20</option>
+                                <option value="50">$20 - $50</option>
+                                <option value="100">$50 - $100</option>
+                                <option value="200">Above $100</option>
+                              </select>
+                            </div>
+                            <div className="w-1/2">
+                              {/* <label
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                      htmlFor="quantity"
+                    >
+                      Quantity Required
+                    </label> */}
+          {/* <select
+                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="quantity"
+                                style={{ width: '100%' }}
+                              >
+                                <option value="">Quantity Required *</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                              </select>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mb-2"
+                            onClick={() => setIsModalOpen(false)}
+                          >
+                            ENQUIRE NOW
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )} */}
+          {/* {isModalOpen && (
+    <div className="fixed z-20 inset-0 overflow-y-auto">
+     <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+      <div className="fixed inset-0 transition-opacity">
+        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+      <div
+        className="inline-block align-bottom bg-white px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+        style={{ maxWidth: '700px' }} // Adjust this width as needed
+      >
+        <div className="flex flex-col items-center justify-center">
+          <h1
+            className="leading-6 font-medium text-gray-900"
+            style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}
+          >
+            Talk to Our Corporate Gifting Experts
+            <button
+              type="button"
+              className="absolute right-[-5.2rem] top-6 text-gray-500 hover:text-gray-700 focus:outline-none"
+              onClick={() => setIsModalOpen(false)}
+            >
+              <FontAwesomeIcon icon={faTimes} size="lg" />
+            </button>
+          </h1>
+          <div className="mt-6 w-full">
+            <form className="w-full">
+              <div className="flex flex-col space-y-4">
+                <div className="flex space-x-4">
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="firstName"
+                    type="text"
+                    placeholder="Enter Your First name"
+                    required
+                  />
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="lastName"
+                    type="text"
+                    placeholder="Enter Your Last name"
+                    required
+                  />
+                </div>
+                <div className="flex space-x-4">
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="email"
+                    placeholder="Enter Your Business Email Address*"
+                    required
+                  />
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="phone"
+                    type="text"
+                    placeholder="Enter Your Phone number*"
+                    required
+                  />
+                </div>
+                <div className="flex space-x-4">
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="city"
+                    type="text"
+                    placeholder="Enter your city*"
+                    required
+                  />
+                  <select
+                    className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="giftingFor"
+                  >
+                    <option value="">Gifting For *</option>
+                    <option value="friend">Internal Employees</option>
+                    <option value="family">Clients/Customers</option>
+                    <option value="colleague">VIP/CEO</option>
+                    <option value="colleague">Others</option>
+                  </select>
+                </div>
+                <div className="flex space-x-4">
+                  <select
+                    className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="budget"
+                  >
+                    <option value="">Budget Per Gift *</option>
+                    <option value="20">₹0 - ₹500</option>
+                    <option value="50">₹500 -₹1000</option>
+                    <option value="100">₹2000-₹5000</option>
+                    <option value="200">₹5000-₹10000</option>
+                  </select>
+                  <select
+                    className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="quantity"
+                  >
+                    <option value="">Quantity Required *</option>
+                    <option value="1">10-50pcs</option>
+                    <option value="2">50-100pcs</option>
+                    <option value="3">100-200pcs</option>
+                    <option value="4">200-300pcs</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mt-6"
+                onClick={() => setIsModalOpen(false)}
+              >
+                ENQUIRE NOW
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 )}
+ */}
+          {isModalOpen && (
+            <div className="fixed z-20 inset-0 overflow-y-auto">
+              <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                <div
+                  className="inline-block align-bottom bg-white px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+                  style={{ maxWidth: '700px' }}
+                >
+                  <div className="flex flex-col items-center justify-center">
+                    <h1
+                      className="leading-6 font-medium text-gray-900"
+                      style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}
+                    >
+                      Talk to Our Experts
+                      <button
+                        type="button"
+                        className="absolute right-[-5.2rem] top-6 text-gray-500 hover:text-gray-700 focus:outline-none"
+                        onClick={() => setIsModalOpen(false)}
+                      >
+                        <FontAwesomeIcon icon={faTimes} size="lg" />
+                      </button>
+                    </h1>
+                    <div className="mt-6 w-full">
+                      <form className="w-full" onSubmit={handleSubmit}>
+                        <div className="flex flex-col space-y-4">
+                          <div className="flex space-x-4">
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="firstName"
+                              type="text"
+                              placeholder="Enter Your First name"
+                              required
+                            />
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="lastName"
+                              type="text"
+                              placeholder="Enter Your Last name"
+                              required
+                            />
+                          </div>
+                          <div className="flex space-x-4">
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="email"
+                              placeholder="Enter Your Business Email Address*"
+                              required
+                            />
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="phone"
+                              type="text"
+                              placeholder="Enter Your Phone number*"
+                              required
+                            />
+                          </div>
+                          <div className="flex space-x-4">
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="city"
+                              type="text"
+                              placeholder="Enter your city*"
+                              required
+                            />
+                            <select
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="giftingFor"
+                              required
+                            >
+                              <option value="">Gifting For *</option>
+                              <option value="internalEmployees">Internal Employees</option>
+                              <option value="clientsCustomers">Clients/Customers</option>
+                              <option value="vipCeo">VIP/CEO</option>
+                              <option value="others">Others</option>
+                            </select>
+                          </div>
+                          <div className="flex space-x-4">
+                            <select
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="budget"
+                              onChange={handleSelectChange1}
+                              required
+
+                            >
+                              <option value="">Budget Per Gift *</option>
+                              <option value="0-500">₹0 - ₹500</option>
+                              <option value="500-1000">₹500 -₹1000</option>
+                              <option value="2000-5000">₹2000-₹5000</option>
+                              <option value="5000-10000">₹5000-₹10000</option>
+                              <option value="other">Other</option>
+                            </select>
+
+                            {showOther1 && (
+                              <input
+                                type="text"
+                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+                                id="other-budget"
+                                name="other-budget"
+                                placeholder="Please specify your budget"
+                              />
+                            )}
+                            <select
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="quantity-select" name="quantity" onChange={handleSelectChange}
+                              required
+                            >
+                              <option value="">Quantity Required *</option>
+                              <option value="10-50">10-50pcs</option>
+                              <option value="50-100">50-100pcs</option>
+                              <option value="100-200">100-200pcs</option>
+                              <option value="200-300">200-300pcs</option>
+                              <option value="other">Other</option>
+                            </select>
+                            {showOther && (
+                              <input
+                                type="text"
+                                id="other-quantity"
+                                name="other-quantity"
+                                placeholder="Please specify"
+                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+                              />
+                            )}
+                          </div>
+                          <div className="w-full">
+                  <textarea
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="wishingMessage"
+                    placeholder="Enter Your Wishing Message"
+                    rows="2"
+                    required
+                  ></textarea>
+                </div>
+                        </div>
+                        <button
+                          type="submit"
+                          className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mt-6"
+                        >
+                          ENQUIRE NOW
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
         </div>
       </div>
@@ -802,7 +1257,7 @@ break;
             </div>
             <div className='image-item'>
               <img src={icon6} alt="" className='box-image' />
-              <p className='image-description1 text-sm md:text-base mt-2'>3 Days Return</p>
+              <p className='image-description1 text-sm md:text-base mt-2'>3 Days Return*</p>
             </div>
             <div className='image-item'>
               <img src={icon7} alt="" className='box-image' />
@@ -814,7 +1269,7 @@ break;
 
       <Catalog />
 
-       {/* <div className='selling'>
+      {/* <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
@@ -876,7 +1331,7 @@ break;
                   <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1" onClick={() => handleCardClick(card.id)} />
                   <button
                     className="favorite-btn"
-                    onClick={(e) => handleFavoriteButtonClick(card.id, e ,card.description)}
+                    onClick={(e) => handleFavoriteButtonClick(card.id, e, card.description)}
                     style={{
                       cursor: 'pointer',
                       border: 'none',
@@ -935,10 +1390,10 @@ break;
             <div key={card.id} className="card-wrapper">
               <div className="card1">
                 <div className="card-header">
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1"  onClick={() => handleCardClick4(card.id)}/>
+                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1" onClick={() => handleCardClick4(card.id)} />
                   <button
                     className="favorite-btn"
-                    onClick={(e) => handleFavoriteButtonClick1(card.id, e ,card.description)}
+                    onClick={(e) => handleFavoriteButtonClick1(card.id, e, card.description)}
                     style={{
                       cursor: 'pointer',
                       border: 'none',
@@ -1027,7 +1482,7 @@ break;
 
 
         <div className="card-container">
-           {/*{cards3.map(card => (
+          {/*{cards3.map(card => (
             <Link
               key={card.id}
               to={`/card/${card.id}`}
@@ -1075,7 +1530,7 @@ break;
             <div key={card.id} className="card-wrapper">
               <div className="card1">
                 <div className="card-header">
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1"  onClick={() => handleCardClick1(card.id)}/>
+                  <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1" onClick={() => handleCardClick1(card.id)} />
                   <button
                     className="favorite-btn"
                     onClick={() => handleFavoriteButtonClick2(card.id)}

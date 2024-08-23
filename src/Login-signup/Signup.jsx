@@ -68,7 +68,7 @@ const SignupForm = () => {
       setError('');
       
       // Redirect to home page upon successful signup
-      navigate('/login');
+      navigate('/');
       
       setName('');
       setPhone('');

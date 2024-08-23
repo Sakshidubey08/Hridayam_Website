@@ -25,6 +25,7 @@ import square1 from '../images/SQUARE FRAME.jpg'
 import oval from '../images/OVAL FRAME(1).jpg'
 import circle from '../images/CIRCLE FRAME.jpg'
 import Header from '../Header';
+import Footer from '../Footer';
 const shapeImages = {
     Normal: ['https://i.pinimg.com/564x/9d/15/79/9d1579ddeda746f26db3950ca3b9c861.jpg', 'https://i.pinimg.com/564x/98/fa/d0/98fad0f3bcb68ef32f106940a1ceacb7.jpg', 'https://i.pinimg.com/564x/42/5e/58/425e58b0dc8e1ec39c29824fdab98568.jpg'],
 };
@@ -341,6 +342,7 @@ const Product1 = () => {
                     Load More
                 </button>
             </div>
+            <Footer/>
         </>
     );
 };

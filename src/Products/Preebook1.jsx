@@ -22,6 +22,7 @@ import image25 from '../images/image 125.png'
 import '../Home.css'
 import './Product3.css'
 import Header from '../Header';
+import Footer from '../Footer';
 const Product1 = () => {
   const { addToCart, addToWishlist } = useContext(CartContext);
   const navigate = useNavigate();
@@ -314,6 +315,7 @@ const Product1 = () => {
           </button>
         </div>
       )}
+      <Footer/>
     </>
   )
 }

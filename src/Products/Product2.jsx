@@ -25,6 +25,7 @@ import square1 from '../images/SQUARE FRAME.jpg'
 import oval from '../images/OVAL FRAME(1).jpg'
 import circle from '../images/CIRCLE FRAME.jpg'
 import Header from '../Header';
+import Footer from '../Footer';
 const shapeImages = {
     Normal: [rect1, rect2],
     RoundEdge: ['round1.jpg', 'round2.jpg', 'round3.jpg', 'round4.jpg'],
@@ -346,6 +347,7 @@ const Product1 = () => {
                     Load More
                 </button>
             </div>
+            <Footer/>
         </>
     );
 };

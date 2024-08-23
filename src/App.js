@@ -30,26 +30,30 @@ import Preebook1 from './Products/Preebook1';
 import Preebook2 from './Products/Preebook2';
 import Preebook3 from './Products/Preebook3';
 import Preebook4 from './Products/Preebook4';
+import Preebook5 from './Products/Preebook5';
+import Preebook6 from './Products/Preebook6';
+import Prebook7 from './Products/Prebook7'
 import Customize1 from './Products/Customize1'
 import Customize2 from './Products/Customize2'
 import Customize7 from './Products/Customize7'
 import Customize8 from './Products/Customize8'
 import Catalog1 from './Catalog/Catalog1'
-import Acrylic from './Acrylic'
+// import Acrylic from './Acrylic'
 import Discover1 from './Products/Discover1'
 import Discover2 from './Products/Discover2'
 import Discover3 from './Products/Discover3'
 import Discover4 from './Products/Discover4'
 import Discover5 from './Products/Discover5'
 import Discover6 from './Products/Discover6'
-
+import CatalogProducts from './Catalog/CatalogProducts';
 import Customize3 from './Products/Customize3'
 import Customize4 from './Products/Customize4'
 import Customize5 from './Products/Customize5'
 import Customize6 from './Products/Customize6'
 import Acylic2 from './Acylic2';
 import Acrylic3 from './Acrylic3'
-
+import ProductDetail from './Catalog/ProductDetail'
+import Thankyou from './Thankyou';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -81,6 +85,10 @@ const App = () => {
                     <Route path="prebook2" element={<Preebook2 />} />
                     <Route path="prebook3" element={<Preebook3 />} />
                     <Route path="prebook4" element={<Preebook4 />} />
+                    <Route path="prebook5" element={<Preebook5 />} />
+                    <Route path="prebook6" element={<Preebook6 />} />
+                    <Route path="prebook7" element={<Prebook7 />} />
+
                     <Route path="customize" element={<Customize1 />} />
                     <Route path="customize1" element={<Customize2 />} />
                     <Route path="signup" element={<Signup />} />
@@ -92,6 +100,8 @@ const App = () => {
                     <Route path="catalog" element={<Catalog />} />
                     <Route path="all-products" element={<AllProducts />} />
                     <Route path="/card/:id" element={<Cardpage1 />} />
+                    <Route path="/product/:id" element={<ProductDetail />} />
+
                     <Route path="/place-order" element={<PlaceOrder />} />
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/my-orders" element={<MyOrder />} />
@@ -110,8 +120,11 @@ const App = () => {
                     <Route path="/customize6" element={<Customize6 />} />
                     <Route path="/customize7" element={<Customize7 />} />
                     <Route path="/customize8" element={<Customize8 />} />
+                    <Route path="/thank-you" element={<Thankyou />} />
 
-                    <Route path='/Aycrlic2' element={<Acylic2></Acylic2>}></Route>
+                    <Route path="/catalog/:catalog_id" element={<CatalogProducts />} />
+
+                    {/* <Route path='/Aycrlic2' element={<Acylic2></Acylic2>}></Route> */}
                 </Routes>
             </CartProvider>
         </AuthProvider>
