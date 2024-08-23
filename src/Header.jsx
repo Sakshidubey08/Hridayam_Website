@@ -45,7 +45,7 @@ const Header = () => {
             <img src={facebook} alt="Image 3" className="image" />
             <img src={XLogo} alt="Image 4" className="image" />
           </div>
-          <div style={{color:' #F3F3F3'}}  className="center-text">
+          <div style={{color:' #F3F3F3',fontFamily:'Poppins'}}  className="center-text">
             Free Shipping On All Us Orders Over Rs 499
           </div>
           <div className="locate-store">

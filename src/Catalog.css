@@ -421,7 +421,7 @@ h1 {
 .image-container {
   width: 400px;
   height: 530px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   overflow: hidden;
 }
 
@@ -574,30 +574,43 @@ h1 {
   width: 50px; 
   height: 50px; 
   flex-shrink: 0; 
-margin-right: 37rem;
+margin-right: 42rem;
 margin-bottom: 17px;
 } 
 .shape-svg2 {
   width: 50px; 
   height: 50px;
   flex-shrink: 0; 
-margin-right: 33.4rem;
+margin-right: 38.4rem;
 } 
 .shape-svg3 {
   width: 50px; 
   height: 50px; 
   flex-shrink: 0; 
-margin-right: 30.5rem;
+margin-right: 35.5rem;
 margin-top: -5px;
 }
 .shape-svg4 {
   width: 50px; 
   height: 50px; 
   flex-shrink: 0; 
-margin-right: 27rem;
+margin-right: 32rem;
 margin-top: -5px;
 } 
-
+.shape-svg5 {
+  width: 50px; 
+  height: 50px; 
+  flex-shrink: 0; 
+margin-right: 28.3rem;
+margin-top: -5px;
+} 
+.shape-svg6 {
+  width: 50px; 
+  height: 50px; 
+  flex-shrink: 0; 
+margin-right: 24.6rem;
+margin-top: -5px;
+} 
 .acrylic{
   text-align: center;
   font-family: 'Roboto';

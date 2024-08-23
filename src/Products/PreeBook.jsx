@@ -22,6 +22,7 @@ import image24 from '../images/image25.png'
 import '../Home.css'
 import './Product3.css'
 import Header from '../Header';
+import Footer from '../Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 const Product1 = () => {
@@ -327,6 +328,7 @@ const Product1 = () => {
           </button>
         </div>
       )}
+      <Footer/>
     </>
   )
 }

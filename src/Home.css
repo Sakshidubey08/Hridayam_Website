@@ -1035,3 +1035,8 @@ input[type="email"] {
     /* left: 13rem */
   }
 }
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #23387A; /* Blue color for focus */
+  box-shadow: 0 0 5px rgba(35, 56, 122, 0.5); /* Optional shadow for effect */
+}

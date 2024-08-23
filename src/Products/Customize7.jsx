@@ -25,6 +25,7 @@ import square1 from '../images/SQUARE FRAME.jpg'
 import oval from '../images/OVAL FRAME(1).jpg'
 import circle from '../images/CIRCLE FRAME.jpg'
 import Header from '../Header';
+import Footer from '../Footer';
 const shapeImages = {
     Normal: ['https://i.pinimg.com/564x/49/e1/44/49e1441c079a80a664f48f839aeebed1.jpg', 'https://i.pinimg.com/564x/0a/03/72/0a037201533c78383bd2a0d4ac632541.jpg', 'https://i.pinimg.com/564x/b7/40/8d/b7408dd3e2456a06e612223158bc69a6.jpg', 'https://i.pinimg.com/564x/6c/c4/71/6cc47135ae86a109f91af95d65c2b6d0.jpg'],
     RoundEdge: ['round1.jpg', 'round2.jpg', 'round3.jpg', 'round4.jpg'],
@@ -361,6 +362,7 @@ const Product1 = () => {
                     Load More
                 </button>
             </div>
+            <Footer/>
         </>
     );
 };

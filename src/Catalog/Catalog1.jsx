@@ -313,6 +313,7 @@ function Filter() {
 }
 
 export default Filter;
+
 // import React, { useState, useEffect } from 'react';
 // import './Catalog.css'; // Import your CSS file
 // import Header from '../Header';

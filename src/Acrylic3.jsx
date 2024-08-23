@@ -343,8 +343,7 @@ import AvatarEditor from 'react-avatar-editor' // Both at the same time
 import Tour from './Tour';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
-
-import backgroundImage from './images/Designer.png';
+import backgroundImage from './images/Designer2.png';
 import circle from './images/CIRCLE FRAME.jpg'
 import { StyledEditorBlock, TextEditorBlock } from "react-web-editor"
 function App() {
@@ -460,8 +459,12 @@ function App() {
                     <div className="profile-pictures">
                         <div className="shape-content">
                             {selectedShape === 'rectangle' && (
-                                <div className="rectangle-section mt-8" style={{ display: 'flex', gap: '10px' }}>
+                                <div className="rectangle-section mt-4" style={{ display: 'flex', gap: '10px' }}>
 
+                                    <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
+                                    <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
+                                    <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
+                                    <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
                                     <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
                                     <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
                                 </div>
@@ -495,7 +498,7 @@ function App() {
                             )}
                         </div>
                     </div>
-                    <div className=' w-[1200px]' style={{
+                    <div className=' w-[1140px]' style={{
                         backgroundImage: `url(${backgroundImage})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
@@ -518,7 +521,7 @@ function App() {
                                             >
                                                 <img
                                                     style={{ transform: `scale(${scale})` }}
-                                                    className='shadow-2xl cursor-move'
+                                                    className={`shadow-2xl cursor-move  ${selectedShape === 'circle'?"rounded-full":""}`}
                                                     src={PreviewImg}
                                                     alt="Draggable"
                                                 />
@@ -685,7 +688,7 @@ function App() {
                         <div>
 
 
-                    
+
                             <button className=" rounded-md text-black relative" onClick={() => document.getElementById('my_modal_3').showModal()}>
 
                                 🔍 Zoom
@@ -792,11 +795,11 @@ function App() {
                             onChange={handleImageUpload}
                         />
                     </div>
-                   
+
                     <div className="shapes">
                         <h3 className='acrylic'>Acrylic Photo Shapes</h3>
                         <div className="shape-options mt-2">
-                        
+
                             <svg
                                 viewBox="0 0 600 400"
                                 className={` shape-svg1 ${selectedShape === 'rectangle' ? 'border-blue' : ''} `}
@@ -830,8 +833,43 @@ function App() {
                             >
                                 <ellipse cx="200" cy="200" rx="200" ry="100" fill="#c1995d" stroke="" strokeWidth="5" />
                             </svg>
-                            </div>    
-                       
+                            <svg
+                                viewBox="0 0 400 400"
+                                className={`shape-svg5 ${selectedShape === 'roundedSquare' ? 'border-blue' : ''}`}
+                                onClick={() => handleShapeClick('roundedSquare')}
+                            >
+                                <rect
+                                    x="50"
+                                    y="50"
+                                    width="300"
+                                    height="300"
+                                    rx="50"
+                                    ry="50"
+                                    fill="#c1995d"
+                                    stroke=""
+                                    strokeWidth="5"
+                                />
+                            </svg>
+                            <svg
+                                viewBox="0 0 600 400"
+                                className={`shape-svg6 ${selectedShape === 'roundedRectangle' ? 'border-blue' : ''}`}
+                                onClick={() => handleShapeClick('roundedRectangle')}
+                            >
+                                <rect
+                                    x="50"
+                                    y="50"
+                                    width="500"
+                                    height="300"
+                                    rx="50"
+                                    ry="50"
+                                    fill="#c1995d"
+                                    stroke=""
+                                    strokeWidth="5"
+                                />
+                            </svg>
+
+                        </div>
+
                     </div>
                     <div className="size-options">
                         <br />
@@ -847,15 +885,15 @@ function App() {
                             <button onClick={() => handleSizeChange('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''}`}>35x23</button>
                         </div> */}
                         <div className='size'>
-                        <h3 className='acrylic1 my-3'>Size (Inch): {selectedSize}</h3>
-                        <div className="size-buttons">
-                            <button onClick={() => handleSizeChange1('12x9')} className={`size-button ${selectedSize === '12x9' ? 'active' : ''}  rounded-md  ${selectedSize === '12x9' ? '' : 'hover:ring'}`}>12x9</button>
-                            <button onClick={() => handleSizeChange1('11x11')} className={`size-button ${selectedSize === '11x11' ? 'active' : ''} rounded-md  ${selectedSize === '11x11' ? '' : 'hover:ring'}`}>11x11</button>
-                            <button onClick={() => handleSizeChange1('16x12')} className={`size-button ${selectedSize === '16x12' ? 'active' : ''} rounded-md  ${selectedSize === '16x12' ? '' : 'hover:ring'}`}>16x12</button>
-                            <button onClick={() => handleSizeChange1('16x16')} className={`size-button ${selectedSize === '16x16' ? 'active' : ''} rounded-md  ${selectedSize === '16x16' ? '' : 'hover:ring'}`}>16x16</button>
-                            <button onClick={() => handleSizeChange1('21x15')} className={`size-button ${selectedSize === '21x15' ? 'active' : ''} rounded-md  ${selectedSize === '21x15' ? '' : 'hover:ring'}`}>21x15</button>
-                            <button onClick={() => handleSizeChange1('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''} rounded-md  ${selectedSize === '35x23' ? '' : 'hover:ring'}`}>35x23</button>
-                        </div>
+                            <h3 className='acrylic1 my-3'>Size (Inch): {selectedSize}</h3>
+                            <div className="size-buttons">
+                                <button onClick={() => handleSizeChange1('12x9')} className={`size-button ${selectedSize === '12x9' ? 'active' : ''}  rounded-md  ${selectedSize === '12x9' ? '' : 'hover:ring'}`}>12x9</button>
+                                <button onClick={() => handleSizeChange1('11x11')} className={`size-button ${selectedSize === '11x11' ? 'active' : ''} rounded-md  ${selectedSize === '11x11' ? '' : 'hover:ring'}`}>11x11</button>
+                                <button onClick={() => handleSizeChange1('16x12')} className={`size-button ${selectedSize === '16x12' ? 'active' : ''} rounded-md  ${selectedSize === '16x12' ? '' : 'hover:ring'}`}>16x12</button>
+                                <button onClick={() => handleSizeChange1('16x16')} className={`size-button ${selectedSize === '16x16' ? 'active' : ''} rounded-md  ${selectedSize === '16x16' ? '' : 'hover:ring'}`}>16x16</button>
+                                <button onClick={() => handleSizeChange1('21x15')} className={`size-button ${selectedSize === '21x15' ? 'active' : ''} rounded-md  ${selectedSize === '21x15' ? '' : 'hover:ring'}`}>21x15</button>
+                                <button onClick={() => handleSizeChange1('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''} rounded-md  ${selectedSize === '35x23' ? '' : 'hover:ring'}`}>35x23</button>
+                            </div>
                         </div>
 
                     </div>
@@ -864,19 +902,18 @@ function App() {
                         <div className="thickness-buttons">
                             <button onClick={() => handleThicknessChange('3MM')} className={`thickness-button rounded-md ${selectedThickness === '3MM' ? 'active' : ''} ${selectedThickness === '3MM' ? '' : 'hover:ring'}`}>3MM</button>
                             <button onClick={() => handleThicknessChange('5MM')} className={`thickness-button rounded-md ${selectedThickness === '5MM' ? 'active' : ''} ${selectedThickness === '5MM' ? '' : 'hover:ring'}`}>5MM</button>
-                            <button onClick={() => handleThicknessChange('8MM')} className={`thickness-button rounded-md ${selectedThickness === '8MM' ? 'active' : ''} ${selectedThickness === '5MM' ? '' : 'hover:ring'}`}>8MM (Premium)</button>
+                            <button onClick={() => handleThicknessChange('8MM')} className={`thickness-button rounded-md ${selectedThickness === '8MM' ? 'active' : ''} ${selectedThickness === '5MM' ? '' : 'hover:ring'}`}>8MM</button>
                         </div>
                     </div>
                     <hr className='border-dashed border-[1px] border-gray-200 mb-2 w-[1200px]' />
 
                     <div className="price1 text-sm">
-                    <span className='text-xl'>₹{price} <span className=' line-through text-gray-300'>₹{price+1000}</span></span>
-                         <p>Only <span className='text-red-500'>8 Acrylic's</span> Left!</p>
-                         <p className='mt-6' style={{fontWeight:"300"}}>  Photo quality for <span style={{fontWeight:"600"}}>{selectedSize}</span> is <span className='text-green-500'>Good</span></p>
-                         <p><span style={{fontWeight:"300"}}>Quick mount:</span> <span className='text-bold text-balance'>Hridayam® Adhesive hooks (Included)</span></p>
+                        <span className='text-xl'>₹{price} <span className=' line-through text-gray-300'>₹{price + 1000}</span></span>
+                        <p className='mt-6' style={{ fontWeight: "300" }}>  Photo quality for <span style={{ fontWeight: "600" }}>{selectedSize}</span> is <span className='text-green-500'>Good</span></p>
+                        <p><span style={{ fontWeight: "300" }}>Quick mount:</span> <span className='text-bold text-balance'>Hridayam® Adhesive hooks (Included)</span></p>
                     </div>
-                    
-                <Link to='/place-order'> <button className="buy-now rounded-md px-20">BUY IT NOW</button></Link>
+
+                    <Link to='/place-order'> <button className="buy-now rounded-md px-20">BUY IT NOW</button></Link>
 
                     <div style={{ maxWidth: '60%', margin: '-30px auto'}}>
 

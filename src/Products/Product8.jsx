@@ -23,7 +23,7 @@ import image17 from '../images/image 124.png'
 import Header from '../Header';
 import '../Home.css'
 import './Product3.css'
-
+import Footer from '../Footer';
 
 const Product1 = () => {
     const { addToCart, addToWishlist } = useContext(CartContext);
@@ -250,6 +250,7 @@ const Product1 = () => {
             </button>
           </div>
         )}
+        <Footer/>
         </>
     )
 }
