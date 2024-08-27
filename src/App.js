@@ -55,6 +55,7 @@ import Acylic2 from './Acylic2';
 import Acrylic3 from './Acrylic3'
 import ProductDetail from './Catalog/ProductDetail'
 import Thankyou from './Thankyou';
+import Products1 from './Catalog/Products1'
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -103,6 +104,7 @@ const App = () => {
                     <Route path="/card/:id" element={<Cardpage1 />} />
                     <Route path="/product/:id" element={<ProductDetail />} />
                     <Route path="/products" element={<Products />} />
+                    <Route path="/products1" element={<Products1 />} />
 
                     <Route path="/place-order" element={<PlaceOrder />} />
                     <Route path="/payment" element={<Payment />} />

@@ -1,3 +1,144 @@
+// import React, { useContext } from 'react';
+// import { CartContext } from './CartContext';
+// import { FaTrash } from 'react-icons/fa';
+// import { Link } from 'react-router-dom';
+// import './CartPage.css';
+// import Footer from './Footer';
+// import Header from './Header';
+// const CartPage = () => {
+//   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
+
+//   console.log('Cart Items:', cartItems);
+
+//   const handleIncrement = (productId) => {
+//     // Find the cart item by productId
+//     const itemToUpdate = cartItems.find(item => item.product_id === productId);
+  
+//     if (itemToUpdate) {
+//       // Increment the quantity
+//       const newQuantity = itemToUpdate.quantity + 1;
+//       // Pass the complete product object
+//       updateQuantity(itemToUpdate, newQuantity);
+//     } else {
+//       console.error('Item not found in cart for productId:', productId);
+//     }
+//   };
+  
+  
+  
+//   const handleDecrement = (productId) => {
+//     const itemToUpdate = cartItems.find(item => item.product_id === productId);
+  
+//     if (itemToUpdate) {
+    
+//       const newQuantity = itemToUpdate.quantity > 1 ? itemToUpdate.quantity - 1 : 1;
+//       updateQuantity(itemToUpdate, newQuantity);
+//     } else {
+//       console.error('Item not found in cart for productId:', productId);
+//     }
+//   };
+  
+
+
+
+//   const calculateSubtotal = () => {
+//     return cartItems.reduce((acc, item) => {
+//       const price = parseFloat(item.product.price) || 0;
+//       const quantity = parseInt(item.quantity) || 0;
+//       return acc + price * quantity;
+//     }, 0);
+//   };
+
+//   const calculateTotal = () => {
+//     return calculateSubtotal();
+//   };
+
+//   if (cartItems.length === 0) {
+//     return <div>Your cart is empty</div>;
+//   }
+
+//   return (
+//     <> 
+//       <Header/>
+//       <div className="cart-container">
+//         <table className="cart-table">
+//           <thead>
+//             <tr>
+//               <th>Product Image</th>
+//               <th>Product Name</th>
+//               <th>Price</th>
+//               <th>Quantity</th>
+//               <th>Total Price</th>
+//               <th>Action</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {cartItems.map(item => (
+//               <tr key={item.id}>
+//               <td>
+//                 <div className="cart-item-image">
+//                   <img
+//                     src={item.product.default_color_image || 'default-image.jpg'}
+//                     alt={item.product.name || 'Product'}
+//                     style={{ width: '50px', height: '50px' }}
+//                   />
+//                 </div>
+//               </td>
+//               <td>
+//                 <div className="cart-item-name">
+//                   {item.product.name || 'Unnamed Product'}
+//                 </div>
+//               </td>
+//               <td>{item.product.price}</td>
+//               <td>
+//                 <button onClick={() => handleDecrement(item.product_id)}>
+//                   -
+//                 </button>
+//                 <span>{item.quantity}</span>
+//                 <button onClick={() => handleIncrement(item.product._id)}>
+//                   +
+//                 </button>
+//               </td>
+//               <td>
+//                 &#8377;{(item.product.price || 0) * (item.quantity || 1)}
+//               </td>
+//               <td>
+//               <button onClick={() => {
+//     console.log('Removing item with _id:', item._id);
+//     removeFromCart(item._id);
+//   }}>
+//                   <FaTrash />
+//                 </button>
+//               </td>
+//             </tr>
+            
+//             ))}
+//           </tbody>
+//         </table>
+//         <div className="cart-summary">
+//           <h2 className="cart-total">Cart Total</h2>
+//           <div className="summary-box">
+//             <div className="summary-item1">
+//               <span>Subtotal</span>
+//               <span>&#8377;{calculateSubtotal()}</span>
+//             </div>
+//             <hr />
+//             <div className="summary-item2">
+//               <span>Total</span>
+//               <span>&#8377;{calculateTotal()}</span>
+//             </div>
+//           </div>
+//           <Link to="/checkout">
+//             <button className="proceed-checkout-btn">Proceed to Checkout</button>
+//           </Link>
+//         </div>
+//       </div>
+//       <Footer />
+//     </>
+//   );
+// };
+
+// export default CartPage;
 import React, { useContext } from 'react';
 import { CartContext } from './CartContext';
 import { FaTrash } from 'react-icons/fa';
@@ -5,41 +146,31 @@ import { Link } from 'react-router-dom';
 import './CartPage.css';
 import Footer from './Footer';
 import Header from './Header';
+
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
 
   console.log('Cart Items:', cartItems);
 
   const handleIncrement = (productId) => {
-    // Find the cart item by productId
     const itemToUpdate = cartItems.find(item => item.product_id === productId);
-  
     if (itemToUpdate) {
-      // Increment the quantity
       const newQuantity = itemToUpdate.quantity + 1;
-      // Pass the complete product object
       updateQuantity(itemToUpdate, newQuantity);
     } else {
       console.error('Item not found in cart for productId:', productId);
     }
   };
-  
-  
-  
+
   const handleDecrement = (productId) => {
     const itemToUpdate = cartItems.find(item => item.product_id === productId);
-  
     if (itemToUpdate) {
-    
       const newQuantity = itemToUpdate.quantity > 1 ? itemToUpdate.quantity - 1 : 1;
       updateQuantity(itemToUpdate, newQuantity);
     } else {
       console.error('Item not found in cart for productId:', productId);
     }
   };
-  
-
-
 
   const calculateSubtotal = () => {
     return cartItems.reduce((acc, item) => {
@@ -59,7 +190,8 @@ const CartPage = () => {
 
   return (
     <> 
-      <Header/>
+      <Header />
+    
       <div className="cart-container">
         <table className="cart-table">
           <thead>
@@ -74,64 +206,63 @@ const CartPage = () => {
           </thead>
           <tbody>
             {cartItems.map(item => (
-              <tr key={item.id}>
-              <td>
-                <div className="cart-item-image">
-                  <img
-                    src={item.product.default_color_image || 'default-image.jpg'}
-                    alt={item.product.name || 'Product'}
-                    style={{ width: '50px', height: '50px' }}
-                  />
-                </div>
-              </td>
-              <td>
-                <div className="cart-item-name">
-                  {item.product.name || 'Unnamed Product'}
-                </div>
-              </td>
-              <td>{item.product.price}</td>
-              <td>
-                <button onClick={() => handleDecrement(item.product_id)}>
-                  -
-                </button>
-                <span>{item.quantity}</span>
-                <button onClick={() => handleIncrement(item.product._id)}>
-                  +
-                </button>
-              </td>
-              <td>
-                &#8377;{(item.product.price || 0) * (item.quantity || 1)}
-              </td>
-              <td>
-              <button onClick={() => {
-    console.log('Removing item with _id:', item._id);
-    removeFromCart(item._id);
-  }}>
-                  <FaTrash />
-                </button>
-              </td>
-            </tr>
-            
+              <tr key={item.product_id}>
+                <td>
+                  <div className="cart-item-image">
+                    <img
+                      src={item.product.image}
+                      alt={item.product.name || 'Product'}
+                      style={{ width: '50px', height: '50px' }}
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div className="cart-item-name">
+                    {item.product.name || 'Unnamed Product'}
+                  </div>
+                </td>
+                <td>{item.product.price}</td>
+                <td>
+                  <button onClick={() => handleDecrement(item.product_id)}>
+                    -
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button onClick={() => handleIncrement(item.product_id)}>
+                    +
+                  </button>
+                </td>
+                <td>
+                  &#8377;{(item.product.price || 0) * (item.quantity || 1)}
+                </td>
+                <td>
+                  <button onClick={() => {
+                    console.log('Removing item with id:', item._id);
+                    removeFromCart(item._id);
+                  }}>
+                    <FaTrash />
+                  </button>
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>
-        <div className="cart-summary">
-          <h2 className="cart-total">Cart Total</h2>
-          <div className="summary-box">
-            <div className="summary-item1">
-              <span>Subtotal</span>
-              <span>&#8377;{calculateSubtotal()}</span>
-            </div>
-            <hr />
-            <div className="summary-item2">
-              <span>Total</span>
-              <span>&#8377;{calculateTotal()}</span>
-            </div>
+      </div>
+      <div className="cart-summary">
+        <h2 className="cart-total">Cart Total</h2>
+        <div className="summary-box">
+          <div className="summary-item1">
+            <span>Subtotal</span>
+            <span>&#8377;{calculateSubtotal()}</span>
           </div>
-          <Link to="/checkout">
-            <button className="proceed-checkout-btn">Proceed to Checkout</button>
-          </Link>
+          <hr />
+          <div className="summary-item2">
+            <span>Total</span>
+            <span>&#8377;{calculateTotal()}</span>
+          </div>
         </div>
+        <Link to="/checkout">
+          <button className="proceed-checkout-btn">Proceed to Checkout</button>
+        </Link>
       </div>
       <Footer />
     </>
@@ -139,6 +270,7 @@ const CartPage = () => {
 };
 
 export default CartPage;
+
 // import React, { useContext } from 'react';
 // import { CartContext } from './CartContext';
 // import { FaTrash } from 'react-icons/fa';

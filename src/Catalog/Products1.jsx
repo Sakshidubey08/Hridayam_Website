@@ -259,9 +259,9 @@ const Product1 = () => {
                 if (result.status) {
                     setProducts(result.data);
                     // Optionally set the first product as the selected product
-                    setSelectedProduct(result.data[0]);
+                    setSelectedProduct(result.data[1]);
                     // Set the main image as the selected image initially
-                    setSelectedImage(result.data[0].image);
+                    setSelectedImage(result.data[1].image);
                 }
             } catch (error) {
                 console.error('Failed to fetch products:', error);

@@ -305,17 +305,25 @@
   flex-direction: column;
   gap: 10px;
 }
-
+.thumbnail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* This gap is between each thumbnail image */
+}
 .thumbnail {
-  width: 100px;
-  height: 100px;
+  
   object-fit: cover;
+  width: 70px;
+  height: 70px;
   cursor: pointer;
-  border: 2px solid transparent;
+  border-radius: 8px;
+ 
+  transition: border 0.3s ease;
 }
 
 .thumbnail:hover, .thumbnail:focus {
-  border: 2px solid #23387A;
+  border: 3px solid black; /* Adjust color to fit your design */
+
 }
 
 .image-placeholder1 {

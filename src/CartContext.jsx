@@ -193,82 +193,183 @@ export const CartProvider = ({ children }) => {
     console.log('Cart items:', cartItems);
   }, [cartItems]);
   
-  // Fetch cart items on component mount
-  useEffect(() => {
-    const token = fetchTokenFromLS();
-    
-    if (token) {
-      axios.get('https://hridayam.dasoclothings.in/api/getcart', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      })
-      .then(response => {
-        console.log('API Response Data:', response.data);
-        if (response.data.status === true && Array.isArray(response.data.data)) {
-          setCartItems(response.data.data);
-        } else {
-          console.error('Unexpected response format:', response.data);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching cart items:', error);
-      });
-    } else {
-      console.error('No token found in localStorage.');
-    }
-  }, []);
+//   useEffect((product, quantity) => {
+//     console.log("Product Object:", product); // Log the product object
 
-  // Add product to cart
-  const addToCart = (product, quantity) => {
-    const token = fetchTokenFromLS();
-  
-    const productToAdd = {
-      product_id: product.id,
-      quantity: quantity,
-      user_id: product.user_id,
-      product_color_id: product.product_color_id,
-      product_variation_id: product.product_variation_id,
-      price: product.price
-    };
-  
-    axios.post('https://hridayam.dasoclothings.in/api/addtocart', productToAdd, {
+//     const token = fetchTokenFromLS();
+    
+//     if (token) {
+//       axios.get('https://hridayam.dasoclothings.in/api/getcart', {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         }
+//       })
+//       .then(response => {
+//         console.log('API Response Data:', response.data);
+//         if (response.data.status === true && Array.isArray(response.data.data)) {
+//           setCartItems(response.data.data);
+//         } else {
+//           console.error('Unexpected response format:', response.data);
+//         }
+//       })
+//       .catch(error => {
+//         console.error('Error fetching cart items:', error);
+//       });
+//     } else {
+//       console.error('No token found in localStorage.');
+//     }
+//   }, []);
+
+// const addToCart = (product, quantity) => {
+//   console.log("Product Object:", product);
+
+//   const token = fetchTokenFromLS();
+//   if (!token) {
+//       console.error('No token found');
+//       return;
+//   }
+
+//   const productToAdd = {
+//       product_id: product.id,
+//       quantity: quantity,
+//       user_id: product.user_id,
+//       price: product.price,
+//       personalize_image: product.personalize_image 
+//   };
+
+//   if (product.product_color_id) {
+//       productToAdd.product_color_id = product.product_color_id;
+//   }
+
+//   if (product.product_variation_id) {
+//       productToAdd.product_variation_id = product.product_variation_id;
+//   }
+
+//   console.log("Product To Add:", productToAdd);
+
+//   axios.post('https://hridayam.dasoclothings.in/api/addtocart', productToAdd, {
+//       headers: {
+//           Authorization: `Bearer ${token}`,
+//           'Content-Type': 'application/json',
+//       }
+//   })
+//   .then(response => {
+//       console.log('Added to Cart:', response.data);
+//       const cartItem = response.data.cart;
+//       if (!cartItem) {
+//           console.error('Cart item not returned in response');
+//           return;
+//       }
+
+//       const cartProduct = {
+//           product_id: cartItem.product_id,
+//           quantity: cartItem.quantity,
+//           price: cartItem.price,
+//           image: cartItem.image,
+//           name: cartItem.name,
+//           _id: cartItem._id,
+//           personalize_image: cartItem.personalize_image
+       
+          
+//       };
+
+//       setCartItems(prevItems => {
+//           const existingItem = prevItems.find(item => item.product_id === product.id);
+//           if (existingItem) {
+//               return prevItems.map(item =>
+//                   item.product_id === product.id
+//                       ? { ...item, quantity: (item.quantity || 1) + 1 }
+//                       : item
+//               );
+//           }
+//           return [...prevItems, cartProduct];
+//       });
+//   })
+//   .catch(error => {
+//       console.error('Error adding to cart:', error.response ? error.response.data : error.message);
+//   });
+// };
+
+const addToCart = (product, quantity) => {
+  console.log("Product Object:", product);
+
+  const token = fetchTokenFromLS();
+  if (!token) {
+      console.error('No token found');
+      return;
+  }
+
+  const formData = new FormData();
+  formData.append('product_id', product.id);
+  formData.append('quantity', quantity);
+  formData.append('user_id', product.user_id);
+  formData.append('price', product.price);
+  formData.append('image', product.image);
+
+
+  if (product.personalize_image) {
+      formData.append('personalize_image', product.personalize_image); // Assuming personalize_image is a File object
+  }
+
+  if (product.product_color_id) {
+      formData.append('product_color_id', product.product_color_id);
+  }
+
+  if (product.product_variation_id) {
+      formData.append('product_variation_id', product.product_variation_id);
+  }
+
+  console.log("FormData to Add:", formData);
+
+  axios.post('https://hridayam.dasoclothings.in/api/addtocart', formData, {
+      headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+      }
+  })
+  .then(response => {
+      console.log('Added to Cart:', response.data);
+
+      if (response.data.status === true) {
+          fetchCartItems(); // Fetch updated cart items
+      } else {
+          console.error('Failed to add to cart:', response.data.message);
+      }
+      
+  })
+  .catch(error => {
+      console.error('Error adding to cart:', error.response ? error.response.data : error.message);
+  });
+};
+
+
+const fetchCartItems = () => {
+  const token = fetchTokenFromLS();
+  if (token) {
+    axios.get('https://hridayam.dasoclothings.in/api/getcart', {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
       }
     })
     .then(response => {
-      console.log('Added to Cart:', response.data);
-  
-      const cartItem = response.data.cart;
-      const cartProduct = {
-        product_id: cartItem.product_id,
-        quantity: cartItem.quantity,
-        price: cartItem.price,
-        image: cartItem.image,
-        name: cartItem.name,
-        _id: cartItem._id // Ensure _id is set as cart_id
-      };
-  
-      setCartItems(prevItems => {
-        const existingItem = prevItems.find(item => item.product_id === product.id);
-        if (existingItem) {
-          return prevItems.map(item =>
-            item.product_id === product.id
-              ? { ...item, quantity: (item.quantity || 1) + 1 }
-              : item
-          );
-        }
-        return [...prevItems, cartProduct]; // Use cartProduct with _id as cart_id
-      });
+      console.log('API Response Data:', response.data);
+      if (response.data.status === true && Array.isArray(response.data.data)) {
+        setCartItems(response.data.data);
+      } else {
+        console.error('Unexpected response format:', response.data);
+      }
     })
     .catch(error => {
-      console.error('Error adding to cart:', error.response ? error.response.data : error.message);
+      console.error('Error fetching cart items:', error);
     });
-  };
-  
-  
+  } else {
+    console.error('No token found in localStorage.');
+  }
+};
+
+useEffect(() => {
+  fetchCartItems();
+}, []);
 
   const removeFromCart = (cartId) => {
     axios.delete('https://hridayam.dasoclothings.in/api/deleteCart', {

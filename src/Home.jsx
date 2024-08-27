@@ -279,23 +279,19 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     }
   };
   const [showOther, setShowOther] = useState(false);
-
-  const handleSelectChange = (event) => {
-    if (event.target.value === 'other') {
-      setShowOther(true);
-    } else {
-      setShowOther(false);
-    }
-  };
   const [showOther1, setShowOther1] = useState(false);
-
-  const handleSelectChange1 = (event) => {
-    if (event.target.value === 'other') {
-      setShowOther1(true);
-    } else {
-      setShowOther1(false);
-    }
+  const handleSelectChange1 = (e) => {
+    const { value } = e.target;
+    setFormData({ ...formData, budget: value });
+    setShowOther1(value === 'other');
   };
+
+  const handleSelectChange = (e) => {
+    const { value } = e.target;
+    setFormData({ ...formData, quantity: value });
+    setShowOther(value === 'other');
+  };
+
   const handleCardClick4 = (id) => {
     switch (id) {
       case 11:
@@ -528,33 +524,79 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   };
   const [showLoadMore2, setShowLoadMore2] = useState(true);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
     // Collect form data
-    const formData = {
-      firstName: e.target.firstName.value,
-      lastName: e.target.lastName.value,
-      email: e.target.email.value,
-      phone: e.target.phone.value,
-      city: e.target.city.value,
-      giftingFor: e.target.giftingFor.value,
-      budget: e.target.budget.value,
-      quantity: e.target.quantity.value,
-    };
+  //   const formData = {
+  //     firstName: e.target.firstName.value,
+  //     lastName: e.target.lastName.value,
+  //     email: e.target.email.value,
+  //     phone: e.target.phone.value,
+  //     city: e.target.city.value,
+  //     giftingFor: e.target.giftingFor.value,
+  //     budget: e.target.budget.value,
+  //     quantity: e.target.quantity.value,
+  //   };
 
-    // Process form data (e.g., send to a server or log to the console)
-    console.log('Form data:', formData);
+  //   // Process form data (e.g., send to a server or log to the console)
+  //   console.log('Form data:', formData);
 
-    // Simulate successful submission (replace this with your actual submission logic)
-    setTimeout(() => {
-      // After successful submission, redirect to the Thank You page
-      navigate('/thank-you');
-    }, 1000);
+  //   // Simulate successful submission (replace this with your actual submission logic)
+  //   setTimeout(() => {
+  //     // After successful submission, redirect to the Thank You page
+  //     navigate('/thank-you');
+  //   }, 1000);
 
-    // Optionally, you can close the modal immediately or after submission
-    setIsModalOpen(false);
+  //   // Optionally, you can close the modal immediately or after submission
+  //   setIsModalOpen(false);
+  // };
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    city: '',
+    giftingFor: '',
+    budget: '',
+    quantity: '',
+    wishingMessage: '',
+    otherBudget: '',
+    otherQuantity: '',
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+   
+    try {
+      // Send the form data to the server
+      const response = await axios.post('https://hridayam.dasoclothings.in/api/enquirenow', formData);
+  
+      // Check if the response is successful
+      if (response.status === 200) {
+        // Navigate to the Thank You page after a successful submission
+        navigate('/thank-you');
+      } else {
+        // Handle any errors that may occur
+        console.error('Error:', response.data.message || 'Submission failed');
+      }
+    } catch (error) {
+      // Handle errors, e.g., network issues, server errors, etc.
+      console.error('Error:', error.message);
+    } finally {
+      // Close the modal (optional)
+      setIsModalOpen(false);
+    }
   };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+  
+  
+  
   const handleLoadMore2 = () => {
     setCards2(prevCards => [
       ...prevCards,
