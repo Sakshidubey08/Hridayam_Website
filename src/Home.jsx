@@ -1311,7 +1311,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
       <Catalog />
 
-      {/* <div className='selling'>
+     <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
@@ -1360,8 +1360,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           </div>
           
         )}
-      </div>  */}
-      <div className='selling'>
+      </div>
+     {/* <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
@@ -1402,7 +1402,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             </button>
           </div>
         )}
-      </div>
+      </div>*/}
       <div>
         <img src={group1} className="group1" alt="Group Image" /></div>
       <div className="relative ">
