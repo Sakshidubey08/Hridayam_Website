@@ -55,6 +55,7 @@ import Acylic2 from './Acylic2';
 import Acrylic3 from './Acrylic3'
 import ProductDetail from './Catalog/ProductDetail'
 import Thankyou from './Thankyou';
+import TextEditer from './TextEditer';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -69,9 +70,10 @@ const App = () => {
     return (
         <AuthProvider>
             <CartProvider>
-                <ScrollToTop />
+                <ScrollToTop/>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="*" element={<Acrylic3 />} />
                     <Route path="login" element={<Login />} />
                     <Route path="product1" element={<Product1 />} />
                     <Route path="product2" element={<Product2 />} />
@@ -108,7 +110,7 @@ const App = () => {
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/my-orders" element={<MyOrder />} />
                     <Route path="/catalog1" element={<Catalog1 />} />
-                    <Route path="/acrylic3" element={<Acrylic3 />} />
+                   
                     <Route path="/discover1" element={<Discover1 />} />
                     <Route path="/discover2" element={<Discover2 />} />
                     <Route path="/discover3" element={<Discover3 />} />
@@ -126,7 +128,7 @@ const App = () => {
 
                     <Route path="/catalog/:catalog_id" element={<CatalogProducts />} />
 
-                    {/* <Route path='/Aycrlic2' element={<Acylic2></Acylic2>}></Route> */}
+                    <Route path='/Acrylic2' element={<TextEditer></TextEditer>}></Route>
                 </Routes>
             </CartProvider>
         </AuthProvider>

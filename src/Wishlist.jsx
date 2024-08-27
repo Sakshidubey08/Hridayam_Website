@@ -164,14 +164,16 @@ const WishlistPage = () => {
             <tbody>
               {wishlistItems.map(item => (
                 <tr key={item.id}>
-                  <td><input type="checkbox" /></td>
-                  <td>{item.name}</td>
+                  <td><input className='' type="checkbox" /></td>
+                  <td className=' font-semibold'>{item.name}</td>
 
                   <td><img src={item.image} alt={item.name} /></td>
-                  <td>
-                    <button onClick={() => removeFromWishlist(item.id)}>
-                      <FaTrash />
+                  <td className=''>
+                    <button className='hidden md:block'  onClick={() => removeFromWishlist(item.id)}>
+                      <FaTrash  />
                     </button>
+                    <img  onClick={() => removeFromWishlist(item.id)} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
+                    
                   </td>
                 </tr>
               ))}

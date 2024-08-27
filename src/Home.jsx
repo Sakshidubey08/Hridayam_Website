@@ -624,6 +624,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   return (
     <>
       <Header />
+      
       <div class="menu-container  hidden md:flex">
         <div class="menu-item">
           <div class="menu-heading">Corporate Gifting</div>
@@ -1342,7 +1343,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             <div key={card.id} className="card-wrapper"
               style={{ cursor: 'pointer' }}>
               <div className="card1-product rounded-md  ">
-                <div className="card-header  w-32 h-56 md:h-72   md:w-full">
+                <div className="card-header w-36 h-56 md:h-72   md:w-full">
                   <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0  " onClick={() => handleCardClick(card.id)} />
                   <button
                     className="favorite-btn m-4 md:m-0"
@@ -1362,7 +1363,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 </div>
               </div>
               <div className="card-info">
-                <p className="image-description">{card.description}</p>
+                <p className="image-description w-36 md:w-full text-wrap md:text-nowrap text-center ">{card.description}</p>
                 <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
               </div>
             </div>
@@ -1386,7 +1387,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           </div>
           <div className="subscribe-form flex  flex-col md:flex-row items-left justify-start gap-4 mb-4 md:mb-6">
             <input type="email" placeholder="Enter your email address" className="w-full md:w-64 lg:w-80 h-10 px-4 border border-gray-300 text-gray-900" />
-            <button className="subscribe-button rounded-md h-10 px-6 bg-[#23387A] text-white    hover:bg-[#1d2a5f]">
+            <button className="subscribe-button rounded-md md:rounded-none h-10 px-6 bg-[#23387A] text-white    hover:bg-[#1d2a5f]">
               Subscribe
             </button>
           </div>
@@ -1396,7 +1397,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         </div>
       </div>
 
-      <div className='selling mt-96'>
+      <div className='selling md:mt-96 '>
         <h3 className='best '>New Arrivals</h3>
         <h1 className='top '>Discover the Latest Trends</h1>
         <div className="card-container">
@@ -1404,7 +1405,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
             <div key={card.id} className="card-wrapper">
               <div className="card1-product rounded-md">
-                <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                <div className="card-header w-36 h-56 md:h-72   md:w-full">
                   <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick4(card.id)}/>
                   <button
                     className="favorite-btn m-4 md:m-0"
@@ -1425,8 +1426,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 </div>
               </div>
               <div className="card-info">
-                <p className="image-description">{card.description}</p>
-                <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
+                <p className="image-description w-36 md:w-full text-wrap text-center">{card.description}</p>
+                <p className='price '><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
               </div>
             </div>
           ))}
@@ -1449,7 +1450,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             {cards2.map(card => (
               <div key={card.id} className="card-wrapper">
                 <div className="card1-product rounded-md">
-                  <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                  <div className="card-header w-36 h-56 md:h-72   md:w-full">
                     <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0" onClick={() => handleCardClick2(card.id)} />
                     <button
                       className="favorite-btn m-4 md:m-0"
@@ -1469,7 +1470,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                   </div>
                 </div>
                 <div className="card-info">
-                  <p className="image-description">{card.description}</p>
+                  <p className="image-description text-wrap w-36 md:w-full text-center">{card.description}</p>
                   <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
                 </div>
               </div>
@@ -1544,7 +1545,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           {cards3.map(card => (
             <div key={card.id} className="card-wrapper">
               <div className="card1-product rounded-md">
-                <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                <div className="card-header w-36 h-56 md:h-72   md:w-full">
                   <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick1(card.id)}/>
                   <button
                     className="favorite-btn m-4 md:m-0"
@@ -1565,7 +1566,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 </div>
               </div>
               <div className="card-info">
-                <p className="image-description">{card.description}</p>
+                <p className="image-description text-wrap text-center w-36 md:w-full">{card.description}</p>
                 <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
               </div>
             </div>

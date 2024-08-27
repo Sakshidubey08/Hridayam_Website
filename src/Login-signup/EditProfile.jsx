@@ -116,7 +116,7 @@ const EditProfile = () => {
   return (
     <>
       <Header />
-      <div className="login-form-container">
+      <div className="login-form-container mt-24 md:mt-3 ">
         <h2 className="login-heading">Edit Profile</h2>
         <br />
         <form className="login-form" onSubmit={handleSubmit}>

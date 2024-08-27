@@ -105,3 +105,32 @@ hr {
   background-color: #ADD8e6;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+@media only screen and (max-width: 600px) {
+  .cart-table {
+    width: 100%;
+    font-size: 6px;
+    max-width: 940px; /* Set your desired max-width here */
+    border-collapse: collapse;
+  }
+  .cart-summary {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    margin-left: 0px;
+    margin: auto;
+  }
+
+  .cart-item-image {
+    width: 30px;
+    height: 30px;
+    
+    margin-right: 0px;
+  }
+
+  .cart-table {
+    width: 100%;
+    max-width: 1140px; /* Set your desired max-width here */
+    border-collapse: collapse;
+  }
+}

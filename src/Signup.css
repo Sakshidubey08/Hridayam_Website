@@ -112,3 +112,42 @@
   color: green;
   font-size: 14px;
 }
+
+@media only screen and (max-width: 600px) {
+
+  .cancel {
+    font-size: 13px;
+    color: #787878;
+    margin-left: 0rem;
+    
+    margin-top: -9px;
+    text-align: right;
+  
+    font-family: 'Roboto';
+    font-weight: 400;
+  }
+
+  
+  
+  .form-row {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 3px;
+    flex-wrap: wrap; /* Allow wrapping for responsiveness */
+  }
+
+  .signup-form {
+    width: 90%;
+    margin: 50px auto;
+    padding: 10px 7px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  input::placeholder{
+    font-size: 0.7rem;
+  }
+  
+}

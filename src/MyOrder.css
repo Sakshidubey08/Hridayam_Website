@@ -28,3 +28,21 @@
     font-size: 16px;
     color: #777;
   }
+
+  @media only screen and (max-width: 600px) {
+    .order-table-container {
+      width: 90%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin: auto;
+      overflow: hidden;
+      margin-top: 92px;
+    }
+
+    .header-cell {
+      font-weight:lighter;
+      font-size: 10px;
+      text-align: center;
+      color: white;
+    }
+  }

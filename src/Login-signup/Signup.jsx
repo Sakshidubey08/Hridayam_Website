@@ -84,7 +84,7 @@ const SignupForm = () => {
   return (
     <>
       <Header />
-      <div className="signup-form">
+      <div className="signup-form mt-28 md:mt-10 ">
         <h2 className="signup">Signup</h2>
         <h2 className="signup-heading1">Please register using account details below.</h2>
         <form onSubmit={handleSubmit}>

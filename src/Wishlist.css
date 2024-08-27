@@ -137,3 +137,42 @@
   background-color: #ADD8e6;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+@media only screen and (max-width: 600px) {
+  .wishlist-page {
+    margin: 80px auto;
+    max-width: 1300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+  }
+
+  .wishlist-table {
+    width: 100%;
+    font-size: 8px;
+    border-collapse: collapse;
+  }
+
+  .empty-wishlist-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 50px auto;
+    font-family: 'Poppins';
+    font-weight: 600;
+    width: 90%;
+    background-color: #ADD8e6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+   
+
+  .wishlist-table input[type="checkbox"] {
+    transform: scale(1.2); /* Adjust size of checkbox */
+  }
+
+ 
+}

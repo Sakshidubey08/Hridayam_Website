@@ -448,7 +448,7 @@ function App() {
         <>
             <Header />
             <Tour />
-            <div className="container">
+            <div className="container ml-1 mt-24 md:mt-10">
                 <div style={{
                     backgroundSize: 'cover', // or 'contain' depending on your requirement
                     backgroundPosition: 'center', // centers the image
@@ -457,9 +457,9 @@ function App() {
                     <h1 className='acrylic'>Acrylic Photo Borders</h1>
 
                     <div className="profile-pictures">
-                        <div className="shape-content">
+                        <div className="shape-content ">
                             {selectedShape === 'rectangle' && (
-                                <div className="rectangle-section mt-4" style={{ display: 'flex', gap: '10px' }}>
+                                <div className="rectangle-section gap-1 md:gap-6 mt-4" style={{ display: 'flex' }}>
 
                                     <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
                                     <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
@@ -498,16 +498,16 @@ function App() {
                             )}
                         </div>
                     </div>
-                    <div className=' w-[1140px]' style={{
+                    <div className=' w-screen m-auto  md:w-[1140px] ' style={{
                         backgroundImage: `url(${backgroundImage})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         overflow: "hidden",
                         backgroundRepeat: 'no-repeat',
                     }}>
-                        <div className="preview" >
+                        <div className="preview">
 
-                            <div className="image-container ">
+                            <div className="image-container">
                                 <div className={` ${selectedImage == null ? "block" : "hidden"}`}>
 
                                     <img style={{ zIndex: '0' }} className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }} />
@@ -689,7 +689,7 @@ function App() {
 
 
 
-                            <button className=" rounded-md text-black relative" onClick={() => document.getElementById('my_modal_3').showModal()}>
+                            <button className="  rounded-md text-black relative" onClick={() => document.getElementById('my_modal_3').showModal()}>
 
                                 🔍 Zoom
 
@@ -728,6 +728,7 @@ function App() {
                         <button className="text rounded-md" onClick={() => document.getElementById('my_modal_4').showModal()}>
                             📝 Text
                         </button>
+                    
                         <dialog id="my_modal_4" className="modal">
                             <div className="modal-box">
                                 <form method="dialog">
@@ -735,30 +736,34 @@ function App() {
                                     <button style={{ background: "transparent", color: "black" }} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                 </form>
 
-
-                                <label style={{ paddingRight: "400px" }} className=' text-nowrap '>Add Text</label><br></br>
+                                <div className='w-full' >
+                                <label  className=' text-nowrap w-full inline-block text-start'>Add Text</label><br></br>
                                 <input
                                     type='text'
-                                    className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
+                                    className='border w-72 md:w-96 relative left-0 md:mr-20 px-3 my-4 py-2 rounded-md'
                                     placeholder='Enter Your Text here'
                                     value={framtext} // Bind the state to the input value
                                     onChange={(e) => setFramText(e.target.value)} // Update state on change
                                 />
-                                <label style={{ paddingRight: "400px" }} className=' text-nowrap'>Text Color</label><br></br>
-                                <input
+                                <label className=' text-nowrap  w-full inline-block text-start'>Text Color</label><br></br>
+                                <div className=' flex'>
+                                     <input
+
                                     type='color'
-                                    className='border w-20  mr-96  px-3 my-4 py-2 rounded-md'
+                                    className='border w-20  relative left-0 inline-block h-8  md:mr-96  px-3 my-4  rounded-md'
                                     placeholder='Enter Your Text here'
                                     value={color} // Bind the state to the input value
                                     onChange={(e) => setColor(e.target.value)} // Update state on change
                                 />
+                                </div>
+                               
 
                                 <div className={`${framtext == "" ? "hidden" : "block"}`}>
-                                    <label style={{ paddingRight: "400px" }} className=' text-nowrap'>Text Style</label><br></br>
+                                    <label  className=' text-nowrap w-full inline-block text-start'>Text Style</label><br></br>
                                     {
                                         framTextfontfamily.map((text, index) => (
                                             <form method="dialog">
-                                                <p className='border my-3 text-2xl py-4 cursor-pointer' onClick={() => { setframTextfontfamilystate(text) }} key={index} style={{ fontFamily: `${text}` }}>{framtext}</p>
+                                                <p className='border rounded-md my-3 text-2xl py-4 cursor-pointer' onClick={() => { setframTextfontfamilystate(text) }} key={index} style={{ fontFamily: `${text}` ,color: `${color}`, }}>{framtext}</p>
                                             </form>
                                         ))
                                     }
@@ -768,10 +773,10 @@ function App() {
                                 <div>
 
                                 </div>
-
+                                 </div>
                                 <form method="dialog" className={`${framtext == "" ? "hidden" : "block"}`}>
                                     {/* if there is a button in form, it will close the modal */}
-                                    <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
+                                    <button style={{ background: "", color: "" }} className="btn text-white   w-full h-full  btn-outline btn-primar ">Save</button>
                                 </form>
                             </div>
                         </dialog>
@@ -798,7 +803,7 @@ function App() {
 
                     <div className="shapes">
                         <h3 className='acrylic'>Acrylic Photo Shapes</h3>
-                        <div className="shape-options mt-2">
+                        <div className="shape-options pl-10  mt-2">
 
                             <svg
                                 viewBox="0 0 600 400"
@@ -885,7 +890,7 @@ function App() {
                             <button onClick={() => handleSizeChange('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''}`}>35x23</button>
                         </div> */}
                         <div className='size'>
-                            <h3 className='acrylic1 my-3'>Size (Inch): {selectedSize}</h3>
+                            <h3 className='acrylic1 ml-10 md:ml-0 my-3'>Size (Inch): {selectedSize}</h3>
                             <div className="size-buttons">
                                 <button onClick={() => handleSizeChange1('12x9')} className={`size-button ${selectedSize === '12x9' ? 'active' : ''}  rounded-md  ${selectedSize === '12x9' ? '' : 'hover:ring'}`}>12x9</button>
                                 <button onClick={() => handleSizeChange1('11x11')} className={`size-button ${selectedSize === '11x11' ? 'active' : ''} rounded-md  ${selectedSize === '11x11' ? '' : 'hover:ring'}`}>11x11</button>
@@ -897,15 +902,15 @@ function App() {
                         </div>
 
                     </div>
-                    <div className="thickness-options mr-48">
-                        <h3 className='acrylic1 my-3'>Thickness: {selectedThickness}</h3>
+                    <div className="thickness-options mr-12  md:mr-48">
+                        <h3 className='acrylic1  my-3 '>Thickness: {selectedThickness}</h3>
                         <div className="thickness-buttons">
                             <button onClick={() => handleThicknessChange('3MM')} className={`thickness-button rounded-md ${selectedThickness === '3MM' ? 'active' : ''} ${selectedThickness === '3MM' ? '' : 'hover:ring'}`}>3MM</button>
                             <button onClick={() => handleThicknessChange('5MM')} className={`thickness-button rounded-md ${selectedThickness === '5MM' ? 'active' : ''} ${selectedThickness === '5MM' ? '' : 'hover:ring'}`}>5MM</button>
                             <button onClick={() => handleThicknessChange('8MM')} className={`thickness-button rounded-md ${selectedThickness === '8MM' ? 'active' : ''} ${selectedThickness === '5MM' ? '' : 'hover:ring'}`}>8MM</button>
                         </div>
                     </div>
-                    <hr className='border-dashed border-[1px] border-gray-200 mb-2 w-[1200px]' />
+                    <hr className='border-dashed border-[1px] border-gray-200 mb-2 w-screen md:w-[1200px]' />
 
                     <div className="price1 text-sm">
                         <span className='text-xl'>₹{price} <span className=' line-through text-gray-300'>₹{price + 1000}</span></span>

@@ -230,11 +230,11 @@ const Product1 = () => {
               <div className="buttons">
                 <button className="wishlist-btn" onClick={handleAddToWishlist}>
                   <span>Wishlist</span>
-                  <FaHeart className="icon" />
+                  {/* <FaHeart className="icon" /> */}
                 </button>
                 <button className="cart-btn" onClick={handleAddToCart}>
                   <span>Add to Cart</span>
-                  <FaShoppingCart className="icon" />
+                  {/* <FaShoppingCart className="icon" /> */}
                 </button>
               </div>
               <div className="pincode-checker">

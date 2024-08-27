@@ -102,72 +102,130 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as fabric from 'fabric';
+import Draggable from 'react-draggable';
+import frameImage from "./images/oval.png"; // Importing the local image
 
 const TextEditer = ({ text }) => {
-    const canvasRef = useRef(null);
-
-    useEffect(() => {
-        // Initialize the Fabric.js canvas
-        const canvas = new fabric.Canvas(canvasRef.current, {
-            // width: 600,
-            // height: 400,
-            // backgroundColor: 'lightgrey',
-        });
-
-        // Add the background image
-        fabric.Image.fromURL('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIb5WQLTJZt3Jw2_H7p27LXjeA55mHxXedQ&s', (img) => {
-            img.set({
-                angle: 30,
-                left: 50,
-                top: 50,
-                scaleX: 0.5,
-                scaleY: 0.5,
-                opacity: 0.4, // Correct property name for opacity
-                selectable: true,
-            });
-            canvas.add(img); // Add the image to the canvas
-            canvas.sendToBack(img); // Optional: Send the image to the back
-        });
-
-        // Add draggable text with a border
-        const addText = (text) => {
-            const newText = new fabric.Textbox(text,{
-                left: 100,
-                top: 100,
-                fontSize: 30,
-                fill: '#000000',
-                fontFamily: 'sans-serif',
-                selectable: true, // Make it draggable
-                borderOpacityWhenMoving: 1, // Border visibility during drag
-                hasControls: true, // Show control handles
-            });
-
-            // Add border to text
-            newText.set({
-                stroke: '#000000', // Border color
-                strokeWidth: 1, // Border width
-                padding: 5, // Padding between text and border
-            });
-
-            canvas.add(newText); // Add the text to the canvas
-        };
-
-        // Example: Add text to the canvas
-        addText("helloo");
-
-        // Cleanup on component unmount
-        window.canvas = canvas;
-        return () => {
-            canvas.dispose();
-        };
-    }, []);
-
+  
     return (
-        <div className=" h-screen relative w-screen border-8 items-center justify-center">
-
-            <canvas className='border absolute top-20' ref={canvasRef}/>
+        <>
+           <div data-draggable="true" className="frame" style={styles.frame} >
+            {/* <img className='selectDisable' src={frameImage} alt="Frame" style={styles.frameImage} /> */}
+            <Draggable bounds="parent">
+                <div className="draggable-element" style={styles.draggable}>
+                    Drag Me!
+                    <img  style={{ userSelect:"none", pointerEvents:"none", WebkitUserSelect:"none"}} src={frameImage}></img>
+                </div>
+            </Draggable>
         </div>
+    
+        </>
+      
+        
     );
 };
 
+const styles = {
+    frame:{
+        position: 'absolute',
+        width: '400px',
+        height: '400px',
+        overflow: 'hidden',
+        margin: '20px auto',
+        border: '2px solid #ccc',
+        borderRadius: '8px',
+        zIndex:1,
+        border:"10px solid ",
+
+        borderImage:`url(${frameImage}) 20 100 70 fill`,
+        borderImageOutset:"70px",
+        
+        boxsizing:"border-box"
+    },
+    frameImage:{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        WebkitUserSelect:"none",
+        userSelect:"none",
+        PointerEvent:"none",
+        zIndex: 2, // Ensure the image stays behind the draggable content
+    },
+
+    draggable:{
+        width: '100px',
+        height: '100px',
+        backgroundColor: '#4CAF50',
+        color: '#fff',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        cursor: 'move',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        zIndex:1,
+        transform: 'translate(-50%, -50%)',
+    },
+};
+
 export default TextEditer;
+
+// import React, { useEffect, useRef } from 'react';
+// import * as  fabric  from 'fabric';
+// import frameImage from './images/oval.png'; // Replace with your frame image path
+// import dragElementImage from './images/oval.png'; // Replace with your draggable element image path
+
+// const TextEditer = () => {
+//     const canvasRef = useRef(null);
+
+//     useEffect(() => {
+//         // Initialize the Fabric.js canvas
+//         const canvas = new fabric.Canvas(canvasRef.current, {
+//             width: 400,
+//             height: 300,
+//             backgroundColor: 'lightgrey',
+//         });
+
+//         // Add the frame image as a background
+//         fabric.Image.fromURL(frameImage, (img) => {
+//             img.set({
+//                 left: 0,
+//                 top: 0,
+//                 width: canvas.width,
+//                 height: canvas.height,
+//                 selectable: false, // Make sure the frame is not selectable
+//                 evented: false,    // Prevent the frame from capturing events
+//             });
+//             canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+//         });
+
+//         // Add a draggable image element inside the frame
+//         fabric.Image.fromURL(dragElementImage, (img) => {
+//             img.set({
+//                 left: 100,
+//                 top: 100,
+//                 scaleX: 0.5,
+//                 scaleY: 0.5,
+//                 selectable: true, // Make the element draggable
+//             });
+//             canvas.add(img);
+//         });
+
+//         // Cleanup on component unmount
+//         return () => {
+//             canvas.dispose();
+//         };
+//     }, []);
+
+//     return (
+//         <div className="canvas-container" style={{ position: 'relative', width: '400px', margin: '20px auto' }}>
+//             <canvas ref={canvasRef} className='border' />
+//         </div>
+//     );
+// };
+
+// export default TextEditer;

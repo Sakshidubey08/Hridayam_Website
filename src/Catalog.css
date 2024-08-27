@@ -497,6 +497,7 @@ h1 {
 .size-buttons {
   display: flex;
   justify-content: center;
+  
 }
 
 .size-button {
@@ -631,4 +632,57 @@ margin-top: -5px;
   transition: transform 0.3s ease;
 
  
+}
+
+@media only screen and (max-width: 600px) {
+  .size-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 10px;
+    
+  }
+
+  .shape-svg1 {
+    width: 30px; 
+    height: 50px; 
+    flex-shrink: 0; 
+  margin-right:10rem;
+  margin-bottom: 17px;
+  } 
+  .shape-svg2 {
+    width: 30px; 
+    height: 50px;
+    flex-shrink: 0; 
+  margin-right: 7.9rem;
+  } 
+  .shape-svg3 {
+    width: 30px; 
+    height: 50px; 
+    flex-shrink: 0; 
+  margin-right: 6rem;
+  margin-top: -5px;
+  }
+  .shape-svg4 {
+    width: 30px; 
+    height: 50px; 
+    flex-shrink: 0; 
+  margin-right: 4rem;
+  margin-top: -5px;
+  } 
+  .shape-svg5 {
+    width: 30px; 
+    height: 50px; 
+    flex-shrink: 0; 
+  margin-right: 2rem;
+  margin-top: -5px;
+  } 
+  .shape-svg6 {
+    width: 30px; 
+    height: 50px; 
+    flex-shrink: 0; 
+  margin-right:0rem;
+  margin-top: -5px;
+  } 
 }

@@ -1040,3 +1040,34 @@ input:focus, select:focus, textarea:focus {
   border-color: #23387A; /* Blue color for focus */
   box-shadow: 0 0 5px rgba(35, 56, 122, 0.5); /* Optional shadow for effect */
 }
+
+@media only screen and (max-width: 600px) {
+
+  .promo-content {
+    background-color: #9CA5C3;
+    padding: 20px;
+    max-width: 1072px; /* Adjust as needed */
+    position: absolute;
+    top: 4rem;
+    z-index: 1;
+    opacity: 0.9;
+  }
+  .forgot-password {
+    font-size: 13px;
+    color:  #787878;
+    
+    margin-left: 11rem;
+  
+  }
+
+  .login-form-container {
+    max-width: 340px;
+    margin: 4px auto;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+

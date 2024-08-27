@@ -15,7 +15,7 @@ const Login = () => {
   const { storeTokenInLS } = useAuth();
   const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event) =>{
     event.preventDefault();
 
     try {
@@ -60,7 +60,7 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div className="login-form-container">
+      <div className="login-form-container mt-24 md:mt-10  mx-auto">
         <h2 className="login-heading">Login</h2>
         <h2 className="login-heading1">Please login using account details below.</h2>
 
@@ -93,7 +93,7 @@ const Login = () => {
           <div className="button-container">
             <button type="submit" className="login-button">Login</button>
           </div>
-          <h1 type="button" className="create-account">
+          <h1 type="button" className="create-account ml-28 md:ml-32 ">
             <Link to="/signup">Create Account</Link>
           </h1>
         </form>

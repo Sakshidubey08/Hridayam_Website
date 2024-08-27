@@ -169,7 +169,7 @@ const Product1 = () => {
 
         <div className="content">
           <div className='image2'>
-            <img src={product.images[selectedColor]} alt="Product" className="product-image6 h-3/4" style={{ marginTop: '55px', marginLeft: '-32px' }} /></div>
+            <img src={product.images[selectedColor]} alt="Product" className="product-image6 justify-center"  /></div>
           <div className="scrollable-content mt-5 md:mt-0">
             <div className="product-info">
               <h1 className='product-name'>{product.name}</h1>
@@ -247,11 +247,11 @@ const Product1 = () => {
               <div className="buttons">
                 <button className="wishlist-btn" onClick={handleAddToWishlist}>
                   <span>Wishlist</span>
-                  <FaHeart className="icon" />
+                  {/* <FaHeart className="icon" /> */}
                 </button>
                 <button className="cart-btn" onClick={handleAddToCart}>
                   <span>Add to Cart</span>
-                  <FaShoppingCart className="icon" />
+                  {/* <FaShoppingCart className="icon" /> */}
                 </button>
               </div>
               {/* <div className="pincode-checker">

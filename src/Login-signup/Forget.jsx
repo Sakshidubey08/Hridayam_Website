@@ -32,7 +32,7 @@ const Login = () => {
     return (
         <>
             <Header />
-            <div className="login-form-container">
+            <div className="login-form-container mt-24 md:mt-10 mx-3 md:m-auto">
                 <h2 className="login-heading">Reset Your Password</h2>
                 <h2 className="login-heading1">We will send you email to reset your password</h2>
 
