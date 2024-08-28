@@ -431,7 +431,7 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const removeFromWishlist = (productId) => {
+  const removeFromWishlist = (productId) =>{
     setWishlistItems(prevItems => prevItems.filter(item => item.id !== productId));
   };
 

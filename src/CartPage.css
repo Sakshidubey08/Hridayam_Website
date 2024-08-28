@@ -1,41 +1,8 @@
-.cart-container {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.cart-table {
-  width: 100%;
-  max-width: 1140px; /* Set your desired max-width here */
-  border-collapse: collapse;
-}
-
-.cart-table th, .cart-table td {
-  border: 1px solid #ddd;
-  padding: 18px;
-}
-
-.cart-table th {
-  background-color: #23387A;
-  color: white;
-}
-
-.cart-item-image {
-  width: 50px;
-  height: 50px;
-  margin-right: 20px;
-}
-
-.cart-table button {
-  padding: 5px 10px;
-  margin: 0 5px;
-}
-
 .cart-summary {
-  margin-top: 20px;
+  margin: 20px auto;
   text-align: center;
-  width: 1180px;
-  margin-left: 62px;
+  width: 100%;
+  max-width: 1140px; /* Same max-width as cart-table for alignment */
 }
 
 .cart-total {
@@ -85,16 +52,19 @@ hr {
   cursor: pointer;
 }
 
-
-
-.action-column {
-  text-align: center;
-  vertical-align: middle;
-}
-.empty-wishlist-card {
+.cart-container {
+  padding: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+.cart-table {
+  width: 100%;
+  max-width: 1140px;
+  border-collapse: collapse;
+}
+
+.cart-table th, .cart-table td {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
