@@ -522,7 +522,7 @@ const handleImageChange = (e) => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     );
 };
