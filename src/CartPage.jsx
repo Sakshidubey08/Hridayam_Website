@@ -160,13 +160,15 @@ import Header from './Header';
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
 
+  console.log(cartItems)
   const handleIncrement = (productId) => {
-    const item = cartItems.find(item => item.id === productId);
+    const item = cartItems.find(item => item._id === productId);
+    
     updateQuantity(productId, item.quantity + 1);
   };
 
   const handleDecrement = (productId) => {
-    const item = cartItems.find(item => item.id === productId);
+    const item = cartItems.find(item => item._id === productId);
     if (item.quantity > 1) {
       updateQuantity(productId, item.quantity - 1);
     }
@@ -208,8 +210,10 @@ const CartPage = () => {
           </thead>
           <tbody>
             {cartItems.map(item => (
+            
               <tr key={item.id}>
-                <td className=' font-semibold md:font-normal'>{item.name}</td>
+              
+                <td className=' font-semibold md:font-normal'>{item.product.name}</td>
                 <td>
                   <div
                     className="cart-item-image"
@@ -219,23 +223,25 @@ const CartPage = () => {
                       
                     // } : {}}
                   >
-                    <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%' }} />
+                    <img src={item.personalize_image
+} alt={item.product.name} style={{ width: '100%', height: '100%' }} />
                   </div>
                 </td>
                 
-                <td>&#8377;{item.price}</td>
+                <td>&#8377;{item.product.price}</td>
                 <td >
-                  <span className=' ' onClick={() => handleDecrement(item.id)}>-</span>
+                  <span className=' ' onClick={() => handleDecrement(item._id)}>-</span>
                  <span className='mx-2'>{item.quantity}</span> 
-                  <span className='' onClick={() => handleIncrement(item.id)}>+</span>
+                  <span className='' onClick={() => handleIncrement(item._id)}>+</span>
                 </td>
-                <td>&#8377;{item.price * item.quantity}</td>
+                <td>&#8377;{item.product.price * item.quantity}</td>
                 <td className="action-column">
                   <div className="action-button">
-                    <button className='hidden md:block' onClick={() => removeFromCart(item.id)}>
+                    <button className='hidden md:block' onClick={() => removeFromCart(item._id)}>
                       <FaTrash />
                     </button>
-                    <img  onClick={() => removeFromCart(item.id)} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
+
+                    <img  onClick={() => removeFromCart(item._id)} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
                   </div>
                 </td>
               </tr>

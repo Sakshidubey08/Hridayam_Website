@@ -56,6 +56,7 @@ import Acrylic3 from './Acrylic3'
 import ProductDetail from './Catalog/ProductDetail'
 import Thankyou from './Thankyou';
 import TextEditer from './TextEditer';
+import Catalogproduct from "./Catalog/Products"
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -73,7 +74,8 @@ const App = () => {
                 <ScrollToTop/>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="*" element={<Acrylic3 />} />
+                    <Route path='/catalogproduct/:id' element={<Catalogproduct/>}></Route>
+                    <Route path="*" element={<Acrylic3 />}/>
                     <Route path="login" element={<Login />} />
                     <Route path="product1" element={<Product1 />} />
                     <Route path="product2" element={<Product2 />} />

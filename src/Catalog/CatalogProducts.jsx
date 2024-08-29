@@ -481,13 +481,15 @@ const handleFavoriteButtonClick = async (id, e) => {
       <div key={product._id} className="card-wrapper" style={{ cursor: 'pointer' }}>
                                 <div className="card1">
                                     <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                                    <Link to={`/catalogproduct/${catalog_id+"&product_id="+product._id}`}>
                                         <img
                                             src={product.image}
                                             alt="product"
-                                            style={{ height: product.height }}
+                                            style={{ height: product.height}}
                                             className="card-image1 w-23  object-contain m-0 p-0"
-                                            onClick={() => handleProductClick(product._id)}
+                                            // onClick={() => handleProductClick(product._id)}
                                         />
+                                        </Link>
                                         <button
                                             className="favorite-btn"
                                             onClick={(e) => handleFavoriteButtonClick(product._id, e)}

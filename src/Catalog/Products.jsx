@@ -225,7 +225,7 @@
 // export default Product1;
 import React, { useState, useEffect, useContext } from 'react';
 import { CartContext } from '../CartContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams ,useLocation} from 'react-router-dom';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -233,6 +233,10 @@ import '../Products/Product1.css';
 import '../Home.css';
 
 const Product1 = () => {
+    
+    const{id} =useParams();
+    const location=useLocation();
+    console.log(id)
     const { addToCart } = useContext(CartContext);
     const navigate = useNavigate();
     const [selectedImage2, setSelectedImage2] = useState(null);
@@ -242,6 +246,8 @@ const Product1 = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [uploadMessage, setUploadMessage] = useState('');
     const [pincode, setPincode] = useState('');
+   
+    const [file ,setfile] =useState(null);
     const [isPincodeChecked, setIsPincodeChecked] = useState(false);
     const [deliveryText, setDeliveryText] = useState({
         line1: "Please enter PIN code to check delivery time.",
@@ -250,18 +256,43 @@ const Product1 = () => {
         line4: "Easy 14 days returns and exchanges."
     });
     const [checkButtonText, setCheckButtonText] = useState('Check');
+    
+    const queryParams = new URLSearchParams(location.search);
+    let product_id = "";
 
+   const newproduc=()=>{
+    for(let i=1;i<=id.length;i++){
+        if(id[i]=='='){
+            i=i+1;
+             for(let j=i;j<id.length;j++){
+               product_id+=id[j]
+             }
+             
+        }
+    }
+   }
+ 
+   
+console.log("render")
     useEffect(() => {
+       
+    
+       
         const fetchProducts = async () => {
             try {
-                const response = await fetch('https://hridayam.dasoclothings.in/api/ProductbycatalogId?catelog_id=66c42a734fd09c17109d482b');
+                const response = await fetch(`https://hridayam.dasoclothings.in/api/ProductbycatalogId?catelog_id=${id}`);
                 const result = await response.json();
                 if (result.status) {
+                    newproduc()
+                    console.log(product_id+"new id")
                     setProducts(result.data);
+                    console.log(products[1]+"dsf")
+                    const product = result.data.find(prod => prod._id === product_id);
+                    console.log(product +"productefj i")
                     // Optionally set the first product as the selected product
-                    setSelectedProduct(result.data[0]);
+                    setSelectedProduct(product);
                     // Set the main image as the selected image initially
-                    setSelectedImage(result.data[0].image);
+                    setSelectedImage(product.image);
                 }
             } catch (error) {
                 console.error('Failed to fetch products:', error);
@@ -276,9 +307,11 @@ const Product1 = () => {
     };
     const handleImageChange = (event) => {
         const file = event.target.files[0];
+        
         if (file) {
             // Simulate uploading the file
             setTimeout(() => {
+                setfile(file)
                 setSelectedImage2(URL.createObjectURL(file));
                 setUploadMessage('File uploaded successfully!');
             }, 1000); // Simulate a delay for the upload process
@@ -323,8 +356,9 @@ const Product1 = () => {
                 id: selectedProduct._id,
                 name: selectedProduct.name,
                 price: parseFloat(selectedProduct.price),
-                image: selectedProduct.image,
+                image:  file,
             };
+          
             addToCart(productToAdd, quantity);
             navigate('/cart');
         }
