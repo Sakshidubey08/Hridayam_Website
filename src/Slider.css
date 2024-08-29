@@ -36,4 +36,15 @@
     height: 20rem;
     object-fit: cover;
   }
+  .swiper-button-next,
+.swiper-button-prev {
+  width: 14px;  /* Set the desired width */
+  height: 50px; /* Set the desired height */
+}
+
+/* Example for custom SVG icons */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 24px; /* Adjust the font size for default icon */
+}
   

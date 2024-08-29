@@ -334,3 +334,19 @@
 .scrollable-content4 {
   max-width: 300px;
 }
+.main-image img {
+  width: 400px;
+  height: auto;
+  border-radius: 4px;
+}
+.image-section {
+  display: flex;
+  align-items: center;
+}
+
+.thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-right: 20px;
+}
