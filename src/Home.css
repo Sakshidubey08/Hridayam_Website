@@ -1071,3 +1071,84 @@ input:focus, select:focus, textarea:focus {
   }
 }
 
+.swiper-container {
+  width: 100%;
+  padding: 10px 0;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Adjust the size of the navigation buttons */
+.swiper-button-next, .swiper-button-prev {
+  width: 25px; /* Adjust width */
+  height: 25px; /* Adjust height */
+}
+
+/* Adjust the arrow icon within the navigation buttons */
+.swiper-button-next::after, .swiper-button-prev::after {
+  font-size: 16px; /* Adjust this to change the arrow icon size */
+}
+
+/* Alternatively, directly target the SVG within the buttons */
+.swiper-button-next, .swiper-button-prev {
+  background-size: 16px 16px; /* Adjust the size of the arrow icon */
+}
+
+/* .dropdown-item5{
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  font-weight: 500;
+  font-size: 15px;
+
+  color: #575757;
+  cursor: pointer;
+
+}
+.dropdown-item5:hover {
+  background-color: #f1f1f1; /* Optional: Add a background color on hover */
+/* } */ 
+
+.menu-item {
+  position: relative;
+}
+
+
+
+/* .menu-item:hover .dropdown-item5 {
+  display: block; /* Show on hover */
+/* }
+
+.dropdown-item5 {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  font-weight: 500;
+  font-size: 15px;
+  color: #575757;
+  cursor: pointer;
+} 
+
+/* .dropdown-item5:hover {
+  background-color: #f1f1f1; /* Optional: Add a background color on hover */
+ .dropdown5{
+  display: none;
+ }
+  
+  .menu-item:hover .dropdown5 {
+    display: block; /* Show on hover */
+  }
+  
+  .dropdown-item5 {
+    padding: 10px;
+   
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins';
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .dropdown-item5:hover {
+    background-color: #f1f1f1; /* Optional: Add a background color on hover */
+  }

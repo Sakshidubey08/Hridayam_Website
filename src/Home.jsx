@@ -55,12 +55,67 @@ import Catalog from './Catalog/Catalog.jsx';
 import { WishlistContext } from './WishlistContext';
 import axios from 'axios';
 import { useProductContext } from './context/Bestproduct.jsx';
+import SwiperCore from 'swiper';
+
+SwiperCore.use([Navigation]);
 
 const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const{isLoading,products} = useProductContext();
+  const { isLoading, products } = useProductContext();
   // console.log(products)
+  // const menuItems = [
+  //   { heading: 'Corporate Gifting' },
+  //   { heading: 'Home Decorations' },
+  //   { heading: 'Birthday Celebration' },
+  //   { heading: 'Birthday Celebration' },
+  //   { heading: 'Birthday Celebration' },
+    
+  // ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://hridayam.dasoclothings.in/api/getcategoryuser');
+        const result = await response.json();
+        if (result.status) {
+          // Map the API data to the desired format for Swiper
+          const categories = result.data.map(category => ({
+            id: category._id,
+            heading: category.name,
+            image: category.image,
+          }));
+          setMenuItems(categories);
+        } else {
+          console.error('Failed to fetch categories:', result.message);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
 
+    fetchData();
+  }, []);
+  const [menuItems, setMenuItems] = useState([]);
+  const [subcategories, setSubcategories] = useState({}); // Store subcategories by category ID
+  const [dropdownOpen, setDropdownOpen] = useState(null); // Track which dropdown is open
+  const handleHeadingClick = async (categoryId) => {
+    setDropdownOpen(prev => (prev === categoryId ? null : categoryId)); // Toggle dropdown
+    if (!subcategories[categoryId]) {
+      try {
+        const response = await fetch(`https://hridayam.dasoclothings.in/api/getSubCategoryByCategory?category_id=${categoryId}`);
+        const result = await response.json();
+        if (result.status) {
+          setSubcategories(prev => ({
+            ...prev,
+            [categoryId]: result.data.map(subcategory => subcategory.name), // Store subcategory names
+          }));
+        } else {
+          console.error('Failed to fetch subcategories:', result.message);
+        }
+      } catch (error) {
+        console.error('Error fetching subcategories:', error);
+      }
+    }
+  };
   const [cards, setCards] = useState([]);
   useEffect(() => {
     axios.get('http://91.108.104.122/api/getbestsellingproduct')
@@ -365,7 +420,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         console.error('Error fetching data:', error);
       });
   }, []);
-  
+
   const [cards2, setCards2] = useState([
     { id: 1, imageUrl: 'https://i.pinimg.com/564x/ca/e6/9c/cae69c9b3349585dbaf4361bdfbbcba4.jpg', price: '&#8377;1,200', height: '200px', description: "Personalize Mugs" },
     { id: 2, imageUrl: 'https://i.pinimg.com/736x/d2/77/47/d27747315ce2522594ef94de4cddce11.jpg', price: '&#8377;4,200', description: "Gift Hamper" },
@@ -654,9 +709,9 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   return (
     <>
       <Header />
-      
+
       <div class="menu-container  hidden md:flex">
-        <div class="menu-item">
+        {/* <div class="menu-item">
           <div class="menu-heading">Corporate Gifting</div>
           <div class="submenu">
             <div class="submenu-item">Drinkware</div>
@@ -733,43 +788,227 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             <div class="submenu-item">Decoration</div>
 
           </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-heading">Acrylic Photoframe</div>
-          <div class="submenu">
-            <Link to='/acrylic3'> <div className="submenu-item ">Acrylic Photo frame</div></Link>
-          </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-heading" onClick={() => setIsModalOpen(true)}>Contact Us</div>
-          {/* {isModalOpen && (
-         <div className="fixed z-10 inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            <div className="fixed inset-0 transition-opacity">
-              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div> */}
+        {/* <Swiper
+
+          slidesPerView={3} // Number of visible slides
+          spaceBetween={20} // Space between slides
+          navigation
+          
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+              
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          }}
+        >
+          {menuItems.map((item, index) => (
+            <SwiperSlide key={index}>
+              <div className="menu-item">
+                <div className="menu-heading">{item.heading}</div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+       */}
+       <Swiper
+      slidesPerView={3}
+      spaceBetween={20}
+      navigation
+      breakpoints={{
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+      }}
+    >
+      {menuItems.map((item) => (
+  <SwiperSlide key={item.id}>
+    <div className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
+      <div className="menu-heading">
+        {item.heading}
+      </div>
+      {subcategories[item.id] && (
+        <div className="dropdown5">
+          {subcategories[item.id].map((subName, index) => (
+            <div key={index} className="dropdown-item5">
+              {subName}
             </div>
-            <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-              <div className="sm:flex sm:items-start">
-                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left pl-20">
-                  <h3 className="text-center leading-6 font-medium text-gray-900">Contact Us</h3>
-                  <p className="text-center text-gray-400">Please Enter Your valid Email Id</p>
-                  <div className="mt-2">
-                    <form>
-                      <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                          Email
-                        </label>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Your email" />
+          ))}
+        </div>
+      )}
+    </div>
+  </SwiperSlide>
+))}
+
+    </Swiper>
+    
+      <div class="menu-item">
+        <div class="menu-heading">Acrylic Photoframe</div>
+        <div class="submenu">
+          <Link to='/acrylic3'> <div className="submenu-item ">Acrylic Photo frame</div></Link>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-heading" onClick={() => setIsModalOpen(true)}>Contact Us</div>
+        {isModalOpen && (
+          <div className="fixed z-20 inset-0 overflow-y-auto">
+            <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+              <div className="fixed inset-0 transition-opacity">
+                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+              </div>
+              <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+              <div
+                className="inline-block align-bottom bg-white px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+                style={{ maxWidth: '700px' }}
+              >
+                <div className="flex flex-col items-center justify-center">
+                  <h1
+                    className="leading-6 font-medium text-gray-900"
+                    style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}
+                  >
+                    Talk to Our Experts
+                    <button
+                      type="button"
+                      className="absolute right-[-5.2rem] top-6 text-gray-500 hover:text-gray-700 focus:outline-none"
+                      onClick={() => setIsModalOpen(false)}
+                    >
+                      <FontAwesomeIcon icon={faTimes} size="lg" />
+                    </button>
+                  </h1>
+                  <div className="mt-6 w-full">
+                    <form className="w-full" onSubmit={handleSubmit}>
+                      <div className="flex flex-col space-y-4">
+                        <div className="flex space-x-4">
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="firstName"
+                            type="text"
+                            placeholder="Enter Your First name"
+                            required
+                          />
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="lastName"
+                            type="text"
+                            placeholder="Enter Your Last name"
+                            required
+                          />
+                        </div>
+                        <div className="flex space-x-4">
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="email"
+                            placeholder="Enter Your Business Email Address*"
+                            required
+                          />
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="phone"
+                            type="text"
+                            placeholder="Enter Your Phone number*"
+                            required
+                          />
+                        </div>
+                        <div className="flex space-x-4">
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="city"
+                            type="text"
+                            placeholder="Enter your city*"
+                            required
+                          />
+                          <select
+                            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="giftingFor"
+                            required
+                          >
+                            <option value="">Gifting For *</option>
+                            <option value="internalEmployees">Internal Employees</option>
+                            <option value="clientsCustomers">Clients/Customers</option>
+                            <option value="vipCeo">VIP/CEO</option>
+                            <option value="others">Others</option>
+                          </select>
+                        </div>
+                        <div className="flex space-x-4">
+                          <select
+                            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="budget"
+                            onChange={handleSelectChange1}
+                            required
+
+                          >
+                            <option value="">Budget Per Gift *</option>
+                            <option value="0-500">₹0 - ₹500</option>
+                            <option value="500-1000">₹500 -₹1000</option>
+                            <option value="2000-5000">₹2000-₹5000</option>
+                            <option value="5000-10000">₹5000-₹10000</option>
+                            <option value="other">Other</option>
+                          </select>
+
+                          {showOther1 && (
+                            <input
+                              type="text"
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+                              id="other-budget"
+                              name="other-budget"
+                              placeholder="Please specify your budget"
+                            />
+                          )}
+                          <select
+                            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="quantity-select" name="quantity" onChange={handleSelectChange}
+                            required
+                          >
+                            <option value="">Quantity Required *</option>
+                            <option value="10-50">10-50pcs</option>
+                            <option value="50-100">50-100pcs</option>
+                            <option value="100-200">100-200pcs</option>
+                            <option value="200-300">200-300pcs</option>
+                            <option value="other">Other</option>
+                          </select>
+                          {showOther && (
+                            <input
+                              type="text"
+                              id="other-quantity"
+                              name="other-quantity"
+                              placeholder="Please specify"
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+                            />
+                          )}
+                        </div>
+                        <div className="w-full">
+                          <textarea
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="wishingMessage"
+                            placeholder="Enter Your Wishing Message"
+                            rows="2"
+                            required
+                          ></textarea>
+                        </div>
                       </div>
-                      <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
-                          Message
-                        </label>
-                        <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" placeholder="Your message"></textarea>
-                      </div>
-                      <button type="button" className="bg-[#23387A] w-full text-white font-bold py-2 px-4 rounded" onClick={() => setIsModalOpen(false)}>
-                        Send
+                      <button
+                        type="submit"
+                        className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mt-6"
+                      >
+                        ENQUIRE NOW
                       </button>
                     </form>
                   </div>
@@ -777,492 +1016,10 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               </div>
             </div>
           </div>
-        </div>
-      )} */}
-          {/* {isModalOpen && (
-   <div className="fixed z-20 inset-0 overflow-y-auto">
-    <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-      <div className="fixed inset-0 transition-opacity">
-        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        )}
+
       </div>
-      <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-      <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-        <div className="sm:flex sm:items-start">
-          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left pl-20 relative">
-            <h3 className="text-center leading-6 font-medium text-gray-900">
-              Contact Us
-              <button
-                type="button"
-                className="absolute right-[-12rem]  top-0 text-gray-500 hover:text-gray-700 focus:outline-none"
-                onClick={() => setIsModalOpen(false)}
-              >
-                <FontAwesomeIcon icon={faTimes} size="lg" />
-              </button>
-            </h3>
-            <p className="text-center text-gray-400">Please Enter Your valid Email Id</p>
-            <div className="mt-2">
-              <form>
-              <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="email"
-                  >
-                    Name
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="name"
-                    type="name"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="email"
-                  >
-                    Email
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="email"
-                    type="email"
-                    placeholder="Your email"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="message"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="message"
-                    placeholder="Your message"
-                  ></textarea>
-                </div>
-                <button
-                  type="button"
-                  className="bg-[#23387A] w-full text-white font-bold py-2 px-4 rounded"
-                  onClick={() => setIsModalOpen(false)}
-                >
-                  Send
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-)} */}
-          {/* {isModalOpen && (
-            <div className="fixed z-20 inset-0 overflow-y-auto">
-              <div className="flex items-center justify-center min-h-screen  px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-                <div className="inline-block align-bottom bg-white  px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-                  <div className="sm:flex sm:items-start">
-                    <div className="mt-3 text-center sm:mt-0  sm:ml-4 sm:text-left relative">
-                      <h1 className="text-center leading-6  font-medium text-gray-900" style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}>
-                        Talk to Our Corporate Gifting Experts
-                        <button
-                          type="button"
-                          className="absolute right-[-12rem] top-0 text-gray-500 hover:text-gray-700 focus:outline-none"
-                          onClick={() => setIsModalOpen(false)}
-                        >
-                          <FontAwesomeIcon icon={faTimes} size="lg" />
-                        </button>
-                      </h1>
-                      <div className="mt-6">
-                        <form>
-                          <div className="flex mb-4 space-x-4">
-                            <div className="w-1/2">
-
-                              <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="firstName"
-                                type="text"
-                                placeholder="First name"
-                              />
-                            </div>
-                            <div className="w-1/2">
-
-                              <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="lastName"
-                                type="text"
-                                placeholder="Last name"
-                              />
-                            </div>
-                          </div>
-                          <div className="flex mb-4 space-x-4">
-                            <div className="w-1/2">
-
-                              <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="email"
-
-                                placeholder="Your email"
-                                style={{ width: '100%' }}
-                              />
-                            </div>
-                            <div className="w-1/2">
-
-                              <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="phone"
-                                type="text"
-                                placeholder="Phone number"
-                                style={{ width: '100%' }}
-                              />
-                            </div>
-                          </div>
-                          <div className="flex mb-4 space-x-4">
-                            <div className="w-1/2">
-
-                              <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="lastName"
-                                type="text"
-                                placeholder="Enter your city"
-                              />
-                            </div>
-                            <div className="w-1/2">
-                              <select
-                                className="shadow   border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="giftingFor"
-                                style={{ width: '100%' }}
-                              >
-                                <option value="">Gifting For *</option>
-                                <option value="friend">Friend</option>
-                                <option value="family">Family</option>
-                                <option value="colleague">Colleague</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="flex mb-4 space-x-4">
-                            <div className="w-1/2">
-
-                              <select
-                                className="shadow  border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="budget"
-                                style={{ width: '100%' }}
-                              >
-                                <option value="">Budget Per Gift *</option>
-                                <option value="20">Below $20</option>
-                                <option value="50">$20 - $50</option>
-                                <option value="100">$50 - $100</option>
-                                <option value="200">Above $100</option>
-                              </select>
-                            </div>
-                            <div className="w-1/2">
-                              {/* <label
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                      htmlFor="quantity"
-                    >
-                      Quantity Required
-                    </label> */}
-          {/* <select
-                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="quantity"
-                                style={{ width: '100%' }}
-                              >
-                                <option value="">Quantity Required *</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                              </select>
-                            </div>
-                          </div>
-                          <button
-                            type="button"
-                            className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mb-2"
-                            onClick={() => setIsModalOpen(false)}
-                          >
-                            ENQUIRE NOW
-                          </button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )} */}
-          {/* {isModalOpen && (
-    <div className="fixed z-20 inset-0 overflow-y-auto">
-     <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-      <div className="fixed inset-0 transition-opacity">
-        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-      </div>
-      <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-      <div
-        className="inline-block align-bottom bg-white px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
-        style={{ maxWidth: '700px' }} // Adjust this width as needed
-      >
-        <div className="flex flex-col items-center justify-center">
-          <h1
-            className="leading-6 font-medium text-gray-900"
-            style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}
-          >
-            Talk to Our Corporate Gifting Experts
-            <button
-              type="button"
-              className="absolute right-[-5.2rem] top-6 text-gray-500 hover:text-gray-700 focus:outline-none"
-              onClick={() => setIsModalOpen(false)}
-            >
-              <FontAwesomeIcon icon={faTimes} size="lg" />
-            </button>
-          </h1>
-          <div className="mt-6 w-full">
-            <form className="w-full">
-              <div className="flex flex-col space-y-4">
-                <div className="flex space-x-4">
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="firstName"
-                    type="text"
-                    placeholder="Enter Your First name"
-                    required
-                  />
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="lastName"
-                    type="text"
-                    placeholder="Enter Your Last name"
-                    required
-                  />
-                </div>
-                <div className="flex space-x-4">
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="email"
-                    placeholder="Enter Your Business Email Address*"
-                    required
-                  />
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="phone"
-                    type="text"
-                    placeholder="Enter Your Phone number*"
-                    required
-                  />
-                </div>
-                <div className="flex space-x-4">
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="city"
-                    type="text"
-                    placeholder="Enter your city*"
-                    required
-                  />
-                  <select
-                    className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="giftingFor"
-                  >
-                    <option value="">Gifting For *</option>
-                    <option value="friend">Internal Employees</option>
-                    <option value="family">Clients/Customers</option>
-                    <option value="colleague">VIP/CEO</option>
-                    <option value="colleague">Others</option>
-                  </select>
-                </div>
-                <div className="flex space-x-4">
-                  <select
-                    className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="budget"
-                  >
-                    <option value="">Budget Per Gift *</option>
-                    <option value="20">₹0 - ₹500</option>
-                    <option value="50">₹500 -₹1000</option>
-                    <option value="100">₹2000-₹5000</option>
-                    <option value="200">₹5000-₹10000</option>
-                  </select>
-                  <select
-                    className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="quantity"
-                  >
-                    <option value="">Quantity Required *</option>
-                    <option value="1">10-50pcs</option>
-                    <option value="2">50-100pcs</option>
-                    <option value="3">100-200pcs</option>
-                    <option value="4">200-300pcs</option>
-                  </select>
-                </div>
-              </div>
-              <button
-                type="button"
-                className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mt-6"
-                onClick={() => setIsModalOpen(false)}
-              >
-                ENQUIRE NOW
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
- */}
-          {isModalOpen && (
-            <div className="fixed z-20 inset-0 overflow-y-auto">
-              <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-                <div
-                  className="inline-block align-bottom bg-white px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
-                  style={{ maxWidth: '700px' }}
-                >
-                  <div className="flex flex-col items-center justify-center">
-                    <h1
-                      className="leading-6 font-medium text-gray-900"
-                      style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}
-                    >
-                      Talk to Our Experts
-                      <button
-                        type="button"
-                        className="absolute right-[-5.2rem] top-6 text-gray-500 hover:text-gray-700 focus:outline-none"
-                        onClick={() => setIsModalOpen(false)}
-                      >
-                        <FontAwesomeIcon icon={faTimes} size="lg" />
-                      </button>
-                    </h1>
-                    <div className="mt-6 w-full">
-                      <form className="w-full" onSubmit={handleSubmit}>
-                        <div className="flex flex-col space-y-4">
-                          <div className="flex space-x-4">
-                            <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="firstName"
-                              type="text"
-                              placeholder="Enter Your First name"
-                              required
-                            />
-                            <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="lastName"
-                              type="text"
-                              placeholder="Enter Your Last name"
-                              required
-                            />
-                          </div>
-                          <div className="flex space-x-4">
-                            <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="email"
-                              placeholder="Enter Your Business Email Address*"
-                              required
-                            />
-                            <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="phone"
-                              type="text"
-                              placeholder="Enter Your Phone number*"
-                              required
-                            />
-                          </div>
-                          <div className="flex space-x-4">
-                            <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="city"
-                              type="text"
-                              placeholder="Enter your city*"
-                              required
-                            />
-                            <select
-                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="giftingFor"
-                              required
-                            >
-                              <option value="">Gifting For *</option>
-                              <option value="internalEmployees">Internal Employees</option>
-                              <option value="clientsCustomers">Clients/Customers</option>
-                              <option value="vipCeo">VIP/CEO</option>
-                              <option value="others">Others</option>
-                            </select>
-                          </div>
-                          <div className="flex space-x-4">
-                            <select
-                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="budget"
-                              onChange={handleSelectChange1}
-                              required
-
-                            >
-                              <option value="">Budget Per Gift *</option>
-                              <option value="0-500">₹0 - ₹500</option>
-                              <option value="500-1000">₹500 -₹1000</option>
-                              <option value="2000-5000">₹2000-₹5000</option>
-                              <option value="5000-10000">₹5000-₹10000</option>
-                              <option value="other">Other</option>
-                            </select>
-
-                            {showOther1 && (
-                              <input
-                                type="text"
-                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
-                                id="other-budget"
-                                name="other-budget"
-                                placeholder="Please specify your budget"
-                              />
-                            )}
-                            <select
-                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="quantity-select" name="quantity" onChange={handleSelectChange}
-                              required
-                            >
-                              <option value="">Quantity Required *</option>
-                              <option value="10-50">10-50pcs</option>
-                              <option value="50-100">50-100pcs</option>
-                              <option value="100-200">100-200pcs</option>
-                              <option value="200-300">200-300pcs</option>
-                              <option value="other">Other</option>
-                            </select>
-                            {showOther && (
-                              <input
-                                type="text"
-                                id="other-quantity"
-                                name="other-quantity"
-                                placeholder="Please specify"
-                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
-                              />
-                            )}
-                          </div>
-                          <div className="w-full">
-                  <textarea
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="wishingMessage"
-                    placeholder="Enter Your Wishing Message"
-                    rows="2"
-                    required
-                  ></textarea>
-                </div>
-                        </div>
-                        <button
-                          type="submit"
-                          className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mt-6"
-                        >
-                          ENQUIRE NOW
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-        </div>
-      </div>
+    </div >
       <div className=' md:hidden'>
       <Catalog/>
      </div>
@@ -1364,8 +1121,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           </div>
           
         )}
-      </div> 
-      {/* <div className='selling'>
+      </div>
+  {/* <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
@@ -1649,8 +1406,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         
       </div>
 
-      {/* <img src={group5} className='group5' />  */}
-      <Footer />
+  {/* <img src={group5} className='group5' />  */ }
+  <Footer />
 
     </>
   );
