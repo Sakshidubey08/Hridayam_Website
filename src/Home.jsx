@@ -54,43 +54,47 @@ import Header from './Header.jsx';
 import Catalog from './Catalog/Catalog.jsx';
 import { WishlistContext } from './WishlistContext';
 import axios from 'axios';
+import { useProductContext } from './context/Bestproduct.jsx';
 
 const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [cards, setCards] = useState([]);
-  // useEffect(() => {
-  //   axios.get('http://91.108.104.122/api/getbestsellingproduct')
-  //     .then(response => {
-  //       const { data } = response;
-  //       if (data.status) {
-  //         // Format the data as required
-  //         const formattedCards = data.data.map(product => ({
-  //           id: product._id,
-  //           imageUrl: product.image,
-  //           price: `&#8377;${parseFloat(product.price).toFixed(2)}`,
-  //           description: product.product_details,
-  //           height: '160px' // Adjust height if necessary
-  //         }));
-  //         setCards(formattedCards);
-  //       } else {
-  //         // Handle error or empty state
-  //         console.error('No data found');
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching data:', error);
-  //     });
-  // }, []);
-  const [cards, setCards] = useState([
-    { id: 1, imageUrl: image9, price: '&#8377;1,200', description: "Veneer Wall Light" },
-    { id: 2, imageUrl: image10, price: '&#8377;4,200', description: "Brass Diya" },
-    { id: 3, imageUrl: image12, price: '&#8377;800', description: "Structured Curved Bill Cap" },
-    { id: 4, imageUrl: image13, price: '&#8377;499', description: "Personalized Notebooks" },
-    { id: 5, imageUrl: image14, price: '&#8377;80', height: '160px', description: "Win Connect Ball Pen Blue" },
-    { id: 6, imageUrl: image15, price: '&#8377;1,500', description: "Acrylic Photo Frame A4" },
-    { id: 7, imageUrl: image16, price: '&#8377;200', description: "Mug, dark turquoise" },
-    { id: 8, imageUrl: image17, price: '&#8377;1,400', description: "Decor Fountain" },
-  ]);
+  const{isLoading,products} = useProductContext();
+  // console.log(products)
+
+  const [cards, setCards] = useState([]);
+  useEffect(() => {
+    axios.get('http://91.108.104.122/api/getbestsellingproduct')
+      .then(response => {
+        const { data } = response;
+        if (data.status) {
+          // Format the data as required
+          const formattedCards = data.data.map(product => ({
+            id: product._id,
+            imageUrl: product.image,
+            price: `&#8377;${parseFloat(product.price).toFixed(2)}`,
+            description: product.name,
+            height: '160px' // Adjust height if necessary
+          }));
+          setCards(formattedCards);
+        } else {
+          // Handle error or empty state
+          console.error('No data found');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+  // const [cards, setCards] = useState([
+  //   { id: 1, imageUrl: image9, price: '&#8377;1,200', description: "Veneer Wall Light" },
+  //   { id: 2, imageUrl: image10, price: '&#8377;4,200', description: "Brass Diya" },
+  //   { id: 3, imageUrl: image12, price: '&#8377;800', description: "Structured Curved Bill Cap" },
+  //   { id: 4, imageUrl: image13, price: '&#8377;499', description: "Personalized Notebooks" },
+  //   { id: 5, imageUrl: image14, price: '&#8377;80', height: '160px', description: "Win Connect Ball Pen Blue" },
+  //   { id: 6, imageUrl: image15, price: '&#8377;1,500', description: "Acrylic Photo Frame A4" },
+  //   { id: 7, imageUrl: image16, price: '&#8377;200', description: "Mug, dark turquoise" },
+  //   { id: 8, imageUrl: image17, price: '&#8377;1,400', description: "Decor Fountain" },
+  // ]);
   const [favoriteCards, setFavoriteCards] = useState(() => {
     // Load favoriteCards from localStorage when the component mounts
     const storedFavorites = localStorage.getItem('favoriteCards');
@@ -326,16 +330,42 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     }
   };
 
-  const [cards1, setCards1] = useState([
-    { id: 11, imageUrl: image18, price: '&#8377;1,200', height: '200px', description: "Double Canopy Umbrella" },
-    { id: 12, imageUrl: image19, price: '&#8377;4,200', description: "Water Bottle" },
-    { id: 13, imageUrl: image20, price: '&#8377;800', description: "Fogg Deodorant Men" },
-    { id: 14, imageUrl: image21, price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
-    { id: 15, imageUrl: image22, price: '&#8377;80', description: "Men White Shoes" },
-    { id: 16, imageUrl: image10, price: '&#8377;1,500', description: "Brass Diya" },
-    { id: 17, imageUrl: image23, price: '&#8377;200', description: "Skybags" },
-    { id: 18, imageUrl: image17, price: '&#8377;1,400', description: "Decor Fountain" },
-  ]);
+  // const [cards1, setCards1] = useState([
+  //   { id: 11, imageUrl: image18, price: '&#8377;1,200', height: '200px', description: "Double Canopy Umbrella" },
+  //   { id: 12, imageUrl: image19, price: '&#8377;4,200', description: "Water Bottle" },
+  //   { id: 13, imageUrl: image20, price: '&#8377;800', description: "Fogg Deodorant Men" },
+  //   { id: 14, imageUrl: image21, price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
+  //   { id: 15, imageUrl: image22, price: '&#8377;80', description: "Men White Shoes" },
+  //   { id: 16, imageUrl: image10, price: '&#8377;1,500', description: "Brass Diya" },
+  //   { id: 17, imageUrl: image23, price: '&#8377;200', description: "Skybags" },
+  //   { id: 18, imageUrl: image17, price: '&#8377;1,400', description: "Decor Fountain" },
+  // ]);
+  const [cards1, setCards1] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://hridayam.dasoclothings.in/api/getlatestTrendUser')
+      .then(response => {
+        const { data } = response;
+        if (data.status && data.data.products) {
+          // Access the products array inside data.data
+          const formattedCards = data.data.products.map(product => ({
+            id: product._id,
+            imageUrl: product.image,
+            price: `₹${parseFloat(product.price).toFixed(2)}`,
+            description: product.name,
+            height: '160px' // Adjust height if necessary
+          }));
+          setCards1(formattedCards);
+        } else {
+          // Handle error or empty state
+          console.error('No data found');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+  
   const [cards2, setCards2] = useState([
     { id: 1, imageUrl: 'https://i.pinimg.com/564x/ca/e6/9c/cae69c9b3349585dbaf4361bdfbbcba4.jpg', price: '&#8377;1,200', height: '200px', description: "Personalize Mugs" },
     { id: 2, imageUrl: 'https://i.pinimg.com/736x/d2/77/47/d27747315ce2522594ef94de4cddce11.jpg', price: '&#8377;4,200', description: "Gift Hamper" },
@@ -1236,7 +1266,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       <div className=' md:hidden'>
       <Catalog/>
      </div>
-      <div style={{backgroundImage:`url(${group})`}} className='swiper-background  bg-left-top bg-no-repeat    relative  md:top-5'>
+      <div style={{backgroundImage:``}} className='swiper-background  bg-left-top bg-no-repeat    relative  md:top-5'>
         <img src={group} alt="" className='group '/>
 
         <div className="w-full max-w-[70rem]  md:mx-auto px-3  mt-14 md:mt-2 md:px-4">
@@ -1285,7 +1315,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
      </div>
       
 
-      {/* <div className='selling'>
+      <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
@@ -1334,8 +1364,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           </div>
           
         )}
-      </div>  */}
-      <div className='selling'>
+      </div> 
+      {/* <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
@@ -1376,7 +1406,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             </button>
           </div>
         )}
-      </div>
+      </div> */}
       <div>
         <img src={group1} className="group1" alt="Group Image" /></div>
       <div className="relative ">
@@ -1402,11 +1432,11 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         <h1 className='top '>Discover the Latest Trends</h1>
         <div className="card-container">
           {cards1.map(card => (
-
+            
             <div key={card.id} className="card-wrapper">
               <div className="card1-product rounded-md">
                 <div className="card-header w-36 h-56 md:h-72   md:w-full">
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick4(card.id)}/>
+                  <img src={card.imageUrl} alt="product"  className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick4(card.id)}/>
                   <button
                     className="favorite-btn m-4 md:m-0"
                     onClick={(e) => handleFavoriteButtonClick1(card.id, e ,card.description)}

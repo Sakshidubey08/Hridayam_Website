@@ -360,7 +360,7 @@ const Product1 = () => {
                                         className="thumbnail"
                                     />
                                 )}
-                                {/* Display additional images */}
+                               
                                 {selectedProduct?.images.map((image, index) => (
                                     <img
                                         key={index}

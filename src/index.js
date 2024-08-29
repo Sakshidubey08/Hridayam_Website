@@ -6,14 +6,17 @@ import './index.css';
 import { AuthProvider } from './store/auth';
 import { CartProvider } from './CartContext';
 import { WishlistProvider } from './WishlistContext';
+import { AppProvider } from './context/Bestproduct';
 
 ReactDOM.render(
   <AuthProvider>
     <CartProvider>
       <WishlistProvider>
+        <AppProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>
+        </AppProvider>
       </WishlistProvider>
     </CartProvider>
   </AuthProvider>,
