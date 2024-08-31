@@ -62,6 +62,7 @@ SwiperCore.use([Navigation]);
 const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isLoading, products } = useProductContext();
+  
   // console.log(products)
   // const menuItems = [
   //   { heading: 'Corporate Gifting' },
@@ -118,7 +119,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   };
   const [cards, setCards] = useState([]);
   useEffect(() => {
-    axios.get('http://91.108.104.122/api/getbestsellingproduct')
+    axios.get('https://hridayam.dasoclothings.in/api/getbestsellingproduct')
       .then(response => {
         const { data } = response;
         if (data.status) {
@@ -156,45 +157,54 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     return storedFavorites ? JSON.parse(storedFavorites) : {};
   });
 
-  const handleFavoriteButtonClick = (id, e, description) => {
-    e.stopPropagation();
+  // const handleFavoriteButtonClick = (id, e, description) => {
+  //   e.stopPropagation();
 
-    setFavoriteCards((prev) => {
-      const updatedFavorites = {
-        ...prev,
-        [id]: !prev[id],
-      };
+  //   setFavoriteCards((prev) => {
+  //     const updatedFavorites = {
+  //       ...prev,
+  //       [id]: !prev[id],
+  //     };
 
-      const selectedCard = cards.find((card) => card.id === id);
-      console.log(selectedCard.description + "slkdflsd")
-      if (selectedCard) {
-        const productToAdd = {
-          id: selectedCard.id, // Use selectedCard instead of product
-          name: description,
-          price: selectedCard.price,
-          image: selectedCard.imageUrl,
+  //     const selectedCard = cards.find((card) => card.id === id);
+  //     console.log(selectedCard.description + "slkdflsd")
+  //     if (selectedCard) {
+  //       const productToAdd = {
+  //         id: selectedCard.id, // Use selectedCard instead of product
+  //         name: description,
+  //         price: selectedCard.price,
+  //         image: selectedCard.imageUrl,
 
-          // Use images if image is not defined
-        };
+  //         // Use images if image is not defined
+  //       };
 
-        if (updatedFavorites[id]) {
-          // Add to wishlist
-          addToWishlist(productToAdd);
+  //       if (updatedFavorites[id]) {
+  //         // Add to wishlist
+  //         addToWishlist(productToAdd);
 
-          setWishlist((prevWishlist) => [...prevWishlist, productToAdd]);
-        } else {
-          // Remove from wishlist
-          setWishlist((prevWishlist) => prevWishlist.filter((item) => item.id !== id));
+  //         setWishlist((prevWishlist) => [...prevWishlist, productToAdd]);
+  //       } else {
+  //         // Remove from wishlist
+  //         setWishlist((prevWishlist) => prevWishlist.filter((item) => item.id !== id));
 
-        }
-      }
+  //       }
+  //     }
 
 
-      return updatedFavorites;
-    });
+  //     return updatedFavorites;
+  //   });
 
-    e.preventDefault();
-  };
+  //   e.preventDefault();
+  // };
+
+  const handleFavoriteButtonClick = (id )=>{
+    console.log(id+"lksdsdjf")
+    addToWishlist(id)
+  
+    // setfavbutton(!favbutton)
+  
+  
+  }
 
   useEffect(() => {
     // Store favoriteCards in localStorage whenever it changes
@@ -846,7 +856,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         {item.heading}
       </div>
       {subcategories[item.id] && (
-        <div className="dropdown5">
+        <div className="dropdown5 absolute">
           {subcategories[item.id].map((subName, index) => (
             <div key={index} className="dropdown-item5">
               {subName}
@@ -1077,19 +1087,21 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
           {cards.map(card => (
-            <Link
+           
+            <div key={card.id} className="card-wrapper" style={{ cursor: 'pointer' }}>
+              <div className="card1">
+                <div className="card-header">
+                <Link
             key={card.id}
             to={`/card/${card.id}`}
             className="card-link"
             onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
           >
-            <div key={card.id} className="card-wrapper" style={{ cursor: 'pointer' }}>
-              <div className="card1">
-                <div className="card-header">
                   <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1" onClick={() => handleCardClick(card.id)} />
+                </Link>
                   <button
-                    className="favorite-btn"
-                    onClick={(e) => handleFavoriteButtonClick(card.id, e)}
+                    className="favorite-btn "
+                    onClick={(e) => handleFavoriteButtonClick(card.id)}
                     style={{
                       cursor: 'pointer',
                       border: 'none',
@@ -1098,8 +1110,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                     }}
                   >
                     <i
-                      className={`fa-heart ${favoriteCards[card.id] ? 'fas' : 'far'}`}
-                      style={{ color: favoriteCards[card.id] ? 'red' : '#23387A', fontSize: '24px' }}
+                      className={`fa-heart ${wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'fas' : 'far'}`}
+                      style={{ color: wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'red' : '#23387A', fontSize: '24px' }}
                     ></i>
                   </button>
                 </div>
@@ -1109,7 +1121,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
               </div>
             </div>
-            </Link>
+          
           ))}
 
         </div>

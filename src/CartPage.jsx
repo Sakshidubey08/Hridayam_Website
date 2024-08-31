@@ -163,8 +163,9 @@ const CartPage = () => {
   console.log(cartItems)
   const handleIncrement = (productId) => {
     const item = cartItems.find(item => item._id === productId);
-    
-    updateQuantity(productId, item.quantity + 1);
+    console.log(item._id)
+    console.log(item.quantity+1)
+    updateQuantity(item._id, item.quantity + 1);
   };
 
   const handleDecrement = (productId) => {
@@ -175,7 +176,7 @@ const CartPage = () => {
   };
 
   const calculateSubtotal = () => {
-    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    return cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   };
 
   const calculateTotal = () => {
@@ -184,7 +185,7 @@ const CartPage = () => {
     return subtotal;
   };
 
-  if (cartItems.length === 0) {
+  if (cartItems.length === 0){
     return (
       <>
         <Header />
@@ -223,8 +224,12 @@ const CartPage = () => {
                       
                     // } : {}}
                   >
-                    <img src={item.personalize_image
+                  <div className=' flex items-center gap-2'>
+                    <img className={`${item.product.product_type=="personalize"?"block":"hidden"}`} src={item.personalize_image
 } alt={item.product.name} style={{ width: '100%', height: '100%' }} />
+ <img src={item.product.image
+} alt={item.product.name} style={{ width: '100%', height: '100%' }} />
+</div>
                   </div>
                 </td>
                 

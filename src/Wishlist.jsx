@@ -134,14 +134,15 @@
 
 // export default WishlistPage;
 import React, { useContext } from 'react';
-import { WishlistContext } from './WishlistContext';
+
 import { FaTrash } from 'react-icons/fa';
 import Header from './Header';
 import './Wishlist.css';
+import { WishlistContext } from './WishlistContext';
 
 const WishlistPage = () => {
   const { wishlistItems, removeFromWishlist } = useContext(WishlistContext);
-  console.log(wishlistItems)
+  console.log(wishlistItems+"widsit lis ")
   return (
     <>
       <Header/>
@@ -154,7 +155,7 @@ const WishlistPage = () => {
           <table className="wishlist-table">
             <thead>
               <tr>
-                <th>Select</th>
+                {/* <th>Select</th> */}
                 <th>Product Name</th>
               
                 <th>Product Image</th>
@@ -162,17 +163,17 @@ const WishlistPage = () => {
               </tr>
             </thead>
             <tbody>
-              {wishlistItems.map(item => (
+              {wishlistItems.data.data.map(item => (
                 <tr key={item.id}>
-                  <td><input className='' type="checkbox" /></td>
-                  <td className=' font-semibold'>{item.name}</td>
+                  {/* <td><input className='' type="checkbox" /></td> */}
+                  <td className=' font-semibold'>{item.product.name}</td>
 
-                  <td><img src={item.image} alt={item.name} /></td>
+                  <td><img src={item.product.image} alt={item.product.name} /></td>
                   <td className=''>
-                    <button className='hidden md:block'  onClick={() => removeFromWishlist(item.id)}>
-                      <FaTrash  />
+                    <button className='hidden md:block'  onClick={() => removeFromWishlist(item.product._id)}>
+                      <FaTrash />
                     </button>
-                    <img  onClick={() => removeFromWishlist(item.id)} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
+                    <img  onClick={() => removeFromWishlist(item.product._id)} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
                     
                   </td>
                 </tr>

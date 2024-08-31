@@ -273,17 +273,20 @@
 // };
 
 //       export default Cardpage1;
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState ,useContext} from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useProductContext } from './context/Bestproduct';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import Header from './Header';
 import './Products/Product1.css';
 import './Home.css';
+import { CartContext } from './CartContext';
 
 const API = "https://hridayam.dasoclothings.in/api/getbestsellingproduct";
 
 const Cardpage1 = () => {
+  const navigate=useNavigate();
+  const { addToCart } = useContext(CartContext);
   const { getSingleProduct, isSingleLoading, filteredCard } = useProductContext();
   const { id } = useParams();
   const [selectedImage2, setSelectedImage2] = useState(null);
@@ -292,6 +295,7 @@ const Cardpage1 = () => {
   const [uploadMessage, setUploadMessage] = useState('');
   const [pincode, setPincode] = useState('');
   const [isPincodeChecked, setIsPincodeChecked] = useState(false);
+  const [file ,setfile] =useState(null);
   const [deliveryText, setDeliveryText] = useState({
     line1: "Please enter PIN code to check delivery time.",
     line2: "100% Original Products.",
@@ -303,17 +307,18 @@ const Cardpage1 = () => {
   const handleIncrement = () => setQuantity(prevQuantity => prevQuantity + 1);
   const handleDecrement = () => setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   
-  const handleImageChange = (event) => {
+  const handleImageChange = (event) =>{
     const file = event.target.files[0];
+    setfile(file);
     if (file) {
-      setTimeout(() => {
+      setTimeout(() =>{
         setSelectedImage2(URL.createObjectURL(file));
         setUploadMessage('File uploaded successfully!');
       }, 1000);
     }
   };
 
-  const handlePincodeChange = (e) => {
+  const handlePincodeChange = (e) =>{
     const value = e.target.value;
     if (!isNaN(value)) {
       setPincode(value);
@@ -344,23 +349,40 @@ const Cardpage1 = () => {
     setSelectedImage(image);
   };
 
-  useEffect(() => {
-    if (id) {
+  useEffect(() =>{
+    if (id){
       getSingleProduct(API, id);
     }
   }, [id, getSingleProduct]);
 
-  if (isSingleLoading) {
+  if (isSingleLoading){
     return <div>Loading...</div>;
   }
 
-  if (!filteredCard || Object.keys(filteredCard).length === 0) {
+  if (!filteredCard || Object.keys(filteredCard).length === 0){
     return <div>No data available for the selected ID.</div>;
   }
 
   const { name, price, default_color_image, images } = filteredCard;
   const mainImage = selectedImage || default_color_image;
 
+  const handleAddToCart = () => {
+    // console.log(getSingleProduct.variations[0]+"new variation")
+    if (true) {
+        const productToAdd = {
+            id: id,
+            name: name,
+            price: price,
+            image:  file,
+            color:filteredCard.colors[0],
+            variation:filteredCard.variations[0]
+            
+        };
+      
+        addToCart(productToAdd, quantity);
+        navigate('/cart');
+    }
+};
   return (
     <>
       <Header />
@@ -382,7 +404,7 @@ const Cardpage1 = () => {
               ))}
             </div>
             <div className="main-image">
-              <img src={mainImage} alt={name} />
+              <img src={mainImage} alt={name}/>
             </div>
           </div>
 
@@ -398,7 +420,7 @@ const Cardpage1 = () => {
                 <button onClick={handleIncrement} className="quantity-btn">+</button>
               </div>
               <br />
-              <div>
+              <div className={`${filteredCard?.product_type=="personalize"?"block":"hidden"}`}>
                 <button
                   onClick={() => document.getElementById('fileInput').click()}
                   style={{
@@ -432,7 +454,7 @@ const Cardpage1 = () => {
                   type="file"
                   accept="image/*"
                   id="fileInput"
-                  style={{ display: 'none' }}
+                  style={{ display: 'none'}}
                   onChange={handleImageChange}
                 />
                 {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
@@ -444,9 +466,9 @@ const Cardpage1 = () => {
                   <span>Wishlist</span>
                   <FaHeart className="icon" />
                 </button>
-                <button className="cart-btn">
+                <button onClick={handleAddToCart} className="cart-btn">
                   <span>Add to Cart</span>
-                  <FaShoppingCart className="icon" />
+                  <FaShoppingCart className="icon"/>
                 </button>
               </div>
               <div className="pincode-checker">

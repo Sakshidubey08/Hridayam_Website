@@ -162,7 +162,7 @@ import { Range, getTrackBackground } from 'react-range';
 import Header from '../Header';
 import { Link } from 'react-router-dom';
 import { WishlistContext } from '../WishlistContext';
-
+import Heart from "react-animated-heart";
 import '../AllP.css';
 const STEP = 1;
 const MIN = 0;
@@ -172,7 +172,7 @@ const CatalogProducts = () => {
   const [cards, setCards] = useState([]);
   const [favoriteCards, setFavoriteCards] = useState({});
   const { addToWishlist, wishlistItems, removeFromWishlist } = useContext(WishlistContext);
-
+  const [isClick, setClick] = useState(false);
   const navigate = useNavigate(); // For programmatic navigation
   const [productsData, setProductsData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -181,6 +181,9 @@ const CatalogProducts = () => {
   const [selectedMaterials, setSelectedMaterials] = useState([]);
   const [selectedColor, setSelectedColor] = useState('');
   const [mobileviewfiltter , setmobileviewfiltter] =useState(true);
+  const [favbutton,setfavbutton]=useState(false);
+
+
   const handleMaterialChange = (material) => {
     if (selectedMaterials.includes(material)) {
       setSelectedMaterials(selectedMaterials.filter((m) => m !== material));
@@ -198,44 +201,53 @@ const CatalogProducts = () => {
     }
     return 0;
 };
-const handleFavoriteButtonClick = async (id, e) => {
-  e.stopPropagation(); // Prevent event propagation
-  e.preventDefault();
 
-  const selectedCard = cards.find((card) => card.id === id);
-  if (!selectedCard) {
-      console.error('Card not found for id:', id);
-      return;
-  }
+ const handleFavoriteButtonClick = (id )=>{
+  console.log(id+"lksdsdjf")
+  addToWishlist(id)
 
-  const isFavorite = favoriteCards[id];
+  setfavbutton(!favbutton)
 
-  try {
-      if (isFavorite) {
-          await removeFromWishlist(id);
-      } else {
-          await addToWishlist(selectedCard);
-      }
 
-      setFavoriteCards((prev) => {
-          const updatedFavoriteCards = {
-              ...prev,
-              [id]: !prev[id],
-          };
-          localStorage.setItem('favoriteCards', JSON.stringify(updatedFavoriteCards));
-          return updatedFavoriteCards;
-      });
-  } catch (error) {
-      console.error('Error managing wishlist:', error);
-  }
-};
+}
+// const handleFavoriteButtonClick = async (id, e) => {
+//   e.stopPropagation(); // Prevent event propagation
+//   e.preventDefault();
+
+//   const selectedCard = cards.find((card) => card.id === id);
+//   if (!selectedCard) {
+//       console.error('Card not found for id:', id);
+//       return;
+//   }
+
+//   const isFavorite = favoriteCards[id];
+
+//   try {
+//       if (isFavorite) {
+//           await removeFromWishlist(id);
+//       } else {
+//           await addToWishlist(selectedCard);
+//       }
+
+//       setFavoriteCards((prev) => {
+//           const updatedFavoriteCards = {
+//               ...prev,
+//               [id]: !prev[id],
+//           };
+//           localStorage.setItem('favoriteCards', JSON.stringify(updatedFavoriteCards));
+//           return updatedFavoriteCards;
+//       });
+//   } catch (error) {
+//       console.error('Error managing wishlist:', error);
+//   }
+// };
 
   const handleClearAll = () => {
     setPriceRange([MIN, MAX]);
     setSelectedColors([]);
     setSelectedMaterials([]);
   };
-  const handleColorChange = (color) => {
+  const handleColorChange = (color) =>{
     setSelectedColor(color);
   };
   useEffect(() => {
@@ -483,6 +495,7 @@ const handleFavoriteButtonClick = async (id, e) => {
                                     <div className="card-header w-32 h-56 md:h-72   md:w-full">
                                     <Link to={`/catalogproduct/${catalog_id+"&product_id="+product._id}`}>
                                         <img
+                                          
                                             src={product.image}
                                             alt="product"
                                             style={{ height: product.height}}
@@ -490,20 +503,24 @@ const handleFavoriteButtonClick = async (id, e) => {
                                             // onClick={() => handleProductClick(product._id)}
                                         />
                                         </Link>
+                                        
                                         <button
-                                            className="favorite-btn"
-                                            onClick={(e) => handleFavoriteButtonClick(product._id, e)}
+                                            className="favorite-btn btn border-8"
+                                            onClick={(e) => handleFavoriteButtonClick(product._id)}
                                             style={{
                                                 cursor: 'pointer',
                                                 border: 'none',
                                                 background: 'none',
                                                 padding: '5px',
                                             }}
-                                        >
-                                            <i
-                                                className={`fa-heart ${favoriteCards[product.id] ? 'fas' : 'far'}`}
-                                                style={{ color: favoriteCards[product.id] ? 'red' : '#23387A', fontSize: '24px' }}
-                                            ></i>
+                                        > 
+                                     {/* <h1>{wishlistItems.data.data.some(item=>item.product._id==product._id)?"a":"b"}</h1>  */}
+                                     
+                                            {/* <i
+                                                className={`fa-heart ${wishlistItems.data.data.some(item=>item.product._id==product._id) ? 'fas' : 'far'} `}
+                                                style={{ color: wishlistItems.data.data.some(item=>item.product._id==product._id) ? 'red' : '#23387A', fontSize: '24px' }}
+                                            ></i> */}
+                                            <Heart className="bg-red-600 " isClick={wishlistItems.data.data.some(item=>item.product._id==product._id)?true:false} />
                                         </button>
                                     </div>
                                 </div>

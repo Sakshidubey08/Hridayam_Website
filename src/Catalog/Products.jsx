@@ -351,12 +351,16 @@ console.log("render")
     };
 
     const handleAddToCart = () => {
+        console.log(selectedProduct.variations[0]+"new variation")
         if (selectedProduct) {
             const productToAdd = {
                 id: selectedProduct._id,
                 name: selectedProduct.name,
                 price: parseFloat(selectedProduct.price),
                 image:  file,
+                color:selectedProduct.colors[0],
+                variation:selectedProduct.variations[0]
+                
             };
           
             addToCart(productToAdd, quantity);
@@ -408,7 +412,7 @@ console.log("render")
                     </div>
                     <div className="image-placeholder1">
                         {selectedImage && (
-                            <img src={selectedImage} alt="Selected" />
+                            <img src={selectedImage} alt="Selected"/>
                         )}
                     </div>
                     <div className="scrollable-content4">
@@ -421,8 +425,9 @@ console.log("render")
                                 <div className="quantity">{quantity}</div>
                                 <button onClick={handleIncrement} className="quantity-btn">+</button>
                             </div>
-                            <br />
-                            <div>
+                            <br/>
+                      
+                            <div className={`${selectedProduct?.product_type=="personalize"?"block":"hidden"}`}>
                                 <button
                                     onClick={handleButtonClick}
                                     style={{
@@ -463,11 +468,11 @@ console.log("render")
                                 {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
                             </div>
 
-                            <h3 className='free'>Free Delivery</h3>
+                            <h3 className='free'>Free Delivery </h3>
                             <div className="buttons">
                                 <button className="wishlist-btn">
                                     <span>Wishlist</span>
-                                    <FaHeart className="icon" />
+                                    <FaHeart className="icon"/>
                                 </button>
                                 <button className="cart-btn" onClick={handleAddToCart}>
                                     <span>Add to Cart</span>

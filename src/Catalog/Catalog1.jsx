@@ -276,6 +276,7 @@ function Filter() {
                                             className="card-image1"
                                             onClick={() => handleCardClick(card.id)}
                                         />
+                                        
                                         <button
                                             className="favorite-btn"
                                             onClick={(e) => handleFavoriteButtonClick(card.id, e)}

@@ -32,6 +32,7 @@ const Cardpage2 = () => {
   const [pincode, setPincode] = useState('');
   const [isPincodeChecked, setIsPincodeChecked] = useState(false);
   const [checkButtonText, setCheckButtonText] = useState('Check');
+  
   const [deliveryText, setDeliveryText] = useState({
     line1: "Please enter PIN code to check delivery time.",
     line2: "100% Original Products.",

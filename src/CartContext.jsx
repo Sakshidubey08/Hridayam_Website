@@ -183,6 +183,7 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  
   const { storeTokenInLS } = useAuth();
 
   // Function to fetch token from localStorage
@@ -191,10 +192,11 @@ export const CartProvider = ({ children }) => {
   };
   useEffect(() => {
     console.log('Cart items:', cartItems);
-  }, [cartItems]);
+    fetchCartItems()
+  }, []);
   
   // Fetch cart items on component mount
-  useEffect(() => {
+  const fetchCartItems = () => {
     const token = fetchTokenFromLS();
     
     if (token) {
@@ -205,7 +207,7 @@ export const CartProvider = ({ children }) => {
       })
       .then(response => {
         console.log('API Response Data:', response.data);
-        if (response.data.status === true && Array.isArray(response.data.data)) {
+        if (response.data.status === true && Array.isArray(response.data.data)){
           setCartItems(response.data.data);
         } else {
           console.error('Unexpected response format:', response.data);
@@ -217,12 +219,12 @@ export const CartProvider = ({ children }) => {
     } else {
       console.error('No token found in localStorage.');
     }
-  }, []);
+  };
 
   // Add product to cart
   const addToCart = (product, quantity) => {
     const token = fetchTokenFromLS();
-    console.log(product)
+    console.log(product.color+"slkdfl")
     // const productToAdd = {
     
     //   product_id: product.id,
@@ -244,53 +246,56 @@ export const CartProvider = ({ children }) => {
   // formData.append('price', product.price);
   // formData.append('image', product.image);
 
-
+     
   // if (product.personalize_image) {
       formData.append('personalize_image', product.image); // Assuming personalize_image is a File object
   // }
 
-  if (product.product_color_id) {
-      formData.append('product_color_id', product.product_color_id);
+  if (product.color) {
+      formData.append('product_color_id', product.color);
   }
 
-  if (product.product_variation_id) {
-      formData.append('product_variation_id', product.product_variation_id);
+  if (product.variation) {
+      formData.append('product_variation_id', product.variation);
   }
 
   console.log("FormData to Add:", formData.quantity);
 
   
   
-    axios.post('https://hridayam.dasoclothings.in/api/addtocart', formData, {
+    axios.post('https://hridayam.dasoclothings.in/api/addtocart', formData,{
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
       }
     })
     .then(response => {
-      console.log('Added to Cart:', response.data);
+    
+  console.log('Added to Cart:');
+      // const cartItem = response.data.cart;
+      
+      // const cartProduct ={
+      //   product_id: cartItem.product_id,
+      //   quantity: cartItem.quantity,
+      //   price: cartItem.price,
+      //   image: cartItem.image,
+      //   name: cartItem.product.name,
+      //   _id: cartItem._id // Ensure _id is set as cart_id
+      // };
   
-      const cartItem = response.data.cart;
-      const cartProduct = {
-        product_id: cartItem.product_id,
-        quantity: cartItem.quantity,
-        price: cartItem.price,
-        image: cartItem.image,
-        name: cartItem.name,
-        _id: cartItem._id // Ensure _id is set as cart_id
-      };
   
-      setCartItems(prevItems => {
-        const existingItem = prevItems.find(item => item.product_id === product.id);
-        if (existingItem) {
-          return prevItems.map(item =>
-            item.product_id === product.id
-              ? { ...item, quantity: (item.quantity || 1) + 1 }
-              : item
-          );
-        }
-        return [...prevItems, cartProduct]; // Use cartProduct with _id as cart_id
-      });
+      // setCartItems(prevItems => {
+      //   const existingItem = prevItems.find(item => item.product_id === product.id);
+      //   if (existingItem) {
+      //     return prevItems.map(item =>
+      //       item.product_id === product.id
+      //         ? { ...item, quantity: (item.quantity || 1) + 1 }
+      //         : item
+      //     );
+      //   }
+      //   return [...prevItems, cartProduct]; // Use cartProduct with _id as cart_id
+      // });
+      fetchCartItems();
     })
     .catch(error => {
       console.error('Error adding to cart:', error.response ? error.response.data : error.message);
@@ -319,8 +324,9 @@ export const CartProvider = ({ children }) => {
   
   
 
-  const updateQuantity = (product, newQuantity) => {
+  const updateQuantity = (product, newQuantity) =>{
     const token = fetchTokenFromLS();
+    console.log(product+"lsdfjlsdflsdlsdsdfs")
   
     if (!token) {
       console.error('No token found in localStorage.');
@@ -332,15 +338,15 @@ export const CartProvider = ({ children }) => {
       return;
     }
   
-    if (!product || !product.product_id) {
+    if (!product || !product) {
       console.error('Product or product_id not provided. Product:', product);
       return;
     }
   
-    const cartItem = cartItems.find(item => item.product_id === product.product_id);
+    const cartItem = cartItems.find(item => item._id === product);
   
     if (!cartItem) {
-      console.error('Cart item not found for product_id:', product.product_id);
+      console.error('Cart item not found for product_id:', product);
       return;
     }
   
@@ -351,9 +357,11 @@ export const CartProvider = ({ children }) => {
   
     const productToUpdate = {
       cart_id: cartItem._id, // Use _id as cart_id
-      product_id: product.product_id,
+      product_id: product,
       quantity: newQuantity,
     };
+
+    console.log(productToUpdate.cart_id+"new id")
       
   
     console.log('Sending request with payload:', productToUpdate);
@@ -366,12 +374,13 @@ export const CartProvider = ({ children }) => {
     })
     .then(response => {
       console.log('Response from API:', response.data);
-      if (response.data && response.data.status === true) {
+      if (response.data && response.data.status === true){
         setCartItems(prevItems =>
           prevItems.map(item =>
-            item.product_id === product.product_id ? { ...item, quantity: newQuantity } : item
+            item.product_id === product.product_id ? {...item, quantity: newQuantity } : item
           )
         );
+        fetchCartItems()
       } else {
         console.error('Unexpected response format:', response.data);
       }

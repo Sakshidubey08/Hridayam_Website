@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, Switch, useLocation } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login-signup/Login';
 import Product1 from './Products/Product1';
@@ -53,7 +53,7 @@ import Customize5 from './Products/Customize5'
 import Customize6 from './Products/Customize6'
 import Acylic2 from './Acylic2';
 import Acrylic3 from './Acrylic3'
-import ProductDetail from './Catalog/ProductDetail'
+// import ProductDetail from './Catalog/ProductDetail'
 import Thankyou from './Thankyou';
 import TextEditer from './TextEditer';
 import Catalogproduct from "./Catalog/Products"
@@ -69,13 +69,15 @@ const ScrollToTop = () => {
 
 const App = () => {
     return (
-        <AuthProvider>
-            <CartProvider>
-                <ScrollToTop/>
+        
+                <>
+   <ScrollToTop/>
+   
+            
                 <Routes>
+              
                     <Route path="/" element={<Home />} />
-                    <Route path='/catalogproduct/:id' element={<Catalogproduct/>}></Route>
-                    <Route path="*" element={<Acrylic3 />}/>
+                   
                     <Route path="login" element={<Login />} />
                     <Route path="product1" element={<Product1 />} />
                     <Route path="product2" element={<Product2 />} />
@@ -102,10 +104,10 @@ const App = () => {
                     <Route path="checkout" element={<Checkout />} />
                     <Route path="forget" element={<Forget />} />
                     <Route path="editprofile" element={<EditProfile />} />
-                    <Route path="catalog" element={<Catalog />} />
+                    <Route path="catalog" element={<Catalog/>} />
                     <Route path="all-products" element={<AllProducts />} />
                     <Route path="/card/:id" element={<Cardpage1 />} />
-                    <Route path="/product/:id" element={<ProductDetail />} />
+                    {/* <Route path="/product/:id" element={<ProductDetail />} /> */}
                     <Route path="/products" element={<Products />} />
 
                     <Route path="/place-order" element={<PlaceOrder />} />
@@ -129,11 +131,12 @@ const App = () => {
                     <Route path="/thank-you" element={<Thankyou />} />
 
                     <Route path="/catalog/:catalog_id" element={<CatalogProducts />} />
-
-                    <Route path='/Acrylic2' element={<TextEditer></TextEditer>}></Route>
+                    <Route path='/catalogproduct/:id' element={<Catalogproduct/>}></Route>
+                   
+                    {/* <Route path='/Acrylic2' element={<TextEditer></TextEditer>}></Route> */}
+                {/* <Route path="*" element={<Acrylic3 />}/> */}
                 </Routes>
-            </CartProvider>
-        </AuthProvider>
+         </>
     );
 };
 
