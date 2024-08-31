@@ -33,7 +33,7 @@ function Filter() {
         }
     }, []);
     useEffect(() => {
-        axios.get('https://hridayam.dasoclothings.in/api/getProductsforuser', {
+        axios.get('https://api.hirdayam.com/api/getProductsforuser', {
             params: {
                 min_price: priceRange[0],
                 max_price: priceRange[1]

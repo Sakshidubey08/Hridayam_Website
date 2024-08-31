@@ -282,7 +282,7 @@ import './Products/Product1.css';
 import './Home.css';
 import { CartContext } from './CartContext';
 
-const API = "https://hridayam.dasoclothings.in/api/getbestsellingproduct";
+const API = "https://api.hirdayam.com/api/getbestsellingproduct";
 
 const Cardpage1 = () => {
   const navigate=useNavigate();

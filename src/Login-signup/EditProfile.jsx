@@ -29,7 +29,7 @@ const EditProfile = () => {
           throw new Error('No token found in localStorage.');
         }
 
-        const response = await axios.get('https://hridayam.dasoclothings.in/api/getUserprofile', {
+        const response = await axios.get('https://api.hirdayam.com/api/getUserprofile', {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -77,7 +77,7 @@ const EditProfile = () => {
         throw new Error('No user_id found in localStorage.');
       }
 
-      const response = await axios.put('https://hridayam.dasoclothings.in/api/updateUserprofile', {
+      const response = await axios.put('https://api.hirdayam.com/api/updateUserprofile', {
         user_id: userId, 
         name,
         phone,
