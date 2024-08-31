@@ -52,7 +52,7 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await axios.post('https://hridayam.dasoclothings.in/api/signup', {
+      const response = await axios.post('https://api.hirdayam.com/api/signup', {
         name,
         phone,
         email,

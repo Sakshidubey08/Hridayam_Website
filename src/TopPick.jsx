@@ -70,7 +70,7 @@ export default function App() {
 //   useEffect(() => {
 //     const fetchImages = async () => {
 //       try {
-//         const response = await fetch('https://hridayam.dasoclothings.in/api/bottomBannerforUser');
+//         const response = await fetch('https://api.hirdayam.com/api/bottomBannerforUser');
 //         const result = await response.json();
 //         console.log('Fetched result:', result); // Log fetched result
 

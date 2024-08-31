@@ -56,6 +56,8 @@ import Acrylic3 from './Acrylic3'
 import ProductDetail from './Catalog/ProductDetail'
 import Thankyou from './Thankyou';
 import TextEditer from './TextEditer';
+import SubCategory from './SubCategory'
+import ManageAddress from './Login-signup/ManageAddress';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -68,8 +70,7 @@ const ScrollToTop = () => {
 
 const App = () => {
     return (
-        <AuthProvider>
-            <CartProvider>
+        <>
                 <ScrollToTop/>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -125,13 +126,16 @@ const App = () => {
                     <Route path="/customize7" element={<Customize7 />} />
                     <Route path="/customize8" element={<Customize8 />} />
                     <Route path="/thank-you" element={<Thankyou />} />
+                    <Route path="/manage-address" element={<ManageAddress />} />
+
+                    {/* <Route path="/sub-category-products" element={<SubCategory />} /> */}
+                    <Route path="/sub-category-products/:subCategoryId" element={<SubCategory />} />
 
                     <Route path="/catalog/:catalog_id" element={<CatalogProducts />} />
-
+                    
                     <Route path='/Acrylic2' element={<TextEditer></TextEditer>}></Route>
                 </Routes>
-            </CartProvider>
-        </AuthProvider>
+                </> 
     );
 };
 

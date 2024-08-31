@@ -14,7 +14,7 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://91.108.104.122/api/forgetpassword', {
+            const response = await axios.post('https://api.hirdayam.com/api/forgetpassword', {
                 email,
                 password,
             });

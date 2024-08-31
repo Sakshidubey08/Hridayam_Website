@@ -281,7 +281,7 @@ import Header from './Header';
 import './Products/Product1.css';
 import './Home.css';
 
-const API = "https://hridayam.dasoclothings.in/api/getbestsellingproduct";
+const API = "https://api.hirdayam.com/api/getbestsellingproduct";
 
 const Cardpage1 = () => {
   const { getSingleProduct, isSingleLoading, filteredCard } = useProductContext();

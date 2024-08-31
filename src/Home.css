@@ -1113,6 +1113,8 @@ input:focus, select:focus, textarea:focus {
 
 .menu-item {
   position: relative;
+ 
+  z-index: 1000; /* Ensure it stacks above other elements */
 }
 
 
@@ -1132,23 +1134,67 @@ input:focus, select:focus, textarea:focus {
 
 /* .dropdown-item5:hover {
   background-color: #f1f1f1; /* Optional: Add a background color on hover */
- .dropdown5{
-  display: none;
- }
-  
-  .menu-item:hover .dropdown5 {
-    display: block; /* Show on hover */
+  .slider-wrapper {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical scrolling */
+    width: calc(2 * 220px); /* Same width as the visible area for 4 items */
+    position: relative;
+    cursor: grab;
   }
   
-  .dropdown-item5 {
-    padding: 10px;
-   
+  .slider-wrapper.active {
+    cursor: grabbing;
+  }
+  .decoration {
+    display: flex;
+    margin-left: 72px;
+    z-index: 10000;
+    transition: transform 0.3s ease;
+    overflow: visible; /* Allow dropdown to overflow outside the container */
+
+    position: relative; /* Ensure the dropdown positions relative to the container */
+  }
+  .menu-item {
+    position: relative; /* Ensure dropdown is positioned relative to this container */
+  }
+  .decoration.active {
+    cursor: grabbing; /* Changes cursor when actively dragging */
+  }
+  .menu-item .dropdown5 {
+    display: none; /* Hide dropdown by default */
+    position: absolute; /* Absolute positioning to place it relative to .menu-item */
+    top: 100%; /* Position dropdown directly below the menu item */
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 170px;
+    
+  z-index: 10000; /* High z-index to ensure visibility */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins';
     font-size: 14px;
     font-weight: 500;
   }
   
-  .dropdown-item5:hover {
-    background-color: #f1f1f1; /* Optional: Add a background color on hover */
+  .menu-item:hover .dropdown5 {
+    display: block; /* Show dropdown on hover */
   }
+  .menu-item .dropdown5 {
+    z-index: 9999; /* Higher value to ensure it's on top of other elements */
+  }
+  
+  .dropdown-item5 {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    font-weight: 500;
+    font-size: 15px;
+    color: #575757;
+    cursor: pointer;
+  }
+  
+  .dropdown-item5:hover {
+    background-color: #f1f1f1; /* Optional: Highlight on hover */
+  }
+   
+
+ 

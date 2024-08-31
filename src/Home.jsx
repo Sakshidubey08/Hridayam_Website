@@ -69,12 +69,21 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   //   { heading: 'Birthday Celebration' },
   //   { heading: 'Birthday Celebration' },
   //   { heading: 'Birthday Celebration' },
-    
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsToShow = 3; // Number of items to show at once
+
+  const handlePrevClick = () => {
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, menuItems.length - itemsToShow));
+  };
   // ];
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://hridayam.dasoclothings.in/api/getcategoryuser');
+        const response = await fetch('https://api.hirdayam.com/api/getcategoryuser');
         const result = await response.json();
         if (result.status) {
           // Map the API data to the desired format for Swiper
@@ -97,16 +106,35 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const [menuItems, setMenuItems] = useState([]);
   const [subcategories, setSubcategories] = useState({}); // Store subcategories by category ID
   const [dropdownOpen, setDropdownOpen] = useState(null); // Track which dropdown is open
+  // const handleHeadingClick = async (categoryId) => {
+  //   setDropdownOpen(prev => (prev === categoryId ? null : categoryId)); // Toggle dropdown
+  //   if (!subcategories[categoryId]) {
+  //     try {
+  //       const response = await fetch(`https://hridayam.dasoclothings.in/api/getSubCategoryByCategory?category_id=${categoryId}`);
+  //       const result = await response.json();
+  //       if (result.status) {
+  //         setSubcategories(prev => ({
+  //           ...prev,
+  //           [categoryId]: result.data.map(subcategory => subcategory.name), // Store subcategory names
+  //         }));
+  //       } else {
+  //         console.error('Failed to fetch subcategories:', result.message);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching subcategories:', error);
+  //     }
+  //   }
+  // };
   const handleHeadingClick = async (categoryId) => {
     setDropdownOpen(prev => (prev === categoryId ? null : categoryId)); // Toggle dropdown
     if (!subcategories[categoryId]) {
       try {
-        const response = await fetch(`https://hridayam.dasoclothings.in/api/getSubCategoryByCategory?category_id=${categoryId}`);
+        const response = await fetch(`https://api.hirdayam.com/api/getSubCategoryByCategory?category_id=${categoryId}`);
         const result = await response.json();
         if (result.status) {
           setSubcategories(prev => ({
             ...prev,
-            [categoryId]: result.data.map(subcategory => subcategory.name), // Store subcategory names
+            [categoryId]: result.data // Ensure this is an array of subcategory objects
           }));
         } else {
           console.error('Failed to fetch subcategories:', result.message);
@@ -116,9 +144,14 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       }
     }
   };
+  
+  const handleSubcategoryClick = async (subCategoryId) => {
+    navigate(`/sub-category-products/${subCategoryId}`); // Navigate to products page
+  };
+
   const [cards, setCards] = useState([]);
   useEffect(() => {
-    axios.get('http://91.108.104.122/api/getbestsellingproduct')
+    axios.get('https://api.hirdayam.com/api/getbestsellingproduct')
       .then(response => {
         const { data } = response;
         if (data.status) {
@@ -398,7 +431,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const [cards1, setCards1] = useState([]);
 
   useEffect(() => {
-    axios.get('https://hridayam.dasoclothings.in/api/getlatestTrendUser')
+    axios.get('https://api.hirdayam.com/api/getlatestTrendUser')
       .then(response => {
         const { data } = response;
         if (data.status && data.data.products) {
@@ -670,7 +703,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const response = await fetch('https://hridayam.dasoclothings.in/api/BannersforUser', {
+        const response = await fetch('https://api.hirdayam.com/api/BannersforUser', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -820,46 +853,67 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           ))}
         </Swiper>
        */}
-       <Swiper
-      slidesPerView={3}
-      spaceBetween={20}
-      navigation
-      breakpoints={{
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-        1024: {
-          slidesPerView: 4,
-          spaceBetween: 40,
-        },
-      }}
-    >
-      {menuItems.map((item) => (
-  <SwiperSlide key={item.id}>
-    <div className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
-      <div className="menu-heading">
-        {item.heading}
-      </div>
-      {subcategories[item.id] && (
-        <div className="dropdown5">
-          {subcategories[item.id].map((subName, index) => (
-            <div key={index} className="dropdown-item5">
-              {subName}
-            </div>
-          ))}
+    {/* <Swiper
+  slidesPerView={3}
+  spaceBetween={20}
+  breakpoints={{
+    640: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: 40,
+    },
+  }}
+>
+  {menuItems.map((item) => (
+    <SwiperSlide key={item.id}>
+      <div className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
+        <div className="menu-heading">
+          {item.heading}
         </div>
-      )}
+        {subcategories[item.id] && (
+          <div className="dropdown5">
+            {subcategories[item.id].map((subName, index) => (
+              <div key={index} className="dropdown-item5">
+                {subName}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </SwiperSlide>
+  ))}
+</Swiper> */}
+<div className='decoration'>
+      {menuItems.map((item) => (
+        <div key={item.id} className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
+          <div className="menu-heading">
+            {item.heading}
+          </div>
+          {subcategories[item.id] && (
+            <div className="dropdown5">
+              {subcategories[item.id].map((subCategory) => (
+                <div 
+                  key={subCategory._id} 
+                  className="dropdown-item5"
+                  onClick={() => handleSubcategoryClick(subCategory._id)} // Add onClick handler
+                >
+                  {subCategory.name}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
-  </SwiperSlide>
-))}
-
-    </Swiper>
-    
+   
+     
       <div class="menu-item">
         <div class="menu-heading">Acrylic Photoframe</div>
         <div class="submenu">

@@ -102,7 +102,9 @@ function App() {
           <br/>
           <Link to="/wishlist" className="dropdown-item4">My Wishlist</Link>
           <br/>
-          <Link to="/my-orders" className="dropdown-item5">My Orders</Link>
+          <Link to="/my-orders" className="dropdown-item7" >My Orders</Link>
+          <br/>
+          <Link to="/manage-address" className="dropdown-item7" >Manage Address</Link>
         </div>
       )}
     </div>

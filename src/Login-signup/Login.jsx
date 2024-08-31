@@ -19,7 +19,7 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://hridayam.dasoclothings.in/api/login', {
+      const response = await axios.post('https://api.hirdayam.com/api/login', {
         email,
         password,
       }, {
