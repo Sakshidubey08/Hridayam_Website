@@ -6,7 +6,7 @@ import reducer from '../reducer/productReducer';
 
 const AppContext = createContext();
 
-const API = "https://api.hirdayam.com/api/getbestsellingproduct";
+const API = "https://api.hirdayam.com/api/getlatestTrendUser";
 
 const initialState = {
   isLoading: false,

@@ -59,6 +59,9 @@ import TextEditer from './TextEditer';
 import Catalogproduct from "./Catalog/Products"
 import SubCategory from './SubCategory'
 import ManageAddress from './Login-signup/ManageAddress';
+import LatestTrendProduct from './LatestTrendProduct';
+import PrebookProduct from './PrebookProduct';
+
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -108,6 +111,8 @@ const App = () => {
                     <Route path="editprofile" element={<EditProfile />} />
                     <Route path="catalog" element={<Catalog/>} />
                     <Route path="all-products" element={<AllProducts />} />
+                    <Route path="/card3/:id" element={<LatestTrendProduct />} />
+
                     <Route path="/card/:id" element={<Cardpage1 />} />
                     {/* <Route path="/product/:id" element={<ProductDetail />} /> */}
                     <Route path="/products" element={<Products />} />
@@ -132,6 +137,7 @@ const App = () => {
                     <Route path="/customize8" element={<Customize8 />} />
                     <Route path="/thank-you" element={<Thankyou />} />
                     <Route path="/manage-address" element={<ManageAddress />} />
+                    <Route path="/card2/:id" element={<PrebookProduct />} />
 
                     {/* <Route path="/sub-category-products" element={<SubCategory />} /> */}
                     <Route path="/sub-category-products/:subCategoryId" element={<SubCategory />} />

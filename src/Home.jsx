@@ -474,40 +474,39 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     { id: 7, imageUrl: 'https://i.pinimg.com/564x/49/e1/44/49e1441c079a80a664f48f839aeebed1.jpg', price: '&#8377;200', description: "Skybags" },
     { id: 8, imageUrl: 'https://i.pinimg.com/564x/0d/78/a4/0d78a455237e6894ea6081881a3039ca.jpg', price: '&#8377;1,400', description: "Decor Fountain" },
   ]);
-  // const [cards3, setCards3] = useState([]);
-  // useEffect(() => {
-  //   axios.get('http://91.108.104.122/api/getPreBook')
-  //     .then(response => {
-  //       const { data } = response;
-  //       if (data.status) {
-  //         const formattedCards = data.data.map(product => ({
-  //           id: product._id,
-  //           imageUrl: product.image,
-  //           price: `&#8377;${parseFloat(product.price).toFixed(2)}`,
-  //           description: product.product_details,
-  //           height: '150px',
-  //           position: 0,
-  //         }));
-  //         setCards3(formattedCards);
-  //       } else {
-  //         // Handle error or empty state
-  //         console.error('No data found');
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching data:', error);
-  //     });
-  // }, []);
-  const [cards3, setCards3] = useState([
-    { id: 1, imageUrl: image24, price: '&#8377;1,200', height: '200px', description: "Double Canopy Umbrella" },
-    { id: 2, imageUrl: image25, price: '&#8377;4,200', description: "Water Bottle" },
-    { id: 3, imageUrl: image26, price: '&#8377;800', description: "Fogg Deodorant Men" },
-    { id: 4, imageUrl: image27, price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
-    { id: 5, imageUrl: image28, price: '&#8377;80', description: "Men White Shoes" },
-    { id: 6, imageUrl: image29, price: '&#8377;1,500', description: "Brass Diya" },
-    { id: 7, imageUrl: image30, price: '&#8377;200', height: '110px', description: "Skybags", position: 50 },
-    { id: 8, imageUrl: image31, price: '&#8377;1,400', height: '150px', description: "Decor Fountain", position: 28 },
-  ]);
+  const [cards3, setCards3] = useState([]);
+  useEffect(() => {
+    axios.get('https://api.hirdayam.com/api/getPreBook')
+      .then(response => {
+        const { data } = response;
+        if (data.status) {
+          const formattedCards = data.data.map(product => ({
+            id: product._id,
+            imageUrl: product.image,
+            price: `&#8377;${parseFloat(product.price).toFixed(2)}`,
+            description: product.name,
+            position: 0,
+          }));
+          setCards3(formattedCards);
+        } else {
+          // Handle error or empty state
+          console.error('No data found');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+  // const [cards3, setCards3] = useState([
+  //   { id: 1, imageUrl: image24, price: '&#8377;1,200', height: '200px', description: "Double Canopy Umbrella" },
+  //   { id: 2, imageUrl: image25, price: '&#8377;4,200', description: "Water Bottle" },
+  //   { id: 3, imageUrl: image26, price: '&#8377;800', description: "Fogg Deodorant Men" },
+  //   { id: 4, imageUrl: image27, price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
+  //   { id: 5, imageUrl: image28, price: '&#8377;80', description: "Men White Shoes" },
+  //   { id: 6, imageUrl: image29, price: '&#8377;1,500', description: "Brass Diya" },
+  //   { id: 7, imageUrl: image30, price: '&#8377;200', height: '110px', description: "Skybags", position: 50 },
+  //   { id: 8, imageUrl: image31, price: '&#8377;1,400', height: '150px', description: "Decor Fountain", position: 28 },
+  // ]);
 
 
   const [selectedColor1, setSelectedColor1] = useState('black');
@@ -1259,7 +1258,14 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             <div key={card.id} className="card-wrapper">
               <div className="card1-product rounded-md">
                 <div className="card-header w-36 h-56 md:h-72   md:w-full">
+                <Link
+            key={card.id}
+            to={`/card1/${card.id}`}
+            className="card-link"
+            onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
+          >
                   <img src={card.imageUrl} alt="product"  className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick4(card.id)}/>
+                  </Link>
                   <button
                     className="favorite-btn m-4 md:m-0"
                     onClick={(e) => handleFavoriteButtonClick1(card.id, e ,card.description)}
@@ -1351,10 +1357,10 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
 
         <div className="card-container">
-          {/*{cards3.map(card => (
+          {cards3.map(card => (
             <Link
               key={card.id}
-              to={`/card/${card.id}`}
+              to={`/card2/${card.id}`}
               className="card-link"
               onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
             >
@@ -1394,8 +1400,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 </div>
               </div>
             </Link>
-          ))} */}
-          {cards3.map(card => (
+          ))}
+          {/* {cards3.map(card => (
             <div key={card.id} className="card-wrapper">
               <div className="card1-product rounded-md">
                 <div className="card-header w-36 h-56 md:h-72   md:w-full">
@@ -1423,7 +1429,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
 
         {showLoadMore3 && (

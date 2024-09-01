@@ -149,7 +149,7 @@ export const WishlistProvider = ({ children }) => {
   const fetchWishlistItems = async () => {
     const token = fetchTokenFromLS();
     try {
-      const response = await axios.get('https://hridayam.dasoclothings.in/api/mywishlist', {
+      const response = await axios.get('https://api.hirdayam.com/api/mywishlist', {
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -172,7 +172,7 @@ export const WishlistProvider = ({ children }) => {
       action: 'add'
     };
     try {
-      const response = await axios.post('https://hridayam.dasoclothings.in/api/manageWishlist', productToAdd, {
+      const response = await axios.post('https://api.hirdayam.com/api/manageWishlist', productToAdd, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -195,7 +195,7 @@ export const WishlistProvider = ({ children }) => {
       action: 'remove'
     };
     try {
-      const response = await axios.post('https://hridayam.dasoclothings.in/api/manageWishlist', productToRemove, {
+      const response = await axios.post('https://api.hirdayam.com/api/manageWishlist', productToRemove, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

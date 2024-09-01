@@ -263,7 +263,7 @@ export const CartProvider = ({ children }) => {
 
   
   
-    axios.post('https://hridayam.dasoclothings.in/api/addtocart', formData,{
+    axios.post('https://api.hirdayam.com/api/addtocart', formData,{
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
@@ -305,7 +305,7 @@ export const CartProvider = ({ children }) => {
   
 
   const removeFromCart = (cartId) => {
-    axios.delete('https://hridayam.dasoclothings.in/api/deleteCart', {
+    axios.delete('https://api.hirdayam.com/api/deleteCart', {
       headers: {
         Authorization: `Bearer ${fetchTokenFromLS()}`,
         'Content-Type': 'application/json',
@@ -366,7 +366,7 @@ export const CartProvider = ({ children }) => {
   
     console.log('Sending request with payload:', productToUpdate);
   
-    axios.put('https://hridayam.dasoclothings.in/api/editCart', productToUpdate, {
+    axios.put('https://api.hirdayam.com/api/editCart', productToUpdate, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',

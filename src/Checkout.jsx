@@ -89,9 +89,9 @@ const CheckoutPage = () => {
             </thead>
             <tbody>
               {cartItems.map(item => (
-                <tr key={item.id}>
-                  <td>{item.name}</td>
-                  <td>&#8377;{item.price}</td>
+                <tr key={item.product._id}>
+                  <td>{item.product.name}</td>
+                  <td>&#8377;{item.product.price}</td>
                 </tr>
               ))}
               <tr>
