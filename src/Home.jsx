@@ -19,7 +19,7 @@ import image16 from './images/image 15 1.png'
 import image17 from './images/image 124.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-
+import Slider2 from "react-slick";
 import image18 from './images/image19.png'
 import image19 from './images/image20.png'
 import image20 from './images/image21.png'
@@ -79,6 +79,41 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
   const handleNextClick = () => {
     setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, menuItems.length - itemsToShow));
+  };
+
+  var settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
   // ];
   useEffect(() => {
@@ -900,15 +935,21 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     </SwiperSlide>
   ))}
 </Swiper> */}
-<div className='decoration'>
+
+
+
+<div className='decoration '>
+    
       {menuItems.map((item) => (
         <div key={item.id} className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
+        
           <div className="menu-heading">
             {item.heading}
           </div>
+        
           {subcategories[item.id] && (
-            <div className="dropdown5">
-              {subcategories[item.id].map((subCategory) => (
+            <div className="dropdown5 ">
+              {subcategories[item.id].map((subCategory) =>(
                 <div 
                   key={subCategory._id} 
                   className="dropdown-item5"
@@ -1085,6 +1126,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       </div>
     </div >
       <div className=' md:hidden'>
+      
       <Catalog/>
      </div>
       <div style={{backgroundImage:``}} className='swiper-background  bg-left-top bg-no-repeat    relative  md:top-5'>
@@ -1262,7 +1304,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                   <img src={card.imageUrl} alt="product"  className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick4(card.id)}/>
                   <button
                     className="favorite-btn m-4 md:m-0"
-                    onClick={(e) => handleFavoriteButtonClick1(card.id, e ,card.description)}
+                    onClick={(e) => handleFavoriteButtonClick(card.id)}
                     style={{
                       cursor: 'pointer',
                       border: 'none',
@@ -1272,8 +1314,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                     }}
                   >
                     <i
-                      className={`fa-heart ${favoriteCards1[card.id] ? 'fas' : 'far'}`}
-                      style={{ color: favoriteCards1[card.id] ? 'red' : '#23387A', fontSize: '24px' }}
+                      className={`fa-heart ${wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'fas' : 'far'}`}
+                      style={{ color: wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'red' : '#23387A', fontSize: '24px' }}
                     ></i>
                   </button>
                 </div>
