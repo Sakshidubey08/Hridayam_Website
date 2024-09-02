@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import '../Home.css';
 import Header from '../Header';
 import '../Signup.css';
 import { useAuth } from '../store/auth';
 import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../CartContext';
 
 const EditProfile = () => {
+  const {userprofiledata,setuserprofiledata}=useContext(CartContext)
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -39,7 +41,8 @@ const EditProfile = () => {
         console.log('Full response data:', response);
         console.log('User profile data:', response.data);
 
-        
+        // setuserprofiledata(response.data)
+        // console.log(userprofiledata+"in edit page")
         const { name, email, phone, _id } = response.data.data;
 
         if (!_id) {

@@ -183,9 +183,12 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  
+  const [couponDiscount,setcouponDiscount]=useState(0);
   const { storeTokenInLS } = useAuth();
+  const [userprofiledata,setuserprofiledata]=useState([]);
 
+
+  
   // Function to fetch token from localStorage
   const fetchTokenFromLS = () => {
     return localStorage.getItem('token');
@@ -193,6 +196,8 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     console.log('Cart items:', cartItems);
     fetchCartItems()
+    fetchUserProfile();
+
   }, []);
   
   // Fetch cart items on component mount
@@ -389,21 +394,98 @@ export const CartProvider = ({ children }) => {
       console.error('Error editing cart:', error.response ? error.response.data : error.message);
     });
   };
+
+
+
+    
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+          throw new Error('No token found in localStorage.');
+        }
+
+        const response = await axios.get('https://api.hirdayam.com/api/getUserprofile', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+        });
+
+        console.log('Full response data:', response);
+        console.log('User profile data:', response.data);
+
+        setuserprofiledata(response.data)
+        // console.log(userprofiledata+"in edit page")
+        const { name, email, phone, _id } = response.data.data;
+
+        if (!_id) {
+          throw new Error('User ID (_id) is missing in the response data.');
+        }
+
+        
+        // localStorage.setItem('user_id', _id);
+
+        // setName(name);
+        // setEmail(email);
+        // setPhone(phone);
+
+        // console.log('Stored user_id:', localStorage.getItem('user_id'));
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+        // setError('Failed to fetch user profile. Please check your credentials.');
+      }
+    };
+
   
+
   
+  const applycoupon =(code,orderTotal)=>{
+    const token = fetchTokenFromLS();
+    const coupondata = {
+     code:code,
+    orderTotal:orderTotal
+    };
+
+    axios.post('https://api.hirdayam.com/api/ApplyCoupon', coupondata, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(response => {
+      setcouponDiscount(response.data.data.discount);
+      console.log('Response from API:', response.data);
+    
+     
+    })
+    .catch(error => {
+       alert(error.response.data.message)
+      console.error('applyed coupon cart:', error.response ? error.response.data : error.message);
+    });
+  }
   
   
   const calculateSubtotal = () => {
     return cartItems.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
   };
 
+
+ const calculateTotal = () => {
+        const subtotal = calculateSubtotal();
+        
+        const total = subtotal - couponDiscount;
+        return total //> 0 ? total : 0;  // Ensure total is not negative
+    };
+
   // Calculate total (can be extended if needed)
-  const calculateTotal = () => {
-    return calculateSubtotal();
-  };
+  // const calculateTotal = () => {
+  //   return calculateSubtotal();
+  // };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>
+    <CartContext.Provider value={{applycoupon, cartItems, userprofiledata,setuserprofiledata, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>
       {children}
     </CartContext.Provider>
   );
