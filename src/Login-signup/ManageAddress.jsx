@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import axios from 'axios';
 import '../Signup.css'
 import Header from '../Header';
@@ -16,6 +16,27 @@ const ManageAddress = () => {
     const [success, setSuccess] = useState('');
     const [error, setError] = useState('');
 
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                // Successfully obtained position
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude);
+              },
+              (err) => {
+                // Handle error
+                setError(err.message);
+              }
+            );
+          } else {
+            // Browser does not support geolocation
+            // setError('Geolocation is not supported by this browser.');
+          }
+    
+    }, [])
+    
+    
     const handleAddressSubmit = async (event) => {
         event.preventDefault();
         try {
