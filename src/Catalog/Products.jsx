@@ -22,14 +22,14 @@
 //     line4: "Easy 14 days returns and exchanges."
 //   });
 //   const [showLoadMore, setShowLoadMore] = useState(true);
-  
+
 //   useEffect(() => {
 //     // Fetch product details from API
 //     const fetchProductData = async () => {
 //       try {
 //         const response = await fetch('https://hridayam.dasoclothings.in/api/ProductbycatalogId?catelog_id=66c42a734fd09c17109d482b');
 //         const result = await response.json();
-        
+
 //         if (result.status) {
 //           const fetchedProduct = result.data[0]; // Assuming you want the first product
 //           setProduct(fetchedProduct);
@@ -225,7 +225,7 @@
 // export default Product1;
 import React, { useState, useEffect, useContext } from 'react';
 import { CartContext } from '../CartContext';
-import { useNavigate, useParams ,useLocation} from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -233,9 +233,9 @@ import '../Products/Product1.css';
 import '../Home.css';
 
 const Product1 = () => {
-    
-    const{id} =useParams();
-    const location=useLocation();
+
+    const { id } = useParams();
+    const location = useLocation();
     console.log(id)
     const { addToCart } = useContext(CartContext);
     const navigate = useNavigate();
@@ -246,8 +246,8 @@ const Product1 = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [uploadMessage, setUploadMessage] = useState('');
     const [pincode, setPincode] = useState('');
-   
-    const [file ,setfile] =useState(null);
+
+    const [file, setfile] = useState(null);
     const [isPincodeChecked, setIsPincodeChecked] = useState(false);
     const [deliveryText, setDeliveryText] = useState({
         line1: "Please enter PIN code to check delivery time.",
@@ -256,39 +256,39 @@ const Product1 = () => {
         line4: "Easy 14 days returns and exchanges."
     });
     const [checkButtonText, setCheckButtonText] = useState('Check');
-    
+
     const queryParams = new URLSearchParams(location.search);
     let product_id = "";
 
-   const newproduc=()=>{
-    for(let i=1;i<=id.length;i++){
-        if(id[i]=='='){
-            i=i+1;
-             for(let j=i;j<id.length;j++){
-               product_id+=id[j]
-             }
-             
+    const newproduc = () => {
+        for (let i = 1; i <= id.length; i++) {
+            if (id[i] == '=') {
+                i = i + 1;
+                for (let j = i; j < id.length; j++) {
+                    product_id += id[j]
+                }
+
+            }
         }
     }
-   }
- 
-   
-console.log("render")
+
+
+    console.log("render")
     useEffect(() => {
-       
-    
-       
+
+
+
         const fetchProducts = async () => {
             try {
-                const response = await fetch(`https://hridayam.dasoclothings.in/api/ProductbycatalogId?catelog_id=${id}`);
+                const response = await fetch(`https://api.hirdayam.com/api/ProductbycatalogId?catelog_id=${id}`);
                 const result = await response.json();
                 if (result.status) {
                     newproduc()
-                    console.log(product_id+"new id")
+                    console.log(product_id + "new id")
                     setProducts(result.data);
-                    console.log(products[1]+"dsf")
+                    console.log(products[1] + "dsf")
                     const product = result.data.find(prod => prod._id === product_id);
-                    console.log(product +"productefj i")
+                    console.log(product + "productefj i")
                     // Optionally set the first product as the selected product
                     setSelectedProduct(product);
                     // Set the main image as the selected image initially
@@ -307,7 +307,7 @@ console.log("render")
     };
     const handleImageChange = (event) => {
         const file = event.target.files[0];
-        
+
         if (file) {
             // Simulate uploading the file
             setTimeout(() => {
@@ -351,18 +351,18 @@ console.log("render")
     };
 
     const handleAddToCart = () => {
-        console.log(selectedProduct.variations[0]+"new variation")
+        console.log(selectedProduct.variations[0] + "new variation")
         if (selectedProduct) {
             const productToAdd = {
                 id: selectedProduct._id,
                 name: selectedProduct.name,
                 price: parseFloat(selectedProduct.price),
-                image:  file,
-                color:selectedProduct.colors[0],
-                variation:selectedProduct.variations[0]
-                
+                image: file,
+                color: selectedProduct.colors[0],
+                variation: selectedProduct.variations[0]
+
             };
-          
+
             addToCart(productToAdd, quantity);
             navigate('/cart');
         }
@@ -379,40 +379,31 @@ console.log("render")
             <div className="product-detail1 mt-1">
                 <div className="content">
                     <div className="image-gallery">
-                        {/* {selectedProduct?.images?.map((img, index) => (
-                            <img
-                                key={index}
-                                src={img}
-                                alt="Thumbnail"
-                                className="thumbnail"
-                                onClick={() => handleImageClick(img)}
-                            />
-                        ))} */}
                         <div className="thumbnail-list">
-                                {/* Display the main image at the top */}
-                                {selectedProduct && (
-                                    <img
-                                        src={selectedProduct.image}
-                                        alt={selectedProduct.name}
-                                        onClick={() => handleImageClick(selectedProduct.image)}
-                                        className="thumbnail"
-                                    />
-                                )}
-                               
-                                {selectedProduct?.images.map((image, index) => (
-                                    <img
-                                        key={index}
-                                        src={image}
-                                        alt={`Thumbnail ${index + 1}`}
-                                        onClick={() => handleImageClick(image)}
-                                        className="thumbnail"
-                                    />
-                                ))}
-                            </div>
+
+                            {selectedProduct && (
+                                <img
+                                    src={selectedProduct.image}
+                                    alt={selectedProduct.name}
+                                    onClick={() => handleImageClick(selectedProduct.image)}
+                                    className="thumbnail"
+                                />
+                            )}
+
+                            {selectedProduct?.images.map((image, index) => (
+                                <img
+                                    key={index}
+                                    src={image}
+                                    alt={`Thumbnail ${index + 1}`}
+                                    onClick={() => handleImageClick(image)}
+                                    className="thumbnail"
+                                />
+                            ))}
+                        </div>
                     </div>
                     <div className="image-placeholder1">
                         {selectedImage && (
-                            <img src={selectedImage} alt="Selected"/>
+                            <img src={selectedImage} alt="Selected" />
                         )}
                     </div>
                     <div className="scrollable-content4">
@@ -425,9 +416,9 @@ console.log("render")
                                 <div className="quantity">{quantity}</div>
                                 <button onClick={handleIncrement} className="quantity-btn">+</button>
                             </div>
-                            <br/>
-                      
-                            <div className={`${selectedProduct?.product_type=="personalize"?"block":"hidden"}`}>
+                            <br />
+
+                            <div className={`${selectedProduct?.product_type == "personalize" ? "block" : "hidden"}`}>
                                 <button
                                     onClick={handleButtonClick}
                                     style={{
@@ -439,8 +430,8 @@ console.log("render")
                                         cursor: 'pointer',
                                         border: '1px solid #ccc',
                                         background: '#23387A',
-                                        color:'white',
-                                        fontFamily:'Poppins'
+                                        color: 'white',
+                                        fontFamily: 'Poppins'
                                     }}
                                 >
                                     {selectedImage2 ? (
@@ -472,7 +463,7 @@ console.log("render")
                             <div className="buttons">
                                 <button className="wishlist-btn">
                                     <span>Wishlist</span>
-                                    <FaHeart className="icon"/>
+                                    <FaHeart className="icon" />
                                 </button>
                                 <button className="cart-btn" onClick={handleAddToCart}>
                                     <span>Add to Cart</span>
@@ -490,7 +481,7 @@ console.log("render")
                                 <button onClick={handlePincodeCheck} className="check-btn">
                                     {checkButtonText}
                                 </button>
-                            </div>  
+                            </div>
                             <p className="delivery-info">
                                 <span className="delivery-line1">{deliveryText.line1}</span>
                                 <br />

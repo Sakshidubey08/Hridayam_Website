@@ -281,7 +281,7 @@ const handleFavoriteButtonClick = async (id, e) => {
                       src={products.image}
                       alt="product"
                       style={{ height: products.height }}
-                      className="card-image1 w-23  object-contain m-0 p-0"
+                      className="card-image1"
                       onClick={() => handleProductClick(products._id)}
                     />
                     <button

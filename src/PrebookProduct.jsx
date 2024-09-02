@@ -160,7 +160,7 @@ const Cardpage1 = () => {
   }
   
 
-  const { name, price, default_color_image, images } = filteredCard;
+  const { name, price, default_color_image, images,image } = filteredCard;
   const mainImage = selectedImage || default_color_image;
 
   const handleAddToCart = () => {
@@ -188,7 +188,7 @@ const Cardpage1 = () => {
         <div className="content">
 
           {/* Image Section */}
-          <div className="image-section">
+          {/* <div className="image-section">
             <div className="thumbnails">
               {images && images.map((img, index) => (
                 <img
@@ -201,8 +201,26 @@ const Cardpage1 = () => {
               ))}
             </div>
             <div className="main-image">
-              <img src={mainImage} alt={name}/>
+              <img src={image} alt={name}/>
             </div>
+          </div> */}
+          <div className="image-gallery">
+            <div className="thumbnails">
+              {images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Thumbnail ${index + 1}`}
+                  onClick={() => handleImageClick(images)}
+                  className="thumbnail"
+                />
+              ))}
+            </div>
+          </div>
+          <div className="main-image">
+            {image && (
+              <img src={image} alt="Selected" />
+            )}
           </div>
 
           {/* Scrollable Content Section */}

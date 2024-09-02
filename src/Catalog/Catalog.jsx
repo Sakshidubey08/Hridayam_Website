@@ -87,7 +87,7 @@ const Catalog = () => {
     // Fetch catalog data from the API
     const fetchCatalogs = async () => {
       try {
-        const response = await fetch('https://hridayam.dasoclothings.in/api/getCatelogsforuser');
+        const response = await fetch('https://api.hirdayam.com/api/getCatelogsforuser');
         const result = await response.json();
 
         if (result.status) {

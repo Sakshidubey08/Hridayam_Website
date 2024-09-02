@@ -259,7 +259,7 @@ const CatalogProducts = () => {
     const fetchCatalog = async () => {
       try {
         // Fetch catalog data
-        const response = await fetch(`https://hridayam.dasoclothings.in/api/getCatelogsforuser?catalog_id=${catalog_id}`, {
+        const response = await fetch(`https://api.hirdayam.com/api/getCatelogsforuser?catalog_id=${catalog_id}`, {
           method: 'GET',
         });
 
@@ -275,7 +275,7 @@ const CatalogProducts = () => {
           if (catalog.product_ids && catalog.product_ids.length > 0) {
             const productIds = catalog.product_ids;
 
-            const productsResponse = await fetch('https://hridayam.dasoclothings.in/api/ProductbycatalogId?catelog_id=' + catalog_id, {
+            const productsResponse = await fetch('https://api.hirdayam.com/api/ProductbycatalogId?catelog_id=' + catalog_id, {
               method: 'GET',
             });
 
@@ -499,8 +499,8 @@ const CatalogProducts = () => {
                                           
                                             src={product.image}
                                             alt="product"
-                                            style={{ height: product.height}}
-                                            className="card-image1 w-23  object-contain m-0 p-0"
+                                            
+                                            className="card-image1"
                                             // onClick={() => handleProductClick(product._id)}
                                         />
                                         </Link>

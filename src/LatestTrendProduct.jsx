@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProductContext } from './context/Bestproduct';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
@@ -7,12 +7,12 @@ import './Products/Product1.css';
 import './Home.css';
 import { CartContext } from './CartContext';
 
-const API = "https://api.hirdayam.com/api/getbestsellingproduct";
+const API = "https://api.hirdayam.com/api/getlatestTrendUser";
 
 const Cardpage1 = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
-  const { getSingleProduct, isSingleLoading, filteredCard } = useProductContext();
+  const { getSingleProduct1, isSingleLoading, filteredCard } = useProductContext();
   const { id } = useParams();
   const [selectedImage2, setSelectedImage2] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -20,7 +20,7 @@ const Cardpage1 = () => {
   const [uploadMessage, setUploadMessage] = useState('');
   const [pincode, setPincode] = useState('');
   const [isPincodeChecked, setIsPincodeChecked] = useState(false);
-  const [file ,setfile] =useState(null);
+  const [file, setfile] = useState(null);
   const [deliveryText, setDeliveryText] = useState({
     line1: "Please enter PIN code to check delivery time.",
     line2: "100% Original Products.",
@@ -31,19 +31,19 @@ const Cardpage1 = () => {
 
   const handleIncrement = () => setQuantity(prevQuantity => prevQuantity + 1);
   const handleDecrement = () => setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
-  
-  const handleImageChange = (event) =>{
+
+  const handleImageChange = (event) => {
     const file = event.target.files[0];
     setfile(file);
     if (file) {
-      setTimeout(() =>{
+      setTimeout(() => {
         setSelectedImage2(URL.createObjectURL(file));
         setUploadMessage('File uploaded successfully!');
       }, 1000);
     }
   };
 
-  const handlePincodeChange = (e) =>{
+  const handlePincodeChange = (e) => {
     const value = e.target.value;
     if (!isNaN(value)) {
       setPincode(value);
@@ -74,64 +74,65 @@ const Cardpage1 = () => {
     setSelectedImage(image);
   };
 
-  useEffect(() =>{
-    if (id){
-      getSingleProduct(API, id);
+  useEffect(() => {
+    if (id) {
+      getSingleProduct1(API, id);
     }
-  }, [id, getSingleProduct]);
+  }, [id, getSingleProduct1]);
 
-  if (isSingleLoading){
+  if (isSingleLoading) {
     return <div>Loading...</div>;
   }
 
-  if (!filteredCard || Object.keys(filteredCard).length === 0){
+  if (!filteredCard || Object.keys(filteredCard).length === 0) {
     return <div>No data available for the selected ID.</div>;
   }
 
-  const { name, price, default_color_image, images } = filteredCard;
+  const { name, price, default_color_image, images, image } = filteredCard;
   const mainImage = selectedImage || default_color_image;
 
   const handleAddToCart = () => {
     // console.log(getSingleProduct.variations[0]+"new variation")
     if (true) {
-        const productToAdd = {
-            id: id,
-            name: name,
-            price: price,
-            image:  file,
-            color:filteredCard.colors[0],
-            variation:filteredCard.variations[0]
-            
-        };
-      
-        addToCart(productToAdd, quantity);
-        navigate('/cart');
+      const productToAdd = {
+        id: id,
+        name: name,
+        price: price,
+        image: file,
+        color: filteredCard.colors[0],
+        variation: filteredCard.variations[0]
+
+      };
+
+      addToCart(productToAdd, quantity);
+      navigate('/cart');
     }
-};
+  };
   return (
     <>
       <Header />
       <div className="breadcrumb1">Home / {name || 'Product'}</div>
       <div className="product-detail1 mt-1">
         <div className="content">
-
-          {/* Image Section */}
-          <div className="image-section">
+          <div className="image-gallery">
             <div className="thumbnails">
-              {images && images.map((img, index) => (
+              {images.map((image, index) => (
                 <img
                   key={index}
-                  src={img}
+                  src={image}
                   alt={`Thumbnail ${index + 1}`}
+                  onClick={() => handleImageClick(images)}
                   className="thumbnail"
-                  onClick={() => handleImageClick(img)}
                 />
               ))}
             </div>
-            <div className="main-image">
-              <img src={mainImage} alt={name}/>
-            </div>
           </div>
+          <div className="main-image">
+            {image && (
+              <img src={image} alt="Selected" />
+            )}
+          </div>
+
 
           {/* Scrollable Content Section */}
           <div className="scrollable-content4">
@@ -145,7 +146,7 @@ const Cardpage1 = () => {
                 <button onClick={handleIncrement} className="quantity-btn">+</button>
               </div>
               <br />
-              <div className={`${filteredCard?.product_type=="personalize"?"block":"hidden"}`}>
+              <div className={`${filteredCard?.product_type == "personalize" ? "block" : "hidden"}`}>
                 <button
                   onClick={() => document.getElementById('fileInput').click()}
                   style={{
@@ -179,7 +180,7 @@ const Cardpage1 = () => {
                   type="file"
                   accept="image/*"
                   id="fileInput"
-                  style={{ display: 'none'}}
+                  style={{ display: 'none' }}
                   onChange={handleImageChange}
                 />
                 {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
@@ -193,7 +194,7 @@ const Cardpage1 = () => {
                 </button>
                 <button onClick={handleAddToCart} className="cart-btn">
                   <span>Add to Cart</span>
-                  <FaShoppingCart className="icon"/>
+                  <FaShoppingCart className="icon" />
                 </button>
               </div>
               <div className="pincode-checker">
