@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const Base_url =  'https://hridayam.dasoclothings.in/api'; // 'http://91.108.104.122/api';
+const Base_url =  'https://api.hirdayam.com/api'; // 'http://91.108.104.122/api';
    console.log(sessionStorage.getItem('authtoken'))
 const Api = axios.create({
     baseURL: Base_url,

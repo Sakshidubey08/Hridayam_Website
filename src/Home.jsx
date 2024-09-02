@@ -775,7 +775,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     };
 
     fetchSlides();
-  });
+  },[]);
   const handleSlideClick = (index) => {
 
     const pageRoutes = ['', '/product3', '/catalog1']; // Add more routes as needed
@@ -1302,7 +1302,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 <div className="card-header w-36 h-56 md:h-72   md:w-full">
                 <Link
             key={card.id}
-            to={`/card1/${card.id}`}
+            to={`/card6/${card.id}`}
             className="card-link"
             onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
           >
@@ -1420,7 +1420,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                       onClick={(e) => {
                         e.preventDefault(); // Prevent the default button behavior
                         e.stopPropagation(); // Stop the event from propagating to the Link
-                        handleFavoriteButtonClick2(card.id, e);
+                        handleFavoriteButtonClick(card.id)
+                        // handleFavoriteButtonClick2(card.id, e);
                       }}
                       style={{
                         cursor: 'pointer',
@@ -1430,8 +1431,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                       }}
                     >
                       <i
-                        className={`fa-heart ${favoriteCards2[card.id] ? 'fas' : 'far'}`}
-                        style={{ color: favoriteCards2[card.id] ? 'red' : '#23387A', fontSize: '24px' }}
+                        className={`fa-heart ${wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'fas' : 'far'}`}
+                        style={{ color: wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'red' : '#23387A', fontSize: '24px' }}
                       ></i>
                     </button>
                   </div>

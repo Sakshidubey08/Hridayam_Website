@@ -280,7 +280,7 @@ console.log("render")
        
         const fetchProducts = async () => {
             try {
-                const response = await fetch(`https://hridayam.dasoclothings.in/api/ProductbycatalogId?catelog_id=${id}`);
+                const response = await fetch(`https://api.hirdayam.com/api/ProductbycatalogId?catelog_id=${id}`);
                 const result = await response.json();
                 if (result.status) {
                     newproduc()

@@ -178,7 +178,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from './store/auth'; // Adjust the import based on your file structure
-
+import { useNavigate } from 'react-router-dom';
+import PlaceOrder2 from './PlaceOrder';
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -186,10 +187,11 @@ export const CartProvider = ({ children }) => {
   const [couponDiscount,setcouponDiscount]=useState(0);
   const { storeTokenInLS } = useAuth();
   const [userprofiledata,setuserprofiledata]=useState([]);
-
-
+  
+  const [address , setaddress]=useState([]);
   
   // Function to fetch token from localStorage
+  
   const fetchTokenFromLS = () => {
     return localStorage.getItem('token');
   };
@@ -197,6 +199,7 @@ export const CartProvider = ({ children }) => {
     console.log('Cart items:', cartItems);
     fetchCartItems()
     fetchUserProfile();
+    fetchAddress();
 
   }, []);
   
@@ -307,7 +310,34 @@ export const CartProvider = ({ children }) => {
     });
   };
   
-  
+  const fetchAddress = async () => {
+    const token = fetchTokenFromLS();
+    try {
+        const response = await axios.get('https://api.hirdayam.com/api/getAddresses', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        console.log('Addres get success:', response.data +"address form cartcontext");
+        // localStorage.setItem('address', JSON.stringify(response.data));
+        // setSuccess('Address managed successfully.');
+        // console.log(userprofiledata.data.name+"profile new")
+        setaddress(response.data.data[0]);
+       
+       
+    } catch (error) {
+        console.error('Error during address submission:', error);
+
+        if (error.response) {
+            console.error('Server responded with:', error.response.data);
+            // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
+        } else {
+            // setError('Address submission failed. Please try again.');
+        }
+    }
+};
 
   const removeFromCart = (cartId) => {
     axios.delete('https://api.hirdayam.com/api/deleteCart', {
@@ -396,47 +426,102 @@ export const CartProvider = ({ children }) => {
   };
 
 
+  const PlaceOrder = () => {
+    const token = fetchTokenFromLS();
+
+    if (!token) {
+        console.error('No token found in localStorage.');
+        return;
+    }
+
+    // if (newQuantity <= 0) {
+    //     console.error('Invalid quantity:', newQuantity);
+    //     return;
+    // }
+
+    // if (!product) {
+    //     console.error('Product not provided. Product:', product);
+    //     return;
+    // }
+
+    // const cartItem = cartItems.find(item => item._id === product._id);
+
+    // if (!cartItem) {
+    //     console.error('Cart item not found for product_id:', product._id);
+    //     return;
+    // }
+
+    // Create the cart details array with updated quantity
+    const cartDetails = cartItems.map(item => {
+        return {
+            _id: item._id,
+            product_id: item.product_id,
+            quantity:item.quantity, // item._id === product._id ? newQuantity : item.quantity, // Update quantity if it's the current product
+            user_id: item.user_id,
+            product_color_image_id: item.product_color_image_id,
+            product_variation_id: item.product_variation_id,
+            personalize_image: item.personalize_image,
+            createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
+            __v: item.__v
+        };
+    });
+
+    const payload = {
+        order_amount: calculateTotal(),
+        coupon_discount: "10.00",
+        order_type: "personalize",
+        cart_details: cartDetails,
+        delivery_address: {
+            _id: address._id,
+            address_type: address.address_type,
+            house_name: address.house_name,
+            floor_number: address.floor_number,
+            landmark: address.landmark,
+            area_name: address.area_name,
+            zip_code: address.zip_code,
+            user_id: address.user_id,
+            createdAt: address.createdAt,
+            updatedAt: address.updatedAt,
+            __v: address.__v
+        },
+        delivery_address_id: "669b9d0ea159078371605d9c",
+        transaction_id: "wkeufgiuei"
+    };
+
+    console.log('Sending request with payload:', payload);
+
+    axios.post('https://api.hirdayam.com/api/placeOrder', payload, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => {
+        console.log('order Response from API :', response.data);
+        fetchCartItems()
+        
+        //  navigate("./placeorder")
+        // if (response.data && response.data.status === true) {
+        //     setCartItems(prevItems =>
+        //         prevItems.map(item =>
+        //             item._id === product._id ? { ...item, quantity: newQuantity } : item
+        //         )
+        //     );
+        //     fetchCartItems();
+        // } 
+        // else {
+        //     console.error('Unexpected response format:', response.data);
+        // }
+    })
+    .catch(error => {
+        console.error('Error editing cart:', error.response ? error.response.data : error.message);
+    });
+};
+
 
     
-    const fetchUserProfile = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        
-        if (!token) {
-          throw new Error('No token found in localStorage.');
-        }
-
-        const response = await axios.get('https://api.hirdayam.com/api/getUserprofile', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-        });
-
-        console.log('Full response data:', response);
-        console.log('User profile data:', response.data);
-
-        setuserprofiledata(response.data)
-        // console.log(userprofiledata+"in edit page")
-        const { name, email, phone, _id } = response.data.data;
-
-        if (!_id) {
-          throw new Error('User ID (_id) is missing in the response data.');
-        }
-
-        
-        // localStorage.setItem('user_id', _id);
-
-        // setName(name);
-        // setEmail(email);
-        // setPhone(phone);
-
-        // console.log('Stored user_id:', localStorage.getItem('user_id'));
-      } catch (error) {
-        console.error('Error fetching user profile:', error);
-        // setError('Failed to fetch user profile. Please check your credentials.');
-      }
-    };
+  
 
   
 
@@ -460,11 +545,52 @@ export const CartProvider = ({ children }) => {
     
      
     })
-    .catch(error => {
+    .catch(error =>{
        alert(error.response.data.message)
       console.error('applyed coupon cart:', error.response ? error.response.data : error.message);
     });
   }
+
+
+  const fetchUserProfile = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      
+      if (!token){
+        throw new Error('No token found in localStorage.');
+      }
+
+      const response = await axios.get('https://api.hirdayam.com/api/getUserprofile', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+
+      console.log('Full response data:', response);
+      console.log('User profile data:', response.data);
+
+      setuserprofiledata(response.data)
+      // console.log(userprofiledata+"in edit page")
+      const { name, email, phone, _id } = response.data.data;
+
+      if (!_id) {
+        throw new Error('User ID (_id) is missing in the response data.');
+      }
+
+      
+      // localStorage.setItem('user_id', _id);
+
+      // setName(name);
+      // setEmail(email);
+      // setPhone(phone);
+
+      // console.log('Stored user_id:', localStorage.getItem('user_id'));
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      // setError('Failed to fetch user profile. Please check your credentials.');
+    }
+  };
   
   
   const calculateSubtotal = () => {
@@ -485,7 +611,7 @@ export const CartProvider = ({ children }) => {
   // };
 
   return (
-    <CartContext.Provider value={{applycoupon, cartItems, userprofiledata,setuserprofiledata, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>
+    <CartContext.Provider value={{applycoupon, PlaceOrder, fetchUserProfile, cartItems, userprofiledata,setuserprofiledata, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>
       {children}
     </CartContext.Provider>
   );

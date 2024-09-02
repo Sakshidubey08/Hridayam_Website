@@ -167,7 +167,7 @@ const ManageAddress = () => {
                         required
                     />
                 </div>
-                <div className="input-container">
+                {/* <div className="input-container">
                     <label htmlFor="latitude">Latitude:</label>
                     <input
                         type="text"
@@ -188,7 +188,7 @@ const ManageAddress = () => {
                         value={longitude}
                         onChange={(e) => setLongitude(e.target.value)}
                     />
-                </div>
+                </div> */}
                 <div className="input-container">
                     <label htmlFor="zip_code">ZIP Code:</label>
                     <input

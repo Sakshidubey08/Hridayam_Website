@@ -100,7 +100,7 @@ const Cardpage1 = () => {
     try {
       const response = await axios.post('https://api.hirdayam.com/api/createprebookEnquiry', submissionData);
 
-      if (response.status === 200) {
+      if (response.status === 200){
         setSuccess(true);
         setIsModalOpen(false);
         setFormData({ name: '', email: '', quantity: '', message: '' });
@@ -175,7 +175,7 @@ const Cardpage1 = () => {
             variation:filteredCard.variations[0]
             
         };
-      
+         console.log(productToAdd)
         addToCart(productToAdd, quantity);
         navigate('/cart');
     }
