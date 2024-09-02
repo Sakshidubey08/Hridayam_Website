@@ -1,184 +1,190 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import '../Signup.css';
+import '../Signup.css'
 import Header from '../Header';
 const ManageAddress = () => {
-  const [addresses, setAddresses] = useState([]);
-  const [selectedAddress, setSelectedAddress] = useState(null);
-  const [addressType, setAddressType] = useState('');
-  const [houseName, setHouseName] = useState('');
-  const [floorNumber, setFloorNumber] = useState('');
-  const [landmark, setLandmark] = useState('');
-  const [areaName, setAreaName] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [addressId, setAddressId] = useState('');
+    const [addressType, setAddressType] = useState('home');
+    const [address, setAddress] = useState('');
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
+    const [addressId, setAddressId] = useState('');
+    const [zipCode, setZipCode] = useState('');
+    const [areaName, setAreaName] = useState('');
+    const [landmark, setLandmark] = useState('');
+    const [floorNumber, setFloorNumber] = useState('');
+    const [houseName, setHouseName] = useState(''); // Add state for house_name
+    const [success, setSuccess] = useState('');
+    const [error, setError] = useState('');
 
-  // Fetch addresses from API
-  const fetchAddresses = async () => {
-    try {
-      const response = await axios.get('https://api.hirdayam.com/api/getAddresses');
-      if (response.data.status) {
-        setAddresses(response.data.data);
-      } else {
-        console.error('Failed to fetch addresses:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error fetching addresses:', error);
-    }
-  };
+    const handleAddressSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('user_id');
+            if (!token) {
+                throw new Error('No token found in localStorage.');
+            }
+            if (!userId) {
+                throw new Error('No user_id found in localStorage.');
+            }
 
-  useEffect(() => {
-    fetchAddresses();
-  }, []);
+            const addressData = {
+                address_type: addressType,
+                address: address,
+                latitude: latitude || '',
+                longitude: longitude || '',
+                address_id: addressId || null,
+                zip_code: zipCode || '',
+                area_name: areaName || '',
+                landmark: landmark || '',
+                floor_number: floorNumber || '',
+                house_name: houseName || '' // Include house_name here
+            };
 
-  // Handle form submission for managing the address
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+            console.log('Address Data:', addressData);
 
-    const rawData = {
-      address_type: addressType,
-      address: areaName,
-      house_name: houseName,
-      floor_number: floorNumber,
-      landmark: landmark,
-      zip_code: zipCode,
-      address_id: addressId,
+            const response = await axios.post('https://api.hirdayam.com/api/Manageaddress', addressData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            console.log('Address API response:', response.data);
+            setSuccess('Address managed successfully.');
+            setError('');
+        } catch (error) {
+            console.error('Error during address submission:', error);
+
+            if (error.response) {
+                console.error('Server responded with:', error.response.data);
+                setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
+            } else {
+                setError('Address submission failed. Please try again.');
+            }
+
+            setSuccess('');
+        }
     };
 
-    try {
-      const response = await axios.post('https://api.hirdayam.com//Manageaddress', rawData);
-
-      if (response.data.status) {
-        console.log('Address managed successfully:', response.data.message);
-        // Refetch addresses to update the list after submission
-        fetchAddresses();
-        // Optionally reset form fields
-        resetForm();
-      } else {
-        console.error('Failed to manage address:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error managing address:', error);
-    }
-  };
-
-  // Handle selecting an address to edit
-  const handleSelectAddress = (address) => {
-    setSelectedAddress(address);
-    setAddressType(address.address_type);
-    setHouseName(address.house_name);
-    setFloorNumber(address.floor_number);
-    setLandmark(address.landmark);
-    setAreaName(address.area_name);
-    setZipCode(address.zip_code);
-    setAddressId(address._id);
-  };
-
-  // Reset form fields
-  const resetForm = () => {
-    setSelectedAddress(null);
-    setAddressType('');
-    setHouseName('');
-    setFloorNumber('');
-    setLandmark('');
-    setAreaName('');
-    setZipCode('');
-    setAddressId('');
-  };
-
-  return (
-    <>
-    <Header/>
-    <div className="manage-address-container">
-      <h2 className="title">Manage Address</h2>
-      <div className="address-list">
-        <h3 className="address-list-title">Your Addresses</h3>
-        <ul className="address-list-items">
-          {addresses.map((address) => (
-            <li key={address._id} className="address-list-item">
-              {address.house_name}, {address.area_name}, {address.zip_code} ({address.address_type})
-              <button 
-                className="edit-button" 
-                onClick={() => handleSelectAddress(address)}
-              >
-                Edit
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {selectedAddress && (
-        <form className="address-form" onSubmit={handleSubmit}>
-          <h3 className="form-title">Edit Address</h3>
-          <div className="form-group">
-            <label htmlFor="addressType" className="form-label">Address Type:</label>
-            <input 
-              id="addressType"
-              type="text" 
-              className="form-input"
-              value={addressType} 
-              onChange={(e) => setAddressType(e.target.value)} 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="houseName" className="form-label">House Name:</label>
-            <input 
-              id="houseName"
-              type="text" 
-              className="form-input"
-              value={houseName} 
-              onChange={(e) => setHouseName(e.target.value)} 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="floorNumber" className="form-label">Floor Number:</label>
-            <input 
-              id="floorNumber"
-              type="text" 
-              className="form-input"
-              value={floorNumber} 
-              onChange={(e) => setFloorNumber(e.target.value)} 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="landmark" className="form-label">Landmark:</label>
-            <input 
-              id="landmark"
-              type="text" 
-              className="form-input"
-              value={landmark} 
-              onChange={(e) => setLandmark(e.target.value)} 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="areaName" className="form-label">Area Name:</label>
-            <input 
-              id="areaName"
-              type="text" 
-              className="form-input"
-              value={areaName} 
-              onChange={(e) => setAreaName(e.target.value)} 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="zipCode" className="form-label">Zip Code:</label>
-            <input 
-              id="zipCode"
-              type="text" 
-              className="form-input"
-              value={zipCode} 
-              onChange={(e) => setZipCode(e.target.value)} 
-            />
-          </div>
-          <button type="submit" className="submit-button">Submit</button>
-        </form>
-      )}
-    </div>
-    </>
-  );
+    return (
+        <div>
+          <Header/>
+            <h2>Manage Address</h2>
+            {success && <div style={{ color: 'green' }}>{success}</div>}
+            {error && <div style={{ color: 'red' }}>{error}</div>}
+            <div className='login-form-container mt-24 md:mt-3 "'>
+            <form onSubmit={handleAddressSubmit}>
+                <div className="input-container">
+                    <label htmlFor="address_type">Address Type:</label>
+                    <select
+                        id="address_type"
+                        value={addressType}
+                        onChange={(e) => setAddressType(e.target.value)}
+                    >
+                        <option value="home">Home</option>
+                        <option value="work">Work</option>
+                    </select>
+                </div>
+                <div className="input-container">
+                    <label htmlFor="house_name">House Name:</label>
+                    <input
+                        type="text"
+                        id="house_name"
+                        name="house_name"
+                        placeholder="Enter house name"
+                        value={houseName}
+                        onChange={(e) => setHouseName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="address">Address:</label>
+                    <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        placeholder="Enter address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="area_name">Area Name:</label>
+                    <input
+                        type="text"
+                        id="area_name"
+                        name="area_name"
+                        placeholder="Enter area name"
+                        value={areaName}
+                        onChange={(e) => setAreaName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="landmark">Landmark:</label>
+                    <input
+                        type="text"
+                        id="landmark"
+                        name="landmark"
+                        placeholder="Enter landmark"
+                        value={landmark}
+                        onChange={(e) => setLandmark(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="floor_number">Floor Number:</label>
+                    <input
+                        type="text"
+                        id="floor_number"
+                        name="floor_number"
+                        placeholder="Enter floor number"
+                        value={floorNumber}
+                        onChange={(e) => setFloorNumber(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="latitude">Latitude:</label>
+                    <input
+                        type="text"
+                        id="latitude"
+                        name="latitude"
+                        placeholder="Enter latitude"
+                        value={latitude}
+                        onChange={(e) => setLatitude(e.target.value)}
+                    />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="longitude">Longitude:</label>
+                    <input
+                        type="text"
+                        id="longitude"
+                        name="longitude"
+                        placeholder="Enter longitude"
+                        value={longitude}
+                        onChange={(e) => setLongitude(e.target.value)}
+                    />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="zip_code">ZIP Code:</label>
+                    <input
+                        type="text"
+                        id="zip_code"
+                        name="zip_code"
+                        placeholder="Enter ZIP code"
+                        value={zipCode}
+                        onChange={(e) => setZipCode(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">Submit Address</button>
+            </form>
+        </div>
+        </div>
+    );
 };
 
 export default ManageAddress;
-
-
