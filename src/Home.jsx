@@ -1210,10 +1210,11 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             className="card-link"
             onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
           >
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0"  />
+          {/* style={{ height: card.height }} */}
+                  <img src={card.imageUrl} alt="product"  className="card-image1 w-23  object-contain m-0 p-0"  />
                 </Link>
                   <button
-                    className="favorite-btn "
+                    className="favorite-btn m-2 md:m-0"
                     onClick={(e) => handleFavoriteButtonClick(card.id)}
                     style={{
                       cursor: 'pointer',
