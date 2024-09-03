@@ -224,11 +224,11 @@ Locate Store
         <Link to='/' className="logo-container">
           <img src={logo} alt="Logo" className="logo"/>
         </Link>
-        <div className="search-container mr-[-130px] md:mr-0">
+        <div className="search-container hidden md:flex mr-[-130px] md:mr-0">
           <img src={search} alt="Search Icon" className="search-icon"/>
           <input type="text" className="search-input" placeholder="Search product..." />
         </div>
-        <div className="nav-img ml-36 gap-4  md:ml-0">
+        <div className="nav-img ml-1 gap-4  md:ml-0">
           <Link to='/wishlist'>
             <div className='heart-black'>
             <img  src={heart} alt="heart" className="image"/>

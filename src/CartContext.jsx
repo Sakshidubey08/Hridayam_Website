@@ -210,7 +210,7 @@ const [placeorderdone,setplaceorderdone]=useState(false);
     const token = fetchTokenFromLS();
     
     if (token) {
-      axios.get('https://hridayam.dasoclothings.in/api/getcart', {
+      axios.get('https://api.hirdayam.com/api/getcart', {
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -309,6 +309,15 @@ const [placeorderdone,setplaceorderdone]=useState(false);
     })
     .catch(error => {
       console.error('Error adding to cart:', error.response ? error.response.data : error.message);
+      console.log(error.response.data.message)
+      if(error.response.data.message=="Token Invalid"){
+        const navigateTo = (url) => {
+          window.location.href = url;
+        };
+        
+        // Usage:
+        navigateTo('/#/login');
+      }
     });
   };
   

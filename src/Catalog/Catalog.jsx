@@ -138,7 +138,7 @@ const Catalog = () => {
         
         
   
-        <div className='text-sm mt-10  md:hidden scrollbar-none flex items-center h-52 w-full px-3 overflow-x-auto gap-4'>
+        <div className='text-sm mt-2  md:hidden scrollbar-none flex items-center h-52 w-full px-3 overflow-x-auto gap-4'>
   {cardsData.map((index) => (
     <Link key={index.id} to={`/catalog/${index.id}`} className="card-link">
     <div key={index.id}   className='text-center w-20 h-20 flex-shrink-0'>

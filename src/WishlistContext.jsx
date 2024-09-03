@@ -159,6 +159,14 @@ export const WishlistProvider = ({ children }) => {
     } catch (err) {
       setError('Failed to fetch wishlist items');
       console.error('Error fetching wishlist items:', err);
+      // if(err.response.statusText=="Unauthorized"){
+      //   const navigateTo = (url) => {
+      //     window.location.href = url;
+      //   };
+        
+      //   // Usage:
+      //   navigateTo('/#/login');
+      // }
     } finally {
       setLoading(false);
     }
@@ -185,6 +193,14 @@ export const WishlistProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error adding to wishlist:', error);
+      if(error.response.statusText=="Unauthorized"){
+        const navigateTo = (url) => {
+          window.location.href = url;
+        };
+        
+        // Usage:
+        navigateTo('/#/login');
+      }
     }
   };
 

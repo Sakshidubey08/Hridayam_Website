@@ -1203,7 +1203,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
            
             <div key={card.id} className="card-wrapper" style={{ cursor: 'pointer' }}>
               <div className="card1-product rounded-md">
-                <div className="card-header">
+                <div className="card-header w-36 h-56 md:h-72   md:w-full">
                 <Link
             key={card.id}
             to={`/card/${card.id}`}
@@ -1316,8 +1316,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           {cards1.map(card => (
             
             <div key={card.id} className="card-wrapper">
-              <div className="card1">
-                <div className="card-header">
+              <div className="card1-product rounded-md">
+                <div className="card-header w-36 h-56 md:h-72   md:w-full">
                 <Link
             key={card.id}
             to={`/card6/${card.id}`}
@@ -1369,18 +1369,18 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             {cards2.map(card => (
               <div key={card.id} className="card-wrapper">
                 <div className="card1-product rounded-md">
-                  <div className="card-header">
+                  <div className="card-header w-36 h-56 md:h-72   md:w-full">
                   <Link
             key={card.id}
             to={`/card8/${card.id}`}
             className="card-link"
             onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
           >
-                    <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1" onClick={() => handleCardClick2(card.id)} />
+                    <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0" onClick={() => handleCardClick2(card.id)} />
                     </Link>
                     <button
                       className="favorite-btn m-4 md:m-0"
-                      onClick={() => handleFavoriteButtonClick2(card.id)}
+                      onClick={() => handleFavoriteButtonClick(card.id)}
                       style={{
                         cursor: 'pointer',
                         border: 'none',
@@ -1389,8 +1389,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                       }}
                     >
                       <i
-                        className={`fa-heart ${favoriteCards2[card.id] ? 'fas' : 'far'}`}
-                        style={{ color: favoriteCards2[card.id] ? 'red' : '#23387A', fontSize: '24px' }}
+                        className={`fa-heart  ${wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'fas' : 'far'}`}
+                        style={{ color:  wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'red' : '#23387A', fontSize: '24px' }}
                       ></i>
                     </button>
                   </div>
@@ -1432,13 +1432,13 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
             >
               <div className="card-wrapper">
-                <div className="card1">
-                  <div className="card-header">
+                <div className="card1-product rounded-md">
+                  <div className="card-header w-36 h-56 md:h-72   md:w-full">
                     <img
                       src={card.imageUrl}
                       alt="product"
                       style={{ height: card.height, position: 'relative', top: `${card.position}px` }}
-                      className="card-image1"
+                      className="card-image1 w-23  object-contain m-0 p-0"
                     />
                     <button
                       className="favorite-btn"
