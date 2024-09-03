@@ -508,19 +508,18 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   //   { id: 7, imageUrl: 'https://i.pinimg.com/564x/49/e1/44/49e1441c079a80a664f48f839aeebed1.jpg', price: '&#8377;200', description: "Skybags" },
   //   { id: 8, imageUrl: 'https://i.pinimg.com/564x/0d/78/a4/0d78a455237e6894ea6081881a3039ca.jpg', price: '&#8377;1,400', description: "Decor Fountain" },
   // ]);
-  const [cards2, setCards2] = useState([]);
+    const [cards2, setCards2] = useState([]);
   useEffect(() => {
-    axios.get('https://api.hirdayam.com/api/getlatestTrendUser')
+    axios.get('https://api.hirdayam.com/api/getPersonalizeProduct')
       .then(response => {
         const { data } = response;
-        if (data.status && data.data.products) {
-          // Access the products array inside data.data
-          const formattedCards = data.data.products.map(product => ({
+        if (data.status && data.data && data.data.data) {
+          // Access the products array inside data.data.data
+          const formattedCards = data.data.data.map(product => ({
             id: product._id,
             imageUrl: product.image,
             price: `₹${parseFloat(product.price).toFixed(2)}`,
             description: product.name,
-          
           }));
           setCards2(formattedCards);
         } else {

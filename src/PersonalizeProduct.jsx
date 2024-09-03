@@ -282,7 +282,7 @@ import './Products/Product1.css';
 import './Home.css';
 import { CartContext } from './CartContext';
 
-const API = "https://api.hirdayam.com/api/getPersonalizeProduct";
+const API1 = "https://api.hirdayam.com/api/getPersonalizeProduct";
 
 const Cardpage1 = () => {
   const navigate = useNavigate();
@@ -351,7 +351,7 @@ const Cardpage1 = () => {
 
   useEffect(() => {
     if (id) {
-      getSingleProduct2(API, id);
+      getSingleProduct2(API1, id);
     }
   }, [id, getSingleProduct2]);
 

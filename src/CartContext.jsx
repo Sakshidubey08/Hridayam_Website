@@ -210,7 +210,7 @@ const [placeorderdone,setplaceorderdone]=useState(false);
     const token = fetchTokenFromLS();
     
     if (token) {
-      axios.get('https://hridayam.dasoclothings.in/api/getcart', {
+      axios.get('https://api.hirdayam.com/api/getcart', {
         headers: {
           Authorization: `Bearer ${token}`,
         }
