@@ -1210,7 +1210,9 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
           >
           {/* style={{ height: card.height }} */}
-                  <img src={card.imageUrl} alt="product"  className="card-image1 w-23  object-contain m-0 p-0"  />
+                  <div className=' w-full h-full flex items-center '>
+                  <img src={card.imageUrl} alt="product"  className="card-image1 rounded-xl  w-23 flex   object-contain m-0 p-0"  />
+                  </div>
                 </Link>
                   <button
                     className="favorite-btn m-2 md:m-0"
@@ -1323,8 +1325,9 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             to={`/card6/${card.id}`}
             className="card-link"
             onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
-          >
+          > <div className=' w-full h-full flex items-center '>
                   <img src={card.imageUrl} alt="product"  className="card-image1 w-23  object-contain m-0 p-0"  />
+                 </div>
                   </Link>
                   <button
                     className="favorite-btn m-4 md:m-0"
@@ -1375,8 +1378,9 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             to={`/card8/${card.id}`}
             className="card-link"
             onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
-          >
+          > <div className=' w-full h-full flex items-center '>
                     <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0" onClick={() => handleCardClick2(card.id)} />
+                   </div>
                     </Link>
                     <button
                       className="favorite-btn m-4 md:m-0"
@@ -1434,12 +1438,14 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               <div className="card-wrapper">
                 <div className="card1-product rounded-md">
                   <div className="card-header w-36 h-56 md:h-72   md:w-full">
+                  <div className=' w-full h-full flex items-center '>
                     <img
                       src={card.imageUrl}
                       alt="product"
                       style={{ height: card.height, position: 'relative', top: `${card.position}px` }}
                       className="card-image1 w-23  object-contain m-0 p-0"
                     />
+                    </div>
                     <button
                       className="favorite-btn"
                       onClick={(e) => {

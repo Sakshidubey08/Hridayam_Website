@@ -149,7 +149,9 @@ h2 {
 .card-image1 {
   padding-left: 25px;
   padding-top: 32px;
-  height: 100%;
+  height: 200px;
+  width: 200px;
+  margin: auto;
 }
 
 .favorite-btn {
