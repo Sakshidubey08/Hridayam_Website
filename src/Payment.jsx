@@ -32,7 +32,7 @@ const RazorpayComponent = () => {
 
     const rzp1 = new window.Razorpay(options);
 
-    rzp1.on('payment.failed', function (response) {
+    rzp1.on('payment.failed', function (response){
       console.log(response.error.code);
       alert(response.error.description);
       alert(response.error.source);

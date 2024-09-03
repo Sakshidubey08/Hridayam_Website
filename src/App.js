@@ -61,7 +61,7 @@ import SubCategory from './SubCategory'
 import ManageAddress from './Login-signup/ManageAddress';
 import LatestTrendProduct from './LatestTrendProduct';
 import PrebookProduct from './PrebookProduct';
-
+import PersonalizeProduct from './PersonalizeProduct'
 import Navbarlist from './Navbarlist';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -113,6 +113,7 @@ const App = () => {
                     <Route path="catalog" element={<Catalog/>} />
                     <Route path="all-products" element={<AllProducts />} />
                     <Route path="/card6/:id" element={<LatestTrendProduct />} />
+                    <Route path="/card8/:id" element={<PersonalizeProduct />} />
 
                     <Route path="/card/:id" element={<Cardpage1 />} />
                     {/* <Route path="/product/:id" element={<ProductDetail />} /> */}

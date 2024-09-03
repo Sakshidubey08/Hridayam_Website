@@ -282,12 +282,12 @@ import './Products/Product1.css';
 import './Home.css';
 import { CartContext } from './CartContext';
 
-const API = "https://api.hirdayam.com/api/getbestsellingproduct";
+const API = "https://api.hirdayam.com/api/getPersonalizeProduct";
 
 const Cardpage1 = () => {
   const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
-  const { getSingleProduct, isSingleLoading, filteredCard } = useProductContext();
+  const { getSingleProduct2, isSingleLoading, filteredCard } = useProductContext();
   const { id } = useParams();
   const [selectedImage2, setSelectedImage2] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -351,9 +351,9 @@ const Cardpage1 = () => {
 
   useEffect(() => {
     if (id) {
-      getSingleProduct(API, id);
+      getSingleProduct2(API, id);
     }
-  }, [id, getSingleProduct]);
+  }, [id, getSingleProduct2]);
 
   if (isSingleLoading) {
     return <div>Loading...</div>;

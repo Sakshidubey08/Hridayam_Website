@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from './CartContext';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Footer from './Footer';
 import './CheckoutPage.css';
 import Header from './Header';
@@ -9,7 +9,7 @@ import Button from 'react-bootstrap-button-loader';
 import axios from 'axios';
 
 const CheckoutPage = () => {
-  const { cartItems,applycoupon,PlaceOrder,   calculateSubtotal, calculateTotal } = useContext(CartContext);
+  const { cartItems,applycoupon,PlaceOrder,placeorderdone, handlePayment,    calculateSubtotal, calculateTotal } = useContext(CartContext);
   
   const countries = ['India', 'Country B', 'Country C', 'Country D'];
   const states = ['Madhya Pradesh', 'State 2', 'State 3', 'State 4', 'State 5'];
@@ -25,6 +25,7 @@ const CheckoutPage = () => {
   const [floornumber ,setfloornumber]=useState("");
   const [discount,setdscount]=useState("");
   const [couponcode,setcouponcode]=useState("");
+  const navigate=useNavigate();
   useEffect(() => {
     // Define an async function inside useEffect
   
@@ -43,7 +44,7 @@ const CheckoutPage = () => {
   
     fetchUserProfile();
     // console.log(userprofiledata.data.name+"user profile data ")
-   
+    console.log(placeorderdone+"in the chekoutou")
     // setphone(userprofiledata.data.phone)
     fetchAddress();
   
@@ -53,6 +54,10 @@ const handlecouponinput=(text)=>{
 }
 const handleapplycouponbutton =()=>{
   applycoupon(couponinput,calculateTotal())
+}
+
+if(placeorderdone=="true"){
+  navigate("/placeorder")
 }
 
 const fetchUserProfile = async () => {
@@ -98,8 +103,14 @@ const fetchUserProfile = async () => {
   }
 };
 
+const handlePayment2=()=>{
+  handlePayment()
+}
+
+
 const handaleplaceorder=()=>{
- PlaceOrder();
+
+
 
 }
 
@@ -149,7 +160,7 @@ const fetchAddress = async () => {
     {/* <div>{userprofiledata.data.name}</div> */}
   
 
-  
+     
       <div className="checkout-page">
         <div className="billing-details">
           <h2 className='billing'>Billing Details</h2>
@@ -240,6 +251,7 @@ const fetchAddress = async () => {
               </tr>
             </thead>
             <tbody>
+              {/* <div>{cartItems.length}dsfjsdfllsdfljk</div> */}
               {cartItems.map(item => (
                 <tr key={item.id}>
                   <td>{item.product.name}</td>
@@ -266,7 +278,7 @@ const fetchAddress = async () => {
            {/* <Link to='/payment'><button>Pay Now</button></Link> */}
           </div>
           {/* <Link to="/place-order"> */}
-            <button onClick={handaleplaceorder} style={{backgroundColor:'#23387A'}} className="proceed-checkout-btn">Place Order</button>
+            <button onClick={handlePayment2} style={{backgroundColor:'#23387A'}} className="proceed-checkout-btn">Place Order</button>
           {/* </Link> */}
         </div>
       </div>

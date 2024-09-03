@@ -26,7 +26,8 @@ const ProductReducer = (state, action) => {
         return {
           ...state,
           isSingleLoading: false,
-          filteredCard: action.payload,  // Adjusted to access `data` inside `payload`
+          selectedProduct: action.payload,
+          filteredCard: action.payload, 
         };
       case "SET_SINGLE_ERROR":
         return {

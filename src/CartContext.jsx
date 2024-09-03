@@ -178,18 +178,20 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from './store/auth'; // Adjust the import based on your file structure
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import PlaceOrder2 from './PlaceOrder';
-export const CartContext = createContext();
 
+export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
+const [placeorderdone,setplaceorderdone]=useState(false);
+
   const [cartItems, setCartItems] = useState([]);
   const [couponDiscount,setcouponDiscount]=useState(0);
   const { storeTokenInLS } = useAuth();
   const [userprofiledata,setuserprofiledata]=useState([]);
-  
+  const [transitionid ,settransitionid] =useState();
   const [address , setaddress]=useState([]);
-  
+  // const navigate = useNavigate();
   // Function to fetch token from localStorage
   
   const fetchTokenFromLS = () => {
@@ -330,7 +332,7 @@ export const CartProvider = ({ children }) => {
     } catch (error) {
         console.error('Error during address submission:', error);
 
-        if (error.response) {
+        if (error.response){
             console.error('Server responded with:', error.response.data);
             // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
         } else {
@@ -340,7 +342,7 @@ export const CartProvider = ({ children }) => {
 };
 
   const removeFromCart = (cartId) => {
-    axios.delete('https://api.hirdayam.com/api/deleteCart', {
+    axios.delete('https://api.hirdayam.com/api/deleteCart',{
       headers: {
         Authorization: `Bearer ${fetchTokenFromLS()}`,
         'Content-Type': 'application/json',
@@ -424,6 +426,53 @@ export const CartProvider = ({ children }) => {
       console.error('Error editing cart:', error.response ? error.response.data : error.message);
     });
   };
+console.log(transitionid)
+
+  const handlePayment = async () => {
+    const options = {
+      key: 'rzp_test_WZu8B3H1Bec0W9', // Use your Razorpay Test/Live Key
+      amount: calculateTotal() * 100, // Razorpay expects the amount in paise (1 INR = 100 paise)
+      currency: 'INR',
+      name: 'Hridayam',
+      description: 'Test Transaction',
+      image: 'https://hirdayam.com/static/media/image%207365.ad833efe156784d1a8a1.png', // Replace with your logo URL
+      handler: async function (response) {
+        console.log('Payment successful. Response:', response);
+         settransitionid(response.razorpay_payment_id);
+         
+
+        // Now place the order since the payment was successful
+        PlaceOrder();
+
+        // setAmount('');
+      },
+      prefill: {
+        name: 'Piyush Garg',
+        email: 'youremail@example.com',
+        contact: '9999999999',
+      },
+      notes: {
+        address: 'Razorpay Corporate Office',
+      },
+      theme: {
+        color: '#3399cc',
+      },
+    };
+
+    const rzp1 = new window.Razorpay(options);
+
+    rzp1.on('payment.failed', function (response){
+      console.log(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
+
+    rzp1.open();
+  };
 
 
   const PlaceOrder = () => {
@@ -467,7 +516,7 @@ export const CartProvider = ({ children }) => {
         };
     });
 
-    const payload = {
+    const payload = { 
         order_amount: calculateTotal(),
         coupon_discount: "10.00",
         order_type: "personalize",
@@ -486,7 +535,7 @@ export const CartProvider = ({ children }) => {
             __v: address.__v
         },
         delivery_address_id: "669b9d0ea159078371605d9c",
-        transaction_id: "wkeufgiuei"
+        transaction_id: `${transitionid}`
     };
 
     console.log('Sending request with payload:', payload);
@@ -499,7 +548,19 @@ export const CartProvider = ({ children }) => {
     })
     .then(response => {
         console.log('order Response from API :', response.data);
+          
+        if(response.message=="Order placed successfully"){
+             setplaceorderdone(true);
+            
+        }
+        const navigateTo = (url) => {
+          window.location.href = url;
+        };
+        
+        // Usage:
+        navigateTo('/#/place-order');
         fetchCartItems()
+        
         
         //  navigate("./placeorder")
         // if (response.data && response.data.status === true) {
@@ -533,7 +594,7 @@ export const CartProvider = ({ children }) => {
     orderTotal:orderTotal
     };
 
-    axios.post('https://api.hirdayam.com/api/ApplyCoupon', coupondata, {
+    axios.post('https://api.hirdayam.com/api/ApplyCoupon', coupondata,{
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -542,7 +603,7 @@ export const CartProvider = ({ children }) => {
     .then(response => {
       setcouponDiscount(response.data.data.discount);
       console.log('Response from API:', response.data);
-    
+      
      
     })
     .catch(error =>{
@@ -552,7 +613,7 @@ export const CartProvider = ({ children }) => {
   }
 
 
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = async () =>{
     try {
       const token = localStorage.getItem('token');
       
@@ -611,7 +672,7 @@ export const CartProvider = ({ children }) => {
   // };
 
   return (
-    <CartContext.Provider value={{applycoupon, PlaceOrder, fetchUserProfile, cartItems, userprofiledata,setuserprofiledata, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>
+    <CartContext.Provider value={{applycoupon, placeorderdone, handlePayment, PlaceOrder, fetchUserProfile, cartItems, userprofiledata,setuserprofiledata, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>
       {children}
     </CartContext.Provider>
   );

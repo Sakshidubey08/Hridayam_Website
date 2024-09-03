@@ -499,8 +499,8 @@ const CatalogProducts = () => {
                                           
                                             src={product.image}
                                             alt="product"
-                                            style={{ height: product.height}}
-                                            className="card-image1 w-23  object-contain m-0 p-0"
+                                            
+                                            className="card-image1"
                                             // onClick={() => handleProductClick(product._id)}
                                         />
                                         </Link>

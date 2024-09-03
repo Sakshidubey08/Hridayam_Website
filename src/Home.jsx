@@ -197,7 +197,6 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             imageUrl: product.image,
             price: `&#8377;${parseFloat(product.price).toFixed(2)}`,
             description: product.name,
-            height: '160px' // Adjust height if necessary
           }));
           setCards(formattedCards);
         } else {
@@ -434,34 +433,34 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       setShowOther1(false);
     }
   };
-  const handleCardClick4 = (id) => {
-    switch (id) {
-      case 11:
-        navigate('/discover1');
-        break;
-      case 12:
-        navigate('/discover2');
-        break;
-      case 13:
-        navigate('/discover3');
-        break;
-      case 14:
-        navigate('/discover4');
-        break;
-      case 15:
-        navigate('/discover5');
-        break;
-      case 16:
-        navigate('/product4');
-        break;
-      case 17:
-        navigate('/discover6');
-        break;
-      case 18:
-        navigate('/product8');
-        break;
-    }
-  };
+  // const handleCardClick4 = (id) => {
+  //   switch (id) {
+  //     case 11:
+  //       navigate('/discover1');
+  //       break;
+  //     case 12:
+  //       navigate('/discover2');
+  //       break;
+  //     case 13:
+  //       navigate('/discover3');
+  //       break;
+  //     case 14:
+  //       navigate('/discover4');
+  //       break;
+  //     case 15:
+  //       navigate('/discover5');
+  //       break;
+  //     case 16:
+  //       navigate('/product4');
+  //       break;
+  //     case 17:
+  //       navigate('/discover6');
+  //       break;
+  //     case 18:
+  //       navigate('/product8');
+  //       break;
+  //   }
+  // };
 
   // const [cards1, setCards1] = useState([
   //   { id: 11, imageUrl: image18, price: '&#8377;1,200', height: '200px', description: "Double Canopy Umbrella" },
@@ -486,7 +485,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             imageUrl: product.image,
             price: `₹${parseFloat(product.price).toFixed(2)}`,
             description: product.name,
-            height: '160px' // Adjust height if necessary
+          
           }));
           setCards1(formattedCards);
         } else {
@@ -499,16 +498,40 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       });
   }, []);
 
-  const [cards2, setCards2] = useState([
-    { id: 1, imageUrl: 'https://i.pinimg.com/564x/ca/e6/9c/cae69c9b3349585dbaf4361bdfbbcba4.jpg', price: '&#8377;1,200', height: '200px', description: "Personalize Mugs" },
-    { id: 2, imageUrl: 'https://i.pinimg.com/736x/d2/77/47/d27747315ce2522594ef94de4cddce11.jpg', price: '&#8377;4,200', description: "Gift Hamper" },
-    { id: 3, imageUrl: 'https://i.pinimg.com/564x/d8/70/cc/d870ccde5b904a6373665143e31d50aa.jpg', price: '&#8377;800', description: "Fogg Deodorant Men" },
-    { id: 4, imageUrl: 'https://i.pinimg.com/564x/61/f6/8f/61f68f3bb8a99a46feb2c4d7250e92d6.jpg', price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
-    { id: 5, imageUrl: 'https://i.pinimg.com/564x/3f/1e/87/3f1e8712c53f32d0bb385b436d40004e.jpg', price: '&#8377;80', description: "Men White Shoes" },
-    { id: 6, imageUrl: 'https://i.pinimg.com/564x/7d/bd/72/7dbd72694da94b1bb2e3dc89b0a8adec.jpg', price: '&#8377;1,500', description: "Brass Diya" },
-    { id: 7, imageUrl: 'https://i.pinimg.com/564x/49/e1/44/49e1441c079a80a664f48f839aeebed1.jpg', price: '&#8377;200', description: "Skybags" },
-    { id: 8, imageUrl: 'https://i.pinimg.com/564x/0d/78/a4/0d78a455237e6894ea6081881a3039ca.jpg', price: '&#8377;1,400', description: "Decor Fountain" },
-  ]);
+  // const [cards2, setCards2] = useState([
+  //   { id: 1, imageUrl: 'https://i.pinimg.com/564x/ca/e6/9c/cae69c9b3349585dbaf4361bdfbbcba4.jpg', price: '&#8377;1,200', height: '200px', description: "Personalize Mugs" },
+  //   { id: 2, imageUrl: 'https://i.pinimg.com/736x/d2/77/47/d27747315ce2522594ef94de4cddce11.jpg', price: '&#8377;4,200', description: "Gift Hamper" },
+  //   { id: 3, imageUrl: 'https://i.pinimg.com/564x/d8/70/cc/d870ccde5b904a6373665143e31d50aa.jpg', price: '&#8377;800', description: "Fogg Deodorant Men" },
+  //   { id: 4, imageUrl: 'https://i.pinimg.com/564x/61/f6/8f/61f68f3bb8a99a46feb2c4d7250e92d6.jpg', price: '&#8377;499', description: "Men Plain Slim Fit Shirt" },
+  //   { id: 5, imageUrl: 'https://i.pinimg.com/564x/3f/1e/87/3f1e8712c53f32d0bb385b436d40004e.jpg', price: '&#8377;80', description: "Men White Shoes" },
+  //   { id: 6, imageUrl: 'https://i.pinimg.com/564x/7d/bd/72/7dbd72694da94b1bb2e3dc89b0a8adec.jpg', price: '&#8377;1,500', description: "Brass Diya" },
+  //   { id: 7, imageUrl: 'https://i.pinimg.com/564x/49/e1/44/49e1441c079a80a664f48f839aeebed1.jpg', price: '&#8377;200', description: "Skybags" },
+  //   { id: 8, imageUrl: 'https://i.pinimg.com/564x/0d/78/a4/0d78a455237e6894ea6081881a3039ca.jpg', price: '&#8377;1,400', description: "Decor Fountain" },
+  // ]);
+  const [cards2, setCards2] = useState([]);
+  useEffect(() => {
+    axios.get('https://api.hirdayam.com/api/getlatestTrendUser')
+      .then(response => {
+        const { data } = response;
+        if (data.status && data.data.products) {
+          // Access the products array inside data.data
+          const formattedCards = data.data.products.map(product => ({
+            id: product._id,
+            imageUrl: product.image,
+            price: `₹${parseFloat(product.price).toFixed(2)}`,
+            description: product.name,
+          
+          }));
+          setCards2(formattedCards);
+        } else {
+          // Handle error or empty state
+          console.error('No data found');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
   const [cards3, setCards3] = useState([]);
   useEffect(() => {
     axios.get('https://api.hirdayam.com/api/getPreBook')
@@ -524,7 +547,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           }));
           setCards3(formattedCards);
         } else {
-          // Handle error or empty state
+         
           console.error('No data found');
         }
       })
@@ -751,19 +774,16 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-
           }
         });
-
+  
         if (!response.ok) {
           console.error(`Error: ${response.status} ${response.statusText}`);
           return;
         }
-
+  
         const result = await response.json();
-
-
-
+  
         if (result && result.status && Array.isArray(result.data)) {
           setSlides(result.data);
         } else {
@@ -773,7 +793,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         console.error('Error fetching data:', error);
       }
     };
-
+  
     fetchSlides();
   },[]);
   const handleSlideClick = (index) => {
@@ -965,10 +985,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
    
      
       <div class="menu-item">
-        <div class="menu-heading">Acrylic Photoframe</div>
-        <div class="submenu">
-          <Link to='/acrylic3'> <div className="submenu-item ">Acrylic Photo frame</div></Link>
-        </div>
+      <Link to='/acrylic3'>    <div class="menu-heading">Acrylic Photoframe</div></Link>
+       
       </div>
       <div class="menu-item">
         <div class="menu-heading" onClick={() => setIsModalOpen(true)}>Contact Us</div>
@@ -1184,7 +1202,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           {cards.map(card => (
            
             <div key={card.id} className="card-wrapper" style={{ cursor: 'pointer' }}>
-              <div className="card1">
+              <div className="card1-product rounded-md">
                 <div className="card-header">
                 <Link
             key={card.id}
@@ -1192,7 +1210,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             className="card-link"
             onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
           >
-                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1" onClick={() => handleCardClick(card.id)} />
+                  <img src={card.imageUrl} alt="product" style={{ height: card.height }} className="card-image1 w-23  object-contain m-0 p-0"  />
                 </Link>
                   <button
                     className="favorite-btn "
@@ -1298,15 +1316,15 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           {cards1.map(card => (
             
             <div key={card.id} className="card-wrapper">
-              <div className="card1-product rounded-md">
-                <div className="card-header w-36 h-56 md:h-72   md:w-full">
+              <div className="card1">
+                <div className="card-header">
                 <Link
             key={card.id}
             to={`/card6/${card.id}`}
             className="card-link"
             onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
           >
-                  <img src={card.imageUrl} alt="product"  className="card-image1 w-23  object-contain m-0 p-0"  onClick={() => handleCardClick4(card.id)}/>
+                  <img src={card.imageUrl} alt="product"  className="card-image1 w-23  object-contain m-0 p-0"  />
                   </Link>
                   <button
                     className="favorite-btn m-4 md:m-0"
@@ -1351,8 +1369,15 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             {cards2.map(card => (
               <div key={card.id} className="card-wrapper">
                 <div className="card1-product rounded-md">
-                  <div className="card-header w-36 h-56 md:h-72   md:w-full">
-                    <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0" onClick={() => handleCardClick2(card.id)} />
+                  <div className="card-header">
+                  <Link
+            key={card.id}
+            to={`/card8/${card.id}`}
+            className="card-link"
+            onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
+          >
+                    <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1" onClick={() => handleCardClick2(card.id)} />
+                    </Link>
                     <button
                       className="favorite-btn m-4 md:m-0"
                       onClick={() => handleFavoriteButtonClick2(card.id)}

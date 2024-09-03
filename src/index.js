@@ -22,6 +22,6 @@ import { AppProvider } from './context/Bestproduct';
       </WishlistProvider>
     </CartProvider>
   </AuthProvider>,
-  
+  // document.getElementById('root')
 );
 
