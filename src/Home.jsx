@@ -805,7 +805,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   return (
     <>
       <Header />
-
+<div>skdfsl</div>
       <div class="menu-container  hidden md:flex">
         {/* <div class="menu-item">
           <div class="menu-heading">Corporate Gifting</div>
