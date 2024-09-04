@@ -164,6 +164,7 @@ import { Link } from 'react-router-dom';
 import { WishlistContext } from '../WishlistContext';
 import Heart from "react-animated-heart";
 import '../AllP.css';
+import Footer from '../Footer';
 const STEP = 1;
 const MIN = 0;
 const MAX = 2000;
@@ -664,6 +665,7 @@ const CatalogProducts = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

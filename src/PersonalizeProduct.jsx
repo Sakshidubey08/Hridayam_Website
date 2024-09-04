@@ -281,7 +281,7 @@ import Header from './Header';
 import './Products/Product1.css';
 import './Home.css';
 import { CartContext } from './CartContext';
-
+import Footer from './Footer';
 const API1 = "https://api.hirdayam.com/api/getPersonalizeProduct";
 
 const Cardpage1 = () => {
@@ -364,8 +364,7 @@ const Cardpage1 = () => {
   }
 
   const { name, price, default_color_image, images, image } = filteredCard;
-  const mainImage = selectedImage || image;
-
+  const mainImage = selectedImage || default_color_image || image;
   const handleAddToCart = () => {
     // console.log(getSingleProduct.variations[0]+"new variation")
     if (true) {
@@ -390,26 +389,22 @@ const Cardpage1 = () => {
       <div className="product-detail1 mt-1">
         <div className="content">
 
-          <div className="image-gallery">
+        <div className="image-gallery">
             <div className="thumbnails">
-              {images.map((image, index) => (
+              {images.map((img, index) => (
                 <img
                   key={index}
-                  src={image}
+                  src={img}
                   alt={`Thumbnail ${index + 1}`}
-                  onClick={() => handleImageClick(images)}
+                  onClick={() => handleImageClick(img)}
                   className="thumbnail"
                 />
               ))}
             </div>
           </div>
           <div className="main-image">
-            {image && (
-              <img src={image} alt="Selected" />
-            )}
+            <img src={mainImage} alt="Selected" />
           </div>
-
-
 
           {/* Scrollable Content Section */}
           <div className="scrollable-content4">
@@ -499,6 +494,7 @@ const Cardpage1 = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
