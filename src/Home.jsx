@@ -885,7 +885,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
           </div>
         </div> */}
-        {/* <Swiper
+        {/* {/* <Swiper
 
           slidesPerView={3} // Number of visible slides
           spaceBetween={20} // Space between slides
@@ -915,8 +915,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             </SwiperSlide>
           ))}
         </Swiper>
-       */}
-    {/* <Swiper
+       */}  
+     {/* <Swiper
   slidesPerView={3}
   spaceBetween={20}
   breakpoints={{
@@ -956,7 +956,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
 
 
-<div className='decoration '>
+ <div className='decoration '>
     
       {menuItems.map((item) => (
         <div key={item.id} className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
@@ -966,11 +966,11 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           </div>
         
           {subcategories[item.id] && (
-            <div className="dropdown5 ">
+            <div className="dropdown15 ">
               {subcategories[item.id].map((subCategory) =>(
                 <div 
                   key={subCategory._id} 
-                  className="dropdown-item5"
+                  className="dropdown-item15"
                   onClick={() => handleSubcategoryClick(subCategory._id)} // Add onClick handler
                 >
                   {subCategory.name}
@@ -981,8 +981,40 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         </div>
       ))}
     </div>
-   
-     
+
+{/* <div className='decoration'>
+      <Swiper
+       spaceBetween={30}
+       slidesPerView={2}
+      
+        freeMode={true}         
+      >
+        {menuItems.map((item) => (
+          <SwiperSlide key={item.id}>
+            <div className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
+              <div className="menu-heading">
+                {item.heading}
+              </div>
+
+              {subcategories[item.id] && (
+                <div className="dropdown15">
+                  {subcategories[item.id].map((subCategory) => (
+                    <div 
+                      key={subCategory._id} 
+                      className="dropdown-item15"
+                      onClick={() => handleSubcategoryClick(subCategory._id)} 
+                    >
+                      {subCategory.name}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div> */}
+
       <div class="menu-item">
       <Link to='/acrylic3'>    <div class="menu-heading">Acrylic Photoframe</div></Link>
        

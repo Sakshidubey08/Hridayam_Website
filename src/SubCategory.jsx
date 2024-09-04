@@ -1,11 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState,useContext } from 'react';
 import './AllP.css';
+import { Link } from 'react-router-dom';
 import { WishlistContext } from './WishlistContext';
 import Header from './Header';
 import axios from 'axios';
 import { Range, getTrackBackground } from 'react-range';
 import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
 const STEP = 1;
 const MIN = 0;
 const MAX = 2000;
@@ -86,7 +88,7 @@ const handleFavoriteButtonClick = async (id, e) => {
     const fetchProducts = async () => {
       try {
         // Directly fetch product data by subcategory ID
-        const response = await fetch(`https://api.hirdayam.com/api/getProductBySubCategory?sub_category_id=${subCategoryId}`, {
+        const response = await fetch(`https://api.hirdayam.com/api/getProductBySubCategory?sub_category_id=` + subCategoryId, {
           method: 'GET',
         });
   
@@ -118,15 +120,7 @@ const handleFavoriteButtonClick = async (id, e) => {
   
     fetchProducts();
   }, [subCategoryId]);
-  
-
-
-  const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
-  };
-
- 
- 
+   
 
   const filteredProducts = productsData.filter(product => {
     const productPrice = parsePrice(product.price);
@@ -272,21 +266,22 @@ const handleFavoriteButtonClick = async (id, e) => {
               <p>No products found in this price range.</p>
             </div>
           ) : (
-            filteredProducts.map((products) => (
+            filteredProducts.map((product) => (
             
-              <div key={products._id} className="card-wrapper" style={{ cursor: 'pointer' }}>
+              <div key={product._id} className="card-wrapper" style={{ cursor: 'pointer' }}>
                 <div className="card1">
                   <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                  <Link to={`/product/${subCategoryId}/${product._id}`}>
                     <img
-                      src={products.image}
+                      src={product.image}
                       alt="product"
-                      style={{ height: products.height }}
                       className="card-image1"
-                      onClick={() => handleProductClick(products._id)}
+                     
                     />
+                    </Link>
                     <button
                       className="favorite-btn"
-                      onClick={(e) => handleFavoriteButtonClick(products._id, e)}
+                      onClick={(e) => handleFavoriteButtonClick(product._id, e)}
                       style={{
                         cursor: 'pointer',
                         border: 'none',
@@ -295,16 +290,16 @@ const handleFavoriteButtonClick = async (id, e) => {
                       }}
                     >
                       <i
-                        className={`fa-heart ${favoriteCards[products.id] ? 'fas' : 'far'}`}
-                        style={{ color: favoriteCards[products.id] ? 'red' : '#23387A', fontSize: '24px' }}
+                        className={`fa-heart ${favoriteCards[product.id] ? 'fas' : 'far'}`}
+                        style={{ color: favoriteCards[product.id] ? 'red' : '#23387A', fontSize: '24px' }}
                       ></i>
                     </button>
                   </div>
                 </div>
                 <div className="card-info">
-                  <p className="image-description">{products.name}</p>
+                  <p className="image-description">{product.name}</p>
                   <p className="price">
-                    ₹{products.price}
+                    ₹{product.price}
                   </p>
                 </div>
               </div>
@@ -442,6 +437,7 @@ const handleFavoriteButtonClick = async (id, e) => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
