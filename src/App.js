@@ -63,6 +63,7 @@ import LatestTrendProduct from './LatestTrendProduct';
 import PrebookProduct from './PrebookProduct';
 import PersonalizeProduct from './PersonalizeProduct'
 import Navbarlist from './Navbarlist';
+import Loadingpage from './Loadingpage';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -77,13 +78,13 @@ const App = () => {
     return (
         
                 <>
-   <ScrollToTop/>
    
-            
+   
+            <ScrollToTop/>
                 <Routes>
               
                     <Route path="/" element={<Home />} />
-                   
+                    <Route path='/loding' element={<Loadingpage></Loadingpage>}></Route>
                     <Route path="login" element={<Login />} />
                     <Route path="product1" element={<Product1 />} />
                     <Route path="product2" element={<Product2 />} />

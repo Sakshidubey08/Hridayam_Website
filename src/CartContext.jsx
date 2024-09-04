@@ -252,6 +252,7 @@ const [placeorderdone,setplaceorderdone]=useState(false);
     const formData = new FormData();
   formData.append('product_id', product.id);
   formData.append('quantity', quantity);
+  formData.append('personalize_text', product.text);
   // formData.append('user_id', product.user_id);
   // formData.append('price', product.price);
   // formData.append('image', product.image);
@@ -556,11 +557,13 @@ console.log(transitionid)
         }
     })
     .then(response => {
-        console.log('order Response from API :', response.data);
-          
-        if(response.message=="Order placed successfully"){
+        console.log('order Response from API :', response.data.message);
+        localStorage.setItem('orderid', response.data.order._id);
+        if(response.data.message=="Order placed successfully"){
              setplaceorderdone(true);
             
+           
+             
         }
         const navigateTo = (url) => {
           window.location.href = url;

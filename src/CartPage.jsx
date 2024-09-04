@@ -229,6 +229,7 @@ const CartPage = () => {
 } alt={item.product.name} style={{ width: '100%', height: '100%' }} />
  <img src={item.product.image
 } alt={item.product.name} style={{ width: '100%', height: '100%' }} />
+<p>{item.personalize_text}</p>
 </div>
                   </div>
                 </td>

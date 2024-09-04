@@ -56,6 +56,7 @@ import { WishlistContext } from './WishlistContext';
 import axios from 'axios';
 import { useProductContext } from './context/Bestproduct.jsx';
 import SwiperCore from 'swiper';
+import Loadingpage from './Loadingpage.jsx';
 
 SwiperCore.use([Navigation]);
 
@@ -117,6 +118,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   };
   // ];
   useEffect(() => {
+   
     const fetchData = async () => {
       try {
         const response = await fetch('https://api.hirdayam.com/api/getcategoryuser');
@@ -510,6 +512,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   // ]);
     const [cards2, setCards2] = useState([]);
   useEffect(() => {
+   
     axios.get('https://api.hirdayam.com/api/getPersonalizeProduct')
       .then(response => {
         const { data } = response;

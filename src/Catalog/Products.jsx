@@ -246,7 +246,7 @@ const Product1 = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [uploadMessage, setUploadMessage] = useState('');
     const [pincode, setPincode] = useState('');
-
+    const [personalizeText,setpersonalize]=useState("");
     const [file, setfile] = useState(null);
     const [isPincodeChecked, setIsPincodeChecked] = useState(false);
     const [deliveryText, setDeliveryText] = useState({
@@ -358,13 +358,21 @@ const Product1 = () => {
                 name: selectedProduct.name,
                 price: parseFloat(selectedProduct.price),
                 image: file,
+                text:personalizeText,
                 color: selectedProduct.colors[0],
                 variation: selectedProduct.variations[0]
 
             };
 
-            addToCart(productToAdd, quantity);
+            if(file==null && selectedProduct?.product_type == "personalize"){
+                alert("Please Add Image")
+            }
+            else{
+                 addToCart(productToAdd, quantity);
             navigate('/cart');
+            }
+
+           
         }
     };
 
@@ -375,10 +383,10 @@ const Product1 = () => {
     return (
         <>
             <Header />
-            <div className="breadcrumb1">Home / {selectedProduct?.name || 'Product'}</div>
+            <div className="breadcrumb1 hidden md:block">Home / {selectedProduct?.name || 'Product'}</div>
             <div className="product-detail1 mt-1">
                 <div className="content">
-                    <div className="image-gallery">
+                    <div className="image-gallery hidden">
                         <div className="thumbnail-list">
 
                             {selectedProduct && (
@@ -401,12 +409,35 @@ const Product1 = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="image-placeholder1">
+                    <div className="image-placeholder1 m-auto flex items-center justify-center">
                         {selectedImage && (
-                            <img src={selectedImage} alt="Selected" />
+                            <img src={selectedImage} alt="Selected"/>
                         )}
                     </div>
-                    <div className="scrollable-content4">
+
+
+                    <div className="thumbnail-lis  w-full gap-2 justify-center items-center flex md:hidden">
+
+{selectedProduct && (
+    <img
+        src={selectedProduct.image}
+        alt={selectedProduct.name}
+        onClick={() => handleImageClick(selectedProduct.image)}
+        className="thumbnai h-20 w-20 hover:ring rounded-md   "
+    />
+)}
+
+{selectedProduct?.images.map((image, index) => (
+    <img
+        key={index}
+        src={image}
+        alt={`Thumbnail ${index + 1}`}
+        onClick={() => handleImageClick(image)}
+        className="thumbnai h-20 w-20 hover:ring rounded-md"
+    />
+))}
+</div>
+                    <div className="scrollable-content">
                         <div className="product-info">
                             <h1 className='product-name'>{selectedProduct?.name}</h1>
                             <p className="price1">&#8377;{selectedProduct?.price}</p>
@@ -417,9 +448,9 @@ const Product1 = () => {
                                 <button onClick={handleIncrement} className="quantity-btn">+</button>
                             </div>
                             <br />
-
-                            <div className={`${selectedProduct?.product_type == "personalize" ? "block" : "hidden"}`}>
-                                <button
+                           
+                            <div className={`${selectedProduct?.product_type == "personalize" ? "block" : "hidden"}  `}>
+                                <button className=''
                                     onClick={handleButtonClick}
                                     style={{
                                         display: 'flex',
@@ -442,32 +473,71 @@ const Product1 = () => {
                                                 width: '40px',
                                                 height: '40px',
 
-                                                marginRight: '10px',
+                                                
                                             }}
                                         />
                                     ) : (
                                         'Select Photo'
                                     )}
                                 </button>
-                                <input
+                                <input 
                                     type="file"
                                     accept="image/*"
                                     id="fileInput"
                                     style={{ display: 'none' }}
                                     onChange={handleImageChange}
                                 />
-                                {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
+                               
+                                <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
+                            Add Text
+                        </button>
+                         {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
                             </div>
 
-                            <h3 className='free'>Free Delivery </h3>
+                          
+                        <div>{personalizeText}</div>
+                        <dialog id="my_modal_4" className="modal">
+                            <div className="modal-box">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "transparent", color: "black" }} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+
+                                
+                                <label style={{ paddingRight: "400px" }} className=' text-nowrap '>Add Text</label><br></br>
+                                <input
+                                onChange={(text)=>{setpersonalize(text.target.value)}}
+                                    type='text'
+                                    className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
+                                    placeholder='Enter Your Text here'
+                                     // Bind the state to the input value
+                                     // Update state on change
+                                />
+                                
+
+                                
+
+
+                               
+                            <div>
+
+                                </div>
+
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
+                                </form>
+                            </div>
+                        </dialog>
+                            <h3 className='free'>Free Delivery</h3>
                             <div className="buttons">
                                 <button className="wishlist-btn">
                                     <span>Wishlist</span>
-                                    <FaHeart className="icon" />
+                                    {/* <FaHeart className="icon" /> */}
                                 </button>
                                 <button className="cart-btn" onClick={handleAddToCart}>
                                     <span>Add to Cart</span>
-                                    <FaShoppingCart className="icon" />
+                                    {/* <FaShoppingCart className="icon" /> */}
                                 </button>
                             </div>
                             <div className="pincode-checker">
