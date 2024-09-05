@@ -250,6 +250,8 @@ const Cardpage1 = () => {
   const [uploadMessage, setUploadMessage] = useState('');
   const [pincode, setPincode] = useState('');
   const [isPincodeChecked, setIsPincodeChecked] = useState(false);
+  const [selectedImage2, setSelectedImage2] = useState(null);
+
   const [file, setfile] = useState(null);
   const [personalizeText,setpersonalize]=useState("");
   const [deliveryText, setDeliveryText] = useState({
@@ -268,12 +270,11 @@ const Cardpage1 = () => {
     setfile(file);
     if (file) {
       setTimeout(() => {
-        setSelectedImage(URL.createObjectURL(file));
+        setSelectedImage2(URL.createObjectURL(file));
         setUploadMessage('File uploaded successfully!');
       }, 1000);
     }
   };
-
   const handlePincodeChange = (e) => {
     const value = e.target.value;
     if (!isNaN(value)) {
@@ -382,7 +383,7 @@ const Cardpage1 = () => {
               </div>
               <br />
               <div className={`${filteredCard?.product_type === "personalize" ? "block" : "hidden"}`}>
-                <button
+                {/* <button
                   onClick={() => document.getElementById('fileInput').click()}
                   style={{
                     display: 'flex',
@@ -418,12 +419,44 @@ const Cardpage1 = () => {
                   style={{ display: 'none' }}
                   onChange={handleImageChange}
                 />
-                                                <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
-                            Add Text
-                        </button>
-                         {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
-                          
-                {/* {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>} */}
+                {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>} */}
+                <button
+                  onClick={() => document.getElementById('fileInput').click()}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '10px',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    border: '1px solid #ccc',
+                    background: '#23387A',
+                    color: 'white',
+                    fontFamily: 'Poppins'
+                  }}
+                >
+                  {selectedImage2 ? (
+                    <img
+                      src={selectedImage2}
+                      alt="Selected"
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        marginRight: '10px',
+                      }}
+                    />
+                  ) : (
+                    'Select Photo'
+                  )}
+                </button>
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="fileInput"
+                  style={{ display: 'none' }}
+                  onChange={handleImageChange}
+                />
+                {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
               </div>
 
               <div>{personalizeText}</div>

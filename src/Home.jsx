@@ -63,17 +63,8 @@ SwiperCore.use([Navigation]);
 const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isLoading, products } = useProductContext();
-  
-  // console.log(products)
-  // const menuItems = [
-  //   { heading: 'Corporate Gifting' },
-  //   { heading: 'Home Decorations' },
-  //   { heading: 'Birthday Celebration' },
-  //   { heading: 'Birthday Celebration' },
-  //   { heading: 'Birthday Celebration' },
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsToShow = 3; // Number of items to show at once
-
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
@@ -186,30 +177,83 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const handleSubcategoryClick = async (subCategoryId) => {
     navigate(`/sub-category-products/${subCategoryId}`); // Navigate to products page
   };
-
   const [cards, setCards] = useState([]);
+  const [visibleCards, setVisibleCards] = useState([]);
+  const [visibleCards1, setVisibleCards1] = useState([]);
+  const [visibleCards2, setVisibleCards2] = useState([]);
+  const [visibleCards3, setVisibleCards3] = useState([]);
+
+
+  const [products12, setProducts12] = useState([]);
+  const [products13, setProducts13] = useState([]);
+  const [products14, setProducts14] = useState([]);
+  const [products15, setProducts15] = useState([]);
+
+
+  const [cardCount, setCardCount] = useState(8);
+  const [cardCount1, setCardCount1] = useState(8);
+  const [cardCount2, setCardCount2] = useState(8);
+
+  // useEffect(() => {
+  //   axios.get('https://api.hirdayam.com/api/getbestsellingproduct')
+  //     .then(response => {
+  //       const { data } = response;
+  //       if (data.status) {
+  //         // Format the data as required
+  //         const formattedCards = data.data.map(product => ({
+  //           id: product._id,
+  //           imageUrl: product.image,
+  //           price: `&#8377;${parseFloat(product.price).toFixed(2)}`,
+  //           description: product.name,
+  //         }));
+  //         setCards(formattedCards);
+
+  //         setCards(prevCards => [...prevCards, ...formattedCards]);
+
+       
+  //       setHasMore(data.data.length > 0); 
+  //       setShowLoadMore(data.data.length > 0); 
+  //         // Handle error or empty state
+  //         console.error('No data found');
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }, []);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    axios.get('https://api.hirdayam.com/api/getbestsellingproduct')
-      .then(response => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('https://api.hirdayam.com/api/getbestsellingproduct');
         const { data } = response;
+
         if (data.status) {
-          // Format the data as required
           const formattedCards = data.data.map(product => ({
             id: product._id,
             imageUrl: product.image,
             price: `&#8377;${parseFloat(product.price).toFixed(2)}`,
             description: product.name,
           }));
-          setCards(formattedCards);
+
+          setProducts12(formattedCards);
+          setVisibleCards(formattedCards.slice(0, cardCount));
+          setShowLoadMore(formattedCards.length > cardCount);
         } else {
-          // Handle error or empty state
           console.error('No data found');
         }
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error fetching data:', error);
-      });
-  }, []);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [cardCount]);
+
   // const [cards, setCards] = useState([
   //   { id: 1, imageUrl: image9, price: '&#8377;1,200', description: "Veneer Wall Light" },
   //   { id: 2, imageUrl: image10, price: '&#8377;4,200', description: "Brass Diya" },
@@ -476,29 +520,63 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   // ]);
   const [cards1, setCards1] = useState([]);
 
-  useEffect(() => {
-    axios.get('https://api.hirdayam.com/api/getlatestTrendUser')
-      .then(response => {
-        const { data } = response;
-        if (data.status && data.data.products) {
-          // Access the products array inside data.data
-          const formattedCards = data.data.products.map(product => ({
-            id: product._id,
-            imageUrl: product.image,
-            price: `₹${parseFloat(product.price).toFixed(2)}`,
-            description: product.name,
+  // useEffect(() => {
+  //   axios.get('https://api.hirdayam.com/api/getlatestTrendUser')
+  //     .then(response => {
+  //       const { data } = response;
+  //       if (data.status && data.data.products) {
+  //         // Access the products array inside data.data
+  //         const formattedCards = data.data.products.map(product => ({
+  //           id: product._id,
+  //           imageUrl: product.image,
+  //           price: `₹${parseFloat(product.price).toFixed(2)}`,
+  //           description: product.name,
           
-          }));
-          setCards1(formattedCards);
+  //         }));
+  //         setProducts13(formattedCards);
+  //         setVisibleCards1(formattedCards.slice(0, cardCount1));
+  //         setShowLoadMore1(formattedCards.length > cardCount1);
+  //       } else {
+  //         // Handle error or empty state
+  //         console.error('No data found');
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }, [cardCount1]);
+  const [loading2, setLoading2] = useState(false);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading2(true);
+        const response = await axios.get('https://api.hirdayam.com/api/getlatestTrendUser');
+        const { data } = response;
+
+        if (data.status && data.data.products) {
+                  const formattedCards= data.data.products.map(product => ({
+                    id: product._id,
+                    imageUrl: product.image,
+                    price: `₹${parseFloat(product.price).toFixed(2)}`,
+                    description: product.name,
+                  
+                  }));
+          setProducts13(formattedCards);
+          setVisibleCards1(formattedCards.slice(0, cardCount1));
+          setShowLoadMore1(formattedCards.length > cardCount1);
         } else {
-          // Handle error or empty state
           console.error('No data found');
         }
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error fetching data:', error);
-      });
-  }, []);
+      } finally {
+        setLoading2(false);
+      }
+    };
+
+    fetchProducts();
+  }, [cardCount1]);
 
   // const [cards2, setCards2] = useState([
   //   { id: 1, imageUrl: 'https://i.pinimg.com/564x/ca/e6/9c/cae69c9b3349585dbaf4361bdfbbcba4.jpg', price: '&#8377;1,200', height: '200px', description: "Personalize Mugs" },
@@ -511,29 +589,62 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   //   { id: 8, imageUrl: 'https://i.pinimg.com/564x/0d/78/a4/0d78a455237e6894ea6081881a3039ca.jpg', price: '&#8377;1,400', description: "Decor Fountain" },
   // ]);
     const [cards2, setCards2] = useState([]);
+    const [loading3, setLoading3] = useState(false);
+
+  // useEffect(() => {
+  //   axios.get('https://api.hirdayam.com/api/getPersonalizeProduct')
+  //     .then(response => {
+  //       const { data } = response;
+  //       if (data.status && data.data && data.data.data) {
+  //         // Access the products array inside data.data.data
+  //         const formattedCards = data.data.data.map(product => ({
+  //           id: product._id,
+  //           imageUrl: product.image,
+  //           price: `₹${parseFloat(product.price).toFixed(2)}`,
+  //           description: product.name,
+  //         }));
+  //         setProducts14(formattedCards);
+  //         setVisibleCards2(formattedCards.slice(0, cardCount2));
+  //         setShowLoadMore2(formattedCards.length > cardCount2);
+  //       } else {
+  //         // Handle error or empty state
+  //         console.error('No data found');
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }, [cardCount2]);
   useEffect(() => {
-   
-    axios.get('https://api.hirdayam.com/api/getPersonalizeProduct')
-      .then(response => {
+    const fetchProducts = async () => {
+      try {
+        setLoading3(true);
+        const response = await axios.get('https://api.hirdayam.com/api/getPersonalizeProduct');
         const { data } = response;
+
         if (data.status && data.data && data.data.data) {
-          // Access the products array inside data.data.data
-          const formattedCards = data.data.data.map(product => ({
-            id: product._id,
-            imageUrl: product.image,
-            price: `₹${parseFloat(product.price).toFixed(2)}`,
-            description: product.name,
-          }));
-          setCards2(formattedCards);
+                  // Access the products array inside data.data.data
+                  const formattedCards = data.data.data.map(product => ({
+                    id: product._id,
+                    imageUrl: product.image,
+                    price: `₹${parseFloat(product.price).toFixed(2)}`,
+                    description: product.name,
+                  }));
+          setProducts14(formattedCards);
+          setVisibleCards2(formattedCards.slice(0, cardCount2));
+          setShowLoadMore2(formattedCards.length > cardCount2);
         } else {
-          // Handle error or empty state
           console.error('No data found');
         }
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error fetching data:', error);
-      });
-  }, []);
+      } finally {
+        setLoading3(false);
+      }
+    };
+
+    fetchProducts();
+  }, [cardCount2]);
   const [cards3, setCards3] = useState([]);
   useEffect(() => {
     axios.get('https://api.hirdayam.com/api/getPreBook')
@@ -689,30 +800,18 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const [showLoadMore, setShowLoadMore] = useState(true);
 
   const handleLoadMore = () => {
-
-    setCards(prevCards => [
-      ...prevCards,
-      { id: 9, imageUrl: image9, price: ' &#8377;45' },
-      { id: 10, imageUrl: image9, price: '$55' },
-      { id: 11, imageUrl: image9, price: '$70' },
-      { id: 12, imageUrl: image9, price: '$80' },
-
-    ]);
-    setShowLoadMore(false);
+    setCardCount(prevCount => prevCount + 8);
+    setVisibleCards(products12.slice(0, cardCount + 8));
+    setShowLoadMore(products12.length > cardCount + 8);
   };
-
+  console.log('Visible Cards:', visibleCards);
+  console.log('Show Load More:', showLoadMore);
   const [showLoadMore1, setShowLoadMore1] = useState(true);
 
   const handleLoadMore1 = () => {
-    setCards1(prevCards => [
-      ...prevCards,
-      { id: 9, imageUrl: image9, price: ' &#8377;45' },
-      { id: 10, imageUrl: image9, price: '$55' },
-      { id: 11, imageUrl: image9, price: '$70' },
-      { id: 12, imageUrl: image9, price: '$80' },
-
-    ]);
-    setShowLoadMore1(false);
+    setCardCount1(prevCount => prevCount + 8);
+    setVisibleCards1(products13.slice(0, cardCount1 + 8));
+    setShowLoadMore1(products13.length > cardCount1 + 8);
   };
   const [showLoadMore2, setShowLoadMore2] = useState(true);
 
@@ -744,16 +843,11 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     setIsModalOpen(false);
   };
   const handleLoadMore2 = () => {
-    setCards2(prevCards => [
-      ...prevCards,
-      { id: 9, imageUrl: image9, price: ' &#8377;45' },
-      { id: 10, imageUrl: image9, price: '$55' },
-      { id: 11, imageUrl: image9, price: '$70' },
-      { id: 12, imageUrl: image9, price: '$80' },
-
-    ]);
-    setShowLoadMore2(false);
+    setCardCount2(prevCount => prevCount + 8);
+    setVisibleCards2(products14.slice(0, cardCount2 + 8));
+    setShowLoadMore2(products14.length > cardCount2 + 8);
   };
+
   const [showLoadMore3, setShowLoadMore3] = useState(true);
   const handleLoadMore3 = () => {
     setCards3(prevCards => [
@@ -1228,11 +1322,11 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
      </div>
       
 
-      <div className='selling'>
+      {/* <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
-          {cards.map(card => (
+          {visibleCards.map(card => (
            
             <div key={card.id} className="card-wrapper" style={{ cursor: 'pointer' }}>
               <div className="card1-product rounded-md">
@@ -1241,9 +1335,9 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             key={card.id}
             to={`/card/${card.id}`}
             className="card-link"
-            onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
+            onClick={(e) => e.stopPropagation()} 
           >
-          {/* style={{ height: card.height }} */}
+        
                   <div className=' w-full h-full flex items-center '>
                   <img src={card.imageUrl} alt="product"  className="card-image1 rounded-xl  w-23 flex   object-contain m-0 p-0"  />
                   </div>
@@ -1275,14 +1369,64 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
         </div>
         {showLoadMore && (
-          <div className="load-more-container">
-            <button className="load-more-btn" onClick={handleLoadMore}>
-              Load More
-            </button>
+        <div className="load-more-container">
+          <button className="load-more-btn" onClick={handleLoadMore}>
+           Load more
+          </button>
+        </div>
+      )}
+      </div> */}
+      <div className='selling'>
+      <h1 className='best'>Best Selling</h1>
+      <h1 className='top'>Top Rated and Bestselling</h1>
+      <div className="card-container">
+        {visibleCards.length > 0 ? visibleCards.map(card => (
+          <div key={card.id} className="card-wrapper" style={{ cursor: 'pointer' }}>
+            <div className="card1-product rounded-md">
+              <div className="card-header w-36 h-56 md:h-72 md:w-full">
+                <Link
+                  to={`/card/${card.id}`}
+                  className="card-link"
+                  onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
+                >
+                  <div className='w-full h-full flex items-center'>
+                    <img src={card.imageUrl} alt="product" className="card-image1 rounded-xl w-23 flex object-contain m-0 p-0" />
+                  </div>
+                </Link>
+                <button
+                  className="favorite-btn m-2 md:m-0"
+                  onClick={(e) => handleFavoriteButtonClick(card.id)}
+                  style={{
+                    cursor: 'pointer',
+                    border: 'none',
+                    background: 'none',
+                    padding: '5px',
+                  }}
+                >
+                  <i
+                    className={`fa-heart ${wishlistItems.data.data.some(item => item.product._id === card.id) ? 'fas' : 'far'}`}
+                    style={{ color: wishlistItems.data.data.some(item => item.product._id === card.id) ? 'red' : '#23387A', fontSize: '24px' }}
+                  ></i>
+                </button>
+              </div>
+            </div>
+            <div className="card-info">
+              <p className="image-description">{card.description}</p>
+              <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
+            </div>
           </div>
-          
+        )) : (
+          <p>No products available</p>
         )}
       </div>
+      {showLoadMore && (
+        <div className="load-more-container">
+          <button className="load-more-btn" onClick={handleLoadMore} disabled={loading}>
+            {loading ? 'Loading...' : 'Load More'}
+          </button>
+        </div>
+      )}
+    </div>
   {/* <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
@@ -1349,7 +1493,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         <h3 className='best '>New Arrivals</h3>
         <h1 className='top '>Discover the Latest Trends</h1>
         <div className="card-container">
-          {cards1.map(card => (
+        {visibleCards1.length > 0 ? visibleCards1.map(card => (
             
             <div key={card.id} className="card-wrapper">
               <div className="card1-product rounded-md">
@@ -1386,16 +1530,18 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 <p className='price '><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
               </div>
             </div>
-          ))}
+          )) : (
+              <p>No products available</p>
+            )}
         </div>
 
         {showLoadMore1 && (
-          <div className="load-more-container">
-            <button className="load-more-btn" onClick={handleLoadMore1}>
-              Load More
-            </button>
-          </div>
-        )}
+        <div className="load-more-container">
+          <button className="load-more-btn" onClick={handleLoadMore1} disabled={loading}>
+            {loading ? 'Loading...' : 'Load More'}
+          </button>
+        </div>
+      )}
       </div>
       <div>
         <img src={group2} className='group2' />
@@ -1403,7 +1549,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           <h3 className='best'>Customizable Products</h3>
           <h1 className='top'>Looking for Personal Touch</h1>
           <div className="card-container">
-            {cards2.map(card => (
+          {visibleCards2.length > 0 ? visibleCards2.map(card => (
+
               <div key={card.id} className="card-wrapper">
                 <div className="card1-product rounded-md">
                   <div className="card-header w-36 h-56 md:h-72   md:w-full">
@@ -1439,15 +1586,17 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 </div>
               </div>
 
-            ))}
+     )) : (
+    <p>No products available</p>
+)}
           </div>
 
           {showLoadMore2 && (
-            <div className="load-more-container">
-              <button className="load-more-btn" onClick={handleLoadMore2}>
-                Load More
-              </button>
-            </div>
+        <div className="load-more-container">
+          <button className="load-more-btn" onClick={handleLoadMore2} disabled={loading}>
+            {loading ? 'Loading...' : 'Load More'}
+          </button>
+        </div>
           )}
         </div>
         <div>
@@ -1540,13 +1689,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           ))} */}
         </div>
 
-        {showLoadMore3 && (
-          <div className="load-more-container">
-            <button className="load-more-btn" onClick={handleLoadMore3}>
-              Load More
-            </button>
-          </div>
-        )}
+       
 
         <img src={group} className='group6' />
         <Slider/>

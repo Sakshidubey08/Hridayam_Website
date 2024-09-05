@@ -10,7 +10,7 @@ import axios from 'axios';
 
 const CheckoutPage = () => {
   const { cartItems,applycoupon,PlaceOrder,placeorderdone, handlePayment,    calculateSubtotal, calculateTotal } = useContext(CartContext);
-  
+  const screenshot = localStorage.getItem('screenshot');
   const countries = ['India', 'Country B', 'Country C', 'Country D'];
   const states = ['Madhya Pradesh', 'State 2', 'State 3', 'State 4', 'State 5'];
   const [couponinput,setcouponinput]=useState("");
@@ -303,13 +303,13 @@ const fetchAddress = async () => {
           {/* </Link> */}
         </div>
       </div>
+     
       <Footer />
     </>
   );
 };
 
 export default CheckoutPage;
-
 
 
 

@@ -366,7 +366,7 @@ const Cardpage1 = () => {
     return <div>No data available for the selected ID.</div>;
   }
 
-  const { name, price, default_color_image, images, image } = filteredCard;
+  const { name, price, default_color_image, images, image,product_details } = filteredCard;
   const mainImage = selectedImage || default_color_image || image;
 
 
