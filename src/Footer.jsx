@@ -17,7 +17,7 @@ function Footer() {
                 </div>
                 <div className='flex flex-wrap md:gap-8  pl-4 md:pl-0 '>
                 <div className="footer-section1 footer-section2 my-1">
-                    <h4 className="footer-title1 font-bold md:pl-4">Location</h4>
+                    <h4 className="footer-title1 md:mt-3  font-bold md:pl-4">Location</h4>
                     <div className="footer-contact1">
                         <i className="fas fa-map-marker-alt1"></i>
                         <p className="footer-address1 md:flex">

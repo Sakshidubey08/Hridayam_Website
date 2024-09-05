@@ -313,9 +313,3 @@ export default CheckoutPage;
 
 
 
-{/* {cartItems.map(item => (
-                <tr key={item.id}>
-                  <td>{item.product.name}</td>
-                  <td>&#8377;{item.product.price}</td>
-                </tr>
-              ))} */}

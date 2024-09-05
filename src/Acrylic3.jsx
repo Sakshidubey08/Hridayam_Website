@@ -1,330 +1,5 @@
-
-
-
-
-
-
-
-
-// import React, { useState } from 'react';
-// import './Catalog.css'; // Import your CSS file
-// import Header from './Header';
-// import rect1 from './images/rect6.png'
-// import PreviewImg from "./images/Preview.png"
-// import circle1 from "./images/GOLDEN CIRCLE FRAME.jpg"
-// import rect2 from './images/RECTANGLE FEAME(1).jpg'
-// import rect7 from './images/rect7.jpg'
-// import oval from './images/oval.png'
-// import oval1 from './images/ovalgolden.jpg'
-// import circle from './images/CIRCLE FRAME.jpg'
-// import { AutoTextSize } from 'auto-text-size'
-// function App() {
-//     const [selectedImage3, setSelectedImage3] = useState(null);
-//     const [selectedShape, setSelectedShape] = useState("rectangle");
-//     const [selectedSize, setSelectedSize] = useState('12x9');
-//     const [selectedThickness, setSelectedThickness] = useState('3MM');
-//     const [selectedImage2, setSelectedImage2] = useState(null);
-//     const [selectedImage, setSelectedImage] = useState(null);
-//     const [scale, setScale] = useState(0.8);
-//     //    const [selectedImage, setSelectedImage] = useState(false);
-//         const [imageSelected, setImageSelected] = useState(false);
-//             const [text, setText] = useState('');
-//             const [showTextInput, setShowTextInput] = useState(false);
-
-//             const handleSliderChange = (e) => {
-//                 setScale(e.target.value / 100);
-//                 console.log(scale)
-//                  // Convert range value to scale factor (0.2 to 1.0)
-//             };
-//     const handleTextChange = (e) => {
-//         setText(e.target.value);
-//     };
-
-//     const handleTextSubmit = (e) => {
-//         e.preventDefault();
-//         setShowTextInput(false);
-//     };
-//     const handleTextClick = () => {
-//         setShowTextInput(true);
-//     };
-//     const handleImageClick = (image) => {
-//         setSelectedImage(image);
-//     };
-//        const handleImageUpload = (e) => {
-//         const file = e.target.files[0];
-//         if (file) {
-//             const reader = new FileReader();
-//             reader.onloadend = () => {
-//                 setSelectedImage2(reader.result);
-//                 setImageSelected(true);
-//             };
-//             reader.readAsDataURL(file);
-//         }
-//     };
-
-//     const handleShapeChange = (shape) => {
-//         setSelectedShape(shape);
-//     };
-//     const handleShapeClick = (shape) => {
-//         setSelectedShape(shape);
-//     };
-//     const handleSizeChange = (size) => {
-//         setSelectedSize(size);
-//     };
-
-//     const handleThicknessChange = (thickness) => {
-//         setSelectedThickness(thickness);
-//     };
-//     const handleImageClick1 = (imageSrc) => {
-//         setSelectedImage2(imageSrc);
-//     };
-//     return (
-//         <>
-//             <Header />
-//             <h1 className='acrylic'>Acrylic Photo Borders</h1>
-//             <div className="container">
-
-//                 <div className="profile-pictures">
-//                     <div className="shape-content" >
-//                         {selectedShape === 'rectangle' && (
-//                             <div className="rectangle-section mt-8" style={{ display: 'flex', gap: '10px' }}>
-
-//                                 <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
-//                                 <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
-//                             </div>
-//                         )}
-
-//                         {selectedShape === 'square' && (
-//                             <div className="square-section">
-
-//                                 <h2>Square Section</h2>
-//                                 <p>Images or content related to Square.</p>
-//                             </div>
-//                         )}
-
-//                         {selectedShape === 'circle' && (
-//                             <div className="circle-section" style={{display:'flex', gap:'10px'}}>
-//      <img src={circle} style={{ height: '60px', width: '60px', marginTop:'5px' }} onClick={() => handleImageClick(circle)} />
-//      <img src={circle1} style={{ height: '60px', width: '60px', marginTop:'5px' }} onClick={() => handleImageClick(circle)} />
-
-//                             </div>
-//                         )}
-
-//                         {selectedShape === 'oval' && (
-//                             <div className="oval-section" style={{display:'flex'}}>
-
-
-//                                 <img src={oval} style={{ height: '60px', width: '60px', marginTop:'5px' }} onClick={() => handleImageClick(oval)} />
-//                                 <img src={oval1} style={{ height: '60px', width: '60px', marginTop:'5px' }} onClick={() => handleImageClick(oval1)} />
-
-//                             </div>
-//                         )}
-//                     </div>
-//                 </div>
-//                 <div className="preview">
-
-//                     <div className="image-container ">
-//                     <div className={` ${ selectedImage==null?"block":"hidden"}`}>
-
-//                     <img  style={{zIndex:'0'}}  className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
-//                     <div className={ `relative ${selectedImage2==null?"block":"hidden"}`}>
-//                         <img style={{transform:`scale(${scale})`}}
-//                          className=' shadow-2xl'
-//                           src={PreviewImg}></img>
-//                         {/* <div  className=' text-3xl text-white  border px-3 py-4  bg-black/30 rounded-md  absolute top-[30%] left-[35%]'>PREVIEW</div> */}
-//                     </div>
-//                      </div>
-//                     {selectedShape === 'rectangle' && selectedImage && (
-//          <div className=' relative'>   
-//          <img className=' h-20 w-20' style={{zIndex:"1"}} src={selectedImage} 
-//          style={{
-//       width: '100%', // Adjust width as needed
-//       height: 'auto'
-//       ,position:"relative" // Maintain aspect ratio
-//     }}></img>       
-//         <img width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
-//         {/* <p className=' relative text-black top-0 left-0'>Text</p> */}
-//         <div className=' absolute text-4xl top-[50%] left-[50%]' style={{zIndex:"3"}}>sdfd</div>
-//          </div>
-//     )}
-//     {selectedShape === 'square' && selectedImage && (
-//         <div className=' relative'>   
-//          <img className='z-0' src={selectedImage}></img>       
-//         <img   className=' absolute  top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
-//          </div>
-//     )}
-//     {selectedShape === 'circle' && selectedImage && (
-//         <div className=' relative'>   
-//          <img className='z-0' src={selectedImage}></img>       
-//         <img   className=' absolute  top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
-//          </div>
-//     )}
-//     {selectedShape === 'oval' && selectedImage && (
-//         <div className=' relative'>   
-//          <img className='z-0' src={selectedImage}></img>       
-//         <img   className=' absolute  top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
-//          </div>
-//     )}
-//                     </div>
-//                     {/* <div className="preview-text">
-//                         <h2>PREVIEW</h2>
-//                     </div> */}
-//                 </div>
-//                 <div className="options">
-
-
-//                     <div className="upload-button">
-//                     <div>                                  
-//                     <button className=" text-black relative" onClick={()=>document.getElementById('my_modal_3').showModal()}>
-
-//                     🔍 Zoom 
-
-// </button>
-// <dialog id="my_modal_3" className="modal">
-//   <div className="modal-box">
-//     <form method="dialog">
-//       {/* if there is a button in form, it will close the modal */}
-//       <button style={{ background:"transparent", color:"black"}} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-0 pb-20 m-20 pl-20">✕</button>
-//     </form>
-//     <input
-//      type="range"
-//       min="20"
-//        max="100" 
-//         className="range range-primary h-3"
-//         value={scale * 100} // Convert scale factor back to percentage for the slider
-//         onChange={handleSliderChange}
-//          />
-//   </div>
-//   <form method="dialog" className="modal-backdrop">
-//     <button style={{color:"transparent" ,background:"transparent"}}>close</button>
-//   </form>
-// </dialog>
-
-
-//                     </div>
-//                     <button className="option" onClick={() => document.getElementById('fileInput').click()}>
-//                     🖼️   Select Photo
-//                    </button>
-
-// <button className="" onClick={()=>document.getElementById('my_modal_4').showModal()}>
-// 📝 Text
-// </button>
-// <dialog id="my_modal_4" className="modal">
-//   <div className="modal-box">
-//     <form method="dialog">
-//       {/* if there is a button in form, it will close the modal */}
-//       <button style={{background:"transparent", color:"black"}} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-//     </form>
-//    <div className='border items-start'>
-//     <label className=' content-start left-0'>Add Text</label><br></br>
-//     <input type='text' placeholder='Enter Your Text here'/>
-//    </div>
-//   </div>
-// </dialog>
-//                    {/* {showTextInput && (
-//                         <form onSubmit={handleTextSubmit} className="text-input-form">
-//                             <input
-//                                 type="text"
-//                                 value={text}
-//                                 onChange={handleTextChange}
-//                                 placeholder="Enter your text"
-//                                 className="text-input"
-//                             />
-//                             <button type="submit">Add Text</button>
-//                         </form>
-//                     )} */}
-//                    <input
-//                         type="file"
-//                         id="fileInput"
-//                         style={{ display: 'none' }}
-//                         accept="image/*"
-//                         onChange={handleImageUpload}
-//                     />
-//                     </div>
-//                     <div className="shapes">
-//                         <h3>Acrylic Photo Shapes</h3>
-//                         <div className="shape-options">
-//                             <svg
-//                                 viewBox="0 0 600 400"
-//                                 className={`shape-svg1 ${selectedShape === 'rectangle' ? 'selected' : ''}`}
-//                                 onClick={() => handleShapeClick('rectangle')}
-//                             >
-//                                 <rect x="10" y="10" width="480" height="280" fill="#c1995d" stroke="black" strokeWidth="5" />
-//                             </svg>
-
-
-//                             <svg
-//                                 viewBox="0 0 400 400"
-//                                 className={`shape-svg2 ${selectedShape === 'square' ? 'selected' : ''}`}
-//                                 onClick={() => handleShapeClick('square')}
-//                             >
-//                                 <rect x="10" y="10" width="280" height="280" fill="#c1995d" stroke="black" strokeWidth="5" />
-//                             </svg>
-
-
-//                             <svg
-//                                 viewBox="0 0 200 200"
-//                                 className={`shape-svg3 ${selectedShape === 'circle' ? 'selected' : ''}`}
-//                                 onClick={() => handleShapeClick('circle')}
-//                                 width="100"
-//                             >
-//                                 <circle cx="100" cy="100" r="80" fill="#c1995d" stroke="gray" strokeWidth="5" />
-//                             </svg>
-
-
-//                             <svg
-//                                 viewBox="0 0 400 400"
-//                                 className={`shape-svg4 ${selectedShape === 'oval' ? 'selected' : ''}`}
-//                                 onClick={() => handleShapeClick('oval')}
-//                             >
-//                                 <ellipse cx="200" cy="200" rx="200" ry="100" fill="#c1995d" stroke="black" strokeWidth="5" />
-//                             </svg>
-//                         </div>
-//                     </div>
-//                     <div className="size-options">
-//                         <br />
-//                         <br />
-//                         <h3>Size (Inch): {selectedSize}</h3>
-//                         <div className="size-buttons">
-//                             <button onClick={() => handleSizeChange('12x9')} className={`size-button ${selectedSize === '12x9' ? 'active' : ''}`}>12x9</button>
-//                             <button onClick={() => handleSizeChange('11x11')} className={`size-button ${selectedSize === '11x11' ? 'active' : ''}`}>11x11</button>
-//                             <button onClick={() => handleSizeChange('16x12')} className={`size-button ${selectedSize === '16x12' ? 'active' : ''}`}>16x12</button>
-//                             <button onClick={() => handleSizeChange('16x16')} className={`size-button ${selectedSize === '16x16' ? 'active' : ''}`}>16x16</button>
-//                             <button onClick={() => handleSizeChange('21x15')} className={`size-button ${selectedSize === '21x15' ? 'active' : ''}`}>21x15</button>
-//                             <button onClick={() => handleSizeChange('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''}`}>35x23</button>
-//                         </div>
-//                     </div>
-//                     <div className="thickness-options">
-//                         <h3>Thickness: {selectedThickness}</h3>
-//                         <div className="thickness-buttons">
-//                             <button onClick={() => handleThicknessChange('3MM')} className={`thickness-button ${selectedThickness === '3MM' ? 'active' : ''}`}>3MM</button>
-//                             <button onClick={() => handleThicknessChange('5MM')} className={`thickness-button ${selectedThickness === '5MM' ? 'active' : ''}`}>5MM</button>
-//                             <button onClick={() => handleThicknessChange('8MM')} className={`thickness-button ${selectedThickness === '8MM' ? 'active' : ''}`}>8MM (Premium)</button>
-//                         </div>
-//                     </div>
-//                     <div className="price1">
-//                         ₹699 ₹1,199
-//                     </div>
-//                     <div className="details">
-//                         Only 8 Acrylic's left!
-//                         Photo quality for 12x9 is Good
-//                         Quick mount: OMGS® Adhesive hooks (Included)
-//                     </div>
-//                     <button className="buy-now">BUY IT NOW</button>
-//                     <div className="size-guide">
-//                         Size guide?
-//                     </div>
-//                     <div style={{ maxWidth: '60%', margin: '0 auto' }}>
-//       {/* <AutoTextSize>sdfsdfdsdfsdsdfsdsddsfsdfsddfsdf</AutoTextSize> */}
-//     </div>
-//                 </div>
-//             </div>
-//         </>
-//     );
-// }
-
-// export default App;
-import React, { useState } from 'react';
+import { toPng } from 'html-to-image';
+import React, { useState ,useCallback,useRef} from 'react';
 import './Catalog.css'; // Import your CSS file
 import Header from './Header';
 import rect1 from './images/rect6.png'
@@ -338,6 +13,7 @@ import oval from './images/oval.png'
 import oval1 from './images/OVALGold.png'
 import { AutoTextSize } from 'auto-text-size'
 import Draggable, { DraggableCore } from 'react-draggable';
+import { useScreenshot } from 'use-react-screenshot'
 import AvatarEditor from 'react-avatar-editor' // Both at the same time
 // import Editor from './Editer';
 import Tour from './Tour';
@@ -346,7 +22,16 @@ import { Link } from 'react-router-dom';
 import backgroundImage from './images/Designer2.png';
 import circle from './images/CIRCLE FRAME.jpg'
 import { StyledEditorBlock, TextEditorBlock } from "react-web-editor"
+import { useEffect } from 'react';
+import html2canvas from 'html2canvas-pro';
+import { FeedbackReporter } from "@medanosol/react-feedback-report";
+import domtoimage from 'dom-to-image';
 function App() {
+    const ref = useRef(null)
+    
+    const [image10, takeScreenshot] = useScreenshot()
+   
+    
     const [selectedImage3, setSelectedImage3] = useState(null);
     const [selectedShape, setSelectedShape] = useState("rectangle");
     const [selectedSize, setSelectedSize] = useState('12x9');
@@ -365,6 +50,8 @@ function App() {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isDraggable, setIsDraggable] = useState(false);
     const [framTextfontfamilystate, setframTextfontfamilystate] = useState("");
+    const [screenshot, setScreenshot] = useState(null);
+
     const handleSliderChange = (e) => {
         setScale(e.target.value / 100);
         console.log(scale)
@@ -374,13 +61,59 @@ function App() {
         setText(e.target.value);
     };
 
+    const captureScreenshot = () => {
+        html2canvas(ref.current,{
+           
+            useCORS: true,
+      scrollX: 0,
+      scrollY: 1200,
+      width: ref.current.scrollWidth, // Capture full width of the element
+      height: ref.current.scrollHeight, // Capture full height of the element
+        }).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            // Store imgData in your store or state
+            console.log(imgData);
+            setScreenshot(imgData); // This is the base64 image
+            // You can save it to a store (Redux, localStorage, etc.)
+          });
+      };
+      
     const handleFocus = () => {
         setIsDraggable(true);
     };
 
 
+    // const captureScreenshot = () => {
+    //   html2canvas(document.body).then((canvas) => {
+    //     const imgData = canvas.toDataURL('image/png');
+    //     setScreenshot(imgData); // Store the screenshot in the state
+    //   });
+    // };
+    
+    
+    const handleCapture = (captureFeedback) => {
+        // Handle the captured feedback data
+        console.log(captureFeedback+"sdfsdfjlkd");
+      };
+     
+    const handlescreenshot = () => {
+        const element = document.getElementById("divtotakescreenshotof")
+        if(!element){
+            return;
+        }
+        html2canvas(element).then((canvas)=>{
+             let image=canvas.toDataURL("image/jpeg")
+        
+             setScreenshot(image)
+             console.log(screenshot)
+        }).catch(err=>{
+            console.error("We can not take the screenshot of your element at this time")
+        })
+    }
+    
 
-    // Handle blur event to disable dragging
+
+   
     const handleBlur = () => {
         setIsDraggable(false);
     };
@@ -446,9 +179,13 @@ function App() {
     const framTextfontfamily = ["Permanent Marker", "Grey Qo", "Matemasie", "Edu VIC WA NT Beginner", "Bodoni Moda SC"];
     return (
         <>
+        
             <Header />
             <Tour />
-            <div className="container ml-1 mt-24 md:mt-10">
+            
+           
+           
+            <div  className="container ml-1 mt-24 md:mt-10">
                 <div style={{
                     backgroundSize: 'cover', // or 'contain' depending on your requirement
                     backgroundPosition: 'center', // centers the image
@@ -456,8 +193,8 @@ function App() {
                 }}>
                     <h1 className='acrylic'>Acrylic Photo Borders</h1>
 
-                    <div className="profile-pictures">
-                        <div className="shape-content ">
+                    <div id="form-id"  className="profile-pictures">
+                        <div  className="shape-content ">
                             {selectedShape === 'rectangle' && (
                                 <div className="rectangle-section gap-1 md:gap-6 mt-4" style={{ display: 'flex' }}>
 
@@ -498,17 +235,18 @@ function App() {
                             )}
                         </div>
                     </div>
-                    <div className=' w-screen m-auto  md:w-[1140px] ' style={{
+                    <div   className=' w-screen m-auto  md:w-[1140px] ' style={{
                         backgroundImage: `url(${backgroundImage})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         overflow: "hidden",
                         backgroundRepeat: 'no-repeat',
                     }}>
-                        <div className="preview">
+                    {/* <img src={image}></img> */}
+                        <div   className="preview ">
 
-                            <div className="image-container">
-                                <div className={` ${selectedImage == null ? "block" : "hidden"}`}>
+                            <div ref={ref} className="image-container">
+                                <div ref={ref}  className={` ${selectedImage == null ? "block" : "hidden"}`}>
 
                                     <img style={{ zIndex: '0' }} className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }} />
 
@@ -551,7 +289,7 @@ function App() {
                                     </div>
                                 </div>
                                 {selectedShape === 'rectangle' && selectedImage && (
-                                    <div className=' relative'>
+                                    <div ref={ref} className=' relative'>
                                         <img className=' h-20 w-20' style={{ zIndex: "1" }} src={selectedImage}
                                             style={{
                                                 width: '100%', // Adjust width as needed
@@ -578,7 +316,6 @@ function App() {
                                         {/* <p className=' relative text-black top-0 left-0'>Text</p> */}
                                         <Draggable
                                             defaultPosition={{ x: -76, y: -44 }}
-                                        // onDrag={handleDrag}
 
 
                                         >
@@ -780,18 +517,6 @@ function App() {
                                 </form>
                             </div>
                         </dialog>
-                        {/* {showTextInput && (
-                        <form onSubmit={handleTextSubmit} className="text-input-form">
-                            <input
-                                type="text"
-                                value={text}
-                                onChange={handleTextChange}
-                                placeholder="Enter your text"
-                                className="text-input"
-                            />
-                            <button type="submit">Add Text</button>
-                        </form>
-                    )} */}
                         <input
                             type="file"
                             id="fileInput"
@@ -879,16 +604,6 @@ function App() {
                     <div className="size-options">
                         <br />
                         <br />
-
-                        {/* <h3 className='acrylic1'>Size (Inch): {selectedSize}</h3> */}
-                        {/* <div className="size-buttons">
-                            <button onClick={() => handleSizeChange('12x9')} className={`size-button ${selectedSize === '12x9' ? 'active' : ''}`}>12x9</button>
-                            <button onClick={() => handleSizeChange('11x11')} className={`size-button ${selectedSize === '11x11' ? 'active' : ''}`}>11x11</button>
-                            <button onClick={() => handleSizeChange('16x12')} className={`size-button ${selectedSize === '16x12' ? 'active' : ''}`}>16x12</button>
-                            <button onClick={() => handleSizeChange('16x16')} className={`size-button ${selectedSize === '16x16' ? 'active' : ''}`}>16x16</button>
-                            <button onClick={() => handleSizeChange('21x15')} className={`size-button ${selectedSize === '21x15' ? 'active' : ''}`}>21x15</button>
-                            <button onClick={() => handleSizeChange('35x23')} className={`size-button ${selectedSize === '35x23' ? 'active' : ''}`}>35x23</button>
-                        </div> */}
                         <div className='size'>
                             <h3 className='acrylic1 ml-10 md:ml-0 my-3'>Size (Inch): {selectedSize}</h3>
                             <div className="size-buttons">
@@ -918,7 +633,9 @@ function App() {
                         <p><span style={{ fontWeight: "300" }}>Quick mount:</span> <span className='text-bold text-balance'>Hridayam® Adhesive hooks (Included)</span></p>
                     </div>
 
-                    <Link to='/place-order'> <button className="buy-now rounded-md px-20">BUY IT NOW</button></Link>
+                    {/* <Link to='/checkout'> */}
+                     <button onClick={captureScreenshot} className="buy-now rounded-md px-20">BUY IT NOW</button>
+                     {/* </Link> */}
 
                     <div style={{ maxWidth: '60%', margin: '-30px auto'}}>
 
@@ -926,7 +643,10 @@ function App() {
                 </div>
             </div>
 
-            <div>
+
+        
+            
+              <div>
             </div>
             <Footer />
 

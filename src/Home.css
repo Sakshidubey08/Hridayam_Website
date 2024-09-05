@@ -1134,21 +1134,12 @@ input:focus, select:focus, textarea:focus {
 
 /* .dropdown-item5:hover {
   background-color: #f1f1f1; /* Optional: Add a background color on hover */
-  .slider-wrapper {
-    overflow-x: auto; /* Enable horizontal scrolling */
-    overflow-y: hidden; /* Prevent vertical scrolling */
-    width: calc(2 * 220px); /* Same width as the visible area for 4 items */
-    position: relative;
-    cursor: grab;
-  }
   
-  .slider-wrapper.active {
-    cursor: grabbing;
-  }
   .decoration {
     display: flex;
     margin-left: 72px;
-    z-index: 10000;
+   
+    z-index: 100;
     transition: transform 0.3s ease;
     overflow: visible; /* Allow dropdown to overflow outside the container */
 
@@ -1160,7 +1151,7 @@ input:focus, select:focus, textarea:focus {
   .decoration.active {
     cursor: grabbing; /* Changes cursor when actively dragging */
   }
-  .menu-item .dropdown5 {
+  .menu-item .dropdown15 {
     display: none; /* Hide dropdown by default */
     position: absolute; /* Absolute positioning to place it relative to .menu-item */
     top: 100%; /* Position dropdown directly below the menu item */
@@ -1176,14 +1167,14 @@ input:focus, select:focus, textarea:focus {
     font-weight: 500;
   }
   
-  .menu-item:hover .dropdown5 {
+  .menu-item:hover .dropdown15 {
     display: block; /* Show dropdown on hover */
   }
-  .menu-item .dropdown5 {
+  .menu-item .dropdown15 {
     z-index: 9999; /* Higher value to ensure it's on top of other elements */
   }
   
-  .dropdown-item5 {
+  .dropdown-item15 {
     padding: 10px;
     border-bottom: 1px solid #ccc;
     font-weight: 500;
@@ -1192,7 +1183,7 @@ input:focus, select:focus, textarea:focus {
     cursor: pointer;
   }
   
-  .dropdown-item5:hover {
+  .dropdown-item15:hover {
     background-color: #f1f1f1; /* Optional: Highlight on hover */
   }
    

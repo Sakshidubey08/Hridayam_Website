@@ -9,6 +9,8 @@ import { CartContext } from './CartContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Footer from './Footer';
+import Loadingpage from './Loadingpage';
 const API = "https://api.hirdayam.com/api/getPreBook";
 
 const Cardpage1 = () => {
@@ -153,7 +155,7 @@ const Cardpage1 = () => {
   }, [id, getSingleProduct]);
 
   if (isSingleLoading){
-    return <div>Loading...</div>;
+    return <Loadingpage></Loadingpage> //<div>Loading...</div>;
   }
 
   if (!filteredCard || Object.keys(filteredCard).length === 0){
@@ -162,7 +164,7 @@ const Cardpage1 = () => {
   
 
   const { name, price, default_color_image, images,image } = filteredCard;
-  const mainImage = selectedImage || default_color_image;
+  const mainImage = selectedImage || default_color_image || image;
 
   const handleAddToCart = () => {
     // console.log(getSingleProduct.variations[0]+"new variation")
@@ -214,23 +216,20 @@ const Cardpage1 = () => {
           </div> */}
           <div className="image-gallery">
             <div className="thumbnails">
-              {images.map((image, index) => (
+              {images.map((img, index) => (
                 <img
                   key={index}
-                  src={image}
+                  src={img}
                   alt={`Thumbnail ${index + 1}`}
-                  onClick={() => handleImageClick(images)}
+                  onClick={() => handleImageClick(img)}
                   className="thumbnail"
                 />
               ))}
             </div>
           </div>
           <div className="main-image">
-            {image && (
-              <img src={image} alt="Selected" />
-            )}
+            <img src={mainImage} alt="Selected" />
           </div>
-
           {/* Scrollable Content Section */}
           <div className="scrollable-content4">
             <div className="product-info">
@@ -482,6 +481,7 @@ const Cardpage1 = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

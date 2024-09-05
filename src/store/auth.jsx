@@ -10,6 +10,10 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("token", serverToken);
         setIsAuthenticated(true);
     };
+    const logout = () => {
+        localStorage.removeItem("token");
+        setIsAuthenticated(false);
+    };
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -19,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, storeTokenInLS }}>
+        <AuthContext.Provider value={{ isAuthenticated, storeTokenInLS,logout }}>
             {children}
         </AuthContext.Provider>
     );

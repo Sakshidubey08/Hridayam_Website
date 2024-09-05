@@ -3,7 +3,7 @@ import { Range, getTrackBackground } from 'react-range';
 import axios from 'axios';
 import './AllP.css';
 import Header from './Header';
-import { Link } from 'react-router-dom';
+import { Link ,useLocation, useSearchParams} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { WishlistContext } from './WishlistContext';
 import Footer from './Footer';
@@ -21,6 +21,10 @@ function Filter() {
     const [cards, setCards] = useState([]);
     const { addToWishlist, wishlistItems, removeFromWishlist } = useContext(WishlistContext);
     const navigate = useNavigate();
+    const location =useLocation();
+    const queryparem=new URLSearchParams(location.search)
+    const searchQuery=queryparem.get("search");
+    console.log(searchQuery)
     useEffect(() => {
         const storedFavoriteCards = localStorage.getItem('favoriteCards');
         if (storedFavoriteCards) {
@@ -33,7 +37,7 @@ function Filter() {
         }
     }, []);
     useEffect(() => {
-        axios.get('https://api.hirdayam.com/api/getProductsforuser', {
+        axios.get(`https://api.hirdayam.com/api/getProductsforuser?search=${searchQuery}`, {
             params: {
                 min_price: priceRange[0],
                 max_price: priceRange[1]
@@ -58,6 +62,33 @@ function Filter() {
                 console.error('Error fetching data from API:', error);
             });
     }, [priceRange]);
+
+    useEffect(() => {
+        axios.get(`https://api.hirdayam.com/api/getProductsforuser?search=${searchQuery}`, {
+            params: {
+                min_price: priceRange[0],
+                max_price: priceRange[1]
+            }
+        })
+            .then(response => {
+                console.log('API response:', response.data); // Log the entire response
+                if (response.data.status) {
+                    const fetchedCards = response.data.data.data.map(product => ({
+                        id: product._id,
+                        imageUrl: product.image,
+                        price: product.price,
+                        description: product.name,
+                        imagesUrl: product.images
+                    }));
+                    setCards(fetchedCards);
+                    localStorage.setItem('fetchedCards', JSON.stringify(fetchedCards));
+                    console.log('Fetched cards:', fetchedCards);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data from API:', error);
+            });
+    }, [searchQuery]);
 
     const parsePrice = (price) => {
         if (typeof price === 'number') {
