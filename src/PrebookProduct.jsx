@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Footer from './Footer';
+import Loadingpage from './Loadingpage';
 const API = "https://api.hirdayam.com/api/getPreBook";
 
 const Cardpage1 = () => {
@@ -27,6 +28,7 @@ const Cardpage1 = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [personalizeText,setpersonalize]=useState("");
   const [deliveryText, setDeliveryText] = useState({
     line1: "Please enter PIN code to check delivery time.",
     line2: "100% Original Products.",
@@ -153,7 +155,7 @@ const Cardpage1 = () => {
   }, [id, getSingleProduct]);
 
   if (isSingleLoading){
-    return <div>Loading...</div>;
+    return <Loadingpage></Loadingpage> //<div>Loading...</div>;
   }
 
   if (!filteredCard || Object.keys(filteredCard).length === 0){
@@ -167,18 +169,25 @@ const Cardpage1 = () => {
   const handleAddToCart = () => {
     // console.log(getSingleProduct.variations[0]+"new variation")
     if (true) {
-        const productToAdd = {
+        const productToAdd ={
             id: id,
             name: name,
             price: price,
             image:  file,
+            text:personalizeText,
             color:filteredCard.colors[0],
             variation:filteredCard.variations[0]
             
         };
          console.log(productToAdd)
-        addToCart(productToAdd, quantity);
+         if(file==null && filteredCard?.product_type=="personalize"){
+          alert("Please Select Image")
+         }
+         else{
+           addToCart(productToAdd, quantity);
         navigate('/cart');
+         }
+       
     }
 };
   return (

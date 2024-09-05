@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import './Header.css'
 import pinterest from './images/PinterestLogo.png'
 import instagram from './images/InstagramLogo.png'
@@ -17,7 +17,7 @@ import coming_soon from "./images/coming-soon.png"
 import icon2 from './images/icon2.png'
 import icon3 from './images/icon3.png'
 import icon3_white from './images/cart-white.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import couponsvg1 from "./images/couponcodesvg.svg"
 import couponsvg2 from "./images/couponcodesvg2.svg"
 import couponsvg3 from "./images/couponcodesvg1.svg"
@@ -28,12 +28,26 @@ import { FaBars } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons'; // Use this if thin is not available
 import { useClipboard } from 'use-clipboard-copy';
+import { CartContext } from './CartContext'
 const Header = () => {
+  const navigate=useNavigate();
+  const {searchinput , handlesearch}=useContext(CartContext);
+  const [searchinput2,setsearchinput2]=useState("");
   const clipboard = useClipboard({
     copiedTimeout: 9000, 
   }
 
   );
+  const handleSearch=(text)=>{
+     setsearchinput2(text.target.value);
+  }
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      // Navigate to the 'All Products' page, passing search text as query param
+      navigate(`/all-products?search=${searchinput2}`);
+    }
+  };
   
   return (
     <>
@@ -45,7 +59,7 @@ const Header = () => {
             <img src={facebook} alt="Image 3" className="image" />
             <img src={XLogo} alt="Image 4" className="image" />
           </div>
-          <div style={{color:' #F3F3F3',fontFamily:'Poppins'}}  className="center-text">
+          <div  style={{color:' #F3F3F3',fontFamily:'Poppins'}}  className="  center-text">
             Free Shipping On All Us Orders Over Rs 499
           </div>
           <div className="locate-store">
@@ -226,7 +240,12 @@ Locate Store
         </Link>
         <div className="search-container hidden md:flex mr-[-130px] md:mr-0">
           <img src={search} alt="Search Icon" className="search-icon"/>
-          <input type="text" className="search-input" placeholder="Search product..." />
+          <input  
+           onChange={handleSearch} // Call handleSearch on text input change
+           onKeyPress={handleKeyPress} // Call handleKeyPress on key press
+            type="text" 
+            className="search-input"
+             placeholder="Search product..." />
         </div>
         <div className="nav-img ml-1 gap-4  md:ml-0">
           <Link to='/wishlist'>
@@ -244,7 +263,7 @@ Locate Store
           <img src={icon3} alt="icon 3" className="image" />
         </div> 
         <div className='cart-white'>
-          <img src={icon3_white} alt="icon 3" className="image" />
+          <img src={icon3_white} alt="icon 3" className="image"/>
         </div> 
          </Link>
          

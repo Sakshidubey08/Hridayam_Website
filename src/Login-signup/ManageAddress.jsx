@@ -201,7 +201,10 @@ const ManageAddress = () => {
                         required
                     />
                 </div>
-                <button type="submit">Submit Address</button>
+                <div className=' flex justify-center'>
+                    <button className='btn bg-blue-800 w-1/2 text-white' type="submit">Submit Address</button>
+                </div>
+                
             </form>
         </div>
         </div>

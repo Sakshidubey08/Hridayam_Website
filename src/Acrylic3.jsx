@@ -1,5 +1,5 @@
-
-import React, { useState } from 'react';
+import { toPng } from 'html-to-image';
+import React, { useState ,useCallback,useRef} from 'react';
 import './Catalog.css'; // Import your CSS file
 import Header from './Header';
 import rect1 from './images/rect6.png'
@@ -13,6 +13,7 @@ import oval from './images/oval.png'
 import oval1 from './images/OVALGold.png'
 import { AutoTextSize } from 'auto-text-size'
 import Draggable, { DraggableCore } from 'react-draggable';
+import { useScreenshot } from 'use-react-screenshot'
 import AvatarEditor from 'react-avatar-editor' // Both at the same time
 // import Editor from './Editer';
 import Tour from './Tour';
@@ -21,7 +22,16 @@ import { Link } from 'react-router-dom';
 import backgroundImage from './images/Designer2.png';
 import circle from './images/CIRCLE FRAME.jpg'
 import { StyledEditorBlock, TextEditorBlock } from "react-web-editor"
+import { useEffect } from 'react';
+import html2canvas from 'html2canvas-pro';
+import { FeedbackReporter } from "@medanosol/react-feedback-report";
+import domtoimage from 'dom-to-image';
 function App() {
+    const ref = useRef(null)
+    
+    const [image10, takeScreenshot] = useScreenshot()
+   
+    
     const [selectedImage3, setSelectedImage3] = useState(null);
     const [selectedShape, setSelectedShape] = useState("rectangle");
     const [selectedSize, setSelectedSize] = useState('12x9');
@@ -40,6 +50,8 @@ function App() {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isDraggable, setIsDraggable] = useState(false);
     const [framTextfontfamilystate, setframTextfontfamilystate] = useState("");
+    const [screenshot, setScreenshot] = useState(null);
+
     const handleSliderChange = (e) => {
         setScale(e.target.value / 100);
         console.log(scale)
@@ -49,10 +61,56 @@ function App() {
         setText(e.target.value);
     };
 
+    const captureScreenshot = () => {
+        html2canvas(ref.current,{
+           
+            useCORS: true,
+      scrollX: 0,
+      scrollY: 1200,
+      width: ref.current.scrollWidth, // Capture full width of the element
+      height: ref.current.scrollHeight, // Capture full height of the element
+        }).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            // Store imgData in your store or state
+            console.log(imgData);
+            setScreenshot(imgData); // This is the base64 image
+            // You can save it to a store (Redux, localStorage, etc.)
+          });
+      };
+      
     const handleFocus = () => {
         setIsDraggable(true);
     };
 
+
+    // const captureScreenshot = () => {
+    //   html2canvas(document.body).then((canvas) => {
+    //     const imgData = canvas.toDataURL('image/png');
+    //     setScreenshot(imgData); // Store the screenshot in the state
+    //   });
+    // };
+    
+    
+    const handleCapture = (captureFeedback) => {
+        // Handle the captured feedback data
+        console.log(captureFeedback+"sdfsdfjlkd");
+      };
+     
+    const handlescreenshot = () => {
+        const element = document.getElementById("divtotakescreenshotof")
+        if(!element){
+            return;
+        }
+        html2canvas(element).then((canvas)=>{
+             let image=canvas.toDataURL("image/jpeg")
+        
+             setScreenshot(image)
+             console.log(screenshot)
+        }).catch(err=>{
+            console.error("We can not take the screenshot of your element at this time")
+        })
+    }
+    
 
 
    
@@ -123,9 +181,13 @@ function App() {
     
     return (
         <>
+        
             <Header />
             <Tour />
-            <div className="container ml-1 mt-24 md:mt-10">
+            
+           
+           
+            <div  className="container ml-1 mt-24 md:mt-10">
                 <div style={{
                     backgroundSize: 'cover', // or 'contain' depending on your requirement
                     backgroundPosition: 'center', // centers the image
@@ -133,8 +195,8 @@ function App() {
                 }}>
                     <h1 className='acrylic'>Acrylic Photo Borders</h1>
 
-                    <div className="profile-pictures">
-                        <div className="shape-content ">
+                    <div id="form-id"  className="profile-pictures">
+                        <div  className="shape-content ">
                             {selectedShape === 'rectangle' && (
                                 <div className="rectangle-section gap-1 md:gap-6 mt-4" style={{ display: 'flex' }}>
 
@@ -175,17 +237,18 @@ function App() {
                             )}
                         </div>
                     </div>
-                    <div className=' w-screen m-auto  md:w-[1140px] ' style={{
+                    <div   className=' w-screen m-auto  md:w-[1140px] ' style={{
                         backgroundImage: `url(${backgroundImage})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         overflow: "hidden",
                         backgroundRepeat: 'no-repeat',
                     }}>
-                        <div className="preview">
+                    {/* <img src={image}></img> */}
+                        <div   className="preview ">
 
-                            <div className="image-container">
-                                <div className={` ${selectedImage == null ? "block" : "hidden"}`}>
+                            <div ref={ref} className="image-container">
+                                <div ref={ref}  className={` ${selectedImage == null ? "block" : "hidden"}`}>
 
                                     <img style={{ zIndex: '0' }} className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }} />
 
@@ -228,7 +291,7 @@ function App() {
                                     </div>
                                 </div>
                                 {selectedShape === 'rectangle' && selectedImage && (
-                                    <div className=' relative'>
+                                    <div ref={ref} className=' relative'>
                                         <img className=' h-20 w-20' style={{ zIndex: "1" }} src={selectedImage}
                                             style={{
                                                 width: '100%', // Adjust width as needed
@@ -572,7 +635,9 @@ function App() {
                         <p><span style={{ fontWeight: "300" }}>Quick mount:</span> <span className='text-bold text-balance'>Hridayam® Adhesive hooks (Included)</span></p>
                     </div>
 
-                    <Link to='/checkout'> <button className="buy-now rounded-md px-20">BUY IT NOW</button></Link>
+                    {/* <Link to='/checkout'> */}
+                     <button onClick={captureScreenshot} className="buy-now rounded-md px-20">BUY IT NOW</button>
+                     {/* </Link> */}
 
                     <div style={{ maxWidth: '60%', margin: '-30px auto'}}>
 
@@ -580,7 +645,10 @@ function App() {
                 </div>
             </div>
 
-            <div>
+
+        
+            
+              <div>
             </div>
             <Footer />
 

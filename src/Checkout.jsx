@@ -60,6 +60,24 @@ if(placeorderdone=="true"){
   navigate("/placeorder")
 }
 
+const handlepersonaldetail=()=>{
+  const navigateTo = (url) => {
+    window.location.href = url;
+  };
+  
+  // Usage:
+  navigateTo('/#/editprofile');
+}
+
+const handleaddressdetails =()=>{
+  const navigateTo = (url) => {
+    window.location.href = url;
+  };
+  
+  // Usage:
+  navigateTo('/#/manage-address');
+}
+
 const fetchUserProfile = async () => {
   try {
     const token = localStorage.getItem('token');
@@ -185,7 +203,10 @@ const fetchAddress = async () => {
                 <input disabled value={phone} type="text" id="phone" name="phone" placeholder='Enter phone number' />
               </div>
             </div>
-            <button className=' btn rounded-md text-white p-2 bg-blue-300 py-0 m-0'>Update Personal Details</button>
+            
+                          <button onClick={handlepersonaldetail} className=' btn rounded-md text-white p-2 bg-blue-300 py-0 m-0'>Update Personal Details</button>
+
+            
             <div className="form-row">
               {/* <div className="half-width">
                 <label  htmlFor="country">Country</label>
@@ -236,7 +257,7 @@ const fetchAddress = async () => {
               </div>
              
           </div>
-          <button className=' btn h-2  rounded-md text-white p-2 my-0 bg-blue-300 py-0 m-0'>Update Address Details</button>
+          <button onClick={handleaddressdetails} className=' btn h-2  rounded-md text-white p-2 my-0 bg-blue-300 py-0 m-0'>Update Address Details</button>
 
 </div>
             
@@ -282,13 +303,7 @@ const fetchAddress = async () => {
           {/* </Link> */}
         </div>
       </div>
-      <div>
-                {screenshot ? (
-                    <img src={screenshot} alt="Preview Screenshot" />
-                ) : (
-                    <p>No screenshot available</p>
-                )}
-            </div>
+     
       <Footer />
     </>
   );

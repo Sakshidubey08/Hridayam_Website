@@ -234,8 +234,11 @@ import Header from './Header';
 import './Products/Product1.css';
 import './Home.css';
 import { CartContext } from './CartContext';
+import { text } from '@fortawesome/fontawesome-svg-core';
+
 import Footer from './Footer';
-const API2 = "https://api.hirdayam.com/api/getlatestTrendUser";
+import Loadingpage from './Loadingpage';
+const API = "https://api.hirdayam.com/api/getlatestTrendUser";
 
 const Cardpage1 = () => {
   const navigate = useNavigate();
@@ -250,6 +253,7 @@ const Cardpage1 = () => {
   const [selectedImage2, setSelectedImage2] = useState(null);
 
   const [file, setfile] = useState(null);
+  const [personalizeText,setpersonalize]=useState("");
   const [deliveryText, setDeliveryText] = useState({
     line1: "Please enter PIN code to check delivery time.",
     line2: "100% Original Products.",
@@ -304,12 +308,12 @@ const Cardpage1 = () => {
 
   useEffect(() => {
     if (id) {
-      getSingleProduct1(API2, id);
+      getSingleProduct1(API, id);
     }
   }, [id, getSingleProduct1]);
 
   if (isSingleLoading) {
-    return <div>Loading...</div>;
+    return <Loadingpage></Loadingpage> //<div>Loading...</div>;
   }
 
   if (!filteredCard || Object.keys(filteredCard).length === 0) {
@@ -320,17 +324,27 @@ const Cardpage1 = () => {
   const mainImage = selectedImage || default_color_image || image;
 
   const handleAddToCart = () => {
-    const productToAdd = {
-      id: id,
-      name: name,
-      price: price,
-      image: file,
-      color: filteredCard.colors[0],
-      variation: filteredCard.variations[0]
-    };
+    // console.log(getSingleProduct.variations[0]+"new variation")
+    if (true) {
+      const productToAdd = {
+        id: id,
+        name: name,
+        price: price,
+        image: file,
+        color: filteredCard.colors[0],
+        text:personalizeText,
+        variation: filteredCard.variations[0]
 
-    addToCart(productToAdd, quantity);
-    navigate('/cart');
+      };
+      if(file==null && filteredCard?.product_type=="personalize"){
+        alert("Please Select Image")
+      }
+      else{
+          addToCart(productToAdd, quantity);
+      navigate('/cart');
+      }
+    
+    }
   };
 
   return (
@@ -444,6 +458,41 @@ const Cardpage1 = () => {
                 />
                 {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
               </div>
+
+              <div>{personalizeText}</div>
+                        <dialog id="my_modal_4" className="modal">
+                            <div className="modal-box">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "transparent", color: "black" }} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+
+                                
+                                <label style={{ paddingRight: "400px" }} className=' text-nowrap '>Add Text</label><br></br>
+                                <input
+                                onChange={(text)=>{setpersonalize(text.target.value)}}
+                                    type='text'
+                                    className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
+                                    placeholder='Enter Your Text here'
+                                     // Bind the state to the input value
+                                     // Update state on change
+                                />
+                                
+
+                                
+
+
+                               
+                            <div>
+
+                                </div>
+
+                                <form method="dialog" >
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
+                                </form>
+                            </div>
+                        </dialog>
 
               <h3 className='free'>Free Delivery</h3>
               <div className="buttons">

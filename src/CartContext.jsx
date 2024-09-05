@@ -189,8 +189,9 @@ const [placeorderdone,setplaceorderdone]=useState(false);
   const [couponDiscount,setcouponDiscount]=useState(0);
   const { storeTokenInLS } = useAuth();
   const [userprofiledata,setuserprofiledata]=useState([]);
-  const [transitionid ,settransitionid] =useState();
+  const [transitionid ,settransitionid] =useState("");
   const [address , setaddress]=useState([]);
+  const [searchinput,setsearchinput]=useState("")
   // const navigate = useNavigate();
   // Function to fetch token from localStorage
   
@@ -204,6 +205,17 @@ const [placeorderdone,setplaceorderdone]=useState(false);
     fetchAddress();
 
   }, []);
+
+  useEffect(() => {
+    if (transitionid) {
+      PlaceOrder(); // This will run when transitionId is set
+    }
+  }, [transitionid]);
+  
+
+  const handlesearch =(text)=>{
+    setsearchinput(text);
+  }
   
   // Fetch cart items on component mount
   const fetchCartItems = () => {
@@ -252,6 +264,7 @@ const [placeorderdone,setplaceorderdone]=useState(false);
     const formData = new FormData();
   formData.append('product_id', product.id);
   formData.append('quantity', quantity);
+  formData.append('personalize_text', product.text);
   // formData.append('user_id', product.user_id);
   // formData.append('price', product.price);
   // formData.append('image', product.image);
@@ -435,7 +448,8 @@ const [placeorderdone,setplaceorderdone]=useState(false);
       console.error('Error editing cart:', error.response ? error.response.data : error.message);
     });
   };
-console.log(transitionid)
+
+ 
 
   const handlePayment = async () => {
     const options = {
@@ -447,18 +461,22 @@ console.log(transitionid)
       image: 'https://hirdayam.com/static/media/image%207365.ad833efe156784d1a8a1.png', // Replace with your logo URL
       handler: async function (response) {
         console.log('Payment successful. Response:', response);
-         settransitionid(response.razorpay_payment_id);
-         
+       
+        settransitionid(response.razorpay_payment_id)
 
+        
+        
         // Now place the order since the payment was successful
-        PlaceOrder();
+       
+          
+        
 
         // setAmount('');
       },
       prefill: {
         name: 'Piyush Garg',
         email: 'youremail@example.com',
-        contact: '9999999999',
+        contact: '+916168055798',
       },
       notes: {
         address: 'Razorpay Corporate Office',
@@ -482,6 +500,9 @@ console.log(transitionid)
 
     rzp1.open();
   };
+  
+  console.log(transitionid)
+  
 
 
   const PlaceOrder = () => {
@@ -543,8 +564,8 @@ console.log(transitionid)
             updatedAt: address.updatedAt,
             __v: address.__v
         },
-        delivery_address_id: "669b9d0ea159078371605d9c",
-        transaction_id: `${transitionid}`
+        delivery_address_id: `${address._id}`,
+        transaction_id: transitionid
     };
 
     console.log('Sending request with payload:', payload);
@@ -556,11 +577,13 @@ console.log(transitionid)
         }
     })
     .then(response => {
-        console.log('order Response from API :', response.data);
-          
-        if(response.message=="Order placed successfully"){
+        console.log('order Response from API :', response);
+        localStorage.setItem('orderid', response.data.order._id);
+        if(response.data.message=="Order placed successfully"){
              setplaceorderdone(true);
             
+           
+             
         }
         const navigateTo = (url) => {
           window.location.href = url;
@@ -588,6 +611,9 @@ console.log(transitionid)
         console.error('Error editing cart:', error.response ? error.response.data : error.message);
     });
 };
+
+
+
 
 
     
@@ -681,7 +707,7 @@ console.log(transitionid)
   // };
 
   return (
-    <CartContext.Provider value={{applycoupon, placeorderdone, handlePayment, PlaceOrder, fetchUserProfile, cartItems, userprofiledata,setuserprofiledata, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>
+    <CartContext.Provider value={{applycoupon,searchinput, handlesearch, placeorderdone, handlePayment, PlaceOrder, fetchUserProfile, cartItems, userprofiledata,setuserprofiledata, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>
       {children}
     </CartContext.Provider>
   );

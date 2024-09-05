@@ -282,6 +282,7 @@ import './Products/Product1.css';
 import Footer from './Footer';
 import './Home.css';
 import { CartContext } from './CartContext';
+import Loadingpage from './Loadingpage';
 
 const API = "https://api.hirdayam.com/api/getbestsellingproduct";
 
@@ -295,6 +296,7 @@ const Cardpage1 = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadMessage, setUploadMessage] = useState('');
   const [pincode, setPincode] = useState('');
+  const [personalizeText,setpersonalize]=useState("");
   const [isPincodeChecked, setIsPincodeChecked] = useState(false);
   const [file, setfile] = useState(null);
   const [deliveryText, setDeliveryText] = useState({
@@ -357,7 +359,7 @@ const Cardpage1 = () => {
   }, [id, getSingleProduct]);
 
   if (isSingleLoading) {
-    return <div>Loading...</div>;
+    return <Loadingpage></Loadingpage> //<div>Loading...</div>;
   }
 
   if (!filteredCard || Object.keys(filteredCard).length === 0) {
@@ -376,13 +378,19 @@ const Cardpage1 = () => {
         name: name,
         price: price,
         image: file,
+        text:personalizeText,
         color: filteredCard.colors[0],
         variation: filteredCard.variations[0]
 
       };
-
-      addToCart(productToAdd, quantity);
+      if(file==null && filteredCard?.product_type=="personalize"){
+          alert("Please Select a Image")
+      }
+      else{
+         addToCart(productToAdd, quantity);
       navigate('/cart');
+      }
+     
     }
   };
   return (
@@ -457,11 +465,50 @@ const Cardpage1 = () => {
                   style={{ display: 'none' }}
                   onChange={handleImageChange}
                 />
-                {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
+                                                <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
+                            Add Text
+                        </button>
+                         {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
+                            
+                {/* {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>} */}
               </div>
-              <h3 className='offer mt-2'>Product Details</h3>
-              <p className='product'>{product_details}</p>
-              <br/>
+              <div>{personalizeText}</div>
+                        <dialog id="my_modal_4" className="modal">
+                            <div className="modal-box">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "transparent", color: "black" }} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+
+                                
+                                <label style={{ paddingRight: "400px" }} className=' text-nowrap '>Add Text</label><br></br>
+                                <input
+                                onChange={(text)=>{setpersonalize(text.target.value)}}
+                                    type='text'
+                                    className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
+                                    placeholder='Enter Your Text here'
+                                     // Bind the state to the input value
+                                     // Update state on change
+                                />
+                                
+
+                                
+
+
+                               
+                            <div>
+
+                                </div>
+
+                                <form method="dialog" >
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
+                                </form>
+                            </div>
+                        </dialog>
+
+              
+
               <h3 className='free'>Free Delivery</h3>
               <div className="buttons">
                 <button className="wishlist-btn">
