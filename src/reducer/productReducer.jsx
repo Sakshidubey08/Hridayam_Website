@@ -11,6 +11,7 @@ const ProductReducer = (state, action) => {
           isLoading: false,
           products: action.payload.data,  // Adjusted to access `data` inside `payload`
           products1: action.payload.data,  // Adjusted to access `data` inside `payload`
+          products2: action.payload.data,  // Adjusted to access `data` inside `payload`
 
         };
       case "API_ERROR":

@@ -235,7 +235,7 @@ import './Products/Product1.css';
 import './Home.css';
 import { CartContext } from './CartContext';
 import Footer from './Footer';
-const API = "https://api.hirdayam.com/api/getlatestTrendUser";
+const API2 = "https://api.hirdayam.com/api/getlatestTrendUser";
 
 const Cardpage1 = () => {
   const navigate = useNavigate();
@@ -247,6 +247,8 @@ const Cardpage1 = () => {
   const [uploadMessage, setUploadMessage] = useState('');
   const [pincode, setPincode] = useState('');
   const [isPincodeChecked, setIsPincodeChecked] = useState(false);
+  const [selectedImage2, setSelectedImage2] = useState(null);
+
   const [file, setfile] = useState(null);
   const [deliveryText, setDeliveryText] = useState({
     line1: "Please enter PIN code to check delivery time.",
@@ -264,12 +266,11 @@ const Cardpage1 = () => {
     setfile(file);
     if (file) {
       setTimeout(() => {
-        setSelectedImage(URL.createObjectURL(file));
+        setSelectedImage2(URL.createObjectURL(file));
         setUploadMessage('File uploaded successfully!');
       }, 1000);
     }
   };
-
   const handlePincodeChange = (e) => {
     const value = e.target.value;
     if (!isNaN(value)) {
@@ -303,7 +304,7 @@ const Cardpage1 = () => {
 
   useEffect(() => {
     if (id) {
-      getSingleProduct1(API, id);
+      getSingleProduct1(API2, id);
     }
   }, [id, getSingleProduct1]);
 
@@ -368,7 +369,7 @@ const Cardpage1 = () => {
               </div>
               <br />
               <div className={`${filteredCard?.product_type === "personalize" ? "block" : "hidden"}`}>
-                <button
+                {/* <button
                   onClick={() => document.getElementById('fileInput').click()}
                   style={{
                     display: 'flex',
@@ -386,6 +387,43 @@ const Cardpage1 = () => {
                   {file ? (
                     <img
                       src={URL.createObjectURL(file)}
+                      alt="Selected"
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        marginRight: '10px',
+                      }}
+                    />
+                  ) : (
+                    'Select Photo'
+                  )}
+                </button>
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="fileInput"
+                  style={{ display: 'none' }}
+                  onChange={handleImageChange}
+                />
+                {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>} */}
+                <button
+                  onClick={() => document.getElementById('fileInput').click()}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '10px',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    border: '1px solid #ccc',
+                    background: '#23387A',
+                    color: 'white',
+                    fontFamily: 'Poppins'
+                  }}
+                >
+                  {selectedImage2 ? (
+                    <img
+                      src={selectedImage2}
                       alt="Selected"
                       style={{
                         width: '40px',

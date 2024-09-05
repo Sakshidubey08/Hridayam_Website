@@ -364,7 +364,7 @@ const Cardpage1 = () => {
     return <div>No data available for the selected ID.</div>;
   }
 
-  const { name, price, default_color_image, images, image } = filteredCard;
+  const { name, price, default_color_image, images, image,product_details } = filteredCard;
   const mainImage = selectedImage || default_color_image || image;
 
 
@@ -459,7 +459,9 @@ const Cardpage1 = () => {
                 />
                 {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
               </div>
-
+              <h3 className='offer mt-2'>Product Details</h3>
+              <p className='product'>{product_details}</p>
+              <br/>
               <h3 className='free'>Free Delivery</h3>
               <div className="buttons">
                 <button className="wishlist-btn">
