@@ -156,7 +156,7 @@ import icon2 from './images/icon2.png';
 import icon3 from './images/icon3.png';
 import Footer from './Footer';
 import Header from './Header';
-
+import Ripples from 'react-ripples'
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
 
@@ -176,7 +176,7 @@ const CartPage = () => {
   };
 
   const calculateSubtotal = () => {
-    return cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+    // return cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   };
 
   const calculateTotal = () => {
@@ -210,11 +210,15 @@ const CartPage = () => {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map(item => (
+            {cartItems.length>0?( cartItems.map((item,index) => {
             
-              <tr key={item.id}>
+             return( <tr key={index}>
               
-                <td className=' font-semibold md:font-normal'>{item.product.name}</td>
+                <td className=' font-semibold md:font-normal'>
+                <div className='flex items-center justify-center'>
+                  {item.product==null?"":item.product.name}
+                </div>
+                </td>
                 <td>
                   <div
                     className="cart-item-image"
@@ -225,33 +229,52 @@ const CartPage = () => {
                     // } : {}}
                   >
                   <div className=' flex items-center gap-2'>
-                    <img className={`${item.product.product_type=="personalize"?"block":"hidden"}`} src={item.personalize_image
-} alt={item.product.name} style={{ width: '100%', height: '100%' }} />
- <img src={item.product.image
-} alt={item.product.name} style={{ width: '100%', height: '100%' }} />
-<p>{item.personalize_text}</p>
+                    <img className={`${item.product==null?"":item.product.product_type=="personalize"?"block":"hidden"}`} src={item.personalize_image
+} alt={item.product==null?"":item.product.name} style={{ width: '100%', height: '100%' }} />
+ <img src={item.product==null?"":item.product.image
+} alt={item.product==null?"":item.product.name} style={{ width: '100%', height: '100%' }} />
+<p>{item.product==null?"":item.personalize_text}</p>
 </div>
                   </div>
                 </td>
                 
-                <td>&#8377;{item.product.price}</td>
-                <td >
-                  <span className=' ' onClick={() => handleDecrement(item._id)}>-</span>
-                 <span className='mx-2'>{item.quantity}</span> 
-                  <span className='' onClick={() => handleIncrement(item._id)}>+</span>
+                <td>
+               <div className='flex items-center justify-center'>
+               &#8377;{item.product==null?"":item.product.price}
+               </div> 
                 </td>
-                <td>&#8377;{item.product.price * item.quantity}</td>
-                <td className="action-column">
-                  <div className="action-button">
-                    <button className='hidden md:block' onClick={() => removeFromCart(item._id)}>
-                      <FaTrash />
-                    </button>
+                <td className='' >
+                <div className='flex gap-4 justify-center items-center'>
+                <Ripples  className='rounded-full'>
+                <span className=' cursor-pointer bg-gray-200/60 shadow-2xl   h-7 text-center  w-7 flex  justify-center  '  onClick={() => handleDecrement(item._id)}>-</span>
 
-                    <img  onClick={() => removeFromCart(item._id)} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
+                </Ripples>
+                 {/* <span className='mx-2'>{item.quantity}</span>  */}
+                 <Ripples className='rounded-full'> 
+                 <span className='bg-gray-200/60 cursor-pointer shadow-2xl   h-7 text-center  w-7 flex  justify-center  ' onClick={() => handleIncrement(item._id)}>+</span>
+
+                 </Ripples>
+                </div>
+                 
+                </td>
+                <td><div className=' flex items-center justify-center'>
+                &#8377;{item.product==null?"":item.product.price * item.quantity}
+                </div></td>
+                <td className="action-column">
+                  <div className="action-butto">
+                    {/* <button className='hidden md:block' onClick={() => removeFromCart(item._id)}>
+                      <FaTrash />
+                    </button> */}
+                    <Ripples className='rounded-full p-3 '>
+                    {/* <img  onClick={() => removeFromCart(item._id)} className='w-5  m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img> */}
+
+                    </Ripples>
                   </div>
                 </td>
               </tr>
-            ))}
+            
+            )})):""}
+            
           </tbody>
         </table>
       </div>
@@ -269,7 +292,10 @@ const CartPage = () => {
           </div>
         </div>
         <Link to="/checkout">
-          <button className="proceed-checkout-btn">Proceed to Checkout</button>
+        <Ripples background	={'rgb(150,150,150)'} color={'rgba(254, 242, 239 ,0.2)'} during={2000} className=''>
+        <button className="proceed-checkout-bt bg-blue-900 text-white p-3 rounded-md">Proceed to Checkout</button>
+
+        </Ripples>
         </Link>
       </div>
       <Footer />

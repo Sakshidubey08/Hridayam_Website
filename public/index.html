@@ -34,16 +34,17 @@
     -->
     <title>Hridayam</title>
     <style>
+      #root::-webkit-scrollbar{
+        width: 4px;
+      }
      .scrollbar-none {
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;     /* Firefox */
 }
 
 .scrollbar-none::-webkit-scrollbar {
-  display: none; 
-              /* Safari and Chrome */
+  display: none;             /* Safari and Chrome */
 }
-
 
 .selectDisable {
     -webkit-user-select: none;
@@ -54,30 +55,13 @@
     -webkit-user-drag: none;
      border: 20px solid gray;
 }
-
-
-.homescrollbar{
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;     /* Firefox */
-}
-
-.homescrollbar::-webkit-scrollbar {
-  /* display: none;  */
-              /* Safari and Chrome */
-              width: 2px;
-}
-.homescrollbar::-webkit-scrollbar{
-  padding: 10px;
-}
-
-
       </style>
   </head>
-  <body style="background-color: white;" >
+  <body style="background-color: white;">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="homescrollbar"  id="root"></div>
+    <div id="root"></div>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script type="module" src="../src/index.js"></script>
-      
+
   </body>
 </html>

@@ -262,9 +262,18 @@ const [placeorderdone,setplaceorderdone]=useState(false);
     // console.log(productToAdd.personalize_image)
 
     const formData = new FormData();
-  formData.append('product_id', product.id);
-  formData.append('quantity', quantity);
-  formData.append('personalize_text', product.text);
+    if(product.id){
+      formData.append('product_id', product.id);
+
+    }
+    if(quantity){
+      formData.append('quantity', quantity);
+
+    }
+    if(product.text){
+      formData.append('personalize_text', product.text);
+
+    }
   // formData.append('user_id', product.user_id);
   // formData.append('price', product.price);
   // formData.append('image', product.image);
@@ -284,8 +293,31 @@ const [placeorderdone,setplaceorderdone]=useState(false);
 
   console.log("FormData to Add:", formData.quantity);
 
+
+  if (product.acrylicsizeid) {
+    formData.append('acrylic_size_id', product.acrylicsizeid);
+}
+if (product.acrylicsizename) {
+  formData.append('acrylic_size_name', product.acrylicsizename);
+}
   
-  
+
+if (product.acrylicthicknessid) {
+  formData.append('acrylic_thickness_id', product.acrylicthicknessid);
+}
+
+if (product.acrylicthicknessname) {
+  formData.append('product_variation_id', product.acrylicthicknessname);
+}
+
+if (product.acrylicprice) {
+  formData.append('acrylic_price', product.acrylicprice);
+}
+
+if (product.acrylicsizeid) {
+  formData.append('acrylic_final_preview', product.acrylicfinalpreview);
+}
+ console.log(product.acrylicthicknessname,quantity)
     axios.post('https://api.hirdayam.com/api/addtocart', formData,{
       headers: {
         Authorization: `Bearer ${token}`,
@@ -294,7 +326,7 @@ const [placeorderdone,setplaceorderdone]=useState(false);
     })
     .then(response => {
     
-  console.log('Added to Cart:');
+  console.log('Added to Cart:',response);
       // const cartItem = response.data.cart;
       
       // const cartProduct ={
@@ -705,6 +737,8 @@ const [placeorderdone,setplaceorderdone]=useState(false);
   // const calculateTotal = () => {
   //   return calculateSubtotal();
   // };
+
+  
 
   return (
     <CartContext.Provider value={{applycoupon,searchinput, handlesearch, placeorderdone, handlePayment, PlaceOrder, fetchUserProfile, cartItems, userprofiledata,setuserprofiledata, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>

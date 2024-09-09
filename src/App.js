@@ -150,7 +150,7 @@ const App = () => {
                     <Route path="/catalog/:catalog_id" element={<CatalogProducts />} />
                     <Route path='/catalogproduct/:id' element={<Catalogproduct/>}></Route>
                     <Route path='navbarlist' element={<Navbarlist></Navbarlist>}></Route>
-                    {/* <Route path='/Acrylic2' element={<TextEditer></TextEditer>}></Route> */}
+                    <Route path='/Acrylic2' element={<TextEditer></TextEditer>}></Route>
                 <Route path="*" element={<Acrylic3 />}/>
                 </Routes>
          </>

@@ -36,8 +36,36 @@ function Filter() {
             setWishlist(JSON.parse(storedWishlist));
         }
     }, []);
+
     useEffect(() => {
-        axios.get(`https://api.hirdayam.com/api/getProductsforuser?search=${searchQuery}`, {
+        axios.get(`https://api.hirdayam.com/api/getProductsforuser/`, {
+            // params: {
+            //     min_price: priceRange[0],
+            //     max_price: priceRange[1]
+            // }
+        })
+            .then(response => {
+                console.log('API response:',  response.data); // Log the entire response
+                if (response.data.status) {
+                    const fetchedCards = response.data.data.data.map(product => ({
+                        id: product._id,
+                        imageUrl: product.image,
+                        price: product.price,
+                        description: product.name,
+                        imagesUrl: product.images
+                    }));
+                    setCards(fetchedCards);
+                    localStorage.setItem('fetchedCards', JSON.stringify(fetchedCards));
+                    console.log('Fetched cards:', fetchedCards);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data from API:', error);
+            });
+    }, []);
+    
+    useEffect(() => {
+        axios.get(`https://api.hirdayam.com/api/getProductsforuser`, {
             params: {
                 min_price: priceRange[0],
                 max_price: priceRange[1]
@@ -63,7 +91,10 @@ function Filter() {
             });
     }, [priceRange]);
 
+   
+
     useEffect(() => {
+        
         axios.get(`https://api.hirdayam.com/api/getProductsforuser?search=${searchQuery}`, {
             params: {
                 min_price: priceRange[0],
@@ -161,7 +192,7 @@ function Filter() {
     return (
         <>
             <Header />
-            <div className="main-container">
+            <div className="main-container ">
                 <div className="filter-container">
                     <div className="filter-header">
                         <h2>Filters</h2>
@@ -314,7 +345,8 @@ function Filter() {
                         <p>No products available in this price range.</p>
                     )}
                 </div>
-            </div >
+            </div>
+            
             <Footer/>
         </>
     );
