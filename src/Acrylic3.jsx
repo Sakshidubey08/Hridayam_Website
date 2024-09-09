@@ -18,6 +18,7 @@ import AvatarEditor from 'react-avatar-editor' // Both at the same time
 // import Editor from './Editer';
 import Tour from './Tour';
 import Footer from './Footer';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import backgroundImage from './images/Designer2.png';
 import circle from './images/CIRCLE FRAME.jpg'
@@ -49,8 +50,11 @@ function App() {
     const [showTextInput, setShowTextInput] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isDraggable, setIsDraggable] = useState(false);
+   
     const [framTextfontfamilystate, setframTextfontfamilystate] = useState("");
     const [screenshot, setScreenshot] = useState(null);
+    const [Acrylicsize, setAcrylicsize] = useState(null);
+
 
     const handleSliderChange = (e) => {
         setScale(e.target.value / 100);
@@ -111,8 +115,57 @@ function App() {
         })
     }
     
+    useEffect(() => {
+        
+        const fetchData = async () => {
+          const fetchTokenFromLS = () => {
+            return localStorage.getItem('token');
+          };
+      
+          const fetchOrderId = () => {
+            return localStorage.getItem('orderid');
+          };
+      
+          const orderid = fetchOrderId();
+          const token = fetchTokenFromLS();
+      
+          if (token) {
+            try {
+              const response = await axios.get('https://api.hirdayam.com/api/getAcrylicSize', {
+                headers: {
+                  Authorization: `Bearer ${token}`, // Fixed interpolation
+                },
+              });
+      
+              if (response && response.data && response.data.data) {
+                console.log('Get Acrylic size:', response);
+                // let data=response;
+                // setAcrylicsize(data); // Update state
+            
+               
+                console.log(Acrylicsize+ 'new');
 
-
+                
+      
+              }
+      
+              if (response.data.status === true && Array.isArray(response.data.data)) {
+                // Your logic here
+              } else {
+                console.error('Unexpected response format:', response.data);
+              }
+            } catch (error) {
+              console.error('Acrylic size item error:', error);
+            }
+          } else {
+            console.error('Token not found in localStorage.');
+          }
+        };
+      
+        fetchData();
+      }, []); 
+      
+    
    
     const handleBlur = () => {
         setIsDraggable(false);

@@ -109,7 +109,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   };
   // ];
   useEffect(() => {
-   
+
     const fetchData = async () => {
       try {
         const response = await fetch('https://api.hirdayam.com/api/getcategoryuser');
@@ -173,7 +173,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       }
     }
   };
-  
+
   const handleSubcategoryClick = async (subCategoryId) => {
     navigate(`/sub-category-products/${subCategoryId}`); // Navigate to products page
   };
@@ -210,7 +210,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
   //         setCards(prevCards => [...prevCards, ...formattedCards]);
 
-       
+
   //       setHasMore(data.data.length > 0); 
   //       setShowLoadMore(data.data.length > 0); 
   //         // Handle error or empty state
@@ -310,13 +310,13 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   //   e.preventDefault();
   // };
 
-  const handleFavoriteButtonClick = (id )=>{
-    console.log(id+"lksdsdjf")
+  const handleFavoriteButtonClick = (id) => {
+    console.log(id + "lksdsdjf")
     addToWishlist(id)
-  
+
     // setfavbutton(!favbutton)
-  
-  
+
+
   }
 
   useEffect(() => {
@@ -531,7 +531,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   //           imageUrl: product.image,
   //           price: `₹${parseFloat(product.price).toFixed(2)}`,
   //           description: product.name,
-          
+
   //         }));
   //         setProducts13(formattedCards);
   //         setVisibleCards1(formattedCards.slice(0, cardCount1));
@@ -555,13 +555,13 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         const { data } = response;
 
         if (data.status && data.data.products) {
-                  const formattedCards= data.data.products.map(product => ({
-                    id: product._id,
-                    imageUrl: product.image,
-                    price: `₹${parseFloat(product.price).toFixed(2)}`,
-                    description: product.name,
-                  
-                  }));
+          const formattedCards = data.data.products.map(product => ({
+            id: product._id,
+            imageUrl: product.image,
+            price: `₹${parseFloat(product.price).toFixed(2)}`,
+            description: product.name,
+
+          }));
           setProducts13(formattedCards);
           setVisibleCards1(formattedCards.slice(0, cardCount1));
           setShowLoadMore1(formattedCards.length > cardCount1);
@@ -588,8 +588,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   //   { id: 7, imageUrl: 'https://i.pinimg.com/564x/49/e1/44/49e1441c079a80a664f48f839aeebed1.jpg', price: '&#8377;200', description: "Skybags" },
   //   { id: 8, imageUrl: 'https://i.pinimg.com/564x/0d/78/a4/0d78a455237e6894ea6081881a3039ca.jpg', price: '&#8377;1,400', description: "Decor Fountain" },
   // ]);
-    const [cards2, setCards2] = useState([]);
-    const [loading3, setLoading3] = useState(false);
+  const [cards2, setCards2] = useState([]);
+  const [loading3, setLoading3] = useState(false);
 
   // useEffect(() => {
   //   axios.get('https://api.hirdayam.com/api/getPersonalizeProduct')
@@ -623,13 +623,13 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         const { data } = response;
 
         if (data.status && data.data && data.data.data) {
-                  // Access the products array inside data.data.data
-                  const formattedCards = data.data.data.map(product => ({
-                    id: product._id,
-                    imageUrl: product.image,
-                    price: `₹${parseFloat(product.price).toFixed(2)}`,
-                    description: product.name,
-                  }));
+          // Access the products array inside data.data.data
+          const formattedCards = data.data.data.map(product => ({
+            id: product._id,
+            imageUrl: product.image,
+            price: `₹${parseFloat(product.price).toFixed(2)}`,
+            description: product.name,
+          }));
           setProducts14(formattedCards);
           setVisibleCards2(formattedCards.slice(0, cardCount2));
           setShowLoadMore2(formattedCards.length > cardCount2);
@@ -660,7 +660,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           }));
           setCards3(formattedCards);
         } else {
-         
+
           console.error('No data found');
         }
       })
@@ -872,14 +872,14 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             'Content-Type': 'application/json',
           }
         });
-  
+
         if (!response.ok) {
           console.error(`Error: ${response.status} ${response.statusText}`);
           return;
         }
-  
+
         const result = await response.json();
-  
+
         if (result && result.status && Array.isArray(result.data)) {
           setSlides(result.data);
         } else {
@@ -889,9 +889,9 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         console.error('Error fetching data:', error);
       }
     };
-  
+
     fetchSlides();
-  },[]);
+  }, []);
   const handleSlideClick = (index) => {
 
     const pageRoutes = ['', '/product3', '/catalog1']; // Add more routes as needed
@@ -1011,8 +1011,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             </SwiperSlide>
           ))}
         </Swiper>
-       */}  
-     {/* <Swiper
+       */}
+        {/* <Swiper
   slidesPerView={3}
   spaceBetween={20}
   breakpoints={{
@@ -1052,33 +1052,33 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
 
 
- <div className='decoration '>
-    
-      {menuItems.map((item) => (
-        <div key={item.id} className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
-        
-          <div className="menu-heading">
-            {item.heading}
-          </div>
-        
-          {subcategories[item.id] && (
-            <div className="dropdown15 ">
-              {subcategories[item.id].map((subCategory) =>(
-                <div 
-                  key={subCategory._id} 
-                  className="dropdown-item15"
-                  onClick={() => handleSubcategoryClick(subCategory._id)} // Add onClick handler
-                >
-                  {subCategory.name}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
+        <div className='decoration '>
 
-{/* <div className='decoration'>
+          {menuItems.map((item) => (
+            <div key={item.id} className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
+
+              <div className="menu-heading">
+                {item.heading}
+              </div>
+
+              {subcategories[item.id] && (
+                <div className="dropdown15 ">
+                  {subcategories[item.id].map((subCategory) => (
+                    <div
+                      key={subCategory._id}
+                      className="dropdown-item15"
+                      onClick={() => handleSubcategoryClick(subCategory._id)} // Add onClick handler
+                    >
+                      {subCategory.name}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* <div className='decoration'>
       <Swiper
        spaceBetween={30}
        slidesPerView={2}
@@ -1111,170 +1111,170 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       </Swiper>
     </div> */}
 
-      <div class="menu-item">
-      <Link to='/acrylic3'>    <div class="menu-heading">Acrylic Photoframe</div></Link>
-       
-      </div>
-      <div class="menu-item">
-        <div class="menu-heading" onClick={() => setIsModalOpen(true)}>Contact Us</div>
-        {isModalOpen && (
-          <div className="fixed z-20 inset-0 overflow-y-auto">
-            <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-              <div className="fixed inset-0 transition-opacity">
-                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-              </div>
-              <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-              <div
-                className="inline-block align-bottom bg-white px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
-                style={{ maxWidth: '700px' }}
-              >
-                <div className="flex flex-col items-center justify-center">
-                  <h1
-                    className="leading-6 font-medium text-gray-900"
-                    style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}
-                  >
-                    Talk to Our Experts
-                    <button
-                      type="button"
-                      className="absolute right-[-5.2rem] top-6 text-gray-500 hover:text-gray-700 focus:outline-none"
-                      onClick={() => setIsModalOpen(false)}
+        <div class="menu-item">
+          <Link to='/acrylic3'>    <div class="menu-heading">Acrylic Photoframe</div></Link>
+
+        </div>
+        <div class="menu-item">
+          <div class="menu-heading" onClick={() => setIsModalOpen(true)}>Contact Us</div>
+          {isModalOpen && (
+            <div className="fixed z-20 inset-0 overflow-y-auto">
+              <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                <div
+                  className="inline-block align-bottom bg-white px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+                  style={{ maxWidth: '700px' }}
+                >
+                  <div className="flex flex-col items-center justify-center">
+                    <h1
+                      className="leading-6 font-medium text-gray-900"
+                      style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}
                     >
-                      <FontAwesomeIcon icon={faTimes} size="lg" />
-                    </button>
-                  </h1>
-                  <div className="mt-6 w-full">
-                    <form className="w-full" onSubmit={handleSubmit}>
-                      <div className="flex flex-col space-y-4">
-                        <div className="flex space-x-4">
-                          <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="firstName"
-                            type="text"
-                            placeholder="Enter Your First name"
-                            required
-                          />
-                          <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="lastName"
-                            type="text"
-                            placeholder="Enter Your Last name"
-                            required
-                          />
-                        </div>
-                        <div className="flex space-x-4">
-                          <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="email"
-                            placeholder="Enter Your Business Email Address*"
-                            required
-                          />
-                          <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="phone"
-                            type="text"
-                            placeholder="Enter Your Phone number*"
-                            required
-                          />
-                        </div>
-                        <div className="flex space-x-4">
-                          <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="city"
-                            type="text"
-                            placeholder="Enter your city*"
-                            required
-                          />
-                          <select
-                            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="giftingFor"
-                            required
-                          >
-                            <option value="">Gifting For *</option>
-                            <option value="internalEmployees">Internal Employees</option>
-                            <option value="clientsCustomers">Clients/Customers</option>
-                            <option value="vipCeo">VIP/CEO</option>
-                            <option value="others">Others</option>
-                          </select>
-                        </div>
-                        <div className="flex space-x-4">
-                          <select
-                            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="budget"
-                            onChange={handleSelectChange1}
-                            required
-
-                          >
-                            <option value="">Budget Per Gift *</option>
-                            <option value="0-500">₹0 - ₹500</option>
-                            <option value="500-1000">₹500 -₹1000</option>
-                            <option value="2000-5000">₹2000-₹5000</option>
-                            <option value="5000-10000">₹5000-₹10000</option>
-                            <option value="other">Other</option>
-                          </select>
-
-                          {showOther1 && (
-                            <input
-                              type="text"
-                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
-                              id="other-budget"
-                              name="other-budget"
-                              placeholder="Please specify your budget"
-                            />
-                          )}
-                          <select
-                            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="quantity-select" name="quantity" onChange={handleSelectChange}
-                            required
-                          >
-                            <option value="">Quantity Required *</option>
-                            <option value="10-50">10-50pcs</option>
-                            <option value="50-100">50-100pcs</option>
-                            <option value="100-200">100-200pcs</option>
-                            <option value="200-300">200-300pcs</option>
-                            <option value="other">Other</option>
-                          </select>
-                          {showOther && (
-                            <input
-                              type="text"
-                              id="other-quantity"
-                              name="other-quantity"
-                              placeholder="Please specify"
-                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
-                            />
-                          )}
-                        </div>
-                        <div className="w-full">
-                          <textarea
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="wishingMessage"
-                            placeholder="Enter Your Wishing Message"
-                            rows="2"
-                            required
-                          ></textarea>
-                        </div>
-                      </div>
+                      Talk to Our Experts
                       <button
-                        type="submit"
-                        className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mt-6"
+                        type="button"
+                        className="absolute right-[-5.2rem] top-6 text-gray-500 hover:text-gray-700 focus:outline-none"
+                        onClick={() => setIsModalOpen(false)}
                       >
-                        ENQUIRE NOW
+                        <FontAwesomeIcon icon={faTimes} size="lg" />
                       </button>
-                    </form>
+                    </h1>
+                    <div className="mt-6 w-full">
+                      <form className="w-full" onSubmit={handleSubmit}>
+                        <div className="flex flex-col space-y-4">
+                          <div className="flex space-x-4">
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="firstName"
+                              type="text"
+                              placeholder="Enter Your First name"
+                              required
+                            />
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="lastName"
+                              type="text"
+                              placeholder="Enter Your Last name"
+                              required
+                            />
+                          </div>
+                          <div className="flex space-x-4">
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="email"
+                              placeholder="Enter Your Business Email Address*"
+                              required
+                            />
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="phone"
+                              type="text"
+                              placeholder="Enter Your Phone number*"
+                              required
+                            />
+                          </div>
+                          <div className="flex space-x-4">
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="city"
+                              type="text"
+                              placeholder="Enter your city*"
+                              required
+                            />
+                            <select
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="giftingFor"
+                              required
+                            >
+                              <option value="">Gifting For *</option>
+                              <option value="internalEmployees">Internal Employees</option>
+                              <option value="clientsCustomers">Clients/Customers</option>
+                              <option value="vipCeo">VIP/CEO</option>
+                              <option value="others">Others</option>
+                            </select>
+                          </div>
+                          <div className="flex space-x-4">
+                            <select
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="budget"
+                              onChange={handleSelectChange1}
+                              required
+
+                            >
+                              <option value="">Budget Per Gift *</option>
+                              <option value="0-500">₹0 - ₹500</option>
+                              <option value="500-1000">₹500 -₹1000</option>
+                              <option value="2000-5000">₹2000-₹5000</option>
+                              <option value="5000-10000">₹5000-₹10000</option>
+                              <option value="other">Other</option>
+                            </select>
+
+                            {showOther1 && (
+                              <input
+                                type="text"
+                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+                                id="other-budget"
+                                name="other-budget"
+                                placeholder="Please specify your budget"
+                              />
+                            )}
+                            <select
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="quantity-select" name="quantity" onChange={handleSelectChange}
+                              required
+                            >
+                              <option value="">Quantity Required *</option>
+                              <option value="10-50">10-50pcs</option>
+                              <option value="50-100">50-100pcs</option>
+                              <option value="100-200">100-200pcs</option>
+                              <option value="200-300">200-300pcs</option>
+                              <option value="other">Other</option>
+                            </select>
+                            {showOther && (
+                              <input
+                                type="text"
+                                id="other-quantity"
+                                name="other-quantity"
+                                placeholder="Please specify"
+                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+                              />
+                            )}
+                          </div>
+                          <div className="w-full">
+                            <textarea
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="wishingMessage"
+                              placeholder="Enter Your Message"
+                              rows="2"
+                              required
+                            ></textarea>
+                          </div>
+                        </div>
+                        <button
+                          type="submit"
+                          className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mt-6"
+                        >
+                          ENQUIRE NOW
+                        </button>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-      </div>
-    </div >
+        </div>
+      </div >
       <div className=' md:hidden'>
-      
-      <Catalog/>
-     </div>
-      <div style={{backgroundImage:``}} className='swiper-background  bg-left-top bg-no-repeat    relative  md:top-5'>
-        <img src={group} alt="" className='group '/>
+
+        <Catalog />
+      </div>
+      <div style={{ backgroundImage: `` }} className='swiper-background  bg-left-top bg-no-repeat    relative  md:top-5'>
+        <img src={group} alt="" className='group ' />
 
         <div className="w-full max-w-[70rem]  md:mx-auto px-3  mt-14 md:mt-2 md:px-4">
           <Swiper
@@ -1285,16 +1285,16 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             keyboard={true}
             modules={[Navigation, Pagination, Mousewheel, Keyboard]}
             className="mySwiper w-full "
-            
+
           >
             {slides.map((slide, index) => (
-              <SwiperSlide key={index}  onClick={() => handleSlideClick(index)}>
-              <div className='hidden md:block'>
-              <img src={slide.image} style={{display:"flex",height:"100%", width:"100%", objectFit:"cover"}} className="block w-full h-[800px] md:h-auto  object-cover" alt={`slide${index + 1}`} />
+              <SwiperSlide key={index} onClick={() => handleSlideClick(index)}>
+                <div className='hidden md:block'>
+                  <img src={slide.image} style={{ display: "flex", height: "100%", width: "100%", objectFit: "cover" }} className="block w-full h-[800px] md:h-auto  object-cover" alt={`slide${index + 1}`} />
 
-              </div>
+                </div>
                 <div className=' md:hidden'>
-                <img src={ headerslider} style={{height:"100%", width:"100%", objectFit:"cover"}} className={" hidden w-full h-[800px] md:h-auto  object-cover"} alt={`slide${index + 1}`} />
+                  <img src={headerslider} style={{ height: "100%", width: "100%", objectFit: "cover" }} className={" hidden w-full h-[800px] md:h-auto  object-cover"} alt={`slide${index + 1}`} />
 
                 </div>
 
@@ -1303,7 +1303,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           </Swiper>
           <div className='image-box  bg-white px-10  flex z-10 justify-around items-center absolute left-0 right-0  md:mx-auto md:left-auto md:right-auto  top-[20.3rem] md:top-[14.3rem]'>
             <div className='image-item   text-wrap'>
-              <img src={icon5} alt="" className='box-image'/>
+              <img src={icon5} alt="" className='box-image' />
               <p className='image-description1     text-sm md:text-base mt-2'>1 Million <br className='block md:hidden'></br> + Customer</p>
             </div>
             <div className='image-item'>
@@ -1317,10 +1317,10 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           </div>
         </div>
       </div>
-     <div className=' hidden md:block'>
-      <Catalog/>
-     </div>
-      
+      <div className=' hidden md:block'>
+        <Catalog />
+      </div>
+
 
       {/* <div className='selling'>
         <h1 className='best'>Best Selling</h1>
@@ -1377,57 +1377,57 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       )}
       </div> */}
       <div className='selling'>
-      <h1 className='best'>Best Selling</h1>
-      <h1 className='top'>Top Rated and Bestselling</h1>
-      <div className="card-container">
-        {visibleCards.length > 0 ? visibleCards.map(card => (
-          <div key={card.id} className="card-wrapper" style={{ cursor: 'pointer' }}>
-            <div className="card1-product rounded-md">
-              <div className="card-header w-36 h-56 md:h-72 md:w-full">
-                <Link
-                  to={`/card/${card.id}`}
-                  className="card-link"
-                  onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
-                >
-                  <div className='w-full h-full flex items-center'>
-                    <img src={card.imageUrl} alt="product" className="card-image1 rounded-xl w-23 flex object-contain m-0 p-0" />
-                  </div>
-                </Link>
-                <button
-                  className="favorite-btn m-2 md:m-0"
-                  onClick={(e) => handleFavoriteButtonClick(card.id)}
-                  style={{
-                    cursor: 'pointer',
-                    border: 'none',
-                    background: 'none',
-                    padding: '5px',
-                  }}
-                >
-                  <i
-                    className={`fa-heart ${wishlistItems.data.data.some(item => item.product._id === card.id) ? 'fas' : 'far'}`}
-                    style={{ color: wishlistItems.data.data.some(item => item.product._id === card.id) ? 'red' : '#23387A', fontSize: '24px' }}
-                  ></i>
-                </button>
+        <h1 className='best'>Best Selling</h1>
+        <h1 className='top'>Top Rated and Bestselling</h1>
+        <div className="card-container">
+          {visibleCards.length > 0 ? visibleCards.map(card => (
+            <div key={card.id} className="card-wrapper" style={{ cursor: 'pointer' }}>
+              <div className="card1-product rounded-md">
+                <div className="card-header w-36 h-56 md:h-72 md:w-full">
+                  <Link
+                    to={`/card/${card.id}`}
+                    className="card-link"
+                    onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
+                  >
+                    <div className='w-full h-full flex items-center'>
+                      <img src={card.imageUrl} alt="product" className="card-image1 rounded-xl w-23 flex object-contain m-0 p-0" />
+                    </div>
+                  </Link>
+                  <button
+                    className="favorite-btn m-2 md:m-0"
+                    onClick={(e) => handleFavoriteButtonClick(card.id)}
+                    style={{
+                      cursor: 'pointer',
+                      border: 'none',
+                      background: 'none',
+                      padding: '5px',
+                    }}
+                  >
+                    <i
+                      className={`fa-heart ${wishlistItems.data.data.some(item => item.product._id === card.id) ? 'fas' : 'far'}`}
+                      style={{ color: wishlistItems.data.data.some(item => item.product._id === card.id) ? 'red' : '#23387A', fontSize: '24px' }}
+                    ></i>
+                  </button>
+                </div>
+              </div>
+              <div className="card-info">
+                <p className="image-description">{card.description}</p>
+                <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
               </div>
             </div>
-            <div className="card-info">
-              <p className="image-description">{card.description}</p>
-              <p className='price'><span dangerouslySetInnerHTML={{ __html: card.price }} /></p>
-            </div>
+          )) : (
+            <p>No products available</p>
+          )}
+        </div>
+        {showLoadMore && (
+          <div className="load-more-container">
+            <button className="load-more-btn" onClick={handleLoadMore} disabled={loading}>
+              {loading ? 'Loading...' : 'Load More'}
+            </button>
           </div>
-        )) : (
-          <p>No products available</p>
         )}
       </div>
-      {showLoadMore && (
-        <div className="load-more-container">
-          <button className="load-more-btn" onClick={handleLoadMore} disabled={loading}>
-            {loading ? 'Loading...' : 'Load More'}
-          </button>
-        </div>
-      )}
-    </div>
-  {/* <div className='selling'>
+      {/* <div className='selling'>
         <h1 className='best'>Best Selling</h1>
         <h1 className='top'>Top Rated and Bestselling</h1>
         <div className="card-container">
@@ -1493,19 +1493,19 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         <h3 className='best '>New Arrivals</h3>
         <h1 className='top '>Discover the Latest Trends</h1>
         <div className="card-container">
-        {visibleCards1.length > 0 ? visibleCards1.map(card => (
-            
+          {visibleCards1.length > 0 ? visibleCards1.map(card => (
+
             <div key={card.id} className="card-wrapper">
               <div className="card1-product rounded-md">
                 <div className="card-header w-36 h-56 md:h-72   md:w-full">
-                <Link
-            key={card.id}
-            to={`/card6/${card.id}`}
-            className="card-link"
-            onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
-          > <div className=' w-full h-full flex items-center '>
-                  <img src={card.imageUrl} alt="product"  className="card-image1 w-23  object-contain m-0 p-0"  />
-                 </div>
+                  <Link
+                    key={card.id}
+                    to={`/card6/${card.id}`}
+                    className="card-link"
+                    onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
+                  > <div className=' w-full h-full flex items-center '>
+                      <img src={card.imageUrl} alt="product" className="card-image1 w-23  object-contain m-0 p-0" />
+                    </div>
                   </Link>
                   <button
                     className="favorite-btn m-4 md:m-0"
@@ -1519,8 +1519,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                     }}
                   >
                     <i
-                      className={`fa-heart ${wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'fas' : 'far'}`}
-                      style={{ color: wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'red' : '#23387A', fontSize: '24px' }}
+                      className={`fa-heart ${wishlistItems.data.data.some(item => item.product._id == card.id) ? 'fas' : 'far'}`}
+                      style={{ color: wishlistItems.data.data.some(item => item.product._id == card.id) ? 'red' : '#23387A', fontSize: '24px' }}
                     ></i>
                   </button>
                 </div>
@@ -1531,17 +1531,17 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               </div>
             </div>
           )) : (
-              <p>No products available</p>
-            )}
+            <p>No products available</p>
+          )}
         </div>
 
         {showLoadMore1 && (
-        <div className="load-more-container">
-          <button className="load-more-btn" onClick={handleLoadMore1} disabled={loading}>
-            {loading ? 'Loading...' : 'Load More'}
-          </button>
-        </div>
-      )}
+          <div className="load-more-container">
+            <button className="load-more-btn" onClick={handleLoadMore1} disabled={loading}>
+              {loading ? 'Loading...' : 'Load More'}
+            </button>
+          </div>
+        )}
       </div>
       <div>
         <img src={group2} className='group2' />
@@ -1549,19 +1549,19 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           <h3 className='best'>Customizable Products</h3>
           <h1 className='top'>Looking for Personal Touch</h1>
           <div className="card-container">
-          {visibleCards2.length > 0 ? visibleCards2.map(card => (
+            {visibleCards2.length > 0 ? visibleCards2.map(card => (
 
               <div key={card.id} className="card-wrapper">
                 <div className="card1-product rounded-md">
                   <div className="card-header w-36 h-56 md:h-72   md:w-full">
-                  <Link
-            key={card.id}
-            to={`/card8/${card.id}`}
-            className="card-link"
-            onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
-          > <div className=' w-full h-full flex items-center '>
-                    <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0" onClick={() => handleCardClick2(card.id)} />
-                   </div>
+                    <Link
+                      key={card.id}
+                      to={`/card8/${card.id}`}
+                      className="card-link"
+                      onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
+                    > <div className=' w-full h-full flex items-center '>
+                        <img src={card.imageUrl} alt="product" style={{ height: card.height, position: 'relative', top: `${card.position}px` }} className="card-image1 w-23  object-contain m-0 p-0" onClick={() => handleCardClick2(card.id)} />
+                      </div>
                     </Link>
                     <button
                       className="favorite-btn m-4 md:m-0"
@@ -1574,8 +1574,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                       }}
                     >
                       <i
-                        className={`fa-heart  ${wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'fas' : 'far'}`}
-                        style={{ color:  wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'red' : '#23387A', fontSize: '24px' }}
+                        className={`fa-heart  ${wishlistItems.data.data.some(item => item.product._id == card.id) ? 'fas' : 'far'}`}
+                        style={{ color: wishlistItems.data.data.some(item => item.product._id == card.id) ? 'red' : '#23387A', fontSize: '24px' }}
                       ></i>
                     </button>
                   </div>
@@ -1586,17 +1586,17 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 </div>
               </div>
 
-     )) : (
-    <p>No products available</p>
-)}
+            )) : (
+              <p>No products available</p>
+            )}
           </div>
 
           {showLoadMore2 && (
-        <div className="load-more-container">
-          <button className="load-more-btn" onClick={handleLoadMore2} disabled={loading}>
-            {loading ? 'Loading...' : 'Load More'}
-          </button>
-        </div>
+            <div className="load-more-container">
+              <button className="load-more-btn" onClick={handleLoadMore2} disabled={loading}>
+                {loading ? 'Loading...' : 'Load More'}
+              </button>
+            </div>
           )}
         </div>
         <div>
@@ -1621,13 +1621,13 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               <div className="card-wrapper">
                 <div className="card1-product rounded-md">
                   <div className="card-header w-36 h-56 md:h-72   md:w-full">
-                  <div className=' w-full h-full flex items-center '>
-                    <img
-                      src={card.imageUrl}
-                      alt="product"
-                      style={{ height: card.height, position: 'relative', top: `${card.position}px` }}
-                      className="card-image1 w-23  object-contain m-0 p-0"
-                    />
+                    <div className=' w-full h-full flex items-center '>
+                      <img
+                        src={card.imageUrl}
+                        alt="product"
+                        style={{ height: card.height, position: 'relative', top: `${card.position}px` }}
+                        className="card-image1 w-23  object-contain m-0 p-0"
+                      />
                     </div>
                     <button
                       className="favorite-btn"
@@ -1645,8 +1645,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                       }}
                     >
                       <i
-                        className={`fa-heart ${wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'fas' : 'far'}`}
-                        style={{ color: wishlistItems.data.data.some(item=>item.product._id==card.id) ? 'red' : '#23387A', fontSize: '24px' }}
+                        className={`fa-heart ${wishlistItems.data.data.some(item => item.product._id == card.id) ? 'fas' : 'far'}`}
+                        style={{ color: wishlistItems.data.data.some(item => item.product._id == card.id) ? 'red' : '#23387A', fontSize: '24px' }}
                       ></i>
                     </button>
                   </div>
@@ -1689,10 +1689,10 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           ))} */}
         </div>
 
-       
+
 
         <img src={group} className='group6' />
-        <Slider/>
+        <Slider />
         <h3 className='best2'>Why Choose Us</h3>
         <h1 className='top2'>Trust and Quality You Can Rely On</h1>
       </div>
@@ -1726,11 +1726,11 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         <h3 className='best3'>Offers</h3>
         <h1 className='top3'>Top Picks for Winters</h1>
         <TopPick />
-        
+
       </div>
 
-  {/* <img src={group5} className='group5' />  */ }
-  <Footer />
+      {/* <img src={group5} className='group5' />  */}
+      <Footer />
 
     </>
   );

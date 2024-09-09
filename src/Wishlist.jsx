@@ -155,9 +155,7 @@ const WishlistPage = () => {
           <table className="wishlist-table">
             <thead>
               <tr>
-                {/* <th>Select</th> */}
                 <th>Product Name</th>
-              
                 <th>Product Image</th>
                 <th>Delete</th>
               </tr>

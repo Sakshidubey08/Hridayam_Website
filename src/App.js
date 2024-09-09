@@ -110,7 +110,7 @@ const App = () => {
                     <Route path="cart" element={<Protected element={<CartPage />} />} />
                     <Route path="wishlist" element={<Protected element={<Wishlist />} />} />
                     <Route path="checkout" element={<Checkout />} />
-                    <Route path="forget" element={<Forget />} />
+                    <Route path="forgot" element={<Forget />} />
                     <Route path="editprofile" element={<EditProfile />} />
                     <Route path="catalog" element={<Catalog/>} />
                     <Route path="all-products" element={<AllProducts />} />

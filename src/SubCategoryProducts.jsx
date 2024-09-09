@@ -419,7 +419,7 @@ const Product1 = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="image-placeholder1">
+                    <div className="image-placeholder1 m-auto flex items-center justify-center">
                         {selectedImage && (
                             <img src={selectedImage} alt="Selected" />
                         )}
