@@ -475,6 +475,7 @@ const Product1 = () => {
                                     />
                                     {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
                                 </>
+                                
                             )}
                             <h3 className='free'>Free Delivery</h3>
                             <div className="buttons">
