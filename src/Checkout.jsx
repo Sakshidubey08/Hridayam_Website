@@ -7,9 +7,10 @@ import Header from './Header';
 import Payment from './Payment';
 import Button from 'react-bootstrap-button-loader';
 import axios from 'axios';
+import Loadingpage from './Loadingpage';
 
 const CheckoutPage = () => {
-  const { cartItems,applycoupon,PlaceOrder,placeorderdone, handlePayment,    calculateSubtotal, calculateTotal } = useContext(CartContext);
+  const { cartItems,applycoupon,PlaceOrder,placeorderdone, handlePayment, calculateSubtotal, calculateTotal } = useContext(CartContext);
   const screenshot = localStorage.getItem('screenshot');
   const countries = ['India', 'Country B', 'Country C', 'Country D'];
   const states = ['Madhya Pradesh', 'State 2', 'State 3', 'State 4', 'State 5'];
@@ -56,9 +57,12 @@ const handleapplycouponbutton =()=>{
   applycoupon(couponinput,calculateTotal())
 }
 
+
 if(placeorderdone=="true"){
   navigate("/placeorder")
 }
+
+
 
 const handlepersonaldetail=()=>{
   const navigateTo = (url) => {
@@ -122,8 +126,14 @@ const fetchUserProfile = async () => {
 };
 
 const handlePayment2=()=>{
+  if(placeorderdone==false){
+    return <Loadingpage></Loadingpage>
+  }
   handlePayment()
+ 
+  
 }
+
 
 
 const handaleplaceorder=()=>{

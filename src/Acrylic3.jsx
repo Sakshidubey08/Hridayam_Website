@@ -1206,6 +1206,7 @@ function App() {
       };
       
 
+      
      
       const handleAddToCart = () => {
         // console.log(getSingleProduct.variations[0]+"new variation")
@@ -1233,14 +1234,22 @@ function App() {
         //       alert("Please Select a Image")
         //   }
         //   else{
+        
+        if(screenshot!=null){
+
+        
              addToCart(productToAdd,1);
           navigate('/cart');
+        }
         //   }
          
         }
       };
 
 
+useEffect(() => {
+ handleAddToCart();
+}, [screenshot])
 
       
   

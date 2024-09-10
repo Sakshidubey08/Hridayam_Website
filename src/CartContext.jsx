@@ -180,6 +180,7 @@ import axios from 'axios';
 import { useAuth } from './store/auth'; // Adjust the import based on your file structure
 import { Navigate, useNavigate } from 'react-router-dom';
 import PlaceOrder2 from './PlaceOrder';
+import Loadingpage from './Loadingpage';
 
 export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
@@ -210,7 +211,11 @@ const [placeorderdone,setplaceorderdone]=useState(false);
     if (transitionid) {
       PlaceOrder(); // This will run when transitionId is set
     }
+    
+   
+    
   }, [transitionid]);
+  
   
 
   const handlesearch =(text)=>{
@@ -314,9 +319,9 @@ if (product.acrylicprice) {
   formData.append('acrylic_price', product.acrylicprice);
 }
 
-if (product.acrylicsizeid) {
-  formData.append('acrylic_final_preview', product.acrylicfinalpreview);
-}
+// if (product.acrylicfinalpreview) {
+  formData.append('acrylic_final_preview', "sdflkjsdf");
+// }
  console.log(product.acrylicthicknessname,quantity)
     axios.post('https://api.hirdayam.com/api/addtocart', formData,{
       headers: {
@@ -496,7 +501,7 @@ if (product.acrylicsizeid) {
        
         settransitionid(response.razorpay_payment_id)
 
-        
+       
         
         // Now place the order since the payment was successful
        
@@ -538,6 +543,7 @@ if (product.acrylicsizeid) {
 
 
   const PlaceOrder = () => {
+   
     const token = fetchTokenFromLS();
 
     if (!token) {
