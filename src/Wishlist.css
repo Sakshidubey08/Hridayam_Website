@@ -1,4 +1,4 @@
-.wishlist-cards-container {
+/* .wishlist-cards-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -175,7 +175,7 @@
    }
 
  
-}  
+}   */
 
 /* .final2{
   display: flex;
@@ -393,3 +393,94 @@
   display: flex;
   gap: 20px;
 }  */
+.wishlist-page {
+  padding: 20px;
+  text-align: center;
+}
+
+.empty-wishlist-card {
+  margin: 20px;
+}
+
+.wishlist-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive card grid */
+  gap: 20px;
+  padding: 20px;
+}
+
+.wishlist-card {
+  background-color: #f9f9f9;
+  padding: 15px;
+  text-align: left;
+  border: 2px solid #EEEEEE; /* Add black border */
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative; /* Enables absolute positioning for the delete button */
+}
+
+.wishlist-card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  margin-top: 14px;
+}
+
+.wishlist-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.wishlist-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.wishlist-product-name {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+.wishlist-product-price {
+  color: #333;
+  font-size: 1em;
+}
+
+.wishlist-delete-button {
+  position: absolute;
+  top: 10px; /* Adjust the top position */
+  right: -98px; /* Adjust the right position */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.wishlist-delete-icon {
+  color: black;
+  height: 20px;
+  background-color: white;
+  width: 20px;
+  font-size: 1.5em;
+  border-radius: 50%;
+}
+
+.wishlist-move-to-bag {
+  position: absolute;
+  top: 24rem; /* Fix the button at the bottom of the card */
+  left: 50%;
+  transform: translateX(-50%); /* Center the button horizontally */
+  background-color: white;
+  color: #23387A;
+  font-weight: bold;
+  padding: 8px 16px;
+  border: 2px solid #EEEEEE; /* Add black border */
+  cursor: pointer;
+  width: 102%; /* Ensure the button takes almost the full width of the card */
+  text-align: center;
+}
+
+
+

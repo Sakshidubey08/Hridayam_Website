@@ -478,10 +478,10 @@ const Product1 = () => {
                             )}
                             <h3 className='free'>Free Delivery</h3>
                             <div className="buttons">
-                                <button className="wishlist-btn">
+                                {/* <button className="wishlist-btn">
                                     <span>Wishlist</span>
                                     <FaHeart className="icon" />
-                                </button>
+                                </button> */}
                                 <button className="cart-btn" onClick={handleAddToCart}>
                                     <span>Add to Cart</span>
                                     <FaShoppingCart className="icon" />

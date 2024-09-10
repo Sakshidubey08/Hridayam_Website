@@ -126,6 +126,13 @@ const handleFavoriteButtonClick = async (id, e) => {
     const productPrice = parsePrice(product.price);
     return productPrice >= priceRange[0] && productPrice <= priceRange[1];
   });
+  
+  if (!productsData.length) {
+    return <>
+    <Header/>
+    <div className='empty-wishlist-card'>No products found.</div>;</>
+  }
+
 
  
   return (

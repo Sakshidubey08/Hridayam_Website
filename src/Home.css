@@ -1176,16 +1176,19 @@ input:focus, select:focus, textarea:focus {
   
   .dropdown-item15 {
     padding: 10px;
-    border-bottom: 1px solid #ccc;
     font-weight: 500;
     font-size: 15px;
     color: #575757;
     cursor: pointer;
+    
   }
   
   .dropdown-item15:hover {
     background-color: #f1f1f1; /* Optional: Highlight on hover */
   }
-   
+  .menu-slider {
+    display: flex;
+    
+  }
 
  

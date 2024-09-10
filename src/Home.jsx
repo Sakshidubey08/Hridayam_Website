@@ -64,14 +64,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isLoading, products } = useProductContext();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsToShow = 3; // Number of items to show at once
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, menuItems.length - itemsToShow));
-  };
+  const ITEMS_PER_PAGE = 3; // Only show 3 categories at a time
 
   var settings = {
     dots: true,
@@ -899,6 +892,17 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       navigate(pageRoutes[index]);
     }
   };
+  const handleNext = () => {
+    if (currentIndex + ITEMS_PER_PAGE < menuItems.length) {
+      setCurrentIndex(currentIndex + ITEMS_PER_PAGE);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentIndex - ITEMS_PER_PAGE >= 0) {
+      setCurrentIndex(currentIndex - ITEMS_PER_PAGE);
+    }
+  };
   return (
     <>
       <Header />
@@ -1052,7 +1056,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
 
 
-        <div className='decoration '>
+        {/* <div className='decoration '>
 
           {menuItems.map((item) => (
             <div key={item.id} className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
@@ -1076,7 +1080,45 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               )}
             </div>
           ))}
-        </div>
+        </div> */}
+      <div className='decoration'>
+      {/* Arrow for sliding left */}
+      <button onClick={handlePrev} disabled={currentIndex === 0}>
+        &#8592; {/* Left arrow */}
+      </button>
+
+      {/* Container for categories */}
+      <div className="menu-slider">
+        {menuItems.slice(currentIndex, currentIndex + ITEMS_PER_PAGE).map((item) => (
+          <div key={item.id} className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
+            <div className="menu-heading">
+              {item.heading}
+            </div>
+            {dropdownOpen === item.id && subcategories[item.id] && (
+              <div className="dropdown15">
+                {subcategories[item.id].map((subCategory) => (
+                  <div
+                    key={subCategory._id}
+                    className="dropdown-item15"
+                    onClick={() => handleSubcategoryClick(subCategory._id)}
+                  >
+                    {subCategory.name}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Arrow for sliding right */}
+      <button
+        onClick={handleNext}
+        disabled={currentIndex + ITEMS_PER_PAGE >= menuItems.length}
+      >
+        &#8594; {/* Right arrow */}
+      </button>
+    </div>
 
         {/* <div className='decoration'>
       <Swiper

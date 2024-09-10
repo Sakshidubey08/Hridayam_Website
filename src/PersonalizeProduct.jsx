@@ -423,6 +423,9 @@ const Cardpage1 = () => {
      
     }
   };
+  const handleProductClick = (productId) => {
+    navigate(`/similar/${productId}`); 
+  };
   return (
     <>
       <Header />
@@ -540,10 +543,10 @@ const Cardpage1 = () => {
                         </dialog>
               <h3 className='free'>Free Delivery</h3>
               <div className="buttons">
-                <button className="wishlist-btn">
+                {/* <button className="wishlist-btn">
                   <span>Wishlist</span>
                   <FaHeart className="icon" />
-                </button>
+                </button> */}
                 <button onClick={handleAddToCart} className="cart-btn">
                   <span>Add to Cart</span>
                   <FaShoppingCart className="icon" />
@@ -586,7 +589,7 @@ const Cardpage1 = () => {
                     className="card-link"
                     onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
                   > */}
-                    <div className='w-full h-full flex items-center'>
+                    <div className='w-full h-full flex items-center' onClick={() => handleProductClick(product._id)}>
                       <img src={product.image} alt="product" className="card-image1 rounded-xl w-23 flex object-contain m-0 p-0" />
                     </div>
                   {/* </Link> */}
