@@ -133,53 +133,105 @@
 // };
 
 // export default WishlistPage;
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
 
+// import { FaTrash } from 'react-icons/fa';
+// import Header from './Header';
+// import './Wishlist.css';
+// import { WishlistContext } from './WishlistContext';
+
+// const WishlistPage = () => {
+//   const { wishlistItems, removeFromWishlist } = useContext(WishlistContext);
+//   console.log(wishlistItems+"widsit lis ")
+//   return (
+//     <>
+//       <Header/>
+//       <div className="wishlist-page">
+//         {wishlistItems.length === 0 ? (
+//            <div className="empty-wishlist-card">
+//            <p>Your wishlist is empty.</p>
+//          </div>
+//         ) : (
+//           <table className="wishlist-table">
+//             <thead>
+//               <tr>
+//                 <th>Product Name</th>
+//                 <th>Product Image</th>
+//                 <th>Delete</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {wishlistItems.data.data.map(item => (
+//                 <tr key={item.id}>
+//                   {/* <td><input className='' type="checkbox" /></td> */}
+//                   <td className=' font-semibold'>{item.product.name}</td>
+
+//                   <td><img src={item.product.image} alt={item.product.name} /></td>
+//                   <td className=''>
+//                     <button className='hidden md:block'  onClick={() => removeFromWishlist(item.product._id)}>
+//                       <FaTrash />
+//                     </button>
+//                     <img  onClick={() => removeFromWishlist(item.product._id)} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
+                    
+//                   </td>
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         )}
+//       </div>
+//     </>
+//   );
+// };
+
+// export default WishlistPage;
+import React, { useContext } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import Header from './Header';
 import './Wishlist.css';
+import Footer from './Footer';
 import { WishlistContext } from './WishlistContext';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 const WishlistPage = () => {
-  const { wishlistItems, removeFromWishlist } = useContext(WishlistContext);
-  console.log(wishlistItems+"widsit lis ")
+  const { wishlistItems, removeFromWishlist, moveToBag } = useContext(WishlistContext); // Assuming you have a `moveToBag` function in your context
+
   return (
     <>
-      <Header/>
+      <Header />
       <div className="wishlist-page">
         {wishlistItems.length === 0 ? (
-           <div className="empty-wishlist-card">
-           <p>Your wishlist is empty.</p>
-         </div>
+          <div className="empty-wishlist-card">
+            <p>Your wishlist is empty.</p>
+          </div>
         ) : (
-          <table className="wishlist-table">
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Product Image</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {wishlistItems.data.data.map(item => (
-                <tr key={item.id}>
-                  {/* <td><input className='' type="checkbox" /></td> */}
-                  <td className=' font-semibold'>{item.product.name}</td>
+          <div className="wishlist-card-container">
+            {wishlistItems.data.data.map(item => (
+              <div key={item.id} className="wishlist-card">
+                <img src={item.product.image} alt={item.product.name} className="wishlist-card-image" />
+                <div className="wishlist-card-info">
+                  <div className="wishlist-details">
+                    <p className="wishlist-product-name">{item.product.name}</p>
+                    <p className="wishlist-product-price">&#8377;{item.product.price}</p>
+                  </div>
+                </div>
+                <button className="wishlist-delete-button" onClick={() => removeFromWishlist(item.product._id)}>
+                  {/* <FaTrash className="wishlist-delete-icon" /> */}
+                  <FontAwesomeIcon icon={faTimes} size="lg" className="wishlist-delete-icon" />
 
-                  <td><img src={item.product.image} alt={item.product.name} /></td>
-                  <td className=''>
-                    <button className='hidden md:block'  onClick={() => removeFromWishlist(item.product._id)}>
-                      <FaTrash />
-                    </button>
-                    <img  onClick={() => removeFromWishlist(item.product._id)} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
-                    
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                </button>
+                <button className="wishlist-move-to-bag" >    
+                  MOVE TO BAG
+                </button>
+
+                {/* onClick={() => moveToBag(item.product._id)} */}
+              </div>
+              
+            ))}
+          </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 };
