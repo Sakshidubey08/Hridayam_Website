@@ -289,7 +289,7 @@ import Ripples from  "react-ripples"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 function App() {
-  const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
+  const { cartItems, removeFromCart,  updateQuantity } = useContext(CartContext);
 
   // console.log(cartItems)
   // const handleIncrement = (productId) => {
@@ -300,6 +300,9 @@ function App() {
   // };
   console.log(cartItems+"this is from cartpage")
   const [selected, setSelected] = useState(false);
+  const [quantity,setquantity]=useState(1);
+  const [quantitymodel,setquantitymodel]=useState(1);
+  const [selected2,setselected2]=useState(false)
   if (cartItems.length === 0) {
     return (
       <>
@@ -311,75 +314,171 @@ function App() {
   const handleCheckboxChange = () => {
     setSelected(!selected);
   };
-   const calculateSubtotal = () => {
-    return 
+  //  const calculateSubtotal = () => {
+  //   return 
+  // };
+const handlequanlity =(product)=>{
+  setquantity(quantitymodel)
+  console.log(product)
+  setselected2(false)
+  updateQuantity(product,quantitymodel)
+
+}
+const handlequanlitymodel =(quan)=>{
+  setselected2(true)
+  setquantitymodel(quan)
+}
+  // const calculateTotal = () => {
+  //   const subtotal = calculateSubtotal();
+  //   // Add any other calculations for the total price, like tax or discounts, if applicable
+  //   return subtotal;
+  // };
+    const calculateSubtotal = () => {
+    return cartItems.reduce((acc, item) => {
+      const price = parseFloat(item.product!=null?item.product.price:"") || 0;
+      const quantity = parseInt(item.quantity) || 0;
+      return acc + price * quantity;
+    }, 0);
   };
 
   const calculateTotal = () => {
-    const subtotal = calculateSubtotal();
-    // Add any other calculations for the total price, like tax or discounts, if applicable
-    return subtotal;
+    return calculateSubtotal();
   };
   return (
     <>
       <Header />
    <div className="product-summary-container">
       <div className='final'>
+        {
 
-        <div className="cart-container" >
+         cartItems.length>0?cartItems.map((item,index)=>{
+
+        return(
+
+        
+        <div className="cart-container">
 
           <div className="product">
             <div className="delete">
-              <button className='hidden md:block' onClick={() => removeFromCart()}>
+              <button className='hidden md:block' onClick={() => removeFromCart(item._id)}>
                 <FontAwesomeIcon icon={faTimes} size="lg" />
 
               </button>
+              
               <img onClick={() => removeFromCart()} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
             </div>
-            <div className="product-image flex items-center gap-2 ">
-              <img src='https://i.pinimg.com/564x/c4/88/15/c48815ba889d5fb6b028e6c494942abc.jpg' />
+            <div className="product-imag w-80 flex items-center gap-1 ">
+              <img src={item.product==null?"":item.product.image} />
+              <img src={item.product==null?"":item.personalize_image} />
+
             </div>
+
             <div className="product-info12">
-              <h2 className="product-name">Name</h2>
-              <p className="product-description">
-                Black Accordion Pleats Empire Dress
+              <h2 className="product-name">{item.product==null?"":item.product.name}</h2>
+              <div>
+              
+              <p className="product-description line-clamp-1 w-1/2 ">
+                {item.product==null?"":item.product.description}
               </p>
-              <div className="product-options">
-                <div className="option flex items-center">
-                  <span className="label">Size:</span>
-                  <select className="select">
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                  </select>
+              </div>
+              <div  className="product-options">
+                <div onClick={()=>document.getElementById('my_modal_31').showModal()} className="option flex items-center">
+                <span  className="label flex items-center justify-center gap-2 bg-gray-300/30 rounded-md">
+                  Size:<span>M</span> 
+                  <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
+                  {/* <div className=' r'><svg width={"20px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg></div> */}
+                  </span>
+                  <dialog id="my_modal_31" className="modal ">
+  <div className="modal-box  w-80">
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <div>
+      <p className=' font-bold text-lg my-3'>Select Size</p>
+      <hr/>
+      <div className='my-4'>
+        <p className='  border border-black w-7 h-7 p-4 flex items-center  justify-center rounded-full '>M</p>
+      </div>
+      <div className=' flex items-center justify-center'>
+      <div className='border p-1 bg-blue-800 flex items-center justify-center text-white rounded-md w-full'>Done</div>
+         
+      </div>
+
+    </div>
+  </div>
+</dialog>
                 </div>
-                <div className="option flex items-center">
-                  <span className="label">Qty:</span>
-                  <select className="select">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </select>
+                <div onClick={()=>(document.getElementById(`my_modal_${index+10}`).showModal())} className="option flex items-center">
+                  <span  className="label flex items-center justify-center gap-2 bg-gray-300/30 rounded-md">
+                  Qty:<span>{item.quantity}</span> 
+                  <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
+                  {/* <div className=' r'><svg width={"20px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg></div> */}
+                  </span>
+                 
+                  {/* You can open the modal using document.getElementById('ID').showModal() method */}
+{/* <button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}>open modal</button> */}
+<div>
+
+<dialog id={`my_modal_${index+10}`} className="modal ">
+
+  <div className="modal-box  w-80">
+
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button onClick={()=>{setselected2(false)}} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <div>
+      <p className=' font-bold text-lg my-3'>Select Quantity</p>
+      <hr/>
+      {/* {item.product==null?"":item.product.stock} */}
+      <div className='my-4 flex flex-wrap  gap-2'>
+      {Array.from({ length: item.product==null?"":item.product.stock }, (_, index) => (
+        <div key={index} className="item-div">
+        
+        
+        <button onClick={()=>{handlequanlitymodel(index+1)}} className={` ${selected2==false?(item.quantity==index+1?"ring":""):"hover:ring focus:ring"}    cursor-pointer  border border-black w-7 h-7 p-4 flex items-center  justify-center rounded-full `}>
+           {index+1}
+        </button>
+        </div>
+    
+        ))}
+      </div>
+      <form method="dialog">
+      <div className=' flex items-center justify-center'>
+        <button onClick={()=>{handlequanlity(item.product._id==null?"":item._id)}} className='border p-1 bg-blue-800 flex items-center justify-center text-white rounded-md w-full'>Done</button>
+
+      </div>
+      </form>
+
+    </div>
+  </div>
+</dialog>
+</div>
                 </div>
               </div>
               <p className="product-price">
-                &#8377;123
+                &#8377;{item.product==null?"":item.product.price*item.quantity}
               </p>
             </div>
           </div>
         </div>
+        )
+      }):"sdfsd"
+        }
+
       </div>
       <div className="cart-summary">
         <h2 className="cart-total">Cart Total</h2>
         <div className="summary-box">
           <div className="summary-item1">
             <span>Subtotal</span>
-            <span>&#8377;123</span>
+            <span>&#8377;{calculateSubtotal()}</span>
           </div>
           <hr />
           <div className="summary-item2">
             <span>Total</span>
-            <span>&#8377;123</span>
+            <span>&#8377;{calculateTotal()}</span>
           </div>
         </div>
         <Link to="/checkout">
