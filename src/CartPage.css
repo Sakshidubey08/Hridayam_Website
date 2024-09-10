@@ -1,4 +1,4 @@
-.cart-container {
+/* .cart-container {
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -6,8 +6,8 @@
 
 .cart-table {
   width: 100%;
-  max-width: 1140px; /* Set your desired max-width here */
-  border-collapse: collapse;
+  max-width: 1140px; 
+   border-collapse: collapse;
 }
 
 .cart-table th, .cart-table td {
@@ -104,13 +104,13 @@ hr {
   width: 50%;
   background-color: #ADD8e6;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+} 
 
 @media only screen and (max-width: 600px) {
   .cart-table {
     width: 100%;
     font-size: 6px;
-    max-width: 940px; /* Set your desired max-width here */
+    max-width: 940px; 
     border-collapse: collapse;
   }
   .cart-summary {
@@ -130,7 +130,248 @@ hr {
 
   .cart-table {
     width: 100%;
-    max-width: 1140px; /* Set your desired max-width here */
+    max-width: 1140px; 
     border-collapse: collapse;
   }
+} */
+.final {
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
 }
+.text{
+  margin-right: 45rem;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.checkbox input[type="checkbox"] {
+  margin-right: 5px;
+  
+}
+
+.remove,
+.wishlist {
+  padding: 8px 15px;
+  background-color: #eee;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.product-image {
+  width: 100px;
+  height: 150px;
+  margin-right: 20px;
+  
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-details {
+  flex: 1;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.product-info12{
+  margin-left: 94px;
+}
+.product-description {
+  margin-bottom: 5px;
+}
+.cart-summary {
+  margin-top: 20px;
+  text-align: center;
+  width: 1180px;
+  margin-left: 62px;
+}
+
+.cart-total {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Roboto';
+  text-align: left;
+  margin-left: 40px;
+}
+.product-seller {
+  margin-bottom: 10px;
+}
+
+.product-options {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.option {
+  margin-right: 20px;
+}
+
+.product-price {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.price12 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.discount {
+  color: #888;
+}
+.cart-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  width: 600px;
+}
+.product-return,
+.product-delivery {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.return-policy,
+.delivery-policy {
+  color: #888;
+}
+
+.close-button {
+  padding: 8px 15px;
+  background-color: #eee;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.wishlist-button12 {
+  display: flex;
+  align-items: center;
+}
+
+.button12 {
+  padding: 10px 20px;
+  background-color: #23388B;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+
+}
+.delete{
+  margin-bottom: 162px;
+  position: absolute;
+  left: 50rem;
+
+  
+}
+.button12 .icon12 {
+  margin-right: 5px;
+}
+
+.arrow {
+  font-size: 20px;
+}
+.final{
+  margin-left: 94px;
+}
+.summary-item1 {
+  background-color: #F6F6F6;
+}
+.summary-item2 {
+  background-color: #E6E6E6;
+}
+
+.cart-total {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Roboto';
+  text-align: left;
+  margin-left: 22px;
+  
+}
+
+.summary-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.summary-item1, .summary-item2 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+.final {
+  display: flex;
+  flex-direction: column;
+  width: 65%; 
+  margin-right: 20px; 
+}
+
+.cart-summary {
+  width: 60%; 
+  margin-top: 0; 
+}
+
+.product-summary-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 -18px;
+  padding: 20px;
+}
+.empty-wishlist-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 50px auto;
+  font-family: 'Poppins';
+  font-weight: bold;
+  width: 50%;
+  background-color: #ADD8e6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} 

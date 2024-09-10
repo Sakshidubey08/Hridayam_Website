@@ -51,7 +51,7 @@ const Login = () => {
         setError('Login failed: No response from server.');
       } else {
         console.error('Error message:', error.message);
-        setError('Login failed: ' + error.message);
+        setError( error.message);
       }
       setSuccess('');
     }

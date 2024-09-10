@@ -12,7 +12,7 @@ function Footer() {
                 <div className="footer-section1 md:mr-20 ">
                     <img className="footer-logo1" src={Frame} alt="Logo" />
                     <p className="footer-description1 ">
-                        Hridayam combines  passion and  innovation to bring real to customers' business
+                        Hirdayam combines  passion and  innovation to bring real to customers' business
                     </p>
                 </div>
                 <div className='flex flex-wrap md:gap-8  pl-4 md:pl-0 '>

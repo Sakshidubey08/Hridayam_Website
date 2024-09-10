@@ -284,15 +284,17 @@ const Product1 = () => {
                 const result = await response.json();
                 if (result.status) {
                     newproduc()
-                    console.log(product_id + "new id")
+                    // console.log(product_id + "new id")
                     setProducts(result.data);
-                    console.log(products[1] + "dsf")
+                    // console.log(products[1] + "dsf")
                     const product = result.data.find(prod => prod._id === product_id);
                     console.log(product + "productefj i")
                     // Optionally set the first product as the selected product
-                    setSelectedProduct(product);
+                    setSelectedProduct(product || result.data[0]); // Set the product by ID or default to the first one
+
                     // Set the main image as the selected image initially
-                    setSelectedImage(product.image);
+                    setSelectedImage(product?.image || result.data[0]?.image); // Set the main image
+
                 }
             } catch (error) {
                 console.error('Failed to fetch products:', error);
@@ -383,7 +385,7 @@ const Product1 = () => {
     return (
         <>
             <Header />
-            <div className="breadcrumb1 hidden md:block">Home / {selectedProduct?.name || 'Product'}</div>
+            {/* <div className="breadcrumb1 hidden md:block">Home / {selectedProduct?.name || 'Product'}</div>
             <div className="product-detail1 mt-1">
                 <div className="content">
                     <div className="image-gallery hidden">
@@ -418,14 +420,14 @@ const Product1 = () => {
 
                     <div className="thumbnail-lis  w-full gap-2 justify-center items-center flex md:hidden">
 
-{selectedProduct && (
+  {selectedProduct && (
     <img
         src={selectedProduct.image}
         alt={selectedProduct.name}
         onClick={() => handleImageClick(selectedProduct.image)}
         className="thumbnai h-20 w-20 hover:ring rounded-md   "
     />
-)}
+  )}
 
 {selectedProduct?.images.map((image, index) => (
     <img
@@ -499,7 +501,6 @@ const Product1 = () => {
                         <dialog id="my_modal_4" className="modal">
                             <div className="modal-box">
                                 <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
                                     <button style={{ background: "transparent", color: "black" }} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                 </form>
 
@@ -524,7 +525,7 @@ const Product1 = () => {
                                 </div>
 
                                 <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
+                                 
                                     <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
                                 </form>
                             </div>
@@ -533,11 +534,127 @@ const Product1 = () => {
                             <div className="buttons">
                                 <button className="wishlist-btn">
                                     <span>Wishlist</span>
-                                    {/* <FaHeart className="icon" /> */}
                                 </button>
                                 <button className="cart-btn" onClick={handleAddToCart}>
                                     <span>Add to Cart</span>
-                                    {/* <FaShoppingCart className="icon" /> */}
+                                </button>
+                            </div>
+                            <div className="pincode-checker">
+                                <input
+                                    type="text"
+                                    value={pincode}
+                                    onChange={handlePincodeChange}
+                                    placeholder="Enter Pincode"
+                                    className="pincode-input"
+                                />
+                                <button onClick={handlePincodeCheck} className="check-btn">
+                                    {checkButtonText}
+                                </button>
+                            </div>
+                            <p className="delivery-info">
+                                <span className="delivery-line1">{deliveryText.line1}</span>
+                                <br />
+                                <span>{deliveryText.line2}</span>
+                                <br />
+                                <span>{deliveryText.line3}</span>
+                                <br />
+                                <span className="delivery-line">{deliveryText.line4}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <Footer /> */}
+            <div className="breadcrumb1">Home / {selectedProduct?.name || 'Product'}</div>
+            <div className="product-detail1 mt-1">
+                <div className="content">
+                    <div className="image-gallery">
+                        <div className="thumbnail-list">
+                            {/* {selectedProduct && (
+                                <img
+                                    src={selectedProduct.image}
+                                    alt={selectedProduct.name}
+                                    onClick={() => handleImageClick(selectedProduct.image)}
+                                    className="thumbnail"
+                                />
+                            )} */}
+                            {selectedProduct?.images?.map((image, index) => (
+                                <img
+                                    key={index}
+                                    src={image}
+                                    alt={`Thumbnail ${index + 1}`}
+                                    onClick={() => handleImageClick(image)}
+                                    className="thumbnail"
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <div className="image-placeholder1 m-auto flex items-center justify-center">
+                        {selectedImage && (
+                            <img src={selectedImage} alt="Selected" />
+                        )}
+                    </div>
+                    <div className="scrollable-content4">
+                        <div className="product-info">
+                            <h1 className='product-name'>{selectedProduct?.name}</h1>
+                            <p className="price1">&#8377;{selectedProduct?.price}</p>
+                            <h3 className='selected1'>Selected Quantity</h3>
+                            <div className="quantity-selector">
+                                <button onClick={handleDecrement} className="quantity-btn">-</button>
+                                <div className="quantity">{quantity}</div>
+                                <button onClick={handleIncrement} className="quantity-btn">+</button>
+                            </div>
+                            <br />
+                            {selectedProduct?.product_type === "personalize" && (
+                                <>
+                                    <button
+                                        onClick={() => document.getElementById('fileInput').click()}
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            padding: '10px',
+                                            borderRadius: '5px',
+                                            cursor: 'pointer',
+                                            border: '1px solid #ccc',
+                                            background: '#23387A',
+                                            color: 'white',
+                                            fontFamily: 'Poppins'
+                                        }}
+                                    >
+                                        {selectedImage2 ? (
+                                            <img
+                                                src={selectedImage2}
+                                                alt="Selected"
+                                                style={{
+                                                    width: '40px',
+                                                    height: '40px',
+                                                    marginRight: '10px',
+                                                }}
+                                            />
+                                        ) : (
+                                            'Select Photo'
+                                        )}
+                                    </button>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        id="fileInput"
+                                        style={{ display: 'none' }}
+                                        onChange={handleImageChange}
+                                    />
+                                    {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
+                                </>
+                            )}
+                            <h3 className='free'>Free Delivery</h3>
+                            <div className="buttons">
+                                <button className="wishlist-btn">
+                                    <span>Wishlist</span>
+                                    <FaHeart className="icon" />
+                                </button>
+                                <button className="cart-btn" onClick={handleAddToCart}>
+                                    <span>Add to Cart</span>
+                                    <FaShoppingCart className="icon" />
                                 </button>
                             </div>
                             <div className="pincode-checker">

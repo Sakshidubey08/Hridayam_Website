@@ -213,7 +213,20 @@ h2 {
   margin-bottom: 20px;
  
 }
-
+.empty-wishlist-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 50px auto;
+  font-family: 'Poppins';
+  font-weight: bold;
+  width: 50%;
+  background-color: #ADD8e6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} 
 .section-title {
   font-size: 1.2em;
   margin-bottom: 10px;

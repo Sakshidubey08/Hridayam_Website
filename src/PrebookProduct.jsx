@@ -12,6 +12,7 @@ import axios from 'axios';
 import Footer from './Footer';
 import Loadingpage from './Loadingpage';
 const API = "https://api.hirdayam.com/api/getPreBook";
+const SIMILAR_PRODUCTS_API = "https://api.hirdayam.com/api/getsimilarProducts";
 
 const Cardpage1 = () => {
   const navigate=useNavigate();
@@ -29,6 +30,8 @@ const Cardpage1 = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [personalizeText,setpersonalize]=useState("");
+  const [similarProducts, setSimilarProducts] = useState([]);
+
   const [deliveryText, setDeliveryText] = useState({
     line1: "Please enter PIN code to check delivery time.",
     line2: "100% Original Products.",
@@ -131,7 +134,34 @@ const Cardpage1 = () => {
       [name]: value
     }));
   };
+  const fetchSimilarProducts = async (productId) => {
+    try {
+      const response = await fetch(`${SIMILAR_PRODUCTS_API}?product_id=${productId}`);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
   
+      // Log the full response to check its structure
+      console.log('Full API response:', data);
+  
+      // Set similar products from data.data
+      setSimilarProducts(data.data || []); // Ensure it's an array or fallback to an empty array
+  
+      // Log the similar products to ensure it's populated
+      console.log('Similar products:', data.data);
+    } catch (error) {
+      console.error("Error fetching similar products: ", error);
+    }
+  };
+  
+  
+
+  useEffect(() => {
+    if (id) {
+      fetchSimilarProducts(id);  // Passing `id` from useParams
+    }
+  }, [id]);
   const handlePincodeCheck = () => {
     if (pincode.trim() !== '') {
       setIsPincodeChecked(true);
@@ -164,7 +194,7 @@ const Cardpage1 = () => {
   
 
   const { name, price, default_color_image, images,image } = filteredCard;
-  const mainImage = selectedImage || default_color_image || image;
+  const mainImage = selectedImage || image;
 
   const handleAddToCart = () => {
     // console.log(getSingleProduct.variations[0]+"new variation")
@@ -479,6 +509,52 @@ const Cardpage1 = () => {
               </p>
             </div>
           </div>
+        </div>
+        <h1 className='top ml-24'>Similar Products</h1>
+
+        <div className="card-container">
+          {similarProducts && similarProducts.length > 0 ? (
+          similarProducts.map((product) => (
+            <div  key={product._id} className="card-wrapper" style={{ cursor: 'pointer' }}>
+              <div className="card1-product rounded-md">
+                <div className="card-header w-36 h-56 md:h-72 md:w-full">
+                  {/* <Link
+                    to={`/card/${card.id}`}
+                    className="card-link"
+                    onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
+                  > */}
+                    <div className='w-full h-full flex items-center'>
+                      <img src={product.image} alt="product" className="card-image1 rounded-xl w-23 flex object-contain m-0 p-0" />
+                    </div>
+                  {/* </Link> */}
+                  <button
+                    className="favorite-btn m-2 md:m-0"
+                  
+                    style={{
+                      cursor: 'pointer',
+                      border: 'none',
+                      background: 'none',
+                      padding: '5px',
+                    }}
+                  >
+                    {/* <i
+                      className={`fa-heart ${wishlistItems.data.data.some(item => item.product._id === card.id) ? 'fas' : 'far'}`}
+                      style={{ color: wishlistItems.data.data.some(item => item.product._id === card.id) ? 'red' : '#23387A', fontSize: '24px' }}
+                    ></i> */}
+                  </button>
+                </div>
+              </div>
+              <div className="card-info">
+                <p className="image-description">{product.name}</p>
+                <p className='price'>&#8377;{product.price}</p>
+              </div>
+            </div>
+         
+        
+           ) )
+           ) : (
+          <p>No similar products available.</p>
+         )}
         </div>
       </div>
       <Footer/>

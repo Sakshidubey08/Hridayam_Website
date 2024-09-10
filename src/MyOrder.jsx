@@ -169,7 +169,7 @@ const cancelOrder = () => {
 
     </table> */}
     <div className='mx-14 my-5 flex gap-3 '>
-            <input onChange={(e)=>{setinputorderid(e.target.value)}} placeholder='Enter Your OrderId' className='border py-2 px-2 rounded-md' type='text'></input>
+            <input onChange={(e)=>{setinputorderid(e.target.value)}} placeholder='Enter OrderId' className='border py-2 px-2 rounded-md' type='text'></input>
             <button onClick={handleinputbox} className='btn bg-blue-900 text-white'>Search Order</button>
           </div>
     <table className="wishlist-table w-11/12 m-auto">
@@ -177,7 +177,7 @@ const cancelOrder = () => {
               <tr>
                 {/* <th>Select</th> */}
                 {/* <th>{orderdetails.data.message}</th> */}
-                <th>Order</th>
+                <th>Order Id</th>
               
                 <th>Order Date</th>
                  <th>Payment</th>
@@ -191,7 +191,7 @@ const cancelOrder = () => {
             
             
                 <tr>
-                  <td><input className='' type="checkbox" /></td>
+                  <td></td>
                   <td className=' font-semibold'>{formattedDate}</td>
                   <td>{payment}</td>
 

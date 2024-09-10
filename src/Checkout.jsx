@@ -147,9 +147,6 @@ const fetchAddress = async () => {
         });
 
         console.log('Addres get success:', response.data);
-        // localStorage.setItem('address', JSON.stringify(response.data));
-        // setSuccess('Address managed successfully.');
-        // console.log(userprofiledata.data.name+"profile new")
         setaddress(response.data.data[0].house_name);
         setLandmark(response.data.data[0].landmark)
         setzipcode(response.data.data[0].zip_code)

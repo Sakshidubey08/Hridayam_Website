@@ -324,7 +324,9 @@ const CatalogProducts = () => {
   }
 
   if (!productsData.length) {
-    return <div>No products found.</div>;
+    return <>
+    <Header/>
+    <div className='empty-wishlist-card'>No products found.</div>;</>
   }
 
 

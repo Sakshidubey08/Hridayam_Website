@@ -163,7 +163,7 @@ function Dropdown() {
 
           {!isAuthenticated ? (
             <button className="dropdown-item2">
-              <Link to="/login" className="dropdown-link1">Login</Link> / 
+              <Link to="/login" className="dropdown-link1">Login</Link><Link to="/login"> /</Link>
               <Link to="/signup" className="dropdown-link">Signup</Link>
             </button>
           ) : (
