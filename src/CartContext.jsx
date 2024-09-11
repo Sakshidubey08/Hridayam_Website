@@ -319,9 +319,9 @@ if (product.acrylicprice) {
   formData.append('acrylic_price', product.acrylicprice);
 }
 
-// if (product.acrylicfinalpreview) {
-  formData.append('acrylic_final_preview', "sdflkjsdf");
-// }
+if (product.acrylicfinalpreview) {
+  formData.append('acrylic_final_preview',product.acrylicfinalpreview );
+}
  console.log(product.acrylicthicknessname,quantity)
     axios.post('https://api.hirdayam.com/api/addtocart', formData,{
       headers: {

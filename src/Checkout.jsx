@@ -126,9 +126,7 @@ const fetchUserProfile = async () => {
 };
 
 const handlePayment2=()=>{
-  if(placeorderdone==false){
-    return <Loadingpage></Loadingpage>
-  }
+  
   handlePayment()
  
   
@@ -175,6 +173,9 @@ const fetchAddress = async () => {
         }
     }
 };
+if(cartItems.lenght==0){
+  return <Loadingpage></Loadingpage>
+}
 
 // console.log(address.data[0].house_name+"new")
 
@@ -282,8 +283,8 @@ const fetchAddress = async () => {
               {/* <div>{cartItems.length}dsfjsdfllsdfljk</div> */}
               {cartItems.map(item => (
                 <tr key={item.id}>
-                  <td>{item.product.name}</td>
-                  <td>&#8377;{item.product.price}</td>
+                  <td>{item.product==null?"Acrylic Photo Frame":item.product.name}</td>
+                  {/* <td>&#8377;{item.product==null?item.acrylic_price:item.product.price}</td> */}
                 </tr>
               ))}
               <tr>

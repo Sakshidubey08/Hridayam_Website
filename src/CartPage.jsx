@@ -367,14 +367,14 @@ const handlequanlitymodel =(quan)=>{
               
               <img onClick={() => removeFromCart()} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
             </div>
-            <div className="product-imag w-80 flex items-center gap-1 ">
-              <img src={item.product==null?"":item.product.image} />
-              <img src={item.product==null?"":item.personalize_image} />
-
+            <div className="product-imag   flex items-center gap-1 ">
+              <img  className={`${item.product==null?"hidden":""} h-28 `} src={item.product==null?"":item.product.image} />
+              <img className={`${item.product==null?"hidden":""} h-28`} src={item.product==null?"":item.personalize_image} />
+              <img className='h-20' src={item.acrylic_final_preview}></img>
             </div>
 
             <div className="product-info12">
-              <h2 className="product-name">{item.product==null?"":item.product.name}</h2>
+              <h2 className="product-name">{item.product==null?"Acrylic Photo Frame":item.product.name}</h2>
               <div>
               
               <p className="product-description line-clamp-1 w-1/2 ">
@@ -458,7 +458,7 @@ const handlequanlitymodel =(quan)=>{
                 </div>
               </div>
               <p className="product-price">
-                &#8377;{item.product==null?"":item.product.price*item.quantity}
+                &#8377;{item.product==null?item.acrylic_price:item.product.price*item.quantity}
               </p>
             </div>
           </div>
