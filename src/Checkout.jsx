@@ -126,9 +126,7 @@ const fetchUserProfile = async () => {
 };
 
 const handlePayment2=()=>{
-  if(placeorderdone==false){
-    return <Loadingpage></Loadingpage>
-  }
+ 
   handlePayment()
  
   
