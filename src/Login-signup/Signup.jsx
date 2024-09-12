@@ -320,7 +320,9 @@ const SignupForm = () => {
   const validateEmail = (email) => /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
 
   
-  const validatePassword = (password) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
+  // const validatePassword = (password) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
+  const validatePassword = (password) => /^[a-zA-Z0-9]{8}$/.test(password);
+
   // const handlePhoneChange = (e) => setPhone(e.target.value.trim());
   // const handleEmailChange = (e) => setEmail(e.target.value.trim());
   const handleNameChange = (e) => {
@@ -443,11 +445,10 @@ const SignupForm = () => {
     }
   
     if (!validatePassword(password)) {
-      setError('Password must be at least 8 characters long and include 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.');
+      setError('Password must be at least 8 characters long.');
       return;
     }
   
-    // Proceed to API call if all validations pass
     try {
       const response = await axios.post('https://api.hirdayam.com/api/signup', {
         name,

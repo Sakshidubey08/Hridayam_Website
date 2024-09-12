@@ -1,6 +1,6 @@
-.main-container {
+/* .main-container {
   display: flex;
-  gap: 20px; /* Optional: Adds space between filter and cards */
+  gap: 20px; 
 }
 
 .filter-container {
@@ -81,7 +81,7 @@ h2 {
 .color-options {
   display: flex;
   gap: 10px;
-  align-items: center; /* Ensure vertical alignment */
+  align-items: center; 
 }
 
 .color-swatch {
@@ -98,7 +98,7 @@ h2 {
 
 .color-swatch.selected {
   transform: scale(1.2);
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3); /* Shadow for selection effect */
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3); 
 }
 
 
@@ -121,10 +121,10 @@ h2 {
 .cards-container1 {
   display: flex;
   flex-wrap: wrap; 
-  gap: 10px; /* Adds space between cards */
+  gap: 10px; 
   margin-top: 40px;
-  flex: 1; /* Allow card container to take remaining space */
-  justify-content: center; /* Center cards horizontally */
+  flex: 1; 
+  justify-content: center; 
 }
 
 .card-wrapper {
@@ -205,7 +205,6 @@ h2 {
 }
 
 .material-option {
-  /* margin-bottom: 10px; */
   display: flex;
   gap: 145px;
 }
@@ -227,6 +226,259 @@ h2 {
   background-color: #ADD8e6;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 } 
+.section-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+} */
+/* Main container to hold filters and cards */
+.main-container {
+  display: flex;
+  gap: 20px; /* Optional: Adds space between filter and cards */
+}
+
+/* Filter container styling */
+.filter-container {
+  padding: 20px;
+  margin-left: 90px;
+  width: 300px;
+  flex: 0 0 300px;
+}
+
+/* Filter header styling */
+.filter-header {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* Filter header title styling */
+h2 {
+  margin: 0;
+  margin-right: 10px;
+  color: black;
+}
+
+/* Clear all button styling */
+.clear-all {
+  color: #23387A;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 110px;
+}
+
+/* Filter option1 styling */
+.filter-option1 {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 53px;
+}
+
+/* General filter option styling */
+.filter-option label {
+  margin-bottom: 0;
+}
+
+/* Show/hide button styling */
+.show-hide {
+  display: flex;
+  gap: 5px;
+}
+
+.show-hide button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Price range styling */
+.price-range {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.price-slider-container {
+  margin-top: 20px;
+}
+
+/* Price range input styling */
+.price-range input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Colors section styling */
+.colors {
+  margin-top: 10px;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+  align-items: center; /* Ensure vertical alignment */
+}
+
+/* Color swatch styling */
+.color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-swatch.selected {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3); /* Shadow for selection effect */
+}
+
+.color-swatch:hover {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Material options styling */
+.material-options {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.material-options label {
+  display: flex;
+  align-items: center;
+}
+
+/* Cards container styling */
+.cards-container1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adds space between cards */
+  margin-top: 40px;
+  flex: 1; /* Allow card container to take remaining space */
+  justify-content: center; /* Center cards horizontally */
+}
+
+/* Card wrapper styling */
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Card styling */
+.card1 {
+  background-color: #e0e0e0;
+  color: white;
+  padding: 20px;
+  position: relative;
+}
+
+/* Card header styling */
+.card-header {
+  position: relative;
+  width: 220px;
+  height: 272px;
+}
+
+/* Card image styling */
+.card-image1 {
+  padding-left: 25px;
+  padding-top: 32px;
+  height: 200px;
+  width: 200px;
+  margin: auto;
+}
+
+/* Favorite button styling */
+.favorite-btn {
+  position: absolute;
+  top: -6px;
+  right: -5px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.favorite-btn.red {
+  color: red;
+}
+
+/* Card info styling */
+.card-info {
+  margin-top: 2px;
+  color: black;
+  text-wrap: nowrap;
+}
+
+/* Image description styling */
+.image-description {
+  margin-top: 10px;
+}
+
+/* Price styling */
+.price {
+  margin-top: 5px;
+}
+
+/* Load more container styling */
+.load-more-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Color option styling */
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+/* Material option styling */
+.material-option {
+  display: flex;
+  gap: 145px;
+}
+
+/* Section styling */
+.section {
+  margin-bottom: 20px;
+}
+
+/* Empty wishlist card styling */
+.empty-wishlist-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 50px auto;
+  font-family: 'Poppins';
+  font-weight: bold;
+  width: 50%;
+  background-color: #ADD8e6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Section title styling */
 .section-title {
   font-size: 1.2em;
   margin-bottom: 10px;

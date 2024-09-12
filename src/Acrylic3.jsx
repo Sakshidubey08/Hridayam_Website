@@ -925,6 +925,23 @@ function App() {
     const handleTextChange = (e) => {
         setText(e.target.value);
     };
+    function base64ToFile(base64String, filename) {
+        // Decode the base64 string
+        let arr = base64String.split(','),
+          mime = arr[0].match(/:(.*?);/)[1],
+          bstr = atob(arr[1]), // atob() decodes a base64 string
+          n = bstr.length,
+          u8arr = new Uint8Array(n);
+      
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+      
+        // Create a File object
+        return new File([u8arr], filename, { type: mime });
+      }
+
+
 
     const captureScreenshot = () => {
         html2canvas(ref.current,{
@@ -936,12 +953,11 @@ function App() {
       height: ref.current.scrollHeight, // Capture full height of the element
         }).then((canvas) => {
             const imgData = canvas.toDataURL('image/png');
+            let imageFile = base64ToFile(imgData, "image.jpg");
             // Store imgData in your store or state
-            console.log(imgData);
-            setScreenshot(imgData); // This is the base64 image
+            console.log(imageFile);
+            setScreenshot(imageFile); // This is the base64 image
             // You can save it to a store (Redux, localStorage, etc.)
-          }).then(()=>{
-            handleAddToCart();
           })
       };
       
@@ -956,6 +972,22 @@ function App() {
     //     setScreenshot(imgData); // Store the screenshot in the state
     //   });
     // };
+
+    function base64ToFile(base64String, filename) {
+        // Decode the base64 string
+        let arr = base64String.split(','),
+          mime = arr[0].match(/:(.*?);/)[1],
+          bstr = atob(arr[1]), // atob() decodes a base64 string
+          n = bstr.length,
+          u8arr = new Uint8Array(n);
+      
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+      
+        // Create a File object
+        return new File([u8arr], filename, { type: mime });
+      }
     
     
     const handleCapture = (captureFeedback) => {
@@ -970,8 +1002,8 @@ function App() {
         }
         html2canvas(element).then((canvas)=>{
              let image=canvas.toDataURL("image/jpeg")
-        
-             setScreenshot(image)
+             let imageFile = base64ToFile(image, "image.jpg");
+             setScreenshot(imageFile)
              console.log(screenshot)
         }).catch(err=>{
             console.error("We can not take the screenshot of your element at this time")
@@ -1004,7 +1036,9 @@ function App() {
                 console.log('Get Acrylic size:', response);
                 // let data=response;
                 // setAcrylicsize(data); // Update state
-            
+                setsizeId(response.data.data[0]._id)
+                setsizeprice(response.data.data[0].price)
+
                
                 console.log(Acrylicsize+ 'new');
 
@@ -1075,7 +1109,7 @@ function App() {
         setSelectedThickness(thickness);
         setthicknessprice(price)
         setthicknessId(id)
-        setPrice(sizeprice+thicknessprice)
+        // setPrice(sizeprice+thicknessprice)
     };
     const handleImageClick1 = (imageSrc) => {
         setSelectedImage2(imageSrc);
@@ -1106,7 +1140,7 @@ function App() {
     useEffect(() => {
        
       
-       fetchthikness()
+      
         fetchsize();
       }, []);
       
@@ -1138,7 +1172,8 @@ function App() {
             if (response2 && response2.data && response2.data.data) {
               console.log('Get Acrylic Thikness:', response2);
               let acrylicThiknessdata =response2.data.data;
-              setthicknessdata(acrylicThiknessdata); // Update state
+              setthicknessdata(acrylicThiknessdata);
+              setthicknessprice(response2.data.data[0].price) // Update state
               //     if(acrylicsize){
              
               console.log( "updated",thicknessdata);
@@ -1179,7 +1214,7 @@ function App() {
               },
             });
     
-            if (response && response.data && response.data.data) {
+            if (response && response.data && response.data.data){
               console.log('Get Acrylic size:', response);
               let acrylicSizedata =response.data.data;
               setacrylicsize4(acrylicSizedata); // Update state
@@ -1225,7 +1260,7 @@ function App() {
             acrylicsizename:selectedSize,
             acrylicthicknessid:thicknessId,
             acrylicthicknessname:selectedThickness,
-            acrylicprice:price,
+            acrylicprice:sizeprice+thicknessprice,
             acrylicfinalpreview:screenshot,
           };
           console.log(productToAdd.acrylicsizename+"new Acylic")
@@ -1247,9 +1282,13 @@ function App() {
       };
 
 
-useEffect(() => {
- handleAddToCart();
-}, [screenshot])
+// useEffect(() => {
+//  handleAddToCart();
+// }, [screenshot])
+
+if(screenshot!=null){
+    handleAddToCart();
+}
 
       
   
@@ -1838,8 +1877,9 @@ useEffect(() => {
                     </div>
                     <hr className='border-dashed border-[1px] border-gray-200 mb-2 w-screen md:w-[1200px]' />
 
+                   <div className='sticky top-0'>
                     <div className="price1 text-sm">
-                        <span className='text-xl'>₹{price} <span className=' line-through text-gray-300'>₹{price + 1000}</span></span>
+                        <span className='text-xl'>₹{sizeprice +thicknessprice} <span className=' line-through text-gray-300'>₹{price + 1000}</span></span>
                         <p className='mt-6' style={{ fontWeight: "300" }}>  Photo quality for <span style={{ fontWeight: "600" }}>{selectedSize}</span> is <span className='text-green-500'>Good</span></p>
                         <p><span style={{ fontWeight: "300" }}>Quick mount:</span> <span className='text-bold text-balance'>Hridayam® Adhesive hooks (Included)</span></p>
                     </div>
@@ -1852,11 +1892,11 @@ useEffect(() => {
 
                     </div>
                 </div>
+                </div>
             </div>
 
 
         
-            <img src={screenshot}></img>
               <div>
             </div>
             <Footer />

@@ -39,10 +39,6 @@ function Filter() {
 
     useEffect(() => {
         axios.get(`https://api.hirdayam.com/api/getProductsforuser/`, {
-            // params: {
-            //     min_price: priceRange[0],
-            //     max_price: priceRange[1]
-            // }
         })
             .then(response => {
                 console.log('API response:',  response.data); // Log the entire response
@@ -207,8 +203,7 @@ function Filter() {
                             <button>Show</button>
                             <button>Hide</button>
                         </div>
-                    </div>
-
+                    </div>                    
                     <div className="filter-option">
                         <label htmlFor="price">Price</label>
                         <div className="price-range">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../Home.css';
 import Header from '../Header';
@@ -10,6 +11,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const navigate = useNavigate(); // Use navigate for redirection
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -20,8 +22,11 @@ const Login = () => {
             });
 
             console.log('Login successful with data:', response.data);
-            setSuccess('Login successful!');
+            setSuccess('Password reset request successful! Check your email for OTP.');
             setError('');
+            setTimeout(() => {
+                navigate('/reset'); // Redirect to reset page
+            }, 2000); 
         } catch (error) {
             console.error('Error during login:', error.message);
             setError('Login failed. Please check your credentials and try again.');
