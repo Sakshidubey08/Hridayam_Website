@@ -38,9 +38,6 @@ function Footer() {
           <NavLink to="/about-us" className="footer-link1">About Us</NavLink>
         </li>
         <li>
-          <NavLink to="/contact-us" className="footer-link1">Contact Us</NavLink>
-        </li>
-        <li>
           <NavLink to="/terms-and-conditions" className="footer-link1">Terms And Conditions</NavLink>
         </li>
         <li>

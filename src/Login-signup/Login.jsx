@@ -87,7 +87,7 @@ const Login = () => {
               required
             />
             <span className="forgot-password">
-              <Link to="/forget">Forgot Password?</Link>
+              <Link to="/forgot">Forgot Password?</Link>
             </span>
           </div>
           <div className="button-container">

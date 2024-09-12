@@ -887,13 +887,54 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
     fetchSlides();
   }, []);
-  const handleSlideClick = (index) => {
-
-    const pageRoutes = ['', '/product3', '/catalog1']; // Add more routes as needed
-    if (index < pageRoutes.length) {
-      navigate(pageRoutes[index]);
+  // const handleSlideClick = (slide) => {
+  //   const { product_id, category_id } = slide;
+  //   if (product_id && !category_id) {
+  //     navigate(`/product/${product_id}`);
+  //   } else if (category_id && !product_id) {
+  //     navigate(`/category/${category_id[0]}`);
+  //   } else if (product_id && category_id) {
+  //     navigate(`/product/${product_id}`);
+  //   } else {
+  //     console.log('No valid product or category to navigate to.');
+  //   }
+  // };
+  // const handleSlideClick = (slide) => {
+  //   const { product_id, category_id } = slide;
+  
+  //   if (Array.isArray(product_id) && product_id.length > 0) {
+  //     const productIds = product_id.join(',');
+  //     navigate(`/banner-products?ids=${productIds}`);
+  //   } else if (category_id && !product_id) {
+  //     navigate(`/category/${category_id[0]}`);
+  //   } else if (product_id && !Array.isArray(product_id)) {
+  //     navigate(`/banner-products/${product_id}`);
+  //   } else {
+  //     console.log('No valid product or category to navigate to.');
+  //   }
+  // };
+  const handleSlideClick = (slide) => {
+    const { product_id, category_id } = slide;
+  
+    if (Array.isArray(product_id) && product_id.length > 0) {
+      // Redirect to a page where multiple products are shown
+      const productIds = product_id.join(',');
+      navigate(`/banner-products?ids=${productIds}`);
+    } else if (Array.isArray(category_id) && category_id.length > 0) {
+      // Redirect to a page where multiple categories are shown
+      const categoryIds = category_id.join(',');
+      navigate(`/categories?ids=${categoryIds}`);
+    } else if (product_id && !Array.isArray(product_id)) {
+      navigate(`/banner-products/${product_id}`);
+    } else if (category_id && !Array.isArray(category_id)) {
+      navigate(`/category/${category_id}`);
+    } else {
+      console.log('No valid product or category to navigate to.');
     }
   };
+  
+
+  
   const handleNext = () => {
     if (currentIndex + ITEMS_PER_PAGE < menuItems.length) {
       setCurrentIndex(currentIndex + ITEMS_PER_PAGE);
@@ -1324,14 +1365,13 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         </div>
       </div >
       <div className=' md:hidden'>
-
         <Catalog />
       </div>
       <div style={{ backgroundImage: `` }} className='swiper-background  bg-left-top bg-no-repeat    relative  md:top-5'>
         <img src={group} alt="" className='group ' />
 
         <div className="w-full max-w-[70rem]  md:mx-auto px-3  mt-14 md:mt-2 md:px-4">
-          <Swiper
+          {/* <Swiper
             cssMode={true}
             navigation={true}
             pagination={true}
@@ -1339,7 +1379,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
             keyboard={true}
             modules={[Navigation, Pagination, Mousewheel, Keyboard]}
             className="mySwiper w-full "
-
+            
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index} onClick={() => handleSlideClick(index)}>
@@ -1354,7 +1394,36 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper> */}
+          <Swiper
+      cssMode={true}
+      navigation={true}
+      pagination={true}
+      mousewheel={true}
+      keyboard={true}
+      className="mySwiper w-full"
+    >
+      {slides.map((slide, index) => (
+        <SwiperSlide key={index} onClick={() => handleSlideClick(slide)}>
+          <div className="hidden md:block">
+            <img
+              src={slide.image}
+              style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+              className="block w-full h-[800px] md:h-auto object-cover"
+              alt={`slide${index + 1}`}
+            />
+          </div>
+          <div className="md:hidden">
+            <img
+              src={headerslider} // Assuming headerslider is a fallback image for mobile
+              style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+              className="hidden w-full h-[800px] md:h-auto object-cover"
+              alt={`slide${index + 1}`}
+            />
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
           <div className='image-box  bg-white px-10  flex z-10 justify-around items-center absolute left-0 right-0  md:mx-auto md:left-auto md:right-auto  top-[20.3rem] md:top-[14.3rem]'>
             <div className='image-item   text-wrap'>
               <img src={icon5} alt="" className='box-image' />

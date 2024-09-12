@@ -53,6 +53,8 @@ import Customize5 from './Products/Customize5'
 import Customize6 from './Products/Customize6'
 import Acylic2 from './Acylic2';
 import Acrylic3 from './Acrylic3'
+import Privacy from './Privacy';
+import Terms from './Terms';
 // import ProductDetail from './Catalog/ProductDetail'
 import Thankyou from './Thankyou';
 import TextEditer from './TextEditer';
@@ -65,8 +67,11 @@ import PersonalizeProduct from './PersonalizeProduct'
 import Navbarlist from './Navbarlist';
 import Loadingpage from './Loadingpage';
 import SimilarProducts from './SimilarProducts'
+import BannerProducts from './BannerProducts'
+import Category from './Category';
 import SubCategoryProducts from './SubCategoryProducts'
 import Couponlist from './Couponlist';
+import Reset from './Login-signup/Reset';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -128,7 +133,8 @@ const App = () => {
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/my-orders" element={<MyOrder />} />
                     <Route path="/catalog1" element={<Catalog1 />} />
-                   
+                    <Route path="/banner-products" element={<BannerProducts />} />
+
                     <Route path="/discover1" element={<Discover1 />} />
                     <Route path="/discover2" element={<Discover2 />} />
                     <Route path="/discover3" element={<Discover3 />} />
@@ -143,6 +149,12 @@ const App = () => {
                     <Route path="/customize7" element={<Customize7 />} />
                     <Route path="/customize8" element={<Customize8 />} />
                     <Route path="/thank-you" element={<Thankyou />} />
+                    <Route path="/privacy-policy" element={<Privacy />} />
+                    <Route path="/categories" element={<Category />} />
+                    <Route path="/reset" element={<Reset />} />
+
+                    <Route path="/terms-and-conditions" element={<Terms />} />
+
                     <Route path="/manage-address" element={<ManageAddress />} />
                     <Route path="/card2/:id" element={<PrebookProduct />} />
                     <Route path="/similar/:id" element={<SimilarProducts />} />

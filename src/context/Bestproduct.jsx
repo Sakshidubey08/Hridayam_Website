@@ -152,10 +152,8 @@ const getSingleProduct2 = useCallback(async (url1, targetId) => {
       const products1 = res.data.data.data;  // Accessing the correct array
       console.log("Products value:", products1); // Log products
 
-      // Log the targetId to ensure it's the expected one
       console.log("Target ID:", targetId);
 
-      // Filter the product based on the correct targetId
       const filteredCard = products1.find(item => item._id === targetId);
       console.log("Filtered product data:", filteredCard);
 

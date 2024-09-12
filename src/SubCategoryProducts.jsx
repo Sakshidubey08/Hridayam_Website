@@ -501,6 +501,7 @@ const Product1 = () => {
                         </button>
                                     {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
                                 </>
+                                
                             )}
                             <div>{personalizeText}</div>
                         <dialog id="my_modal_4" className="modal">

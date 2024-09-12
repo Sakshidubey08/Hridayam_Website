@@ -2,11 +2,12 @@ import React from 'react'
 import Header from './Header'
 import './PlaceOrder.css'
 import { Link } from 'react-router-dom'
+import Footer from './Footer'
 const PlaceOrder = () => {
     return (
         <>
             <Header />
-            <div className="container">
+            <div className="container21">
                 <div className="message">
                     <div className="message-content">
                         Thank you. Your order has been received
@@ -33,6 +34,7 @@ const PlaceOrder = () => {
                 
                <Link to='/'> <button className="button">Back To Home Page</button></Link>
             </div>
+            <Footer/>
         </>
     )
 }
