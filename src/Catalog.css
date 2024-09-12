@@ -5,31 +5,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bungee+Tint&family=Grey+Qo&family=Jersey+10&family=Matemasie&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bungee+Tint&family=Edu+VIC+WA+NT+Beginner:wght@400..700&family=Grey+Qo&family=Jersey+10&family=Matemasie&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bungee+Tint&family=Edu+VIC+WA+NT+Beginner:wght@400..700&family=Grey+Qo&family=Jersey+10&family=Matemasie&family=Permanent+Marker&display=swap');
-/* .container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .header {
-   
-    justify-content: space-between;
-    align-items: center;
-    
-  }
-  
-  .photo {
-     margin-bottom: -0.9rem;
-    text-align: center;
-    font-family: 'Poppins';
-    font-weight: bold;
-  }
-  .acrylic{
-    text-align: center;
-    font-family: 'Poppins';
-    font-weight: bold;
-  }
 
 
 /* Icon styling */
@@ -397,7 +372,6 @@
 /* App.css */
 
 .container19 {
-  width: 80%;
   margin: 10px auto;
   text-align: center;
 }
@@ -412,20 +386,20 @@
   margin-bottom: 20px;
 }
 
-.preview {
+.preview22 {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.image-container {
+.image-container12 {
   width: 400px;
   height: 530px;
   /* border: 1px solid #ccc; */
   overflow: hidden;
 }
 
-.image-container img {
+.image-container12 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -437,7 +411,7 @@
   font-weight: bold;
 }
 
-.options {
+.options12 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -488,6 +462,10 @@
   background-color: #23387A
   ; /* Green */
   color: white;
+}
+.size{
+  margin-left: -162px;
+  /* margin: auto; */
 }
 
 .size-options {
@@ -617,6 +595,7 @@ margin-top: -5px;
   font-family: 'Roboto';
   font-size: 20px;
   font-weight: 500;
+  
 }
 .acrylic1{
   text-align: left;

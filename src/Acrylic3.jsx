@@ -1362,9 +1362,9 @@ if(screenshot!=null){
                         backgroundRepeat: 'no-repeat',
                     }}>
                     {/* <img src={image}></img> */}
-                        <div   className="preview">
+                        <div   className="preview22">
 
-                            <div ref={ref} className="image-container">
+                            <div ref={ref} className="image-container12">
                                 <div ref={ref}  className={` ${selectedImage == null ? "block" : "hidden"}`}>
 
                                     <img onMouseOver={() => { handleFocus() }}
@@ -1640,7 +1640,7 @@ if(screenshot!=null){
                         </div>
                     </div>
                 </div>
-                <div className="options">
+                <div className="options12">
 
 
                     <div className="upload-button my-4">

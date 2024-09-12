@@ -72,6 +72,7 @@ import Category from './Category';
 import SubCategoryProducts from './SubCategoryProducts'
 import Couponlist from './Couponlist';
 import Reset from './Login-signup/Reset';
+import CategoryProducts from './CategoryProducts';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -154,6 +155,7 @@ const App = () => {
                     <Route path="/reset" element={<Reset />} />
 
                     <Route path="/terms-and-conditions" element={<Terms />} />
+                    <Route path="/category-products/:category_id" element={<CategoryProducts />} />
 
                     <Route path="/manage-address" element={<ManageAddress />} />
                     <Route path="/card2/:id" element={<PrebookProduct />} />
