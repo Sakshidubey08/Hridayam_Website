@@ -124,10 +124,7 @@ useEffect(() => {
 
     fetchProducts();
   }, []);
-  const handleProductClick = (productId) => {
-    console.log('Redirecting to product:', productId); // Debugging line
-    navigate(`/product/${productId}`);
-  };
+ 
   const handleIconClick = () => {
     setFiltersVisible(!filtersVisible);
   };
@@ -147,6 +144,9 @@ useEffect(() => {
         return isNaN(numericPrice) ? 0 : numericPrice;
     }
     return 0;
+};
+const handleProductClick = (productId) => {
+  navigate(`/similar/${productId}`); 
 };
 
 const [filtersVisible, setFiltersVisible] = useState(true);
@@ -297,6 +297,7 @@ const handleClearAll = () => {
                 <path d="M12 4.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM12 11a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM12 17.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM4 3.5h16a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z"/>
               </svg>
             </div> */}
+            {/* <button class="clear-all" onClick={handleIconClick}> */}
             <button class="clear-all" onClick={handleIconClick}>
           <i class="fas fa-times clear-all-icon"></i> 
         </button>
@@ -469,7 +470,7 @@ const handleClearAll = () => {
       ) : error ? (
         <p>{error}</p>
       ) : products.length > 0 ? (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }} >
           {products.map((product) => (
             // <div
             //   key={product._id} // Use `_id` based on your API response
@@ -490,14 +491,13 @@ const handleClearAll = () => {
             //   <h3>{product.name}</h3>
             //   <p>Price: ${product.price}</p>
             // </div>
-            <div key={product._id} className="card-wrapper" style={{ cursor: 'pointer' }}>
+            <div key={product._id} className="card-wrapper" style={{ cursor: 'pointer' }}  onClick={() => navigate(`/similar/${product._id}`)}>
                 <div className="card1">
                   <div className="card-header w-32 h-56 md:h-72   md:w-full">
                     <img
                       src={product.image}
                       alt="product"
                       className="card-image1"
-                     
                     />
                     <button
                       className="favorite-btn"
