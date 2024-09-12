@@ -193,6 +193,7 @@ const [placeorderdone,setplaceorderdone]=useState(false);
   const [transitionid ,settransitionid] =useState("");
   const [address , setaddress]=useState([]);
   const [searchinput,setsearchinput]=useState("")
+  const [gst,setgst]=useState(0);
   // const navigate = useNavigate();
   // Function to fetch token from localStorage
   
@@ -204,6 +205,7 @@ const [placeorderdone,setplaceorderdone]=useState(false);
     fetchCartItems()
     fetchUserProfile();
     fetchAddress();
+    getSettings();
 
   }, []);
 
@@ -725,10 +727,57 @@ if (product.acrylicfinalpreview) {
       // setError('Failed to fetch user profile. Please check your credentials.');
     }
   };
+
+  const getSettings = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      
+      if (!token){
+        throw new Error('No token found in localStorage.');
+      }
+  
+      const response = await axios.get('https://api.hirdayam.com/api/getSettings', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+      
+      if(response.data&&response){
+  
+      
+      console.log('setting  data:', response);
+      
+      console.log('setting data:', response.data);
+      let gst2=response.data.data.gst
+      setgst(gst2)
+    
+    
+      }
+      // setuserprofiledata(response.data)
+     
+      // console.log(userprofiledata+"in edit page")
+      // const { name, email, phone, _id } = response.data.data;
+  
+     
+  
+      
+      // localStorage.setItem('user_id', _id);
+  
+      // setName(name);
+      // setEmail(email);
+      // setPhone(phone);
+  
+      // console.log('Stored user_id:', localStorage.getItem('user_id'));
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      // setError('Failed to fetch user profile. Please check your credentials.');
+    }
+  };
   
   
   const calculateSubtotal = () => {
-    return cartItems.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
+    return cartItems.reduce((acc, item) => acc + (item.product==null?item.acrylic_price*item.quantity:item.product.price * item.quantity), 0);
   };
 
 
@@ -736,7 +785,8 @@ if (product.acrylicfinalpreview) {
         const subtotal = calculateSubtotal();
         
         const total = subtotal - couponDiscount;
-        return total //> 0 ? total : 0;  // Ensure total is not negative
+        const gstamount=total*gst/100
+        return gstamount+total //> 0 ? total : 0;  // Ensure total is not negative
     };
 
   // Calculate total (can be extended if needed)
@@ -747,7 +797,7 @@ if (product.acrylicfinalpreview) {
   
 
   return (
-    <CartContext.Provider value={{applycoupon,searchinput, handlesearch, placeorderdone, handlePayment, PlaceOrder, fetchUserProfile, cartItems, userprofiledata,setuserprofiledata, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>
+    <CartContext.Provider value={{applycoupon,searchinput,gst, handlesearch, placeorderdone, handlePayment, PlaceOrder, fetchUserProfile, cartItems, userprofiledata,setuserprofiledata, addToCart, removeFromCart, updateQuantity, calculateSubtotal, calculateTotal }}>
       {children}
     </CartContext.Provider>
   );

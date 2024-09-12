@@ -297,6 +297,8 @@ const Product1 = () => {
     const [uploadMessage, setUploadMessage] = useState('');
     const [pincode, setPincode] = useState('');
     const [isPincodeChecked, setIsPincodeChecked] = useState(false);
+    const [personalizeText,setpersonalize]=useState("");
+    const [file,setfile]=useState(null);
     const [deliveryText, setDeliveryText] = useState({
         line1: "Please enter PIN code to check delivery time.",
         line2: "100% Original Products.",
@@ -330,7 +332,9 @@ const Product1 = () => {
     }, [subCategoryId, productId]);
 
     const handleIncrement = () => {
+        if (quantity < selectedProduct.stock) {
         setQuantity(prevQuantity => prevQuantity + 1);
+        }
     };
 
     const handleDecrement = () => {
@@ -370,19 +374,35 @@ const Product1 = () => {
                 id: selectedProduct._id,
                 name: selectedProduct.name,
                 price: parseFloat(selectedProduct.price),
-                image: selectedImage2 || selectedProduct.image, // Use uploaded image or main image
+                image: file, // Use uploaded image or main image
                 color: selectedProduct.colors[0],
-                variation: selectedProduct.variations[0]
+                variation: selectedProduct.variations[0],
+                text:personalizeText
             };
 
-            addToCart(productToAdd, quantity);
-            navigate('/cart');
+
+            // addToCart(productToAdd, quantity);
+            // navigate('/cart');
+            if(selectedProduct.stock==0){
+                alert("Product is Out of stock ")
+                return;
+            }
+            if(file==null && selectedProduct?.product_type=="personalize"){
+                alert("Please Select Image")
+              }
+            
+              else{
+                 addToCart(productToAdd, quantity);
+              navigate('/cart');
+              }
         }
     };
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
+        
         if (file) {
+            setfile(file)
             setSelectedImage2(URL.createObjectURL(file));
             setUploadMessage('File uploaded successfully!');
         }
@@ -419,6 +439,7 @@ const Product1 = () => {
                             ))}
                         </div>
                     </div>
+                    
                     <div className="image-placeholder1 m-auto flex items-center justify-center">
                         {selectedImage && (
                             <img src={selectedImage} alt="Selected" />
@@ -438,6 +459,7 @@ const Product1 = () => {
                             {selectedProduct?.product_type === "personalize" && (
                                 <>
                                     <button
+                                    className='w-28'
                                         onClick={() => document.getElementById('fileInput').click()}
                                         style={{
                                             display: 'flex',
@@ -457,8 +479,8 @@ const Product1 = () => {
                                                 src={selectedImage2}
                                                 alt="Selected"
                                                 style={{
-                                                    width: '40px',
-                                                    height: '40px',
+                                                    width: '24px',
+                                                    height: '24px',
                                                     marginRight: '10px',
                                                 }}
                                             />
@@ -473,9 +495,47 @@ const Product1 = () => {
                                         style={{ display: 'none' }}
                                         onChange={handleImageChange}
                                     />
+                                    
+                                    <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
+                            Add Text
+                        </button>
                                     {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
                                 </>
                             )}
+                            <div>{personalizeText}</div>
+                        <dialog id="my_modal_4" className="modal">
+                            <div className="modal-box">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "transparent", color: "black" }} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+
+                                
+                                <label style={{ paddingRight: "400px" }} className=' text-nowrap '>Add Text</label><br></br>
+                                <input
+                                onChange={(text)=>{setpersonalize(text.target.value)}}
+                                    type='text'
+                                    className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
+                                    placeholder='Enter Your Text here'
+                                     // Bind the state to the input value
+                                     // Update state on change
+                                />
+                                
+
+                                
+
+
+                               
+                            <div>
+
+                                </div>
+
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
+                                </form>
+                            </div>
+                        </dialog>
                             <h3 className='free'>Free Delivery</h3>
                             <div className="buttons">
                                 {/* <button className="wishlist-btn">

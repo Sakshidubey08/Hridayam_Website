@@ -36,8 +36,17 @@ const Cardpage1 = () => {
   });
   const [checkButtonText, setCheckButtonText] = useState('Check');
 
-  const handleIncrement = () => setQuantity(prevQuantity => prevQuantity + 1);
-  const handleDecrement = () => setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  const handleIncrement = () => {
+    if(quantity<filteredCard.stock){
+    setQuantity(prevQuantity => prevQuantity + 1);
+    }
+
+  }
+  const handleDecrement = () => {
+    if(quantity<filteredCard.stock){
+      setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1))
+    }
+  };
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -141,6 +150,10 @@ const Cardpage1 = () => {
         variation: filteredCard.variations[0]
 
       };
+      if(filteredCard.stock==0){
+        alert("Product is out of stock");
+        return;
+      }
       if(file==null && filteredCard?.product_type=="personalize"){
           alert("Please Select a Image")
       }

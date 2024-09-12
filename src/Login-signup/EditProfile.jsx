@@ -57,7 +57,7 @@ const EditProfile = () => {
         setPhone(phone);
 
         console.log('Stored user_id:', localStorage.getItem('user_id'));
-      } catch (error) {
+      } catch (error){
         console.error('Error fetching user profile:', error);
         setError('Failed to fetch user profile. Please check your credentials.');
       }

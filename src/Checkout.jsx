@@ -10,7 +10,7 @@ import axios from 'axios';
 import Loadingpage from './Loadingpage';
 
 const CheckoutPage = () => {
-  const { cartItems,applycoupon,PlaceOrder,placeorderdone, handlePayment, calculateSubtotal, calculateTotal } = useContext(CartContext);
+  const { cartItems,applycoupon,gst,PlaceOrder,placeorderdone, handlePayment, calculateSubtotal, calculateTotal } = useContext(CartContext);
   const screenshot = localStorage.getItem('screenshot');
   const countries = ['India', 'Country B', 'Country C', 'Country D'];
   const states = ['Madhya Pradesh', 'State 2', 'State 3', 'State 4', 'State 5'];
@@ -26,6 +26,7 @@ const CheckoutPage = () => {
   const [floornumber ,setfloornumber]=useState("");
   const [discount,setdscount]=useState("");
   const [couponcode,setcouponcode]=useState("");
+  
   const navigate=useNavigate();
   useEffect(() => {
     // Define an async function inside useEffect
@@ -48,8 +49,11 @@ const CheckoutPage = () => {
     console.log(placeorderdone+"in the chekoutou")
     // setphone(userprofiledata.data.phone)
     fetchAddress();
+   
   
   },[])
+
+  
 const handlecouponinput=(text)=>{
   setcouponinput(text.target.value);
 }
@@ -124,6 +128,8 @@ const fetchUserProfile = async () => {
     // setError('Failed to fetch user profile. Please check your credentials.');
   }
 };
+
+
 
 const handlePayment2=()=>{
   
@@ -247,7 +253,7 @@ if(cartItems.lenght==0){
               </div>
             </div>
 
-            <div className="form-row">
+            <div className="form-row">    
               <div className="half-width">
                 <label htmlFor="city">Area Name</label>
                 <input disabled value={areaname} type="text" id="city" name="city" placeholder='Enter city or town'/>
@@ -284,13 +290,19 @@ if(cartItems.lenght==0){
               {cartItems.map(item => (
                 <tr key={item.id}>
                   <td>{item.product==null?"Acrylic Photo Frame":item.product.name}</td>
-                  {/* <td>&#8377;{item.product==null?item.acrylic_price:item.product.price}</td> */}
+                  <td>&#8377;{item.product==null?item.acrylic_price*item.quantity:item.product.price*item.quantity}</td>
                 </tr>
               ))}
               <tr>
                 <td>Subtotal</td>
                 <td>&#8377;{calculateSubtotal()}</td>
               </tr>
+
+              <tr>
+                <td>GST%</td>
+                <td>{ gst!=0?gst+"%":"0"}</td>
+              </tr>
+
               <tr>
                 <td>Total</td>
                 <td>&#8377;{calculateTotal()}</td>
@@ -300,7 +312,13 @@ if(cartItems.lenght==0){
           <div className='gap-2'>
           <input onChange={handlecouponinput} className=' border-blue-300 p-2 rounded-md border-2 w-4/6' type='text'></input>
           {/* <Button >Press me!</Button> */}
+         
           <button loading={handleapplycouponbutton.loading} onClick={handleapplycouponbutton} className='border  rounded-md  p-2 m-2 '>Apply coupon</button>
+          <div>
+         <Link to={"/Morecoupon"}> <p className=' text-blue-600 hover:underline cursor-pointer  transition-all duration-700 ease-in-out   '>% Discount coupon & Gift Voucher <code>></code></p></Link>
+          
+          </div>
+          
           </div>
           <div>
             <h2 className='billing1'>Payment Details</h2>

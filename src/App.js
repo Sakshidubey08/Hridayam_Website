@@ -66,6 +66,7 @@ import Navbarlist from './Navbarlist';
 import Loadingpage from './Loadingpage';
 import SimilarProducts from './SimilarProducts'
 import SubCategoryProducts from './SubCategoryProducts'
+import Couponlist from './Couponlist';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -153,6 +154,7 @@ const App = () => {
                     <Route path='/catalogproduct/:id' element={<Catalogproduct/>}></Route>
                     <Route path='navbarlist' element={<Navbarlist></Navbarlist>}></Route>
                     <Route path='/Acrylic2' element={<TextEditer></TextEditer>}></Route>
+                    <Route path='/Morecoupon' element={<Couponlist></Couponlist>}></Route>
                 <Route path="*" element={<Acrylic3 />}/>
                 </Routes>
          </>

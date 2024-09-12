@@ -335,7 +335,7 @@ const handlequanlitymodel =(quan)=>{
   // };
     const calculateSubtotal = () => {
     return cartItems.reduce((acc, item) => {
-      const price = parseFloat(item.product!=null?item.product.price:"") || 0;
+      const price = parseFloat(item.product==null?item.acrylic_price:item.product.price) || 0;
       const quantity = parseInt(item.quantity) || 0;
       return acc + price * quantity;
     }, 0);
@@ -388,7 +388,7 @@ const handlequanlitymodel =(quan)=>{
                   <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
                   {/* <div className=' r'><svg width={"20px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg></div> */}
                   </span>
-                  <dialog id="my_modal_31" className="modal ">
+                  <dialog id="my_modal_31" className="modal">
   <div className="modal-box  w-80">
     <form method="dialog">
       {/* if there is a button in form, it will close the modal */}
@@ -433,7 +433,7 @@ const handlequanlitymodel =(quan)=>{
       <hr/>
       {/* {item.product==null?"":item.product.stock} */}
       <div className='my-4 flex flex-wrap  gap-2'>
-      {Array.from({ length: item.product==null?"":item.product.stock }, (_, index) => (
+      {Array.from({ length: item.product==null?10:item.product.stock }, (_, index) => (
         <div key={index} className="item-div">
         
         
@@ -446,7 +446,7 @@ const handlequanlitymodel =(quan)=>{
       </div>
       <form method="dialog">
       <div className=' flex items-center justify-center'>
-        <button onClick={()=>{handlequanlity(item.product._id==null?"":item._id)}} className='border p-1 bg-blue-800 flex items-center justify-center text-white rounded-md w-full'>Done</button>
+        <button onClick={()=>{handlequanlity(item.product==null?item._id:item._id)}} className='border p-1 bg-blue-800 flex items-center justify-center text-white rounded-md w-full'>Done</button>
 
       </div>
       </form>
@@ -458,7 +458,7 @@ const handlequanlitymodel =(quan)=>{
                 </div>
               </div>
               <p className="product-price">
-                &#8377;{item.product==null?item.acrylic_price:item.product.price*item.quantity}
+                &#8377;{item.product==null?item.acrylic_price*quantity:item.product.price*item.quantity}
               </p>
             </div>
           </div>
@@ -475,7 +475,7 @@ const handlequanlitymodel =(quan)=>{
             <span>Subtotal</span>
             <span>&#8377;{calculateSubtotal()}</span>
           </div>
-          <hr />
+          <hr/>
           <div className="summary-item2">
             <span>Total</span>
             <span>&#8377;{calculateTotal()}</span>

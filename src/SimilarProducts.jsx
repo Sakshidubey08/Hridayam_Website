@@ -6,13 +6,14 @@ import Header from './Header';
 import Footer from './Footer';
 import './Products/Product1.css';
 import './Home.css';
+import { text } from '@fortawesome/fontawesome-svg-core';
 
 const ProductDetailsPage = () => {
   const { id } = useParams(); // Retrieve the product ID from the URL
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [file,setfile]=useState(null);
   const { addToCart } = useContext(CartContext);
   const navigate = useNavigate(); // For programmatic navigation
 
@@ -24,6 +25,8 @@ const ProductDetailsPage = () => {
   const [uploadMessage, setUploadMessage] = useState('');
   const [pincode, setPincode] = useState('');
   const [isPincodeChecked, setIsPincodeChecked] = useState(false);
+  const [personalizeText,setpersonalize]=useState("");
+
   const [deliveryText, setDeliveryText] = useState({
       line1: "Please enter PIN code to check delivery time.",
       line2: "100% Original Products.",
@@ -176,19 +179,30 @@ const handleAddToCart = () => {
             id: selectedProduct._id,
             name: selectedProduct.name,
             price: parseFloat(selectedProduct.price),
-            image: selectedImage2 || selectedProduct.image, // Use uploaded image or main image
+            image: file, // Use uploaded image or main image
             color: selectedProduct.colors[0],
-            variation: selectedProduct.variations[0]
+            variation: selectedProduct.variations[0],
+            text:personalizeText
         };
 
-        addToCart(productToAdd, quantity);
-        navigate('/cart');
+        // addToCart(productToAdd, quantity);
+        // navigate('/cart');
+
+        if(file==null && selectedProduct?.product_type=="personalize"){
+            alert("Please Select Image")
+          }
+          else{
+             addToCart(productToAdd, quantity);
+          navigate('/cart');
+          }
     }
 };
 
 const handleImageChange = (event) => {
     const file = event.target.files[0];
+
     if (file) {
+        setfile(file)
         setSelectedImage2(URL.createObjectURL(file));
         setUploadMessage('File uploaded successfully!');
     }
@@ -243,6 +257,7 @@ const handleImageClick = (image) => {
                             {selectedProduct?.product_type === "personalize" && (
                                 <>
                                     <button
+                                    className='w-28'
                                         onClick={() => document.getElementById('fileInput').click()}
                                         style={{
                                             display: 'flex',
@@ -273,14 +288,52 @@ const handleImageClick = (image) => {
                                     </button>
                                     <input
                                         type="file"
-                                        accept="image/*"
+                                        accept="image/*"    
                                         id="fileInput"
                                         style={{ display: 'none' }}
                                         onChange={handleImageChange}
                                     />
+                                     <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
+                            Add Text
+                        </button>
                                     {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
                                 </>
                             )}
+
+                            <div>{personalizeText}</div>
+                        <dialog id="my_modal_4" className="modal">
+                            <div className="modal-box">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "transparent", color: "black" }} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+
+                                
+                                <label style={{ paddingRight: "400px" }} className=' text-nowrap '>Add Text</label><br></br>
+                                <input
+                                onChange={(text)=>{setpersonalize(text.target.value)}}
+                                    type='text'
+                                    className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
+                                    placeholder='Enter Your Text here'
+                                     // Bind the state to the input value
+                                     // Update state on change
+                                />
+                                
+
+                                
+
+
+                               
+                            <div>
+
+                                </div>
+
+                                <form method="dialog" >
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
+                                </form>
+                            </div>
+                        </dialog>
                             <h3 className='free'>Free Delivery</h3>
                             <div className="buttons">
                                 <button className="wishlist-btn">

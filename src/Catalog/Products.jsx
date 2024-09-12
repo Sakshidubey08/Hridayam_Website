@@ -305,7 +305,9 @@ const Product1 = () => {
     }, []);
 
     const handleIncrement = () => {
+        if(quantity<selectedProduct.stock){
         setQuantity(prevQuantity => prevQuantity + 1);
+        }
     };
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -320,7 +322,10 @@ const Product1 = () => {
         }
     };
     const handleDecrement = () => {
-        setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+        if(quantity>selectedProduct.stock){
+            setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+
+        }
     };
 
     const handlePincodeChange = (e) => {
@@ -366,6 +371,11 @@ const Product1 = () => {
 
             };
 
+            if(selectedProduct.stock==0){
+                alert("Product is out of stock")
+                return;
+            }
+
             if(file==null && selectedProduct?.product_type == "personalize"){
                 alert("Please Add Image")
             }
@@ -385,6 +395,7 @@ const Product1 = () => {
     return (
         <>
             <Header />
+            
             {/* <div className="breadcrumb1 hidden md:block">Home / {selectedProduct?.name || 'Product'}</div>
             <div className="product-detail1 mt-1">
                 <div className="content">
@@ -607,7 +618,7 @@ const Product1 = () => {
                             <br />
                             {selectedProduct?.product_type === "personalize" && (
                                 <>
-                                    <button
+                                    <button className='w-28'
                                         onClick={() => document.getElementById('fileInput').click()}
                                         style={{
                                             display: 'flex',
@@ -643,9 +654,46 @@ const Product1 = () => {
                                         style={{ display: 'none' }}
                                         onChange={handleImageChange}
                                     />
+                                     <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
+                            Add Text
+                        </button>
                                     {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
                                 </>
                             )}
+                            <div>{personalizeText}</div>
+                        <dialog id="my_modal_4" className="modal">
+                            <div className="modal-box">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "transparent", color: "black" }} className="btn  btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+
+                                
+                                <label style={{ paddingRight: "400px" }} className=' text-nowrap '>Add Text</label><br></br>
+                                <input
+                                onChange={(text)=>{setpersonalize(text.target.value)}}
+                                    type='text'
+                                    className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
+                                    placeholder='Enter Your Text here'
+                                     // Bind the state to the input value
+                                     // Update state on change
+                                />
+                                
+
+                                
+
+
+                               
+                            <div>
+
+                                </div>
+
+                                <form method="dialog" >
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
+                                </form>
+                            </div>
+                        </dialog>
                             <h3 className='free'>Free Delivery</h3>
                             <div className="buttons">
                                 <button className="wishlist-btn">

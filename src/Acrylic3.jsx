@@ -1038,7 +1038,7 @@ function App() {
                 // setAcrylicsize(data); // Update state
                 setsizeId(response.data.data[0]._id)
                 setsizeprice(response.data.data[0].price)
-
+               
                
                 console.log(Acrylicsize+ 'new');
 
@@ -1114,7 +1114,7 @@ function App() {
     const handleImageClick1 = (imageSrc) => {
         setSelectedImage2(imageSrc);
     };
-    const [price, setPrice] = useState(699);
+    const [price, setPrice] = useState(0);
 
     const sizePriceMap = {
         '12x9': 699,
@@ -1169,7 +1169,7 @@ function App() {
               },
             });
     
-            if (response2 && response2.data && response2.data.data) {
+            if (response2 && response2.data && response2.data.data){
               console.log('Get Acrylic Thikness:', response2);
               let acrylicThiknessdata =response2.data.data;
               setthicknessdata(acrylicThiknessdata);

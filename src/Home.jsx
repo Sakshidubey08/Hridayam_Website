@@ -57,7 +57,9 @@ import axios from 'axios';
 import { useProductContext } from './context/Bestproduct.jsx';
 import SwiperCore from 'swiper';
 import Loadingpage from './Loadingpage.jsx';
+import Rimpple from "react-ripples"
 
+import { SwitchTransition, CSSTransition, TransitionGroup } from "react-transition-group";
 SwiperCore.use([Navigation]);
 
 const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 }) => {
@@ -1083,12 +1085,17 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         </div> */}
       <div className='decoration'>
       {/* Arrow for sliding left */}
-      <button onClick={handlePrev} disabled={currentIndex === 0}>
-        &#8592; {/* Left arrow */}
+      <Rimpple color='gray' className=' bg-gray-300/40  font-semibold flex items-center justify-center p-1 w-6 h-6 m-auto rounded-full'>
+        <button className='' onClick={handlePrev} disabled={currentIndex === 0}>
+        <code>&#8592;</code> {/* Left arrow */}
       </button>
-
-      {/* Container for categories */}
+      </Rimpple>
+      
+      
+    
+     
       <div className="menu-slider">
+      
         {menuItems.slice(currentIndex, currentIndex + ITEMS_PER_PAGE).map((item) => (
           <div key={item.id} className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
             <div className="menu-heading">
@@ -1110,14 +1117,19 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           </div>
         ))}
       </div>
+     
 
       {/* Arrow for sliding right */}
-      <button
+      <Rimpple color="gray/30"  className=' bg-gray-300/40  flex items-center justify-center p-1 w-6 h-6 m-auto rounded-full'>
+         <button
+     
         onClick={handleNext}
         disabled={currentIndex + ITEMS_PER_PAGE >= menuItems.length}
       >
-        &#8594; {/* Right arrow */}
+       <code>&#8594;</code>  {/* Right arrow */}
       </button>
+      </Rimpple>
+     
     </div>
 
         {/* <div className='decoration'>
