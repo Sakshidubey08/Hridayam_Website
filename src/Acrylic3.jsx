@@ -1304,7 +1304,7 @@ if(screenshot!=null){
             
            
            
-            <div  className="container ml-1 mt-24 md:mt-10">
+            <div  className="container19 ml-1 mt-24 md:mt-10">
                 <div style={{
                     backgroundSize: 'cover', // or 'contain' depending on your requirement
                     backgroundPosition: 'center', // centers the image

@@ -43,6 +43,15 @@ const ProductsPage = () => {
     return 0;
 };
 
+const handleFavoriteButtonClick2 = (id) => {
+  // console.log(id + "lksdsdjf")
+  addToWishlist(id)
+
+  // setfavbutton(!favbutton)
+
+
+}
+
 const handleFavoriteButtonClick = async (id, e) => {
   e.stopPropagation(); // Prevent event propagation
   e.preventDefault();
@@ -288,7 +297,7 @@ const handleFavoriteButtonClick = async (id, e) => {
                     </Link>
                     <button
                       className="favorite-btn"
-                      onClick={(e) => handleFavoriteButtonClick(product._id, e)}
+                      onClick={(e) => handleFavoriteButtonClick2(product._id)}
                       style={{
                         cursor: 'pointer',
                         border: 'none',
@@ -297,12 +306,14 @@ const handleFavoriteButtonClick = async (id, e) => {
                       }}
                     >
                       <i
-                        className={`fa-heart ${favoriteCards[product.id] ? 'fas' : 'far'}`}
-                        style={{ color: favoriteCards[product.id] ? 'red' : '#23387A', fontSize: '24px' }}
+                        className={`fa-heart ${wishlistItems.data.data.some(item => item.product._id === product._id) ? 'fas' : 'far'}`}
+                        style={{ color: wishlistItems.data.data.some(item => item.product._id === product._id) ? 'red' : '#23387A', fontSize: '24px' }}
+
                       ></i>
                     </button>
                   </div>
                 </div>
+
                 <div className="card-info">
                   <p className="image-description">{product.name}</p>
                   <p className="price">

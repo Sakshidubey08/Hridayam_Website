@@ -205,26 +205,27 @@ const WishlistPage = () => {
             <p>Your wishlist is empty.</p>
           </div>
         ) : (
-          <div className="wishlist-card-container">
+          <div className="wishlist-card-container ">
             {wishlistItems.data.data.map(item => (
               <div key={item.id} className="wishlist-card">
-                <img src={item.product.image} alt={item.product.name} className="wishlist-card-image" />
+                <img  src={item.product.image} alt={item.product.name} className="wishlist-card-image h-40 object-contain" />
                 <div className="wishlist-card-info">
                   <div className="wishlist-details">
-                    <p className="wishlist-product-name">{item.product.name}</p>
+                    <p className="wishlist-product-name text-sm">{item.product.name}</p>
                     <p className="wishlist-product-price">&#8377;{item.product.price}</p>
                   </div>
                 </div>
                 <button className="wishlist-delete-button" onClick={() => removeFromWishlist(item.product._id)}>
-                  {/* <FaTrash className="wishlist-delete-icon" /> */}
+                  <FaTrash className="wishlist-delete-icon" />
                   <FontAwesomeIcon icon={faTimes} size="lg" className="wishlist-delete-icon" />
 
                 </button>
-                <button className="wishlist-move-to-bag" >    
+                <button className="wishlist-move-to-bag rounded-md my-3 relative top-0" >    
                   MOVE TO BAG
                 </button>
+               
 
-                {/* onClick={() => moveToBag(item.product._id)} */}
+              
               </div>
               
             ))}

@@ -1424,6 +1424,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         </SwiperSlide>
       ))}
     </Swiper>
+    
           <div className='image-box  bg-white px-10  flex z-10 justify-around items-center absolute left-0 right-0  md:mx-auto md:left-auto md:right-auto  top-[20.3rem] md:top-[14.3rem]'>
             <div className='image-item   text-wrap'>
               <img src={icon5} alt="" className='box-image' />

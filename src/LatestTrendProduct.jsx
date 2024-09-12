@@ -264,8 +264,18 @@ const Cardpage1 = () => {
   });
   const [checkButtonText, setCheckButtonText] = useState('Check');
 
-  const handleIncrement = () => setQuantity(prevQuantity => prevQuantity + 1);
-  const handleDecrement = () => setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  const handleIncrement = () => {
+    if(quantity<filteredCard.stock){
+    setQuantity(prevQuantity => prevQuantity + 1);
+    }
+    else{
+      return
+    }
+  }
+  const handleDecrement = () => 
+   
+      setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -366,6 +376,10 @@ const Cardpage1 = () => {
         variation: filteredCard.variations[0]
 
       };
+      if(filteredCard.stock==0){
+        alert("Product is out of stock");
+        return;
+      }
       if(file==null && filteredCard?.product_type=="personalize"){
         alert("Please Select Image")
       }
@@ -489,6 +503,9 @@ const Cardpage1 = () => {
                   style={{ display: 'none' }}
                   onChange={handleImageChange}
                 />
+                 <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
+                            Add Text
+                        </button>
                 {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
               </div>
 
@@ -520,7 +537,7 @@ const Cardpage1 = () => {
 
                                 </div>
 
-                                <form method="dialog" >
+                                <form method="dialog">
                                     {/* if there is a button in form, it will close the modal */}
                                     <button style={{ background: "", color: "" }} className="btn   w-full h-full  btn-outline btn-primary  ">Save</button>
                                 </form>
