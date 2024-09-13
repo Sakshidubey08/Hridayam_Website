@@ -112,7 +112,7 @@ const Header = () => {
              
               {/* <img src={dropdown_background}></img> */}
               <details tabIndex={1} className="collapse full text-gray-500  collapse-arrow ">
-  <summary className="collapse-title text-md font-bold "><sapn className="text-blue-800">Corporate Gifting</sapn></summary>
+  <summary className="collapse-title text-md font-bold "><span className="text-blue-800">Corporate Gifting</span></summary>
   <div className="collapse-content text-black leading-10">
      <ul>
         <li>Drinkware</li>
@@ -181,7 +181,7 @@ const Header = () => {
 </details>
 
 <details tabIndex={3} className="collapse full text-gray-500  collapse-arrow ">
-  <summary className="collapse-title text-md font-bold  "><sapn className="text-blue-800">Birthday Celebration</sapn></summary>
+  <summary className="collapse-title text-md font-bold  "><span className="text-blue-800">Birthday Celebration</span></summary>
   <div className="collapse-content leading-10 text-black">
      <ul>
         <li>Baloons</li>

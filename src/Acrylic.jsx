@@ -585,7 +585,7 @@ function App() {
                     <div className="image-container" >
                     <div className={` ${ selectedImage==null?"block":"hidden"}`}>
                    
-                    <img  style={{zIndex:'0'}}  className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  />
+                    <img   className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex:'0',transform:`scale(${scale})`}}  />
                     
                     <div     onMouseOver={()=>{handleFocus()}}
        onMouseOut={handleBlur} className={ `relative ${selectedImage2==null?"block":"hidden"}`}>
@@ -625,12 +625,12 @@ function App() {
         >
 
             <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}    className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex:'2',transform:`scale(${scale})`}}  ></img>
             </Draggable>
          )
          :(
             <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}   className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex:'2',transform:`scale(${scale})`}}  ></img>
 
          )
          }
@@ -656,12 +656,12 @@ function App() {
         >
 
             <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"} st  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}   className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex:'2',transform:`scale(${scale})`}}  ></img>
             </Draggable>
          )
          :(
             <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}    className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex:'2',transform:`scale(${scale})`}}  ></img>
 
          )
          }
@@ -677,12 +677,12 @@ function App() {
         >
 
             <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}    className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex:'2',transform:`scale(${scale})`}}  ></img>
             </Draggable>
          )
          :(
             <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}    className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex:'2',transform:`scale(${scale})`}}  ></img>
 
          )
          }
@@ -698,12 +698,12 @@ function App() {
         >
 
             <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}    className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex:'2',transform:`scale(${scale})`}}  ></img>
             </Draggable>
          )
          :(
             <img onMouseOver={()=>{handleFocus()}}
-       onMouseOut={handleBlur} width={"100px"} height={"600px"}  style={{zIndex:'2'}}  className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{transform:`scale(${scale})`}}  ></img>
+       onMouseOut={handleBlur} width={"100px"} height={"600px"}    className=' absolute z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex:'2' ,transform:`scale(${scale})`}}  ></img>
 
          )
          }

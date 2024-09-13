@@ -288,6 +288,8 @@ import { Link } from 'react-router-dom';
 import Ripples from  "react-ripples"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 function App() {
   const { cartItems, removeFromCart,  updateQuantity } = useContext(CartContext);
 
@@ -368,22 +370,35 @@ const handlequanlitymodel =(quan)=>{
               <img onClick={() => removeFromCart()} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
             </div>
             <div className="product-imag   flex items-center gap-1 ">
-              <img  className={`${item.product==null?"hidden":""} h-28 `} src={item.product==null?"":item.product.image} />
-              <img className={`${item.product==null?"hidden":""} h-28`} src={item.product==null?"":item.personalize_image} />
-              <img className='h-20' src={item.acrylic_final_preview}></img>
+             {/* <div>{item.product==null?"":item.product.product_type}</div> */}
+            <Swiper  className={`${item.product==null?"":(item.product.product_type=="normal"?"hidden":"block")}   w-32 h-20 `}   loop={true} spaceBetween={10} slidesPerView={1} autoplay={{ delay: 1000 }} pagination={{ clickable: true }} navigation>
+  {/* SwiperSlide Components */}
+  <SwiperSlide>
+  <img style={{height:"100%"}}  className={`${item.product==null?"hidden":""} bg-contain  md:h-28 h-full w-full `} src={item.product==null?"":item.product.image} />
+
+  </SwiperSlide>
+  <SwiperSlide className="bg-contain h-full w-full">
+  <img style={{height:"100%"}} className={`${item.product==null?"hidden":""}  bg-contain h-full w-full`} src={item.product==null?"":item.personalize_image} />
+
+  </SwiperSlide>
+</Swiper>
+                <img style={{height:"100%"}}  className={`${item.product==null?"":(item.product.product_type=="normal"?"block":"hidden")}  bg-contain  md:h-28 h-full w-full `} src={item.product==null?"":item.product.image} />
+
+              
+              <img className='md:h-20 ' src={item.acrylic_final_preview}></img>
             </div>
 
             <div className="product-info12">
-              <h2 className="product-name">{item.product==null?"Acrylic Photo Frame":item.product.name}</h2>
+              <h2 className="product-name text-sm md:text-lg">{item.product==null?"Acrylic Photo Frame":item.product.name}</h2>
               <div>
               
-              <p className="product-description line-clamp-1 w-1/2 ">
+              <p className="product-description text-xs md:text-sm line-clamp-1 w-1/2">
                 {item.product==null?"":item.product.description}
               </p>
               </div>
               <div  className="product-options">
                 <div onClick={()=>document.getElementById('my_modal_31').showModal()} className="option flex items-center">
-                <span  className="label flex items-center justify-center gap-2 bg-gray-300/30 rounded-md">
+                <span  className="labe flex items-center w-20 justify-center gap-2 bg-gray-300/30 rounded-md">
                   Size:<span>M</span> 
                   <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
                   {/* <div className=' r'><svg width={"20px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg></div> */}
@@ -410,7 +425,7 @@ const handlequanlitymodel =(quan)=>{
 </dialog>
                 </div>
                 <div onClick={()=>(document.getElementById(`my_modal_${index+10}`).showModal())} className="option flex items-center">
-                  <span  className="label flex items-center justify-center gap-2 bg-gray-300/30 rounded-md">
+                  <span  className="labe flex items-center justify-center w-20  gap-2 bg-gray-300/30 rounded-md">
                   Qty:<span>{item.quantity}</span> 
                   <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
                   {/* <div className=' r'><svg width={"20px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg></div> */}

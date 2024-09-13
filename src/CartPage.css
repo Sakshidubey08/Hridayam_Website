@@ -375,3 +375,36 @@ hr {
   background-color: #ADD8e6;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 } 
+
+@media only screen and (max-width: 600px) {
+  .product-info12{
+    margin-left: 0px;
+  }
+  .final {
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    margin-right: 0px; 
+    padding: 0;
+    margin: auto;
+   
+  }
+  .cart-container {
+    background-color: #f9f9f9;
+    padding: 0px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    width: 100%;
+  
+  }
+  .product-summary-container {
+    display: block;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 0px;
+    padding: 20px;
+    
+  }
+}

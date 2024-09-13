@@ -583,7 +583,7 @@ function App() {
                                 <div ref={ref}  className={` ${selectedImage == null ? "block" : "hidden"}`}>
 
                                     <img onMouseOver={() => { handleFocus() }}
-                                        onMouseOut={handleBlur} style={{ zIndex: '0' }} className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{ transform: `scale(${scale})` }} />
+                                        onMouseOut={handleBlur}  className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex: '0', transform: `scale(${scale})` }} />
 
                                     <div 
                                     onMouseOver={() => { handleFocus() }}
@@ -631,8 +631,9 @@ function App() {
                                     <div ref={ref} className=' relative'>
                                         <img onMouseOver={() => { handleFocus() }}
                                                     onMouseOut={handleBlur}
-                                                     className=' h-20 w-20 z-20' style={{ zIndex: "1" }} src={selectedImage}
+                                                     className=' h-20 w-20 z-20'  src={selectedImage}
                                             style={{
+                                                zIndex: "1",
                                                 width: '100%', // Adjust width as needed
                                                 height: 'auto'
                                                 , position: "relative",
@@ -688,8 +689,9 @@ function App() {
                                     {/* <img className='z-50' src={selectedImage}></img> */}
                                     <img onMouseOver={() => { handleFocus() }}
                                                     onMouseOut={handleBlur}
-                                                     className=' py-20  z-20' style={{ zIndex: "1" }} src={selectedImage}
+                                                     className=' py-20  z-20' src={selectedImage}
                                             style={{
+                                                zIndex: "1",
                                                 width: '100%', // Adjust width as needed
                                                 height: '100%'
                                                 , position: "relative",
@@ -744,8 +746,9 @@ function App() {
                                         <div className='h-full w-full bg-white py-20'>
                                         <img onMouseOver={() => { handleFocus() }}
                                                     onMouseOut={handleBlur}
-                                                     className=' h-20 w-20 z-20' style={{ zIndex: "1" }} src={selectedImage}
+                                                     className=' h-20 w-20 z-20'  src={selectedImage}
                                             style={{
+                                                zIndex: "1",
                                                 width: '100%', // Adjust width as needed
                                                 height: 'auto'
                                                 , position: "relative",
@@ -800,8 +803,9 @@ function App() {
                                         <div>
                                         <img onMouseOver={() => { handleFocus() }}
                                                     onMouseOut={handleBlur}
-                                                     className=' h-20 w-20 z-20' style={{ zIndex: "1" }} src={selectedImage}
+                                                     className=' h-20 w-20 z-20'  src={selectedImage}
                                             style={{
+                                                zIndex: "1",
                                                 width: '100%', // Adjust width as needed
                                                 height: 'auto'
                                                 , position: "relative",

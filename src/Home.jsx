@@ -38,7 +38,7 @@ import image32 from './images/Rectangle.png'
 import group2 from './images/Group (8).png'
 import group4 from './images/Group4.png'
 import group5 from './images/group9.png'
-import headerslider from "./images/headerslide.svg"
+import headerslider from "./images/headerslide.svg"   
 import Footer from './Footer.jsx';
 import { Link } from 'react-router-dom';
 import group1 from './images/Group (5).png'

@@ -315,7 +315,7 @@ if(cartItems.lenght==0){
          
           <button loading={handleapplycouponbutton.loading} onClick={handleapplycouponbutton} className='border  rounded-md  p-2 m-2 '>Apply coupon</button>
           <div>
-         <Link to={"/Morecoupon"}> <p className=' text-blue-600 hover:underline cursor-pointer  transition-all duration-700 ease-in-out   '>% Discount coupon & Gift Voucher <code>></code></p></Link>
+         <Link to={"/Morecoupon"}> <p className=' text-blue-600 hover:underline cursor-pointer  transition-all duration-700 ease-in-out   '>% Discount coupon & Gift Voucher <code>{">"}</code></p></Link>
           
           </div>
           

@@ -97,6 +97,7 @@ const App = () => {
                     <Route path="login" element={<Login />} />
                     <Route path="product1" element={<Product1 />} />
                     <Route path="product2" element={<Product2 />} />
+                    
                     <Route path="product3" element={<Product3 />} />
                     <Route path="product4" element={<Product4 />} />
                     <Route path="product5" element={<Product5 />} />
@@ -161,12 +162,12 @@ const App = () => {
                     <Route path="/card2/:id" element={<PrebookProduct />} />
                     <Route path="/similar/:id" element={<SimilarProducts />} />
 
-                    {/* <Route path="/sub-category-products" element={<SubCategory />} /> */}
+                    <Route path="/sub-category-products" element={<SubCategory />} />
                     <Route path="/sub-category-products/:subCategoryId" element={<SubCategory />} />
 
                     <Route path="/catalog/:catalog_id" element={<CatalogProducts />} />
                     <Route path='/catalogproduct/:id' element={<Catalogproduct/>}></Route>
-                    <Route path='navbarlist' element={<Navbarlist></Navbarlist>}></Route>
+                    <Route path='/navbarlist' element={<Navbarlist></Navbarlist>}></Route>
                     <Route path='/Acrylic2' element={<TextEditer></TextEditer>}></Route>
                     <Route path='/Morecoupon' element={<Couponlist></Couponlist>}></Route>
                 <Route path="*" element={<Acrylic3 />}/>

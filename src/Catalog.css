@@ -487,8 +487,7 @@
 }
 
 .size-button.active {
-  background-color: #23387A
-  ; /* Green */
+  background-color: #23387A; /* Green */
   color: white;
 }
 
@@ -510,8 +509,7 @@
 }
 
 .thickness-button.active {
-  background-color: #23387A
-  ; /* Green */
+  background-color: #23387A; /* Green */
   color: white;
 }
 

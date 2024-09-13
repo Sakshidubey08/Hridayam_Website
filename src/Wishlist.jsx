@@ -193,9 +193,39 @@ import Footer from './Footer';
 import { WishlistContext } from './WishlistContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { CartContext } from './CartContext';
+import { useNavigate } from 'react-router-dom';
 const WishlistPage = () => {
   const { wishlistItems, removeFromWishlist, moveToBag } = useContext(WishlistContext); // Assuming you have a `moveToBag` function in your context
+  const {addToCart}=useContext(CartContext);
+  const navigate=useNavigate();
+  const handleAddToCart = (id ,name,price,color,variation,stock) => {
+    // console.log(getSingleProduct.variations[0]+"new variation")
+    if (true) {
+      const productToAdd = {
+        id: id,
+        name: name,
+        price: price,
+        // image: file,
+        color: color,
+        // text:personalizeText,
+        variation: variation
 
+      };
+      if(stock==0){
+        alert("Product is out of stock");
+        return;
+      }
+      // if(file==null && filteredCard?.product_type=="personalize"){
+      //   alert("Please Select Image")
+      // }
+      else{
+          addToCart(productToAdd, 1);
+      navigate('/cart');
+      }
+    
+    }
+  };
   return (
     <>
       <Header />
@@ -220,7 +250,11 @@ const WishlistPage = () => {
                   <FontAwesomeIcon icon={faTimes} size="lg" className="wishlist-delete-icon" />
 
                 </button>
-                <button className="wishlist-move-to-bag rounded-md my-3 relative top-0" >    
+                {/* {item.product.product_type} */}
+              
+                <button 
+                //  onClick={()=>{if(item.product.product_type=="normal"){handleAddToCart(item.product._id,item.product.name,item.product.price,item.product.color[0],item.product.variation[0],item.product.stock)}}} 
+                   className="wishlist-move-to-bag rounded-md my-3 relative top-0" >    
                   MOVE TO BAG
                 </button>
                
