@@ -459,8 +459,7 @@
 }
 
 .shape.selected {
-  background-color: #23387A
-  ; /* Green */
+  background-color: #23387A; 
   color: white;
 }
 .size{
@@ -527,8 +526,7 @@
 }
 
 .buy-now {
-  background-color: #23387A
-  ; /* Green */
+  background-color: #23387A; 
   border: none;
   color: white;
   padding: 10px 20px;

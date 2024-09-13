@@ -223,8 +223,6 @@ const WishlistPage = () => {
                 <button className="wishlist-move-to-bag rounded-md my-3 relative top-0" >    
                   MOVE TO BAG
                 </button>
-               
-
               
               </div>
               
