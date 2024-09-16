@@ -353,6 +353,13 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .breadcrumb1 {
+    margin-top: 32px;
+     font-size: 16px;
+     color: #555;
+     margin-left: 10px;
+     display: none;
+   }
   .product-detail1 {
     display: flex;
     flex-direction: column;
@@ -385,5 +392,19 @@
   align-items: center;
   justify-content: center;
   object-fit: contain;
+}
+.product-name{
+  font-family: 'Roboto';
+  color: #363636;
+  font-weight: 500;
+  font-size: 10px;
+  margin-top: 2px;
+  
+}
+.product-info {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  
 }
 }

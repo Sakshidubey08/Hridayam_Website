@@ -369,7 +369,7 @@ const handlequanlitymodel =(quan)=>{
               
               <img onClick={() => removeFromCart()} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
             </div>
-            <div className="product-imag   flex items-center gap-1 ">
+            <div className={`product-imag   flex items-center gap-1 ${item.product==null?"hidden":"block"}  `}>
              {/* <div>{item.product==null?"":item.product.product_type}</div> */}
             <Swiper  className={`${item.product==null?"":(item.product.product_type=="normal"?"hidden":"block")}   w-32 h-20 `}   loop={true} spaceBetween={10} slidesPerView={1} autoplay={{ delay: 1000 }} pagination={{ clickable: true }} navigation>
   {/* SwiperSlide Components */}
@@ -377,16 +377,18 @@ const handlequanlitymodel =(quan)=>{
   <img style={{height:"100%"}}  className={`${item.product==null?"hidden":""} bg-contain  md:h-28 h-full w-full `} src={item.product==null?"":item.product.image} />
 
   </SwiperSlide>
-  <SwiperSlide className="bg-contain h-full w-full">
-  <img style={{height:"100%"}} className={`${item.product==null?"hidden":""}  bg-contain h-full w-full`} src={item.product==null?"":item.personalize_image} />
+  <SwiperSlide>
+  <img style={{height:"100%"}} className={`${item.product==null?"hidden":""}  bg-contain md:h-10 h-full w-full`} src={item.product==null?"":item.personalize_image} />
+  {/* <img style={{height:"100%"}} className={`${item.product==null?"hidden":""}  bg-contain h-full w-full`} src={item.product==null?"":item.personalize_image} /> */}
 
   </SwiperSlide>
 </Swiper>
                 <img style={{height:"100%"}}  className={`${item.product==null?"":(item.product.product_type=="normal"?"block":"hidden")}  bg-contain  md:h-28 h-full w-full `} src={item.product==null?"":item.product.image} />
 
               
-              <img className='md:h-20 ' src={item.acrylic_final_preview}></img>
             </div>
+            <img className='h-32 md:h-38 ' src={item.acrylic_final_preview}></img>
+
 
             <div className="product-info12">
               <h2 className="product-name text-sm md:text-lg">{item.product==null?"Acrylic Photo Frame":item.product.name}</h2>

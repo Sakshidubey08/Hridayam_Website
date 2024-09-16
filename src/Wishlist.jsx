@@ -194,12 +194,12 @@ import { WishlistContext } from './WishlistContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from './CartContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const WishlistPage = () => {
   const { wishlistItems, removeFromWishlist, moveToBag } = useContext(WishlistContext); // Assuming you have a `moveToBag` function in your context
   const {addToCart}=useContext(CartContext);
   const navigate=useNavigate();
-  const handleAddToCart = (id ,name,price,color,variation,stock) => {
+  const handleAddToCart = (id,producttype,stock ,name,price,color,variation) => {
     // console.log(getSingleProduct.variations[0]+"new variation")
     if (true) {
       const productToAdd = {
@@ -216,12 +216,18 @@ const WishlistPage = () => {
         alert("Product is out of stock");
         return;
       }
-      // if(file==null && filteredCard?.product_type=="personalize"){
-      //   alert("Please Select Image")
-      // }
+      if(producttype=="normal"){
+        addToCart(productToAdd, 1);
+        navigate('/cart');
+        // alert("Please Select Image")
+      }
       else{
-          addToCart(productToAdd, 1);
-      navigate('/cart');
+        if(stock==0){
+          alert("Product is out of stock")
+        }
+        navigate(`/card/${id}`)
+        
+         
       }
     
     }
@@ -229,16 +235,19 @@ const WishlistPage = () => {
   return (
     <>
       <Header />
-      <div className="wishlist-page">
+      <div className="wishlist-page  p-4  md:p-10 ">
         {wishlistItems.length === 0 ? (
           <div className="empty-wishlist-card">
             <p>Your wishlist is empty.</p>
           </div>
         ) : (
-          <div className="wishlist-card-container ">
+          <div className="wishlist-card-container flex  gap-2 md:gap-4 m-0 p-0 flex-wrap  ">
             {wishlistItems.data.data.map(item => (
-              <div key={item.id} className="wishlist-card">
-                <img  src={item.product.image} alt={item.product.name} className="wishlist-card-image h-40 object-contain" />
+              <div key={item.id} className="wishlist-card  w-40 md:w-64 ">
+              <Link  to={`/card/${item.product._id}`} className="card-link">
+                   
+                <img  src={item.product.image} alt={item.product.name} className="wishlist-card-image h-40 object-contain"/>
+                </Link>
                 <div className="wishlist-card-info">
                   <div className="wishlist-details">
                     <p className="wishlist-product-name text-sm">{item.product.name}</p>
@@ -251,12 +260,14 @@ const WishlistPage = () => {
 
                 </button>
                 {/* {item.product.product_type} */}
-              
-                <button 
+               {/* <div>{item.product.stock }sdflkj</div> */}
+                <button onClick={()=>{handleAddToCart(item.product._id,item.product.product_type,item.product.stock)}}
                 //  onClick={()=>{if(item.product.product_type=="normal"){handleAddToCart(item.product._id,item.product.name,item.product.price,item.product.color[0],item.product.variation[0],item.product.stock)}}} 
-                   className="wishlist-move-to-bag rounded-md my-3 relative top-0" >    
+                   className="wishlist-move-to-bag  rounded-md my-2 md:my-3 text-xs md:text-lg relative top-0" >    
                   MOVE TO BAG
                 </button>
+
+                <p className={`${item.product.stock==0?"block":"hidden"} text-xs text-green-600`}>Product is out of stock</p>
                
 
               

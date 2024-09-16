@@ -589,6 +589,7 @@ const Product1 = () => {
                                     className="thumbnail"
                                 />
                             )} */}
+                            <div className='hidden md:block'>
                             {selectedProduct?.images?.map((image, index) => (
                                 <img
                                     key={index}
@@ -598,6 +599,7 @@ const Product1 = () => {
                                     className="thumbnail"
                                 />
                             ))}
+                            </div>
                         </div>
                     </div>
                     <div className="image-placeholder1 m-auto flex items-center justify-center">
@@ -605,6 +607,17 @@ const Product1 = () => {
                             <img src={selectedImage} alt="Selected" />
                         )}
                     </div>
+                    <div className='block md:hidden'>
+                            {selectedProduct?.images?.map((image, index) => (
+                                <img
+                                    key={index}
+                                    src={image}
+                                    alt={`Thumbnail ${index + 1}`}
+                                    onClick={() => handleImageClick(image)}
+                                    className=" h-12  hover:ring rounded-md"
+                                />
+                            ))}
+                            </div>
                     <div className="scrollable-content4">
                         <div className="product-info">
                             <h1 className='product-name'>{selectedProduct?.name}</h1>
@@ -618,13 +631,13 @@ const Product1 = () => {
                             <br />
                             {selectedProduct?.product_type === "personalize" && (
                                 <>
-                                    <button className='w-28'
+                                    <button className='w-28 p-2'
                                         onClick={() => document.getElementById('fileInput').click()}
                                         style={{
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',
-                                            padding: '10px',
+                                            
                                             borderRadius: '5px',
                                             cursor: 'pointer',
                                             border: '1px solid #ccc',
@@ -654,7 +667,7 @@ const Product1 = () => {
                                         style={{ display: 'none' }}
                                         onChange={handleImageChange}
                                     />
-                                     <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
+                                     <button  className="text rounded-md dialogs p-2 " onClick={() => document.getElementById('my_modal_4').showModal()} >
                             Add Text
                         </button>
                                     {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
@@ -698,11 +711,11 @@ const Product1 = () => {
                             <div className="buttons">
                                 <button className="wishlist-btn">
                                     <span>Wishlist</span>
-                                    <FaHeart className="icon" />
+                                    {/* <FaHeart className="icon" /> */}
                                 </button>
                                 <button className="cart-btn" onClick={handleAddToCart}>
                                     <span>Add to Cart</span>
-                                    <FaShoppingCart className="icon" />
+                                    {/* <FaShoppingCart className="icon" /> */}
                                 </button>
                             </div>
                             <div className="pincode-checker">

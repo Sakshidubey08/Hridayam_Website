@@ -1,6 +1,7 @@
 .checkout-page {
   display: flex;
   justify-content: space-between;
+
 }
 
 .billing-details {
@@ -106,4 +107,30 @@
 .pay-now-button:active {
   background-color: #1e5c73;
 }
+
+@media only screen and (max-width: 600px) {
+  .checkout-page {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+  }
+  .billing-details {
+    width: 100%;
+    margin-left: 20px; /* Add left margin to billing details */
+  }
+  .billing{
+    font-size:15px;
+    margin-top: 10px;
+  }
+  .order-summary {
+    width: 100%; /* Adjust width to fit side by side with some space between */
+    margin-right: 0px;
+    margin: 0 12.5px;
+  }
+  .billing1{
+    font-size:15px;
+  }
+}
+
 

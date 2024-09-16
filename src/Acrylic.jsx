@@ -533,10 +533,10 @@ function App() {
         setSelectedSize(size);
     };
 
-    const handleThicknessChange = (thickness) => {
+    const handleThicknessChange = (thickness) =>{
         setSelectedThickness(thickness);
     };
-    const handleImageClick1 = (imageSrc) => {
+    const handleImageClick1 = (imageSrc) =>{
         setSelectedImage2(imageSrc);
     };
     return (

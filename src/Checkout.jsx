@@ -310,7 +310,7 @@ if(cartItems.lenght==0){
             </tbody>
           </table>
           <div className='gap-2'>
-          <input onChange={handlecouponinput} className=' border-blue-300 p-2 rounded-md border-2 w-4/6' type='text'></input>
+          <input onChange={handlecouponinput} className=' border-blue-300 p-2 rounded-md border-2 w-1/2 md:w-4/6' type='text'></input>
           {/* <Button >Press me!</Button> */}
          
           <button loading={handleapplycouponbutton.loading} onClick={handleapplycouponbutton} className='border  rounded-md  p-2 m-2 '>Apply coupon</button>
@@ -321,7 +321,7 @@ if(cartItems.lenght==0){
           
           </div>
           <div>
-            <h2 className='billing1'>Payment Details</h2>
+            {/* <h2 className='billing1'>Payment Details</h2> */}
            {/* <Link to='/payment'><button>Pay Now</button></Link> */}
           </div>
           {/* <Link to="/place-order"> */}

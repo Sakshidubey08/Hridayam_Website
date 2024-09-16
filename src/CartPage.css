@@ -377,6 +377,16 @@ hr {
 } 
 
 @media only screen and (max-width: 600px) {
+  .cart-summary {
+    margin-top: 20px;
+    text-align: center;
+    width: 1180px;
+    margin-left: 0px;
+  }
+  .cart-summary {
+    width: 90%; 
+    margin-top: 0; 
+  }
   .product-info12{
     margin-left: 0px;
   }

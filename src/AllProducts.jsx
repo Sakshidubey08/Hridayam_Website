@@ -37,28 +37,7 @@ function Filter() {
         }
     }, []);
 
-    useEffect(() => {
-        axios.get(`https://api.hirdayam.com/api/getProductsforuser/`, {
-        })
-            .then(response => {
-                console.log('API response:',  response.data); // Log the entire response
-                if (response.data.status) {
-                    const fetchedCards = response.data.data.data.map(product => ({
-                        id: product._id,
-                        imageUrl: product.image,
-                        price: product.price,
-                        description: product.name,
-                        imagesUrl: product.images
-                    }));
-                    setCards(fetchedCards);
-                    localStorage.setItem('fetchedCards', JSON.stringify(fetchedCards));
-                    console.log('Fetched cards:', fetchedCards);
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching data from API:', error);
-            });
-    }, []);
+   
     
     useEffect(() => {
         axios.get(`https://api.hirdayam.com/api/getProductsforuser`, {
@@ -116,6 +95,29 @@ function Filter() {
                 console.error('Error fetching data from API:', error);
             });
     }, [searchQuery]);
+
+    useEffect(() => {
+        axios.get(`https://api.hirdayam.com/api/getProductsforuser/`, {
+        })
+            .then(response => {
+                console.log('API response:',  response.data); // Log the entire response
+                if (response.data.status) {
+                    const fetchedCards = response.data.data.data.map(product => ({
+                        id: product._id,
+                        imageUrl: product.image,
+                        price: product.price,
+                        description: product.name,
+                        imagesUrl: product.images
+                    }));
+                    setCards(fetchedCards);
+                    localStorage.setItem('fetchedCards', JSON.stringify(fetchedCards));
+                    console.log('Fetched cards:', fetchedCards);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data from API:', error);
+            });
+    }, []);
 
     const parsePrice = (price) => {
         if (typeof price === 'number') {

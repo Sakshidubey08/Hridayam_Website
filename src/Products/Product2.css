@@ -134,6 +134,14 @@ select {
 }
 
 @media only screen and (max-width: 600px) {
+  .scrollable-content4 {
+    max-height: 100%; /* Adjust the height as needed */
+    overflow-y:visible;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    
+    margin-top: 16px;
+  }
   .image-placeholder1 {
     position:static;
     display: flex;
