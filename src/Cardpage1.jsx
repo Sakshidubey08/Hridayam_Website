@@ -133,7 +133,7 @@ const Cardpage1 = () => {
     return <div>No data available for the selected ID.</div>;
   }
 
-  const { name, price, default_color_image, images, image,product_details } = filteredCard;
+  const { name, price, default_color_image, images, image,product_details,features } = filteredCard;
   const mainImage = selectedImage || image;
 
 
@@ -263,8 +263,7 @@ const Cardpage1 = () => {
                                     placeholder='Enter Your Text here'
                                      // Bind the state to the input value
                                      // Update state on change
-                                />
-                               
+                                />     
                             <div>
 
                                 </div>
@@ -278,7 +277,7 @@ const Cardpage1 = () => {
 
               
 
-              <h3 className='free'>Free Delivery</h3>
+              {/* <h3 className='free'>Free Delivery</h3> */}
               <div className="buttons">
                 {/* <button className="wishlist-btn">
                   <span>Wishlist</span>
@@ -289,7 +288,7 @@ const Cardpage1 = () => {
                   <FaShoppingCart className="icon" />
                 </button>
               </div>
-              <div className="pincode-checker">
+              {/* <div className="pincode-checker">
                 <input
                   type="text"
                   value={pincode}
@@ -309,7 +308,22 @@ const Cardpage1 = () => {
                 <span>{deliveryText.line3}</span>
                 <br />
                 <span className="delivery-line">{deliveryText.line4}</span>
-              </p>
+              </p> */}
+              <h3 className='offer mt-4'>Product Details</h3>
+              <p className='product'>{product_details}</p>
+              <h3 className='offer mt-2'>Features</h3>
+              <ul className="offer-details">
+                {/* <li> Athleisure Tshirt can be paired with Tracks</li>
+                <li>Style: round neck.</li>
+                <li>Sleeves: Short sleeves</li>
+                <li>Sleeves: Short sleeves</li>
+                <li>Color: Teal</li>
+                <li>Print: Geometric</li>
+                <li>Fit:regular</li> */}
+                 {features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                     ))}
+              </ul>
             </div>
           </div>
         </div>

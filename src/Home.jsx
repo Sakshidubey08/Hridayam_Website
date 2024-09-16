@@ -188,7 +188,18 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const [cardCount, setCardCount] = useState(8);
   const [cardCount1, setCardCount1] = useState(8);
   const [cardCount2, setCardCount2] = useState(8);
-
+  const [title, setTitle] = useState('');
+  useEffect(() => {
+    axios.get('https://api.hirdayam.com/api/getSettings')
+      .then(response => {
+        // The title is nested inside the `data` object
+        const fetchedTitle = response.data.data.bottom_banner_title;
+        setTitle(fetchedTitle);
+      })
+      .catch(error => {
+        console.error('Error fetching the title:', error);
+      });
+  }, []);
   // useEffect(() => {
   //   axios.get('https://api.hirdayam.com/api/getbestsellingproduct')
   //     .then(response => {
@@ -2099,7 +2110,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       </div>
       <div>
         <h3 className='best3'>Offers</h3>
-        <h1 className='top3'>Top Picks for Winters</h1>
+        {/* <h1 className='top3'>Top Picks for Winters</h1> */}
+        <h1 className='top3'>{title}</h1>
         <TopPick />
 
       </div>

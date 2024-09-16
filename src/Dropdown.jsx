@@ -113,16 +113,19 @@
 // }
 
 // export default Dropdown;
-import React, { useState } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import './Dropdown.css';
 import { Link } from 'react-router-dom';
 import icon2 from './images/icon2.png';
 import icon2_white from './images/user-white.png';
 import { useAuth } from './store/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 function Dropdown() {
   const [showDropdown, setShowDropdown] = useState(false);
   const { isAuthenticated, logout } = useAuth(); // Get isAuthenticated and logout from context
+  const dropdownRef = useRef(null); // Create a ref for the dropdown
 
   const handleIconClick = () => {
     setShowDropdown(!showDropdown);
@@ -131,9 +134,21 @@ function Dropdown() {
   const handleCloseClick = () => {
     setShowDropdown(false);
   };
+ 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
 
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef]);
   return (
-    <div>
+    <div ref={dropdownRef}>
       <div onClick={handleIconClick}>
         <div className='user-black'>
           <img 
@@ -157,7 +172,9 @@ function Dropdown() {
         <div className="dropdown1">
           <div className="dropdown-header">
             <div className="dropdown-item1">Welcome</div>
-            <span className="close-icon" onClick={handleCloseClick}>&times;</span>
+            {/* <span className="close-icon" onClick={handleCloseClick}>&times;</span> */}
+            <FontAwesomeIcon icon={faTimes} onClick={handleCloseClick} size="lg" className="wishlist-delete-icon3" />
+
           </div>
           <p className="dropdown-item6">To access account and manage order</p>
 
