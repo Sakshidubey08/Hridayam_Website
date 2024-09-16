@@ -33,7 +33,7 @@
 //     const navigate=useNavigate();
 //     const [image10, takeScreenshot] = useScreenshot()
 //    const {addToCart}=useContext(CartContext)
-    
+
 //     const [selectedImage3, setSelectedImage3] = useState(null);
 //     const [selectedShape, setSelectedShape] = useState("rectangle");
 //     const [selectedSize, setSelectedSize] = useState('12x9');
@@ -70,7 +70,7 @@
 
 //     const captureScreenshot = () => {
 //         html2canvas(ref.current,{
-           
+
 //             useCORS: true,
 //       scrollX: 0,
 //       scrollY: 1200,
@@ -86,7 +86,7 @@
 //             handleAddToCart();
 //           })
 //       };
-      
+
 //     const handleFocus = () => {
 //         setIsDraggable(true);
 //     };
@@ -98,13 +98,13 @@
 //     //     setScreenshot(imgData); // Store the screenshot in the state
 //     //   });
 //     // };
-    
-    
+
+
 //     const handleCapture = (captureFeedback) => {
 //         // Handle the captured feedback data
 //         console.log(captureFeedback+"sdfsdfjlkd");
 //       };
-     
+
 //     const handlescreenshot = () => {
 //         const element = document.getElementById("divtotakescreenshotof")
 //         if(!element){
@@ -112,17 +112,17 @@
 //         }
 //         html2canvas(element).then((canvas)=>{
 //              let image=canvas.toDataURL("image/jpeg")
-        
+
 //              setScreenshot(image)
 //              console.log(screenshot)
 //         }).catch(err=>{
 //             console.error("We can not take the screenshot of your element at this time")
 //         })
 //     }
-    
 
 
-   
+
+
 //     const handleBlur = () => {
 //         setIsDraggable(false);
 //     };
@@ -161,7 +161,7 @@
 //     };
 //     const handleSizeChange = (size) => {
 //         setSelectedSize(size);
-        
+
 //     };
 
 //     const handleThicknessChange = (thickness,price,id) => {
@@ -194,32 +194,32 @@
 //     const framTextfontfamily = ["Permanent Marker", "Grey Qo", "Matemasie", "Edu VIC WA NT Beginner", "Bodoni Moda SC"];
 
 
-      
-    
+
+
 //     useEffect(() => {
-       
-      
+
+
 //        fetchthikness()
 //         fetchsize();
 //       }, []);
-      
+
 //       // Empty dependency array to run only once on mount
 
 //       useEffect(() => {
-        
-      
+
+
 //         fetchthikness();
-       
+
 //       }, [sizeId]);
 
 //       const fetchthikness = async () => {
 //         const fetchTokenFromLS = () => {
 //           return localStorage.getItem('token');
 //         };
-    
-       
+
+
 //         const token = fetchTokenFromLS();
-    
+
 //         if (token) {
 //           try {
 //             const response2 = await axios.get(`https://api.hirdayam.com/api/getAcrylicThickness?size_id=${sizeId}`, {
@@ -227,20 +227,20 @@
 //                 Authorization: `Bearer ${token}`, // Fixed interpolation
 //               },
 //             });
-    
+
 //             if (response2 && response2.data && response2.data.data) {
 //               console.log('Get Acrylic Thikness:', response2);
 //               let acrylicThiknessdata =response2.data.data;
 //               setthicknessdata(acrylicThiknessdata); // Update state
 //               //     if(acrylicsize){
-             
+
 //               console.log( "updated",thicknessdata);
 
 //               // }
-    
+
 //               // Ensure state is updated before logging
 //             }
-    
+
 //             if (response2.data.status === true && Array.isArray(response2.data.data)) {
 //               // Your logic here
 //             } else {
@@ -260,10 +260,10 @@
 //         const fetchTokenFromLS = () => {
 //           return localStorage.getItem('token');
 //         };
-    
-       
+
+
 //         const token = fetchTokenFromLS();
-    
+
 //         if (token) {
 //           try {
 //             const response = await axios.get('https://api.hirdayam.com/api/getAcrylicSize', {
@@ -271,20 +271,20 @@
 //                 Authorization: `Bearer ${token}`, // Fixed interpolation
 //               },
 //             });
-    
+
 //             if (response && response.data && response.data.data) {
 //               console.log('Get Acrylic size:', response);
 //               let acrylicSizedata =response.data.data;
 //               setacrylicsize4(acrylicSizedata); // Update state
 //               // if(acrylicsize){
-             
+
 //               console.log( "updated",acrylicsize4);
-               
+
 //               // }
-    
+
 //               // Ensure state is updated before logging
 //             }
-    
+
 //             if (response.data.status === true && Array.isArray(response.data.data)) {
 //               // Your logic here
 //             } else {
@@ -297,9 +297,9 @@
 //           console.error('Token not found in localStorage.');
 //         }
 //       };
-      
 
-     
+
+
 //       const handleAddToCart = () => {
 //         // console.log(getSingleProduct.variations[0]+"new variation")
 //         console.log(sizeId)
@@ -329,26 +329,26 @@
 //              addToCart(productToAdd,1);
 //           navigate('/cart');
 //         //   }
-         
+
 //         }
 //       };
 
 
 
-      
-  
-    
-    
-    
-     
+
+
+
+
+
+
 //     return (
 //         <>
-        
+
 //             <Header />
 //             <Tour />
-            
-           
-           
+
+
+
 //             <div  className="container ml-1 mt-24 md:mt-10">
 //                 <div style={{
 //                     backgroundSize: 'cover', // or 'contain' depending on your requirement
@@ -633,7 +633,7 @@
 //                         <button className="text rounded-md" onClick={() => document.getElementById('my_modal_4').showModal()}>
 //                             📝 Text
 //                         </button>
-                    
+
 //                         <dialog id="my_modal_4" className="modal">
 //                             <div className="modal-box">
 //                                 <form method="dialog">
@@ -661,7 +661,7 @@
 //                                     onChange={(e) => setColor(e.target.value)} // Update state on change
 //                                 />
 //                                 </div>
-                               
+
 
 //                                 <div className={`${framtext == "" ? "hidden" : "block"}`}>
 //                                     <label  className=' text-nowrap w-full inline-block text-start'>Text Style</label><br></br>
@@ -780,10 +780,10 @@
 //                                 <button onClick={() => handleSizeChange1(item.size,item._id,item.price)} className={`size-button ${selectedSize === item.size ? 'active' : ''} rounded-md  ${selectedSize === item.size ? '' : 'hover:ring'}`}>{item.size}</button>
 
 //                                 </div>
-                                
+
 
 //                             );
-                                    
+
 //                            })):("sdfk")
 //                            }
 //                            </div>
@@ -808,10 +808,10 @@
 //                              <button onClick={() => {handleThicknessChange(item.thickness,item.price,item._id)}} className={`thickness-button rounded-md ${selectedThickness === item.thickness ? 'active' : ''} ${selectedThickness === item.thickness ? '' : 'hover:ring'}`}>{item.thickness}</button>
 
 //                                 </div>
-                                
+
 
 //                             );
-                                    
+
 //                            })):(<div>skdf</div>)
 //                            }
 //                            </div>
@@ -840,7 +840,7 @@
 //             </div>
 
 
-        
+
 //             <img src={screenshot}></img>
 //               <div>
 //             </div>
@@ -853,7 +853,7 @@
 // export default App;
 
 import { toPng } from 'html-to-image';
-import React, { useState ,useCallback,useRef, useContext} from 'react';
+import React, { useState, useCallback, useRef, useContext } from 'react';
 import './Catalog.css'; // Import your CSS file
 import Header from './Header';
 import rect1 from './images/rect6.png'
@@ -884,10 +884,10 @@ import axios from 'axios';
 import { CartContext } from './CartContext';
 function App() {
     const ref = useRef(null)
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const [image10, takeScreenshot] = useScreenshot()
-   const {addToCart}=useContext(CartContext)
-    
+    const { addToCart } = useContext(CartContext)
+
     const [selectedImage3, setSelectedImage3] = useState(null);
     const [selectedShape, setSelectedShape] = useState("rectangle");
     const [selectedSize, setSelectedSize] = useState('12x9');
@@ -905,15 +905,15 @@ function App() {
     const [showTextInput, setShowTextInput] = useState(false);
     const [position, setPosition] = useState({ x: -200, y: 0 });
     const [isDraggable, setIsDraggable] = useState(false);
-   
+
     const [framTextfontfamilystate, setframTextfontfamilystate] = useState("");
     const [screenshot, setScreenshot] = useState(null);
-    const [acrylicsize4,setacrylicsize4]=useState([]);
-    const [thicknessdata,setthicknessdata]=useState([]);
-    const [sizeId ,setsizeId]=useState([]);
-    const [thicknessprice,setthicknessprice]=useState();
-    const [sizeprice,setsizeprice]=useState();
-    const [thicknessId,setthicknessId]=useState();
+    const [acrylicsize4, setacrylicsize4] = useState([]);
+    const [thicknessdata, setthicknessdata] = useState([]);
+    const [sizeId, setsizeId] = useState([]);
+    const [thicknessprice, setthicknessprice] = useState();
+    const [sizeprice, setsizeprice] = useState();
+    const [thicknessId, setthicknessId] = useState();
     const [Acrylicsize, setAcrylicsize] = useState(null);
 
 
@@ -928,29 +928,29 @@ function App() {
     function base64ToFile(base64String, filename) {
         // Decode the base64 string
         let arr = base64String.split(','),
-          mime = arr[0].match(/:(.*?);/)[1],
-          bstr = atob(arr[1]), // atob() decodes a base64 string
-          n = bstr.length,
-          u8arr = new Uint8Array(n);
-      
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), // atob() decodes a base64 string
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+
         while (n--) {
-          u8arr[n] = bstr.charCodeAt(n);
+            u8arr[n] = bstr.charCodeAt(n);
         }
-      
+
         // Create a File object
         return new File([u8arr], filename, { type: mime });
-      }
+    }
 
 
 
     const captureScreenshot = () => {
-        html2canvas(ref.current,{
-           
+        html2canvas(ref.current, {
+
             useCORS: true,
-      scrollX: 0,
-      scrollY: 1200,
-      width: ref.current.scrollWidth, // Capture full width of the element
-      height: ref.current.scrollHeight, // Capture full height of the element
+            scrollX: 0,
+            scrollY: 1200,
+            width: ref.current.scrollWidth, // Capture full width of the element
+            height: ref.current.scrollHeight, // Capture full height of the element
         }).then((canvas) => {
             const imgData = canvas.toDataURL('image/png');
             let imageFile = base64ToFile(imgData, "image.jpg");
@@ -958,9 +958,9 @@ function App() {
             console.log(imageFile);
             setScreenshot(imageFile); // This is the base64 image
             // You can save it to a store (Redux, localStorage, etc.)
-          })
-      };
-      
+        })
+    };
+
     const handleFocus = () => {
         setIsDraggable(true);
     };
@@ -976,94 +976,94 @@ function App() {
     function base64ToFile(base64String, filename) {
         // Decode the base64 string
         let arr = base64String.split(','),
-          mime = arr[0].match(/:(.*?);/)[1],
-          bstr = atob(arr[1]), // atob() decodes a base64 string
-          n = bstr.length,
-          u8arr = new Uint8Array(n);
-      
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), // atob() decodes a base64 string
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+
         while (n--) {
-          u8arr[n] = bstr.charCodeAt(n);
+            u8arr[n] = bstr.charCodeAt(n);
         }
-      
+
         // Create a File object
         return new File([u8arr], filename, { type: mime });
-      }
-    
-    
+    }
+
+
     const handleCapture = (captureFeedback) => {
         // Handle the captured feedback data
-        console.log(captureFeedback+"sdfsdfjlkd");
-      };
-     
+        console.log(captureFeedback + "sdfsdfjlkd");
+    };
+
     const handlescreenshot = () => {
         const element = document.getElementById("divtotakescreenshotof")
-        if(!element){
+        if (!element) {
             return;
         }
-        html2canvas(element).then((canvas)=>{
-             let image=canvas.toDataURL("image/jpeg")
-             let imageFile = base64ToFile(image, "image.jpg");
-             setScreenshot(imageFile)
-             console.log(screenshot)
-        }).catch(err=>{
+        html2canvas(element).then((canvas) => {
+            let image = canvas.toDataURL("image/jpeg")
+            let imageFile = base64ToFile(image, "image.jpg");
+            setScreenshot(imageFile)
+            console.log(screenshot)
+        }).catch(err => {
             console.error("We can not take the screenshot of your element at this time")
         })
     }
-    
-    useEffect(() => {
-        
-        const fetchData = async () => {
-          const fetchTokenFromLS = () => {
-            return localStorage.getItem('token');
-          };
-      
-          const fetchOrderId = () => {
-            return localStorage.getItem('orderid');
-          };
-      
-          const orderid = fetchOrderId();
-          const token = fetchTokenFromLS();
-      
-          if (token) {
-            try {
-              const response = await axios.get('https://api.hirdayam.com/api/getAcrylicSize', {
-                headers: {
-                  Authorization: `Bearer ${token}`, // Fixed interpolation
-                },
-              });
-      
-              if (response && response.data && response.data.data) {
-                console.log('Get Acrylic size:', response);
-                // let data=response;
-                // setAcrylicsize(data); // Update state
-                setsizeId(response.data.data[0]._id)
-                setsizeprice(response.data.data[0].price)
-               
-               
-                console.log(Acrylicsize+ 'new');
 
-                
-      
-              }
-      
-              if (response.data.status === true && Array.isArray(response.data.data)) {
-                // Your logic here
-              } else {
-                console.error('Unexpected response format:', response.data);
-              }
-            } catch (error) {
-              console.error('Acrylic size item error:', error);
+    useEffect(() => {
+
+        const fetchData = async () => {
+            const fetchTokenFromLS = () => {
+                return localStorage.getItem('token');
+            };
+
+            const fetchOrderId = () => {
+                return localStorage.getItem('orderid');
+            };
+
+            const orderid = fetchOrderId();
+            const token = fetchTokenFromLS();
+
+            if (token) {
+                try {
+                    const response = await axios.get('https://api.hirdayam.com/api/getAcrylicSize', {
+                        headers: {
+                            Authorization: `Bearer ${token}`, // Fixed interpolation
+                        },
+                    });
+
+                    if (response && response.data && response.data.data) {
+                        console.log('Get Acrylic size:', response);
+                        // let data=response;
+                        // setAcrylicsize(data); // Update state
+                        setsizeId(response.data.data[0]._id)
+                        setsizeprice(response.data.data[0].price)
+
+
+                        console.log(Acrylicsize + 'new');
+
+
+
+                    }
+
+                    if (response.data.status === true && Array.isArray(response.data.data)) {
+                        // Your logic here
+                    } else {
+                        console.error('Unexpected response format:', response.data);
+                    }
+                } catch (error) {
+                    console.error('Acrylic size item error:', error);
+                }
+            } else {
+                console.error('Token not found in localStorage.');
             }
-          } else {
-            console.error('Token not found in localStorage.');
-          }
         };
-      
+
         fetchData();
-      }, []); 
-      
-    
-   
+    }, []);
+
+
+
     const handleBlur = () => {
         setIsDraggable(false);
     };
@@ -1102,10 +1102,10 @@ function App() {
     };
     const handleSizeChange = (size) => {
         setSelectedSize(size);
-        
+
     };
 
-    const handleThicknessChange = (thickness,price,id) => {
+    const handleThicknessChange = (thickness, price, id) => {
         setSelectedThickness(thickness);
         setthicknessprice(price)
         setthicknessId(id)
@@ -1125,125 +1125,125 @@ function App() {
         '35x23': 1499,
     };
 
-    const handleSizeChange1 = (size,sizeid,price) => {
+    const handleSizeChange1 = (size, sizeid, price) => {
         setSelectedSize(size);
         setsizeprice(price)
         setsizeId(sizeid)
-        setPrice(sizeprice+thicknessprice);
+        setPrice(sizeprice + thicknessprice);
     };
 
     const framTextfontfamily = ["Permanent Marker", "Grey Qo", "Matemasie", "Edu VIC WA NT Beginner", "Bodoni Moda SC"];
 
 
-      
-    
+
+
     useEffect(() => {
-       
-      
-      
+
+
+
         fetchsize();
-      }, []);
-      
-      // Empty dependency array to run only once on mount
+    }, []);
 
-      useEffect(() => {
-        
-      
+    // Empty dependency array to run only once on mount
+
+    useEffect(() => {
+
+
         fetchthikness();
-       
-      }, [sizeId]);
 
-      const fetchthikness = async () => {
+    }, [sizeId]);
+
+    const fetchthikness = async () => {
         const fetchTokenFromLS = () => {
-          return localStorage.getItem('token');
+            return localStorage.getItem('token');
         };
-    
-       
+
+
         const token = fetchTokenFromLS();
-    
+
         if (token) {
-          try {
-            const response2 = await axios.get(`https://api.hirdayam.com/api/getAcrylicThickness?size_id=${sizeId}`, {
-              headers: {
-                Authorization: `Bearer ${token}`, // Fixed interpolation
-              },
-            });
-    
-            if (response2 && response2.data && response2.data.data){
-              console.log('Get Acrylic Thikness:', response2);
-              let acrylicThiknessdata =response2.data.data;
-              setthicknessdata(acrylicThiknessdata);
-              setthicknessprice(response2.data.data[0].price) // Update state
-              //     if(acrylicsize){
-             
-              console.log( "updated",thicknessdata);
+            try {
+                const response2 = await axios.get(`https://api.hirdayam.com/api/getAcrylicThickness?size_id=${sizeId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Fixed interpolation
+                    },
+                });
 
-              // }
-    
-              // Ensure state is updated before logging
+                if (response2 && response2.data && response2.data.data) {
+                    console.log('Get Acrylic Thikness:', response2);
+                    let acrylicThiknessdata = response2.data.data;
+                    setthicknessdata(acrylicThiknessdata);
+                    setthicknessprice(response2.data.data[0].price) // Update state
+                    //     if(acrylicsize){
+
+                    console.log("updated", thicknessdata);
+
+                    // }
+
+                    // Ensure state is updated before logging
+                }
+
+                if (response2.data.status === true && Array.isArray(response2.data.data)) {
+                    // Your logic here
+                } else {
+                    console.error('Unexpected response format:', response2.data);
+                }
+            } catch (error) {
+                console.error('Acrylic thikeness item error:', error);
             }
-    
-            if (response2.data.status === true && Array.isArray(response2.data.data)) {
-              // Your logic here
-            } else {
-              console.error('Unexpected response format:', response2.data);
-            }
-          } catch (error) {
-            console.error('Acrylic thikeness item error:', error);
-          }
         } else {
-          console.error('Token not found in localStorage.');
+            console.error('Token not found in localStorage.');
         }
-      };
+    };
 
 
 
-      const fetchsize = async () => {
+    const fetchsize = async () => {
         const fetchTokenFromLS = () => {
-          return localStorage.getItem('token');
+            return localStorage.getItem('token');
         };
-    
-       
-        const token = fetchTokenFromLS();
-    
-        if (token) {
-          try {
-            const response = await axios.get('https://api.hirdayam.com/api/getAcrylicSize', {
-              headers: {
-                Authorization: `Bearer ${token}`, // Fixed interpolation
-              },
-            });
-    
-            if (response && response.data && response.data.data){
-              console.log('Get Acrylic size:', response);
-              let acrylicSizedata =response.data.data;
-              setacrylicsize4(acrylicSizedata); // Update state
-              // if(acrylicsize){
-             
-              console.log( "updated",acrylicsize4);
-               
-              // }
-    
-              // Ensure state is updated before logging
-            }
-    
-            if (response.data.status === true && Array.isArray(response.data.data)) {
-              // Your logic here
-            } else {
-              console.error('Unexpected response format:', response.data);
-            }
-          } catch (error) {
-            console.error('Acrylic size item error:', error);
-          }
-        } else {
-          console.error('Token not found in localStorage.');
-        }
-      };
-      
 
-      
-     
-      const handleAddToCart = () => {
+
+        const token = fetchTokenFromLS();
+
+        if (token) {
+            try {
+                const response = await axios.get('https://api.hirdayam.com/api/getAcrylicSize', {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Fixed interpolation
+                    },
+                });
+
+                if (response && response.data && response.data.data) {
+                    console.log('Get Acrylic size:', response);
+                    let acrylicSizedata = response.data.data;
+                    setacrylicsize4(acrylicSizedata); // Update state
+                    // if(acrylicsize){
+
+                    console.log("updated", acrylicsize4);
+
+                    // }
+
+                    // Ensure state is updated before logging
+                }
+
+                if (response.data.status === true && Array.isArray(response.data.data)) {
+                    // Your logic here
+                } else {
+                    console.error('Unexpected response format:', response.data);
+                }
+            } catch (error) {
+                console.error('Acrylic size item error:', error);
+            }
+        } else {
+            console.error('Token not found in localStorage.');
+        }
+    };
+
+
+
+
+    const handleAddToCart = () => {
         // console.log(getSingleProduct.variations[0]+"new variation")
         console.log(sizeId)
         if (true) {
@@ -1266,55 +1266,55 @@ function App() {
           };
           console.log(productToAdd.acrylicsizename+"new Acylic")
 
-        //   if(file==null && filteredCard?.product_type=="personalize"){
-        //       alert("Please Select a Image")
-        //   }
-        //   else{
-        
-        if(screenshot!=null){
+            //   if(file==null && filteredCard?.product_type=="personalize"){
+            //       alert("Please Select a Image")
+            //   }
+            //   else{
 
-        
-             addToCart(productToAdd,1);
-          navigate('/cart');
+            if (screenshot != null) {
+
+
+                addToCart(productToAdd, 1);
+                navigate('/cart');
+            }
+            //   }
+
         }
-        //   }
-         
-        }
-      };
+    };
 
 
-// useEffect(() => {
-//  handleAddToCart();
-// }, [screenshot])
+    // useEffect(() => {
+    //  handleAddToCart();
+    // }, [screenshot])
 
-if(screenshot!=null){
-    handleAddToCart();
-}
+    if (screenshot != null) {
+        handleAddToCart();
+    }
 
-      
-  
-    
-    
-    
-     
+
+
+
+
+
+
     return (
         <>
-        
+
             <Header />
             <Tour />
-            
-           
-           
-            <div  className="container19 ml-1 mt-24 md:mt-10">
+
+
+
+            <div className="container19 ml-1 mt-24 md:mt-10">
                 <div style={{
                     backgroundSize: 'cover', // or 'contain' depending on your requirement
                     backgroundPosition: 'center', // centers the image
                     backgroundRepeat: 'no-repeat', // prevents the image from repeating
                 }}>
-                    <h1 className='acrylic'>Acrylic Photo Borders</h1>
+                {/* <h1 className='acrylic'>Acrylic Photo Frames</h1> */}
 
-                    <div id="form-id"  className="profile-pictures">
-                        <div  className="shape-content ">
+                    {/* <div id="form-id" className="profile-pictures">
+                        <div className="shape-content ">
                             {selectedShape === 'rectangle' && (
                                 <div className="rectangle-section gap-1 md:gap-6 mt-4" style={{ display: 'flex' }}>
 
@@ -1354,39 +1354,79 @@ if(screenshot!=null){
                                 </div>
                             )}
                         </div>
-                    </div>
-                    <div   className=' w-screen m-auto  md:w-[1140px] ' style={{
+                    </div> */}
+                    <div className=' w-screen m-auto  md:w-[1140px] ' style={{
                         backgroundImage: `url(${backgroundImage})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         overflow: "hidden",
                         backgroundRepeat: 'no-repeat',
                     }}>
-                    {/* <img src={image}></img> */}
-                        <div   className="preview22">
+                        <div className="acrylic-photo-borders" style={{
+        display: 'flex',
+        flexDirection: 'column',  
+        position: 'absolute',    // Allow positioning over the background
+        left: '12rem',
+        height:'21.5rem', 
+        borderRadius:'5px',           // Push the borders to the left side
+        top: '270px',             // Adjust this for top positioning
+        gap: '10px'              // Space between images
+    }}>
+        {selectedShape === 'rectangle' && (
+            <div className="rectangle-section gap-1 md:gap-6 mt-4" style={{ display: 'flex', flexDirection: 'column' }}>
+                <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
+                <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
+                <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
+                <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
+            </div>
+        )}
+
+        {selectedShape === 'square' && (
+            <div className="square-section" style={{ display: 'flex', flexDirection: 'column' }}>
+                <img src={square} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(square)} />
+                <img src={square1} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(square1)} />
+            </div>
+        )}
+
+        {selectedShape === 'circle' && (
+            <div className="circle-section" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <img src={circle} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(circle)} />
+                <img src={circle1} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(circle1)} />
+            </div>
+        )}
+
+        {selectedShape === 'oval' && (
+            <div className="oval-section" style={{ display: 'flex', flexDirection: 'column' }}>
+                <img src={oval} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(oval)} />
+                <img src={oval1} style={{ height: '60px', width: '60px', marginTop: '5px' }} onClick={() => handleImageClick(oval1)} />
+            </div>
+        )}
+    </div>
+                        {/* <img src={image}></img> */}
+                        <div className="preview22">
 
                             <div ref={ref} className="image-container12">
-                                <div ref={ref}  className={` ${selectedImage == null ? "block" : "hidden"}`}>
+                                <div ref={ref} className={` ${selectedImage == null ? "block" : "hidden"}`}>
 
                                     <img onMouseOver={() => { handleFocus() }}
                                         onMouseOut={handleBlur}  className=' z-0 top-0 h-20 w-20 ' src={selectedImage2} style={{zIndex: '0', transform: `scale(${scale})` }} />
 
-                                    <div 
-                                    onMouseOver={() => { handleFocus() }}
+                                    <div
+                                        onMouseOver={() => { handleFocus() }}
                                         onMouseOut={handleBlur}
-                                         className={`relative ${selectedImage2 == null ? "block" : "hidden"}`}>
+                                        className={`relative ${selectedImage2 == null ? "block" : "hidden"}`}>
                                         {isDraggable ? (
                                             <Draggable
                                                 position={position}
                                                 onDrag={handleDrag}
                                             >
                                                 <div
-                                                    style={{ transform: `scale(${scale})` ,backgroundImage:`url(${PreviewImg})` , backgroundSize:"contain", backgroundRepeat:"no-repeat", backgroundPosition:"center" }} 
-                                                    className={`shadow-2xl h-96 w-96 z-40  cursor-move ${selectedShape === 'oval' ? 'rounded-[80%]' : ''} ${selectedShape === 'roundedSquare' ? 'rounded-[15%]' : ''} ${selectedShape === 'roundedRectangle' ? 'rounded-[10%]' : ''} ${selectedShape === 'circle'?"rounded-[50%]":""} `}
-                                                    src={PreviewImg} 
-                                                    alt="Draggable" 
+                                                    style={{ transform: `scale(${scale})`, backgroundImage: `url(${PreviewImg})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}
+                                                    className={`shadow-2xl h-96 w-96 z-40  cursor-move ${selectedShape === 'oval' ? 'rounded-[80%]' : ''} ${selectedShape === 'roundedSquare' ? 'rounded-[15%]' : ''} ${selectedShape === 'roundedRectangle' ? 'rounded-[10%]' : ''} ${selectedShape === 'circle' ? "rounded-[50%]" : ""} `}
+                                                    src={PreviewImg}
+                                                    alt="Draggable"
 
-                                               ></div>
+                                                ></div>
                                             </Draggable>
                                         ) : (
                                             <img
@@ -1395,19 +1435,19 @@ if(screenshot!=null){
                                                     left: `${position.x}`,
                                                     top: `${position.y}`,
                                                 }}
-                                                className={`shadow-2xl   ${selectedShape === 'oval' ? 'rounded-[80%]' : ''} ${selectedShape === 'roundedSquare' ? 'rounded-[15%]' : ''} ${selectedShape === 'roundedRectangle' ? 'rounded-[10%]' : ''} ${selectedShape === 'circle'?"rounded-[50%]":""} `}
+                                                className={`shadow-2xl   ${selectedShape === 'oval' ? 'rounded-[80%]' : ''} ${selectedShape === 'roundedSquare' ? 'rounded-[15%]' : ''} ${selectedShape === 'roundedRectangle' ? 'rounded-[10%]' : ''} ${selectedShape === 'circle' ? "rounded-[50%]" : ""} `}
                                                 src={PreviewImg}
                                                 alt="Not Draggable"
                                             />
                                         )}
-                                        <Draggable 
-                                        
+                                        <Draggable
+
                                             defaultPosition={{ x: -76, y: -44 }}
                                         // onDrag={handleDrag}
 
 
                                         >
-                                            <div className=' absolute z-0 text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, transform:`scale($scale)`, transformOrigin: 'center',  fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
+                                            <div className=' absolute z-0 text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ zIndex: "3", color: `${color}`, transform: `scale($scale)`, transformOrigin: 'center', fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
                                         </Draggable>
                                         {/* <div  className=' text-3xl text-white  border px-3 py-4  bg-black/30 rounded-md  absolute top-[30%] left-[35%]'>PREVIEW</div> */}
 
@@ -1427,45 +1467,45 @@ if(screenshot!=null){
                                             }}></img>
                                         {isDraggable ? (
                                             <Draggable
-                                             scale={scale}
+                                                scale={scale}
                                                 position={position}
                                                 onDrag={handleDrag}
                                             >
 
                                                 <div
-                                                 onMouseOver={() => { handleFocus() }}
+                                                    onMouseOver={() => { handleFocus() }}
                                                     onMouseOut={handleBlur}
-                                                      className=' absolute z-40 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2} 
-                                                     style={{ transform: `scale(${scale})`, backgroundImage:`url(${selectedImage2})` , backgroundRepeat:"no-repeat", backgroundSize:"contain",  backgroundPosition:"center" }}  >
+                                                    className=' absolute z-40 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2}
+                                                    style={{ transform: `scale(${scale})`, backgroundImage: `url(${selectedImage2})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}  >
 
-                                                    </div>
+                                                </div>
                                             </Draggable>
                                         )
                                             : (
-                                               
-                                                 
-                                                   <Draggable  scale={scale} position={position} onDrag={handleDrag}>
 
-                                                   <div
-                                                
-                                                      className=' absolute z-0 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2} 
-                                                     style={{translate:`(${position.x}px, ${position.y}px) scale(${scale})`, backgroundImage:`url(${selectedImage2})` , backgroundRepeat:"no-repeat", backgroundSize:"contain",  backgroundPosition:"center" }}  >
+
+                                                <Draggable scale={scale} position={position} onDrag={handleDrag}>
+
+                                                    <div
+
+                                                        className=' absolute z-0 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2}
+                                                        style={{ translate: `(${position.x}px, ${position.y}px) scale(${scale})`, backgroundImage: `url(${selectedImage2})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}  >
 
                                                     </div>
-                                            </Draggable>
-                                                  
+                                                </Draggable>
+
 
                                             )
                                         }
                                         {/* <p className=' relative text-black top-0 left-0'>Text</p> */}
                                         <Draggable
-                                        onMouseOver={() => { handleFocus() }}
-                                                    onMouseOut={handleBlur}
+                                            onMouseOver={() => { handleFocus() }}
+                                            onMouseOut={handleBlur}
                                             defaultPosition={{ x: -76, y: -44 }}
 
 
                                         >
-                                            <div className=' absolute z-40 text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{  color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
+                                            <div className=' absolute z-40 text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
                                         </Draggable>
                                     </div>
                                 )}
@@ -1485,43 +1525,43 @@ if(screenshot!=null){
                                             }}></img>
                                             </div>
                                         {isDraggable ? (
-                                          <Draggable
-                                             scale={scale}
+                                            <Draggable
+                                                scale={scale}
                                                 position={position}
                                                 onDrag={handleDrag}
                                             >
 
                                                 <div
-                                                 onMouseOver={() => { handleFocus() }}
+                                                    onMouseOver={() => { handleFocus() }}
                                                     onMouseOut={handleBlur}
-                                                      className=' absolute z-40 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2} 
-                                                     style={{ transform: `scale(${scale})`, backgroundImage:`url(${selectedImage2})` , backgroundRepeat:"no-repeat", backgroundSize:"contain",  backgroundPosition:"center" }}  >
+                                                    className=' absolute z-40 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2}
+                                                    style={{ transform: `scale(${scale})`, backgroundImage: `url(${selectedImage2})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}  >
 
-                                                    </div>
+                                                </div>
                                             </Draggable>
                                         )
                                             : (
-                                              <Draggable  scale={scale} position={position} onDrag={handleDrag}>
+                                                <Draggable scale={scale} position={position} onDrag={handleDrag}>
 
-<div
+                                                    <div
 
-   className=' absolute z-0 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2} 
-  style={{translate:`(${position.x}px, ${position.y}px) scale(${scale})`, backgroundImage:`url(${selectedImage2})` , backgroundRepeat:"no-repeat", backgroundSize:"contain",  backgroundPosition:"center" }}  >
+                                                        className=' absolute z-0 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2}
+                                                        style={{ translate: `(${position.x}px, ${position.y}px) scale(${scale})`, backgroundImage: `url(${selectedImage2})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}  >
 
- </div>
-</Draggable>
+                                                    </div>
+                                                </Draggable>
 
                                             )
                                         }
 
                                         <Draggable
-                                        onMouseOver={() => { handleFocus() }}
-                                                    onMouseOut={handleBlur}
+                                            onMouseOver={() => { handleFocus() }}
+                                            onMouseOut={handleBlur}
                                             defaultPosition={{ x: -76, y: -44 }}
 
 
                                         >
-                                            <div className=' absolute z-40 text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{  color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
+                                            <div className=' absolute z-40 text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
                                         </Draggable>
 
                                     </div>
@@ -1542,49 +1582,49 @@ if(screenshot!=null){
                                             }}></img>
                                             </div>
                                         {isDraggable ? (
-                                          <Draggable
-                                             scale={scale}
+                                            <Draggable
+                                                scale={scale}
                                                 position={position}
                                                 onDrag={handleDrag}
                                             >
 
                                                 <div
-                                                 onMouseOver={() => { handleFocus() }}
+                                                    onMouseOver={() => { handleFocus() }}
                                                     onMouseOut={handleBlur}
-                                                      className=' absolute z-40 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2} 
-                                                     style={{ transform: `scale(${scale})`, backgroundImage:`url(${selectedImage2})` , backgroundRepeat:"no-repeat", backgroundSize:"contain",  backgroundPosition:"center" }}  >
+                                                    className=' absolute z-40 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2}
+                                                    style={{ transform: `scale(${scale})`, backgroundImage: `url(${selectedImage2})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}  >
 
-                                                    </div>
+                                                </div>
                                             </Draggable>
                                         )
                                             : (
-                                              <Draggable  scale={scale} position={position} onDrag={handleDrag}>
+                                                <Draggable scale={scale} position={position} onDrag={handleDrag}>
 
-<div
+                                                    <div
 
-   className=' absolute z-0 p-10 rounded-full cursor-move top-0 h-[600px] w-[800px]  ' src={selectedImage2} 
-  style={{translate:`(${position.x}px, ${position.y}px) scale(${scale})`, backgroundImage:`url(${selectedImage2})` , backgroundRepeat:"no-repeat", backgroundSize:"contain",  backgroundPosition:"center" }}  >
+                                                        className=' absolute z-0 p-10 rounded-full cursor-move top-0 h-[600px] w-[800px]  ' src={selectedImage2}
+                                                        style={{ translate: `(${position.x}px, ${position.y}px) scale(${scale})`, backgroundImage: `url(${selectedImage2})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}  >
 
- </div>
-</Draggable>
+                                                    </div>
+                                                </Draggable>
 
                                             )
                                         }
                                         <Draggable
-                                        onMouseOver={() => { handleFocus() }}
-                                                    onMouseOut={handleBlur}
+                                            onMouseOver={() => { handleFocus() }}
+                                            onMouseOut={handleBlur}
                                             defaultPosition={{ x: -76, y: -44 }}
 
 
                                         >
-                                            <div className=' absolute z-40 text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{  color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
+                                            <div className=' absolute z-40 text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
                                         </Draggable>
                                     </div>
                                 )}
                                 {selectedShape === 'oval' && selectedImage && (
                                     <div className=' relative'>
                                         {/* <img className='z-0' src={selectedImage}></img> */}
-                                  
+
                                         {/* <img className='z-0' src={selectedImage}></img> */}
                                         <div>
                                         <img onMouseOver={() => { handleFocus() }}
@@ -1599,43 +1639,43 @@ if(screenshot!=null){
                                             }}></img>
                                             </div>
                                         {isDraggable ? (
-                                          <Draggable
-                                             scale={scale}
+                                            <Draggable
+                                                scale={scale}
                                                 position={position}
                                                 onDrag={handleDrag}
                                             >
 
                                                 <div
-                                                 onMouseOver={() => { handleFocus() }}
+                                                    onMouseOver={() => { handleFocus() }}
                                                     onMouseOut={handleBlur}
-                                                      className=' absolute z-40 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2} 
-                                                     style={{ transform: `scale(${scale})`, backgroundImage:`url(${selectedImage2})` , backgroundRepeat:"no-repeat", backgroundSize:"contain",  backgroundPosition:"center" }}  >
+                                                    className=' absolute z-40 p-10 cursor-move top-0 h-[600px] w-[800px] border-8 ' src={selectedImage2}
+                                                    style={{ transform: `scale(${scale})`, backgroundImage: `url(${selectedImage2})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}  >
 
-                                                    </div>
+                                                </div>
                                             </Draggable>
                                         )
                                             : (
-                                              <Draggable  scale={scale} position={position} onDrag={handleDrag}>
+                                                <Draggable scale={scale} position={position} onDrag={handleDrag}>
 
-<div
+                                                    <div
 
-   className=' absolute z-0 p-10 rounded-full cursor-move top-0 h-[600px] w-[800px]  ' src={selectedImage2} 
-  style={{translate:`(${position.x}px, ${position.y}px) scale(${scale})`, backgroundImage:`url(${selectedImage2})` , backgroundRepeat:"no-repeat", backgroundSize:"contain",  backgroundPosition:"center" }}  >
+                                                        className=' absolute z-0 p-10 rounded-full cursor-move top-0 h-[600px] w-[800px]  ' src={selectedImage2}
+                                                        style={{ translate: `(${position.x}px, ${position.y}px) scale(${scale})`, backgroundImage: `url(${selectedImage2})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}  >
 
- </div>
-</Draggable>
+                                                    </div>
+                                                </Draggable>
 
                                             )
                                         }
 
                                         <Draggable
-                                        onMouseOver={() => { handleFocus() }}
-                                                    onMouseOut={handleBlur}
+                                            onMouseOver={() => { handleFocus() }}
+                                            onMouseOut={handleBlur}
                                             defaultPosition={{ x: -76, y: -44 }}
 
 
                                         >
-                                            <div className=' absolute z-40 text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{  color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
+                                            <div className=' absolute z-40 text-4xl cursor-move hover:border top-[50%] left-[50%]' style={{ color: `${color}`, fontFamily: `${framTextfontfamilystate}` }}>{framtext}</div>
                                         </Draggable>
 
                                     </div>
@@ -1692,7 +1732,7 @@ if(screenshot!=null){
                         <button className="text rounded-md" onClick={() => document.getElementById('my_modal_4').showModal()}>
                             📝 Text
                         </button>
-                    
+
                         <dialog id="my_modal_4" className="modal">
                             <div className="modal-box">
                                 <form method="dialog">
@@ -1701,43 +1741,43 @@ if(screenshot!=null){
                                 </form>
 
                                 <div className='w-full'>
-                                <label  className=' text-nowrap w-full inline-block text-start'>Add Text</label><br></br>
-                                <input
-                                    type='text'
-                                    className='border w-72 md:w-96 relative left-0 md:mr-20 px-3 my-4 py-2 rounded-md'
-                                    placeholder='Enter Your Text here'
-                                    value={framtext} // Bind the state to the input value
-                                    onChange={(e) => setFramText(e.target.value)} // Update state on change
-                                />
-                                <label className=' text-nowrap  w-full inline-block text-start'>Text Color</label><br></br>
-                                <div className=' flex'>
-                                     <input
+                                    <label className=' text-nowrap w-full inline-block text-start'>Add Text</label><br></br>
+                                    <input
+                                        type='text'
+                                        className='border w-72 md:w-96 relative left-0 md:mr-20 px-3 my-4 py-2 rounded-md'
+                                        placeholder='Enter Your Text here'
+                                        value={framtext} // Bind the state to the input value
+                                        onChange={(e) => setFramText(e.target.value)} // Update state on change
+                                    />
+                                    <label className=' text-nowrap  w-full inline-block text-start'>Text Color</label><br></br>
+                                    <div className=' flex'>
+                                        <input
 
-                                    type='color'
-                                    className='border w-20  relative left-0 inline-block h-8  md:mr-96  px-3 my-4  rounded-md'
-                                    placeholder='Enter Your Text here'
-                                    value={color} // Bind the state to the input value
-                                    onChange={(e) => setColor(e.target.value)} // Update state on change
-                                />
+                                            type='color'
+                                            className='border w-20  relative left-0 inline-block h-8  md:mr-96  px-3 my-4  rounded-md'
+                                            placeholder='Enter Your Text here'
+                                            value={color} // Bind the state to the input value
+                                            onChange={(e) => setColor(e.target.value)} // Update state on change
+                                        />
+                                    </div>
+
+
+                                    <div className={`${framtext == "" ? "hidden" : "block"}`}>
+                                        <label className=' text-nowrap w-full inline-block text-start'>Text Style</label><br></br>
+                                        {
+                                            framTextfontfamily.map((text, index) => (
+                                                <form method="dialog">
+                                                    <p className='border rounded-md my-3 text-2xl py-4 cursor-pointer' onClick={() => { setframTextfontfamilystate(text) }} key={index} style={{ fontFamily: `${text}`, color: `${color}`, }}>{framtext}</p>
+                                                </form>
+                                            ))
+                                        }
+
+
+                                    </div>
+                                    <div>
+
+                                    </div>
                                 </div>
-                               
-
-                                <div className={`${framtext == "" ? "hidden" : "block"}`}>
-                                    <label  className=' text-nowrap w-full inline-block text-start'>Text Style</label><br></br>
-                                    {
-                                        framTextfontfamily.map((text, index) => (
-                                            <form method="dialog">
-                                                <p className='border rounded-md my-3 text-2xl py-4 cursor-pointer' onClick={() => { setframTextfontfamilystate(text) }} key={index} style={{ fontFamily: `${text}` ,color: `${color}`, }}>{framtext}</p>
-                                            </form>
-                                        ))
-                                    }
-
-
-                                </div>
-                                <div>
-
-                                </div>
-                                 </div>
                                 <form method="dialog" className={`${framtext == "" ? "hidden" : "block"}`}>
                                     {/* if there is a button in form, it will close the modal */}
                                     <button style={{ background: "", color: "" }} className="btn text-white   w-full h-full  btn-outline btn-primar ">Save</button>
@@ -1833,19 +1873,19 @@ if(screenshot!=null){
                         <br />
                         <div className='size'>
                             <h3 className='acrylic1 ml-10 md:ml-0 my-3'>Size (Inch): {selectedSize}</h3>
-                          <div className='size-buttons'> { acrylicsize4.length>0?(acrylicsize4.map((item,index)=>{
-                            return(
-                                <div   key={index}>
-                                <button onClick={() => handleSizeChange1(item.size,item._id,item.price)} className={`size-button ${selectedSize === item.size ? 'active' : ''} rounded-md  ${selectedSize === item.size ? '' : 'hover:ring'}`}>{item.size}</button>
+                            <div className='size-buttons'> {acrylicsize4.length > 0 ? (acrylicsize4.map((item, index) => {
+                                return (
+                                    <div key={index}>
+                                        <button onClick={() => handleSizeChange1(item.size, item._id, item.price)} className={`size-button ${selectedSize === item.size ? 'active' : ''} rounded-md  ${selectedSize === item.size ? '' : 'hover:ring'}`}>{item.size}</button>
 
-                                </div>
-                                
+                                    </div>
 
-                            );
-                                    
-                           })):("sdfk")
-                           }
-                           </div>
+
+                                );
+
+                            })) : ("sdfk")
+                            }
+                            </div>
                             {/* <div className="size-buttons">
                                 <button onClick={() => handleSizeChange1('11x11')} className={`size-button ${selectedSize === '11x11' ? 'active' : ''} rounded-md  ${selectedSize === '11x11' ? '' : 'hover:ring'}`}>11x11</button>
                                 <button onClick={() => handleSizeChange1('16x12')} className={`size-button ${selectedSize === '16x12' ? 'active' : ''} rounded-md  ${selectedSize === '16x12' ? '' : 'hover:ring'}`}>16x12</button>
@@ -1860,20 +1900,20 @@ if(screenshot!=null){
                     <div className="thickness-options mr-12  md:mr-48">
                         <h3 className='acrylic1  my-3 '>Thickness: {selectedThickness}</h3>
 
-                        <div className='thickness-buttons'> { thicknessdata.length>0?(thicknessdata.map((item,index)=>{
-                            return(
-                                <div   key={index}>
-                                {/* <button onClick={() => handleSizeChange1(item.size,item._id)} className={`size-button ${selectedSize === item.size ? 'active' : ''} rounded-md  ${selectedSize === item.size ? '' : 'hover:ring'}`}>{item.size}</button> */}
-                             <button onClick={() => {handleThicknessChange(item.thickness,item.price,item._id)}} className={`thickness-button rounded-md ${selectedThickness === item.thickness ? 'active' : ''} ${selectedThickness === item.thickness ? '' : 'hover:ring'}`}>{item.thickness}</button>
+                        <div className='thickness-buttons'> {thicknessdata.length > 0 ? (thicknessdata.map((item, index) => {
+                            return (
+                                <div key={index}>
+                                    {/* <button onClick={() => handleSizeChange1(item.size,item._id)} className={`size-button ${selectedSize === item.size ? 'active' : ''} rounded-md  ${selectedSize === item.size ? '' : 'hover:ring'}`}>{item.size}</button> */}
+                                    <button onClick={() => { handleThicknessChange(item.thickness, item.price, item._id) }} className={`thickness-button rounded-md ${selectedThickness === item.thickness ? 'active' : ''} ${selectedThickness === item.thickness ? '' : 'hover:ring'}`}>{item.thickness}</button>
 
                                 </div>
-                                
+
 
                             );
-                                    
-                           })):(<div>skdf</div>)
-                           }
-                           </div>
+
+                        })) : (<div>skdf</div>)
+                        }
+                        </div>
                         {/* <div className="thickness-buttons">
                             <button onClick={() => handleThicknessChange('3MM')} className={`thickness-button rounded-md ${selectedThickness === '3MM' ? 'active' : ''} ${selectedThickness === '3MM' ? '' : 'hover:ring'}`}>3MM</button>
                             <button onClick={() => handleThicknessChange('5MM')} className={`thickness-button rounded-md ${selectedThickness === '5MM' ? 'active' : ''} ${selectedThickness === '5MM' ? '' : 'hover:ring'}`}>5MM</button>
@@ -1882,27 +1922,27 @@ if(screenshot!=null){
                     </div>
                     <hr className='border-dashed border-[1px] border-gray-200 mb-2 w-screen md:w-[1200px]' />
 
-                   <div className='sticky top-0'>
-                    <div className="price1 text-sm">
-                        <span className='text-xl'>₹{sizeprice +thicknessprice} <span className=' line-through text-gray-300'>₹{price + 1000}</span></span>
-                        <p className='mt-6' style={{ fontWeight: "300" }}>  Photo quality for <span style={{ fontWeight: "600" }}>{selectedSize}</span> is <span className='text-green-500'>Good</span></p>
-                        <p><span style={{ fontWeight: "300" }}>Quick mount:</span> <span className='text-bold text-balance'>Hridayam® Adhesive hooks (Included)</span></p>
+                    <div className='sticky top-0'>
+                        <div className="price1 text-sm">
+                            <span className='text-xl'>₹{sizeprice + thicknessprice} <span className=' line-through text-gray-300'>₹{price + 1000}</span></span>
+                            <p className='mt-6' style={{ fontWeight: "300" }}>  Photo quality for <span style={{ fontWeight: "600" }}>{selectedSize}</span> is <span className='text-green-500'>Good</span></p>
+                            <p><span style={{ fontWeight: "300" }}>Quick mount:</span> <span className='text-bold text-balance'>Hridayam® Adhesive hooks (Included)</span></p>
+                        </div>
+
+                        {/* <Link to='/checkout'> */}
+                        <button onClick={captureScreenshot} className="buy-now rounded-md px-20">BUY IT NOW</button>
+                        {/* </Link> */}
+
+                        <div style={{ maxWidth: '60%', margin: '-30px auto' }}>
+
+                        </div>
                     </div>
-
-                    {/* <Link to='/checkout'> */}
-                     <button onClick={captureScreenshot} className="buy-now rounded-md px-20">BUY IT NOW</button>
-                     {/* </Link> */}
-
-                    <div style={{ maxWidth: '60%', margin: '-30px auto'}}>
-
-                    </div>
-                </div>
                 </div>
             </div>
 
 
-        
-              <div>
+
+            <div>
             </div>
             <Footer />
 

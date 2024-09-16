@@ -52,10 +52,15 @@ const Reset = () => {
   
     // Handle New Password submission
     const handlePasswordSubmit = async (e) => {
+        const userId = localStorage.getItem('user_id'); // Retrieve the user_id from localStorage
+
         e.preventDefault();
         try {
             const response = await axios.post('https://api.hirdayam.com/api/resetPassword', {
                 password: newPassword,
+                user_id: userId, 
+                // Retrieve the user_id from localStorage
+
             });
 
             if (response.data.status) {

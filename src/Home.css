@@ -622,7 +622,7 @@ body {
   border-radius: 7px;
 }
 .load-more-btn:hover {
-  background-color: red; /* Ensure background color stays white */
+  background-color: #23387A; /* Ensure background color stays white */
   color: white; /* Ensure text color stays black */
 }
 

@@ -459,8 +459,7 @@
 }
 
 .shape.selected {
-  background-color: #23387A
-  ; /* Green */
+  background-color: #23387A; 
   color: white;
 }
 .size{

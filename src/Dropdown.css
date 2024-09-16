@@ -184,3 +184,15 @@
   margin-left: 4px;
  
 }
+
+
+.wishlist-delete-icon3 {
+  color: black;
+  height: 20px;
+  background-color: white;
+  width: 20px;
+  font-size: 1.5em;
+  border-radius: 50%;
+  margin-right: -91px;
+  cursor: pointer;
+}
