@@ -446,7 +446,7 @@ const CatalogProducts = () => {
             </div>
           </div>
           <br />
-          <div className="filter-option">
+          <div className="filter-option hidden">
             <div className="section">
               <h3 className="section-title">Material</h3>
               <div className="material-options">
@@ -646,7 +646,7 @@ const CatalogProducts = () => {
                 </div>
               </div>
               <br />
-              <div className="filter-option">
+              <div className="filter-option hidden">
                 <div className="section">
                   <h3 className="section-title">Material</h3>
                   <div className="material-options">

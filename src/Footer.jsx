@@ -129,7 +129,7 @@ function Footer() {
                         <h4 className="footer-title1 font-bold">Company</h4>
                         <ul className="footer-links1">
                             <li>
-                                <NavLink to="/all-products" className="footer-link1">All Products</NavLink>
+                                <NavLink to="/all-products?search=" className="footer-link1">All Products</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/about-us" className="footer-link1">About Us</NavLink>

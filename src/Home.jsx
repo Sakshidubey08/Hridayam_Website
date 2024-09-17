@@ -14,6 +14,8 @@ import image11 from './images/image15.png'
 import image12 from './images/image 13 (3).png'
 import image13 from './images/image15.png'
 import image14 from './images/image 16.png'
+import search from './images/search.png'
+
 import image15 from './images/transparent.png'
 import image16 from './images/image 15 1.png'
 import image17 from './images/image 124.png'
@@ -105,7 +107,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   // ];
   useEffect(() => {
 
-    const fetchData = async () => {
+    const fetchData = async () =>{
       try {
         const response = await fetch('https://api.hirdayam.com/api/getcategoryuser');
         const result = await response.json();
@@ -831,6 +833,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const [budgetPerGift, setBudgetPerGift] = useState('');
   const [quantityRequired, setQuantityRequired] = useState('');
   const [message, setMessage] = useState('');
+  const [searchinput2, setsearchinput2] = useState("");
+
   // const handleSubmit = (e) => {
   //   e.preventDefault();
 
@@ -1007,7 +1011,16 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     }
   };
   
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      // Navigate to the 'All Products' page, passing search text as query param
+      navigate(`/all-products?search=${searchinput2}`);
+    }
+  };
 
+  const handleSearch = (text) => {
+    setsearchinput2(text.target.value);
+  }
   
   const handleNext = () => {
     if (currentIndex + ITEMS_PER_PAGE < menuItems.length) {
@@ -1023,6 +1036,15 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   return (
     <>
       <Header />
+      <div className="  my-3  flex items-center justify-center   md:hidden ">
+            <img onClick={()=>{navigate(`/all-products?search=${searchinput2}`)}} src={search} alt="Search Icon" className="search-icon ml-3 p-0" />
+            <input
+              onChange={handleSearch} // Call handleSearch on text input change
+              onKeyPress={handleKeyPress} // Call handleKeyPress on key press
+              type="text"
+              className="search-input"
+              placeholder="Search product..." />
+          </div>
       <div class="menu-container  hidden md:flex">
         {/* <div class="menu-item">
           <div class="menu-heading">Corporate Gifting</div>
@@ -1625,7 +1647,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 )}
 
         </div>
-      </div >
+      </div>
       <div className=' md:hidden'>
         <Catalog />
       </div>
@@ -1667,7 +1689,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={index} onClick={() => handleSlideClick(slide)}>
-          <div className="hidden md:block">
+          <div className="">
             <img
               src={slide.image}
               style={{ height: '100%', width: '100%', objectFit: 'cover' }}
@@ -1675,19 +1697,19 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               alt={`slide${index + 1}`}
             />
           </div>
-          <div className="md:hidden">
+          {/* <div className="md:hidden">
             <img
-              // src={headerslider} // Assuming headerslider is a fallback image for mobile
+               src={headerslider} // Assuming headerslider is a fallback image for mobile
               style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               className="hidden w-full h-[800px] md:h-auto object-cover"
               alt={`slide${index + 1}`}
             />
-          </div>
+          </div> */}
         </SwiperSlide>
       ))}
     </Swiper>
     
-          <div className='image-box  bg-white px-10  flex z-10 justify-around items-center absolute left-0 right-0  md:mx-auto md:left-auto md:right-auto  top-[20.3rem] md:top-[14.3rem]'>
+          <div className='image-box  bg-white px-10  flex z-10 justify-around items-center absolute left-0 right-0  md:mx-auto md:left-auto md:right-auto  top-[3.3rem] md:top-[14.3rem]'>
             <div className='image-item   text-wrap'>
               <img src={icon5} alt="" className='box-image' />
               <p className='image-description1     text-sm md:text-base mt-2'>1 Million <br className='block md:hidden'></br> + Customer</p>

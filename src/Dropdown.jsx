@@ -113,7 +113,7 @@
 // }
 
 // export default Dropdown;
-import React, { useState,useEffect,useRef } from 'react';
+import React, { useState,useEffect,useRef, useContext } from 'react';
 import './Dropdown.css';
 import { Link } from 'react-router-dom';
 import icon2 from './images/icon2.png';
@@ -121,12 +121,13 @@ import icon2_white from './images/user-white.png';
 import { useAuth } from './store/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { CartContext } from './CartContext';
 
 function Dropdown() {
   const [showDropdown, setShowDropdown] = useState(false);
   const { isAuthenticated, logout } = useAuth(); // Get isAuthenticated and logout from context
   const dropdownRef = useRef(null); // Create a ref for the dropdown
-
+  const {userprofiledata,setuserprofiledata}=useContext(CartContext)
   const handleIconClick = () => {
     setShowDropdown(!showDropdown);
   };
@@ -171,11 +172,14 @@ function Dropdown() {
       {showDropdown && (
         <div className="dropdown1">
           <div className="dropdown-header">
-            <div className="dropdown-item1">Welcome</div>
+            <div className="dropdown-item1">Welcome </div>
+            
             {/* <span className="close-icon" onClick={handleCloseClick}>&times;</span> */}
             <FontAwesomeIcon icon={faTimes} onClick={handleCloseClick} size="lg" className="wishlist-delete-icon3" />
 
           </div>
+          {/* <div>{userprofiledata.length}</div> */}
+          {/* <span className=''>{userprofiledata && userprofiledata.data && userprofiledata.data.name?userprofiledata.data.name.split(' ')[0]:""}</span> */}
           <p className="dropdown-item6">To access account and manage order</p>
 
           {!isAuthenticated ? (
@@ -185,14 +189,20 @@ function Dropdown() {
             </button>
           ) : (
             <>
-              <Link to="/editprofile" className="dropdown-item3">Visit Profile</Link>
-              <br/>
-              <Link to="/wishlist" className="dropdown-item4">My Wishlist</Link>
-              <br/>
-              <Link to="/my-orders" className="dropdown-item7">My Orders</Link>
-              <br/>
-              <Link to="/manage-address" className="dropdown-item7">Manage Address</Link>
-              <br/>
+              
+              <Link to="/editprofile" className="dropdown-item3 dropdown-line-text w-full">Visit Profile</Link>
+              <div className=' h-1  rounded-r-md dropdownline  bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
+              
+              
+              <Link to="/wishlist" className="dropdown-item4 dropdown-line-text">My Wishlist</Link>
+              <div className=' h-1  rounded-r-md dropdownline  bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
+
+              <Link to="/my-orders" className="dropdown-item7 dropdown-line-text">My Orders</Link>
+              <div className=' h-1  rounded-r-md dropdownline  bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
+
+              <Link to="/manage-address" className="dropdown-item7 dropdown-line-text">Manage Address</Link>
+              <div className=' h-1  rounded-r-md dropdownline  bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
+
               <button className="dropdown-item2" onClick={logout}>Logout</button>
             </>
           )}
