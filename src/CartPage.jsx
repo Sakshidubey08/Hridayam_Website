@@ -371,14 +371,14 @@ const handlequanlitymodel =(quan)=>{
             </div>
             <div className={`product-imag   flex items-center gap-1 ${item.product==null?"hidden":"block"}  `}>
              {/* <div>{item.product==null?"":item.product.product_type}</div> */}
-            <Swiper  className={`${item.product==null?"":(item.product.product_type=="normal"?"hidden":"block")}   w-32 h-20 `}   loop={true} spaceBetween={10} slidesPerView={1} autoplay={{ delay: 1000 }} pagination={{ clickable: true }} navigation>
+            <Swiper  className={`${item.product==null?"":(item.product.product_type=="normal"?"hidden":"block")}    w-32 h-50 `}   loop={true} spaceBetween={10} slidesPerView={1} autoplay={{ delay: 1000 }} pagination={{ clickable: true }} navigation>
   {/* SwiperSlide Components */}
   <SwiperSlide>
   <img style={{height:"100%"}}  className={`${item.product==null?"hidden":""} bg-contain  md:h-28 h-full w-full `} src={item.product==null?"":item.product.image} />
 
   </SwiperSlide>
   <SwiperSlide>
-  <img style={{height:"100%"}} className={`${item.product==null?"hidden":""}  bg-contain md:h-10 h-full w-full`} src={item.product==null?"":item.personalize_image} />
+  <img style={{height:"100%"}} className={`${item.product==null?"hidden":""}   bg-contain md:h-10 h-full w-full`} src={item.product==null?"":item.personalize_image} />
   {/* <img style={{height:"100%"}} className={`${item.product==null?"hidden":""}  bg-contain h-full w-full`} src={item.product==null?"":item.personalize_image} /> */}
 
   </SwiperSlide>

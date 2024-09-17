@@ -28,6 +28,8 @@ const Cardpage1 = () => {
   const [personalizeText,setpersonalize]=useState("");
   const [isPincodeChecked, setIsPincodeChecked] = useState(false);
   const [file, setfile] = useState(null);
+  const [selectedColor, setSelectedColor] = useState('black');
+
   const [deliveryText, setDeliveryText] = useState({
     line1: "Please enter PIN code to check delivery time.",
     line2: "100% Original Products.",
@@ -195,6 +197,10 @@ const Cardpage1 = () => {
             <div className="product-info">
               <h1 className='product-name'>{name}</h1>
               <p className="price1">&#8377;{price}</p>
+              <h3 className='product-name mt-4'>Colors</h3>
+              <div className="colors1">
+              
+              </div>
               <h3 className='selected1'>Selected Quantity</h3>
               <div className="quantity-selector">
                 <button onClick={handleDecrement} className="quantity-btn">-</button>
@@ -239,7 +245,7 @@ const Cardpage1 = () => {
                   style={{ display: 'none' }}
                   onChange={handleImageChange}
                 />
-                                                <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
+                <button  className="text rounded-md dialogs" onClick={() => document.getElementById('my_modal_4').showModal()} >
                             Add Text
                         </button>
                          {uploadMessage && <p style={{ color: 'green', marginTop: '10px' }}>{uploadMessage}</p>}
@@ -313,13 +319,7 @@ const Cardpage1 = () => {
               <p className='product'>{product_details}</p>
               <h3 className='offer mt-2'>Features</h3>
               <ul className="offer-details">
-                {/* <li> Athleisure Tshirt can be paired with Tracks</li>
-                <li>Style: round neck.</li>
-                <li>Sleeves: Short sleeves</li>
-                <li>Sleeves: Short sleeves</li>
-                <li>Color: Teal</li>
-                <li>Print: Geometric</li>
-                <li>Fit:regular</li> */}
+               
                  {features.map((feature, index) => (
                     <li key={index}>{feature}</li>
                      ))}

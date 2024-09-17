@@ -288,7 +288,7 @@ const Product1 = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { addToCart } = useContext(CartContext);
-
+  
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);

@@ -331,7 +331,9 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   }, [favoriteCards]);
 
 
-
+ const handleProductClick = (productId) => {
+    navigate(`/similar/${productId}`); 
+  };
   const [favoriteCards1, setFavoriteCards1] = useState(() => {
     // Load favoriteCards from localStorage when the component mounts
     const storedFavorites1 = localStorage.getItem('favoriteCards');
@@ -1771,7 +1773,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               <div className="card1-product rounded-md">
                 <div className="card-header w-36 h-56 md:h-72 md:w-full">
                   <Link
-                    to={`/card/${card.id}`}
+                    to={`/similar/${card.id}`}
                     className="card-link"
                     onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
                   >
@@ -1886,7 +1888,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 <div className="card-header w-36 h-56 md:h-72   md:w-full">
                   <Link
                     key={card.id}
-                    to={`/card6/${card.id}`}
+                    to={`/similar/${card.id}`}
                     className="card-link"
                     onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
                   > <div className=' w-full h-full flex items-center '>
@@ -1942,7 +1944,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                   <div className="card-header w-36 h-56 md:h-72   md:w-full">
                     <Link
                       key={card.id}
-                      to={`/card8/${card.id}`}
+                      to={`/similar/${card.id}`}
                       className="card-link"
                       onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
                     > <div className=' w-full h-full flex items-center '>
@@ -2000,7 +2002,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           {cards3.map(card => (
             <Link
               key={card.id}
-              to={`/card2/${card.id}`}
+              to={`/similar/${card.id}`}
               className="card-link"
               onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
             >
