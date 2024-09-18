@@ -402,6 +402,13 @@ h2 {
   width: 200px;
   margin: auto;
 }
+.allProducts{
+  padding-left: 25px;
+  padding-top: 32px;
+  height: 240px;
+  width: 200px;
+  margin: auto;
+}
 
 /* Favorite button styling */
 .favorite-btn {
