@@ -141,8 +141,8 @@ function Filter() {
     return (
         <>
             <Header />
-            <div className="main-container">
-                <div className="filter-container ">
+            <div className="main-container ">
+                <div className="filter-container  ">
                     <div className="filter-header">
                         <h2>Filters</h2>
                         <button className="clear-all" onClick={handleClearAll}>

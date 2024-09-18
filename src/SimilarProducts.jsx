@@ -7,6 +7,7 @@ import Footer from './Footer';
 import './Products/Product1.css';
 import './Home.css';
 import { text } from '@fortawesome/fontawesome-svg-core';
+import Loadingpage from './Loadingpage';
 
 const ProductDetailsPage = () => {
     const { id } = useParams(); // Retrieve the product ID from the URL
@@ -82,7 +83,7 @@ const ProductDetailsPage = () => {
 
 
     if (loading) {
-        return <p>Loading...</p>;
+        return <Loadingpage></Loadingpage>;
     }
 
     if (error) {
@@ -188,7 +189,7 @@ const ProductDetailsPage = () => {
             <div className="breadcrumb1">Home / {selectedProduct?.name || 'Product'}</div>
             <div className="product-detail1 mt-1">
                 <div className="content">
-                    <div className="image-gallery">
+                    <div className="image-gallery hidden md:block">
                         <div className="thumbnail-list">
                             {selectedProduct && (
                                 <img
@@ -234,6 +235,49 @@ const ProductDetailsPage = () => {
                         {selectedImage && (
                             <img src={selectedImage} alt="Selected" />
                         )}
+                    </div>
+
+                    <div className="">
+                        <div className="thumbnail-list block md:hidden ">
+                            {selectedProduct && (
+                                <img
+                                    src={selectedProduct.image}
+                                    alt={selectedProduct.name}
+                                    onClick={() => handleImageClick(selectedProduct.image)}
+                                    className="thumbnail h-20 w-20 object-contain"
+                                />
+                            )}
+                            {selectedProduct?.images?.map((image, index) => (
+                                <img
+                                    key={index}
+                                    src={image}
+                                    alt={`Thumbnail ${index + 1}`}
+                                    onClick={() => handleImageClick(image)}
+                                    className="thumbnail h-20 w-20 object-contain"
+                                />
+                            ))}
+                            {/* {selectedColor && selectedColor.color_images.map((image, index) => (
+                                <img
+                                    key={index}
+                                    src={image}
+                                    alt={`Color ${selectedColor.color_name} - Thumbnail ${index + 1}`}
+                                    onClick={() => handleImageClick(image)}
+                                    className="thumbnail"
+                                    style={{ width: '100px', height: '100px', margin: '5px', cursor: 'pointer' }}
+                                />
+                            ))} */}
+                            {selectedColor && selectedColor.color_images.slice(1).map((image, index) => (
+                                <img
+                                    key={index}
+                                    src={image}
+                                    alt={`Color ${selectedColor.color_name} - Thumbnail ${index + 1}`}
+                                    onClick={() => handleImageClick(image)}
+                                    className="thumbnail"
+                                    style={{ width: '100px', height: '100px', margin: '5px', cursor: 'pointer' }}
+                                />
+                            ))}
+
+                        </div>
                     </div>
                     <div className="scrollable-content4">
                         <div className="product-info">

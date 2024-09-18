@@ -353,8 +353,8 @@ const CatalogProducts = () => {
         <div className="main-container">
         {/* Toggle Filters Section */}
         {filtersVisible ? (
-          <div className="filter-container">
-            <div className="filter-header">
+          <div className="filter-container hidden md:block">
+            <div className="filter-header ">
               <h2>Filters</h2>
               {/* <div className="filter-toggle-icon" onClick={handleIconClick}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

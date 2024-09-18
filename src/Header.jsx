@@ -35,12 +35,14 @@ const Header = () => {
   const { searchinput, handlesearch } = useContext(CartContext);
   const [searchinput2, setsearchinput2] = useState("");
   const [latestcoupon,setlatestcoupon]=useState("");
+  const [searchdatatext,setsearchdatatext]=useState("");
   const clipboard = useClipboard({
     copiedTimeout: 9000,
   }
 
   );
   const handleSearch = (text) => {
+    fetchsearchdatalist();
     setsearchinput2(text.target.value);
   }
 
@@ -134,6 +136,41 @@ const Header = () => {
     }
 };
 
+const fetchsearchdatalist = async () => {
+  try {
+      const response = await axios.get(`https://api.hirdayam.com/api/universalSearch?search_key=${searchinput2}`, {
+          headers: {
+              // 'Content-Type': 'application/json',
+              // 'Authorization': `Bearer ${token}`
+          }
+      });
+      if (response && response.data && response.data.data) {
+      let searchhdata=response.data;
+
+        setsearchdatatext(searchhdata);
+      
+      
+    
+      console.log('searchdaralist success:', response.data);
+      }
+     
+  } catch (error){
+      console.error('Error during searchdaralist user submission:', error);
+
+      if (error.response) {
+          console.error('searchdartalist:', error.response.data);
+          // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
+      } else {
+          // setError('Address submission failed. Please try again.');
+      }
+  }
+};
+
+
+// useEffect(() => {
+//   fetchsearchdatalist();
+// }, [])
+
 
   return (
     <>
@@ -175,17 +212,17 @@ const Header = () => {
                   </div>
 
                   <div className='p-4'>
-                    <img className=' rounded-md' src={latestcoupon&&latestcoupon.data?"http://api.hirdayam.com/uploads/coupon_images/"+latestcoupon.data.image||"id not found":coming_soon}></img>
+                    <img className=' rounded-md' src={latestcoupon&&latestcoupon.data?latestcoupon.data.image||"id not found":coming_soon}></img>
                     {/* <div>{latestcoupon&&latestcoupon.data?latestcoupon.data._id||"id not found":"dfd"}</div> */}
                   </div>
                   <div className='flex px-4 py-3'>
                     <div style={{ backgroundImage: `url(${couponsvg2})` }} className=' flex   items-center gap-3 justify-center bg-contain   bg-no-repeat h-16 w-9/12  '>
-                      <div className='bg-gray-400 p-2 rounded-md '>
+                      <div className='bg-gray-400 p-2 rounded-md'>
                         <img width={"20px"} src={couponsvg3}></img>
                       </div>
                       <div className='text-[10px]'>
                         <p className='font-bold'>Haridayam Fashion</p>
-                        <p>Download App . Save ₹200</p>
+                        <p>Redeem Coupon Save ₹200</p>
                       </div>
                     </div>
                     <div className=' bg-contain mb-2 bg-no-repeat bg-center w-4/12 items-center justify-center flex text-center' style={{ backgroundImage: `url(${couponsvg1})` }}>
@@ -269,15 +306,96 @@ const Header = () => {
           <Link to='/' className="logo-container">
             <img src={logo} alt="Logo" className="logo" />
           </Link>
-          <div className="search-container hidden md:flex mr-[-130px] md:mr-0">
+         
+
+          <div className="dropdown dropdown-bottom search-container hidden md:flex mr-[-130px] md:mr-0">
+  {/* <div tabIndex={0} role="button" className="btn m-1">Click</div> */}
+  <div tabIndex={0} role="button"  className="w-full flex  items-center justify-between">
             <img onClick={()=>{navigate(`/all-products?search=${searchinput2}`)}}  src={search} alt="Search Icon" className="search-icon" />
+            
             <input
               onChange={handleSearch} // Call handleSearch on text input change
               onKeyPress={handleKeyPress} // Call handleKeyPress on key press
               type="text"
               className="search-input"
               placeholder="Search product..." />
+              
+              
           </div>
+  <ul tabIndex={0} className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.catelogs.length<1&&searchdatatext.data.categories.length<1&&searchdatatext.data.products.length<1?"hidden":"block"):""} ${searchinput2.length==0?"hidden":"block"} dropdown-content  my-2 mr-10 menu bg-base-100 overflow-y-scroll h-96  rounded-box  z-[5000] w-3/5 shadow`}>
+  {/* <div>{searchdatatext&&searchdatatext.data?searchdatatext.data.products[0].name:"df"}</div>   */}
+  <div className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.products.length<1?"hidden":"block"):""} ml-3 font-semibold`}>
+  Products
+
+  </div>
+  
+    {
+       
+      searchdatatext&&searchdatatext.data?searchdatatext.data.products.map((item,index)=>{
+          return(
+            <div key={index} onClick={()=>{navigate(`/similar/${item._id}`)}}>
+            <li className=''>
+
+            <a>
+            <img className='h-9 w-9  object-contain ' src={item.image||"not fount"}></img>
+
+            {item.name}</a></li>
+            </div>
+          )
+      }):(<div className=' gap-3' >
+      <li ><a className=' skeleton h-8 my-1'></a></li>
+      <li ><a className=' skeleton h-8 my-1'></a></li>
+      <li><a className=' skeleton h-8 my-1'></a></li>
+      <li><a className=' skeleton h-8 my-1'></a></li>
+      </div>)
+    }
+
+    <div className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.categories.length<1?"hidden":"block"):""} ml-3 font-semibold`}>Categories</div>
+    {
+       
+      searchdatatext&&searchdatatext.data?searchdatatext.data.categories.map((item,index)=>{
+          return(
+            <div key={index} onClick={()=>{navigate(`/sub-category-products/${item._id}`)}} >
+            <li className=''>
+
+            <a>
+            <img className='h-9 w-9  object-contain ' src={item.image||"not fount"}></img>
+
+            {item.name}</a></li>
+            </div>
+          )
+      }):(<div className=' gap-3' >
+      <li ><a className=' skeleton h-8 my-1'></a></li>
+      <li ><a className=' skeleton h-8 my-1'></a></li>
+      <li><a className=' skeleton h-8 my-1'></a></li>
+      <li><a className=' skeleton h-8 my-1'></a></li>
+      </div>)
+    }
+   
+    <div className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.catelogs.length<1?"hidden":"block"):""} ml-3 font-semibold`}>Catalog</div>
+
+    {
+      searchdatatext&&searchdatatext.data?searchdatatext.data.catelogs.map((item,index)=>{
+          return(
+            <div key={index} onClick={()=>{navigate(`/catalog/${item._id}`)}} >
+            <li className=''>
+
+            <a>
+            <img className='h-9 w-9 object-contain' src={item.image||"not fount"}></img>
+
+            {item.title}</a></li>
+            </div>
+          )
+      }):(<div className=' gap-3' >
+      <li ><a className=' skeleton h-8 my-1'></a></li>
+      <li ><a className=' skeleton h-8 my-1'></a></li>
+      <li><a className=' skeleton h-8 my-1'></a></li>
+      <li><a className=' skeleton h-8 my-1'></a></li>
+      </div>)
+    }
+  </ul>
+</div>
+         
           <div className="nav-img ml-1 gap-4  md:ml-0">
             <Link to='/wishlist'>
               <div className='heart-black'>

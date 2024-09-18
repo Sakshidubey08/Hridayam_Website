@@ -833,6 +833,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const [message, setMessage] = useState('');
   const [searchinput2, setsearchinput2] = useState("");
   const [latestcoupon,setlatestcoupon]=useState([]);
+  const [searchdatatext,setsearchdatatext]=useState("");
+
   // const handleSubmit = (e) => {
   //   e.preventDefault();
 
@@ -1019,6 +1021,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
   const handleSearch = (text) => {
     setsearchinput2(text.target.value);
+    fetchsearchdatalist();
   }
   
   const handleNext = () => {
@@ -1062,10 +1065,40 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         }
     }
 };
+
+const fetchsearchdatalist = async () => {
+  try {
+      const response = await axios.get(`https://api.hirdayam.com/api/universalSearch?search_key=${searchinput2}`, {
+          headers: {
+              // 'Content-Type': 'application/json',
+              // 'Authorization': `Bearer ${token}`
+          }
+      });
+      if (response && response.data && response.data.data) {
+      let searchhdata=response.data;
+
+        setsearchdatatext(searchhdata);
+      
+      
+    
+      console.log('searchdaralist success:', response.data);
+      }
+     
+  } catch (error){
+      console.error('Error during searchdaralist user submission:', error);
+
+      if (error.response) {
+          console.error('searchdartalist:', error.response.data);
+          // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
+      } else {
+          // setError('Address submission failed. Please try again.');
+      }
+  }
+};
   return (
     <>
       <Header />
-      <div className="  my-3  flex items-center justify-center   md:hidden ">
+      {/* <div className="  my-3  flex items-center justify-center   md:hidden ">
             <img onClick={()=>{navigate(`/all-products?search=${searchinput2}`)}} src={search} alt="Search Icon" className="search-icon ml-3 p-0" />
             <input
               onChange={handleSearch} // Call handleSearch on text input change
@@ -1073,7 +1106,96 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               type="text"
               className="search-input"
               placeholder="Search product..." />
+          </div> */}
+          <div className='flex pl-8  items-center justify-center'>
+          <div className="dropdown dropdown-bottom  w-full mt-3 flex items-center justify-center      md:hidden ">
+  {/* <div tabIndex={0} role="button" className="btn m-1">Click</div> */}
+  <div tabIndex={0} role="button"  className=" w-full flex  items-center justify-between">
+            <img onClick={()=>{navigate(`/all-products?search=${searchinput2}`)}}  src={search} alt="Search Icon" className="search-icon" />
+            
+            <input
+              onChange={handleSearch} // Call handleSearch on text input change
+              onKeyPress={handleKeyPress} // Call handleKeyPress on key press
+              type="text"
+              className="search-input"
+              placeholder="Search product..." />
+              
+              
           </div>
+  <ul tabIndex={0} className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.catelogs.length<1&&searchdatatext.data.categories.length<1&&searchdatatext.data.products.length<1?"hidden":"block"):""} ${searchinput2.length==0?"hidden":"block"} dropdown-content  my-2 mr-10 menu bg-base-100  rounded-box  z-[5000] w-11/12 shadow`}>
+  {/* <div>{searchdatatext&&searchdatatext.data?searchdatatext.data.products[0].name:"df"}</div>   */}
+  <div className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.products.length<1?"hidden":"block"):""} ml-3 font-semibold`}>
+  Products
+
+  </div>
+  
+    {
+       
+      searchdatatext&&searchdatatext.data?searchdatatext.data.products.map((item,index)=>{
+          return(
+            <div key={index} onClick={()=>{navigate(`/similar/${item._id}`)}}>
+            <li className=''>
+
+            <a>
+            <img className='h-9 w-9  object-contain ' src={item.image||"not fount"}></img>
+
+            {item.name}</a></li>
+            </div>
+          )
+      }):(<div className=' gap-3' >
+      <li ><a className=' skeleton h-4 my-1'></a></li>
+      <li ><a className=' skeleton h-4 my-1'></a></li>
+      <li><a className=' skeleton h-4 my-1'></a></li>
+      <li><a className=' skeleton h-4 my-1'></a></li>
+      </div>)
+    }
+
+    <div className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.categories.length<1?"hidden":"block"):""} ml-3 font-semibold`}>Category</div>
+    {
+       
+      searchdatatext&&searchdatatext.data?searchdatatext.data.categories.map((item,index)=>{
+          return(
+            <div key={index} onClick={()=>{navigate(`/sub-category-products/${item._id}`)}} >
+            <li className=''>
+
+            <a>
+            <img className='h-9 w-9  object-contain ' src={item.image||"not fount"}></img>
+
+            {item.name}</a></li>
+            </div>
+          )
+      }):(<div className=' gap-3' >
+      <li ><a className=' skeleton h-4 my-1'></a></li>
+      <li ><a className=' skeleton h-4 my-1'></a></li>
+      <li><a className=' skeleton h-4 my-1'></a></li>
+      <li><a className=' skeleton h-4 my-1'></a></li>
+      </div>)
+    }
+   
+    <div className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.catelogs.length<1?"hidden":"block"):""} ml-3 font-semibold`}>Catalog</div>
+
+    {
+      searchdatatext&&searchdatatext.data?searchdatatext.data.catelogs.map((item,index)=>{
+          return(
+            <div key={index} onClick={()=>{navigate(`/catalog/${item._id}`)}} >
+            <li className=''>
+
+            <a>
+            <img className='h-9 w-9 object-contain' src={item.image||"not fount"}></img>
+
+            {item.title}</a></li>
+            </div>
+          )
+      }):(<div className=' gap-3' >
+      <li ><a className=' skeleton h-4 my-1'></a></li>
+      <li ><a className=' skeleton h-4 my-1'></a></li>
+      <li><a className=' skeleton h-4 my-1'></a></li>
+      <li><a className=' skeleton h-4 my-1'></a></li>
+      </div>)
+    }
+  </ul>
+</div>
+</div>
       <div class="menu-container  hidden md:flex">
         {/* <div class="menu-item">
           <div class="menu-heading">Corporate Gifting</div>
