@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext,useEffect, useState } from 'react'
 import './Header.css'
 import pinterest from './images/PinterestLogo.png'
 import instagram from './images/InstagramLogo.png'
@@ -29,10 +29,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons'; // Use this if thin is not available
 import { useClipboard } from 'use-clipboard-copy';
 import { CartContext } from './CartContext'
+import axios from 'axios'
 const Header = () => {
   const navigate = useNavigate();
   const { searchinput, handlesearch } = useContext(CartContext);
   const [searchinput2, setsearchinput2] = useState("");
+  const [latestcoupon,setlatestcoupon]=useState("");
   const clipboard = useClipboard({
     copiedTimeout: 9000,
   }
@@ -49,15 +51,99 @@ const Header = () => {
     }
   };
 
+  useEffect(() => {
+
+    const fetchData = async () =>{
+      try {
+        const response = await fetch('https://api.hirdayam.com/api/getcategoryuser');
+        const result = await response.json();
+        if (result.status) {
+          // Map the API data to the desired format for Swiper
+          const categories = result.data.map(category => ({
+            id: category._id,
+            heading: category.name,
+            image: category.image,
+          }));
+          setMenuItems(categories);
+        } else {
+          console.error('Failed to fetch categories:', result.message);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchData();
+    getcouponforuser();
+  }, []);
+  const [menuItems, setMenuItems] = useState([]);
+  const [subcategories, setSubcategories] = useState({}); // Store subcategories by category ID
+  const [dropdownOpen, setDropdownOpen] = useState(null); // Track which dropdown is open
+  const handleHeadingClick = async (categoryId) => {
+    setDropdownOpen(prev => (prev === categoryId ? null : categoryId)); // Toggle dropdown
+    if (!subcategories[categoryId]) {
+      try {
+        const response = await fetch(`https://api.hirdayam.com/api/getSubCategoryByCategory?category_id=${categoryId}`);
+        const result = await response.json();
+        if (result.status) {
+          setSubcategories(prev => ({
+            ...prev,
+            [categoryId]: result.data // Ensure this is an array of subcategory objects
+          }));
+        } else {
+          console.error('Failed to fetch subcategories:', result.message);
+        }
+      } catch (error) {
+        console.error('Error fetching subcategories:', error);
+      }
+    }
+  };
+
+  const handleSubcategoryClick = async (subCategoryId) => {
+    navigate(`/sub-category-products/${subCategoryId}`); // Navigate to products page
+  };
+
+
+  const getcouponforuser = async () => {
+    try {
+        const response = await axios.get('https://api.hirdayam.com/api/getlatestcouponalways', {
+            headers: {
+                // 'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${token}`
+            }
+        });
+        if (response && response.data && response.data.data) {
+        let coupondata=response.data;
+  
+          setlatestcoupon(coupondata);
+        
+        
+      
+        console.log('Addres get success:', response.data);
+        }
+       
+    } catch (error) {
+        console.error('Error during couopnlistfor user submission:', error);
+
+        if (error.response) {
+            console.error('Server couponlistforuser responded with:', error.response.data);
+            // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
+        } else {
+            // setError('Address submission failed. Please try again.');
+        }
+    }
+};
+
+
   return (
     <>
       <div className='home-container'>
-        <div className="blue-background" >
+        <div className="blue-background">
           <div className="images-container">
-            <img src={pinterest} alt="Image 1" className="image" />
-            <img src={instagram} alt="Image 2" className="image" />
-            <img src={facebook} alt="Image 3" className="image" />
-            <img src={XLogo} alt="Image 4" className="image" />
+            <img src={pinterest} alt="Image 1" className="image"/>
+            <img src={instagram} alt="Image 2" className="image"/>
+            <img src={facebook} alt="Image 3" className="image"/>
+            <img src={XLogo} alt="Image 4" className="image"/>
           </div>
           <div style={{ color: ' #F3F3F3', fontFamily: 'Poppins' }} className="  center-text">
             Free Shipping On All Us Orders Over Rs 499
@@ -89,7 +175,8 @@ const Header = () => {
                   </div>
 
                   <div className='p-4'>
-                    <img src={coming_soon}></img>
+                    <img className=' rounded-md' src={latestcoupon&&latestcoupon.data?"http://api.hirdayam.com/uploads/coupon_images/"+latestcoupon.data.image||"id not found":coming_soon}></img>
+                    {/* <div>{latestcoupon&&latestcoupon.data?latestcoupon.data._id||"id not found":"dfd"}</div> */}
                   </div>
                   <div className='flex px-4 py-3'>
                     <div style={{ backgroundImage: `url(${couponsvg2})` }} className=' flex   items-center gap-3 justify-center bg-contain   bg-no-repeat h-16 w-9/12  '>
@@ -103,112 +190,56 @@ const Header = () => {
                     </div>
                     <div className=' bg-contain mb-2 bg-no-repeat bg-center w-4/12 items-center justify-center flex text-center' style={{ backgroundImage: `url(${couponsvg1})` }}>
                       <span className=' text-[8px] text-nowrap'>use code<br></br>
-                        <input ref={clipboard.target} value={`${clipboard.copied ? 'Copied' : 'App 200'}`} onClick={clipboard.copy} readOnly className="text-[8px] p-1 w-10 text-center  outline-none rounded-md cursor-copy bg-blue-900 text-white"></input>
+                        <input ref={clipboard.target} value={`${clipboard.copied ? 'Copied' : latestcoupon&&latestcoupon.data?latestcoupon.data.code:"dfd"}`} onClick={clipboard.copy} readOnly className="text-[8px] p-1 w-10 text-center  outline-none rounded-md cursor-copy bg-blue-900 text-white"></input>
                       </span>
 
                     </div>
+                    
                   </div>
+                  {/* <div className=' h-1 w-full  my-2 rounded-r-md dropdownline  bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div> */}
+                  <Link to={"/Morecoupon"}>  <p className=' text-xs mx-5 underline cursor-pointer'>View more coupon</p></Link>
+
+                  
                   <div> <div className=' bg-contain bg-fixed bg-left-top overflow-scroll bg-no-repeat w-full px-3 h-96' style={{ backgroundImage: `url(${dropdown_background})` }}>
 
                     {/* <img src={dropdown_background}></img> */}
-                    <details tabIndex={1} className="collapse full text-gray-500  collapse-arrow ">
-                      <summary className="collapse-title text-md font-bold "><sapn className="text-blue-800">Corporate Gifting</sapn></summary>
+                    {
+
+                    menuItems.map((item,index)=>{
+
+                    return(
+                          
+                    <details key={item._id} tabIndex={index} className="collapse full text-gray-500  collapse-arrow ">
+                    
+                      <summary onMouseEnter={() => handleHeadingClick(item.id)} className="collapse-title text-md font-bold "><sapn className="text-blue-800">{item.heading}</sapn></summary>
                       <div className="collapse-content text-black leading-10">
-                        <ul>
-                          <li>Drinkware</li>
-                          <li>Handbag</li>
-                          <li>Chocolate</li>
-                          <li>Backpacks</li>
-                          <li>Smartwatches</li>
-                          <li>Branded apparel</li>
-                        </ul>
-                      </div>
-                    </details>
-
-                    <details tabIndex={2} className="collapse full text-gray-500  collapse-arrow ">
-                      <summary className="collapse-title text-md font-bold "><span className='text-blue-800 '>Home Decoration</span></summary>
-                      <div className="collapse-content leading-10 text-black">
-                        <ul className=' list-disc'>
-                          <li className=' font-bold'>Home Decor</li>
-                          <ul>
-                            <li>Wall Scenery</li>
-                            <li>Artificial Plants</li>
-                            <li>Sofas</li>
-                            <li>Pendulum Clocks</li>
-                            <li>Paper Hat</li>
-                            <li>LED Mirror</li>
-                          </ul>
-
-                          <li className=' font-bold'>Kitchen Decor</li>
-                          <ul>
-                            <li>Dinnerware Sits</li>
-                            <li>Coasters & Trivets</li>
-                            <li>Curtain</li>
-                            <li>Pendulum Clocks</li>
-
-                          </ul>
-
-                          <li className=' font-bold'>Table Decor</li>
-                          <ul>
-                            <li>Decorative Boxes</li>
-                            <li>Desk Organizers</li>
-                            <li>Pen Stands</li>
-                            <li>Bookends</li>
-                            <li>Accessory Holders</li>
-                          </ul>
-
-                          <li className=' font-bold'>Kids Decor</li>
-                          <ul>
-                            <li>Wall Shelves</li>
-                            <li>Clocks</li>
-                            <li>Wall Art</li>
-                            <li>Height Chart</li>
-                            <li>Book Ends</li>
-                            <li>Picture Frames</li>
-                          </ul>
-
-                          <li className=' font-bold'>Festival Decor</li>
-                          <ul>
-                            <li>Torans</li>
-                            <li>Rangolis</li>
-                            <li>Christmas Decoration</li>
-
-
-
-                          </ul>
-                        </ul>
-                      </div>
-                    </details>
-
-                    <details tabIndex={3} className="collapse full text-gray-500  collapse-arrow ">
-                      <summary className="collapse-title text-md font-bold  "><sapn className="text-blue-800">Birthday Celebration</sapn></summary>
-                      <div className="collapse-content leading-10 text-black">
-                        <ul>
-                          <li>Baloons</li>
-                          <li>Happy Birthday Banner</li>
-                          <li>Foil Curtain</li>
-                          <li>Cupcake Stands</li>
-                          <li>Paper Hat</li>
-                          <li>Decoration</li>
-                        </ul>
-                      </div>
-                    </details>
-
-                    <details tabIndex={4} className="collapse w-full text-gray-500  collapse-arrow ">
-                      <summary className="collapse-title text-md font-bold "><span className=' text-blue-800'>Acrylic Photoframe</span></summary>
-                      <div className="collapse-content  leading-10 text-black">
-
-                        <ul>
-
-                          <li>Acrylic Photoframe</li>
-
-                          <li><Link to={"./Acrylic3"} className=''>Water Color Photoframe</Link></li>
-
-                        </ul>
-                      </div>
-                    </details>
-                    {/* <div className='ml-4 text-blue-800 font-bold'>Contact us</div> */}
+                      {dropdownOpen === item.id && subcategories[item.id] && (
+              <div className="dropdown15">
+                {subcategories[item.id].map((subCategory) =>(
+                  <div
+                    key={subCategory._id}
+                    className=""
+                    onClick={() => handleSubcategoryClick(subCategory._id)}
+                  >
+                    {subCategory.name}
                   </div>
+                ))}
+              </div>
+            )}
+                      </div>
+                    </details>
+                    )
+                    })
+                    }
+              
+             <div class="menu-headin text-blue-800 font-bold ml-4 mb-3">Acrylic Photoframe</div>
+
+        
+                  
+                    <div className='ml-4 text-blue-800 font-bold'>Contact us</div>
+                  </div>
+
+
 
 
 
@@ -239,7 +270,7 @@ const Header = () => {
             <img src={logo} alt="Logo" className="logo" />
           </Link>
           <div className="search-container hidden md:flex mr-[-130px] md:mr-0">
-            <img src={search} alt="Search Icon" className="search-icon" />
+            <img onClick={()=>{navigate(`/all-products?search=${searchinput2}`)}}  src={search} alt="Search Icon" className="search-icon" />
             <input
               onChange={handleSearch} // Call handleSearch on text input change
               onKeyPress={handleKeyPress} // Call handleKeyPress on key press
@@ -269,9 +300,11 @@ const Header = () => {
 
           </div>
         </div>
-
-
+       
       </div>
+     
+
+      
 
     </>
   )

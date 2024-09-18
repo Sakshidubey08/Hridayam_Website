@@ -76,7 +76,11 @@ import CategoryProducts from './CategoryProducts';
 import AboutUs from './AboutUs'
 import Refundpolicy from './Refundpolicy'
 const ScrollToTop = () => {
+   
     const { pathname } = useLocation();
+
+ 
+  
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -84,6 +88,7 @@ const ScrollToTop = () => {
 
     return null;
 };
+
 
 const App = () => {
     return (

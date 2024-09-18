@@ -35,8 +35,11 @@ const ProductDetailsPage = () => {
         line4: "Easy 14 days returns and exchanges."
     });
     const [checkButtonText, setCheckButtonText] = useState('Check');
-
-
+   
+    
+    useEffect(() => {
+        console.log('Selected Image:', selectedImage);
+    }, [selectedImage]);
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
@@ -138,12 +141,15 @@ const ProductDetailsPage = () => {
                 id: selectedProduct._id,
                 name: selectedProduct.name,
                 price: parseFloat(selectedProduct.price),
-                image: file, // Use uploaded image or main image
-                color: selectedProduct.colors[0],
-                variation: selectedProduct.variations[0],
+                image: selectedImage || selectedProduct.image, 
+
+                color: selectedColor?._id,
                 text: personalizeText
             };
-
+            if(selectedProduct.stock==0){
+                alert("Product is out of stock")
+                return;
+            }
             // addToCart(productToAdd, quantity);
             // navigate('/cart');
 
@@ -155,7 +161,9 @@ const ProductDetailsPage = () => {
                 navigate('/cart');
             }
         }
+        
     };
+    
     // const handleColorClick = (color) => {
     //     setSelectedColor(color); // Set the clicked color as selected
     //     setSelectedImage(null);  // Clear the selected image on color change
@@ -168,7 +176,7 @@ const ProductDetailsPage = () => {
             setSelectedImage(null); // Clear the selected image if no images exist
         }
     };
-
+ 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
 
@@ -182,6 +190,7 @@ const ProductDetailsPage = () => {
     const handleImageClick = (image) => {
         setSelectedImage(image);
     };
+    
     return (
         <>
             <Header />
@@ -207,16 +216,7 @@ const ProductDetailsPage = () => {
                                     className="thumbnail"
                                 />
                             ))}
-                            {/* {selectedColor && selectedColor.color_images.map((image, index) => (
-                                <img
-                                    key={index}
-                                    src={image}
-                                    alt={`Color ${selectedColor.color_name} - Thumbnail ${index + 1}`}
-                                    onClick={() => handleImageClick(image)}
-                                    className="thumbnail"
-                                    style={{ width: '100px', height: '100px', margin: '5px', cursor: 'pointer' }}
-                                />
-                            ))} */}
+                           
                             {selectedColor && selectedColor.color_images.slice(1).map((image, index) => (
                                 <img
                                     key={index}
@@ -230,11 +230,22 @@ const ProductDetailsPage = () => {
 
                         </div>
                     </div>
-                    <div className="image-placeholder1 m-auto flex items-center justify-center">
+                    {/* <div className="image-placeholder1 m-auto flex items-center justify-center">
                         {selectedImage && (
-                            <img src={selectedImage} alt="Selected" />
+                            // <img src={selectedImage} alt="Selected" />
+                            <img src={selectedImage || file} alt="Selected Product" /> 
+
                         )}
-                    </div>
+                    </div> */}
+                     <div className="image-placeholder1 m-auto flex items-center justify-center">
+                {selectedImage ? (
+                    <img src={selectedImage} alt="Selected Product" />
+                ) : (
+                    selectedProduct?.image && (
+                        <img src={selectedProduct.image} alt="Default Product" />
+                    )
+                )}
+            </div>
                     <div className="scrollable-content4">
                         <div className="product-info">
                             <h1 className='product-name'>{selectedProduct?.name}</h1>
@@ -328,14 +339,15 @@ const ProductDetailsPage = () => {
                                         <h3 className='free'>Colors</h3>
                                         <div style={{ display: 'flex' }}>
                                             {selectedProduct.colors.map((color) => (
-                                                <div key={color._id} style={{ marginRight: '20px' }}>
+                                                <div key={color._id} style={{ marginRight: '10px' }}>
                                                     <h3
-                                                        className="color-circle"
+                                                        className="color-circle border"
+
                                                         onClick={() => handleColorClick(color)} // Add onClick to color name
 
-                                                        style={{ cursor: 'pointer' }} // Make color name clickable
+                                                        style={{ cursor: 'pointer',backgroundColor:`${color.color_name}` }} // Make color name clickable
                                                     >
-                                                        {color.color_name || "No color name"}
+                                                        {/* {color.color_name || "No color name"} */}
                                                     </h3>
                                                 </div>
                                             ))}

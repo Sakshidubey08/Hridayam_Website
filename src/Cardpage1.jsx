@@ -177,7 +177,7 @@ const Cardpage1 = () => {
         <div className="content">
 
         <div className="image-gallery">
-            <div className="thumbnails">
+            <div className="thumbnails hidden md:block">
               {images.map((img, index) => (
                 <img
                   key={index}
@@ -192,6 +192,17 @@ const Cardpage1 = () => {
           <div className="main-image">
             <img src={mainImage} alt="Selected" />
           </div>
+          <div className='block md:hidden my-3 mx-2'>
+                            {images?.map((image, index) => (
+                                <img
+                                    key={index}
+                                    src={image}
+                                    alt={`Thumbnail ${index + 1}`}
+                                    onClick={() => handleImageClick(image)}
+                                    className=" h-12  hover:ring rounded-md"
+                                />
+                            ))}
+                            </div>
           {/* Scrollable Content Section */}
           <div className="scrollable-content4">
             <div className="product-info">
@@ -340,9 +351,9 @@ const Cardpage1 = () => {
         <p>No similar products available.</p>
           )}
         </div>  */}
-      <h1 className='top ml-24'>Similar Products</h1>
+      <h1 className='top md:ml-24'>Similar Products</h1>
 
-        <div className="card-container">
+        <div className="card-container gap-3 ">
           {similarProducts && similarProducts.length > 0 ? (
           similarProducts.map((product) => (
             <div  key={product._id} className="card-wrapper" style={{ cursor: 'pointer' }}>

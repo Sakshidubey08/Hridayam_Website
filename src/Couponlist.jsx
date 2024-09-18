@@ -5,7 +5,9 @@ import { useClipboard } from 'use-clipboard-copy';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { faL } from '@fortawesome/free-solid-svg-icons';
+import { Link,  useNavigate } from 'react-router-dom';
 const Couponlist = () => {
+  const navigate=useNavigate();
     const [couponlist,setcouponlist]=useState([]);
     const [couponlist2,setcouponlist2]=useState([]);
     const [copiedCode, setCopiedCode] = useState(null);
@@ -113,7 +115,17 @@ return(<div key={index}>
 
  </div>
 )
-             })):"sdffds"
+             })):(
+              <div className=' m-auto'>
+                <div className='flex items-center justify-center'>
+                <img className=' object-contain' src='https://us.123rf.com/450wm/andyvi/andyvi1511/andyvi151100061/48092793-discount-coupons-in-hand-60-percent-discount-special-offer-for-holidays-and-weekends-card-with-a.jpg?ver=6'></img>
+                </div>
+                <div className='m-auto flex items-center  justify-center w-full '>
+
+              <div onClick={()=>{navigate("/login")}} className='btn bg-blue-900  text-white'>View Coupons List</div> 
+                </div>
+              </div>
+             )
 
         }
         </div>

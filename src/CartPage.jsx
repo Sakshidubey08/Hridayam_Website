@@ -285,13 +285,13 @@ import { CartContext } from './CartContext';
 import { FaTrash } from 'react-icons/fa';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
-import Ripples from  "react-ripples"
+import Ripples from "react-ripples"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 function App() {
-  const { cartItems, removeFromCart,  updateQuantity } = useContext(CartContext);
+  const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
 
   // console.log(cartItems)
   // const handleIncrement = (productId) => {
@@ -300,11 +300,11 @@ function App() {
   //   console.log(item.quantity + 1)
   //   updateQuantity(item._id, item.quantity + 1);
   // };
-  console.log(cartItems+"this is from cartpage")
+  console.log(cartItems + "this is from cartpage")
   const [selected, setSelected] = useState(false);
-  const [quantity,setquantity]=useState(1);
-  const [quantitymodel,setquantitymodel]=useState(1);
-  const [selected2,setselected2]=useState(false)
+  const [quantity, setquantity] = useState(1);
+  const [quantitymodel, setquantitymodel] = useState(1);
+  const [selected2, setselected2] = useState(false)
   if (cartItems.length === 0) {
     return (
       <>
@@ -319,25 +319,26 @@ function App() {
   //  const calculateSubtotal = () => {
   //   return 
   // };
-const handlequanlity =(product)=>{
-  setquantity(quantitymodel)
-  console.log(product)
-  setselected2(false)
-  updateQuantity(product,quantitymodel)
+  const handlequanlity = (product) => {
+    setquantity(quantitymodel)
+    console.log(product)
+    setselected2(false)
+    updateQuantity(product, quantitymodel)
 
-}
-const handlequanlitymodel =(quan)=>{
-  setselected2(true)
-  setquantitymodel(quan)
-}
+  }
+  
+  const handlequanlitymodel = (quan) => {
+    setselected2(true)
+    setquantitymodel(quan)
+  }
   // const calculateTotal = () => {
   //   const subtotal = calculateSubtotal();
   //   // Add any other calculations for the total price, like tax or discounts, if applicable
   //   return subtotal;
   // };
-    const calculateSubtotal = () => {
+  const calculateSubtotal = () => {
     return cartItems.reduce((acc, item) => {
-      const price = parseFloat(item.product==null?item.acrylic_price:item.product.price) || 0;
+      const price = parseFloat(item.product == null ? item.acrylic_price : item.product.price) || 0;
       const quantity = parseInt(item.quantity) || 0;
       return acc + price * quantity;
     }, 0);
@@ -349,163 +350,163 @@ const handlequanlitymodel =(quan)=>{
   return (
     <>
       <Header />
-   <div className="product-summary-container">
-      <div className='final'>
-        {
+      <div className="product-summary-container">
+        <div className='final'>
+          {
 
-         cartItems.length>0?cartItems.map((item,index)=>{
+            cartItems.length > 0 ? cartItems.map((item, index) => {
 
-        return(
-
-        
-        <div className="cart-container">
-
-          <div className="product">
-            <div className="delete">
-              <button className='hidden md:block' onClick={() => removeFromCart(item._id)}>
-                <FontAwesomeIcon icon={faTimes} size="lg" />
-
-              </button>
-              
-              <img onClick={() => removeFromCart()} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
-            </div>
-            <div className={`product-imag   flex items-center gap-1 ${item.product==null?"hidden":"block"}  `}>
-             {/* <div>{item.product==null?"":item.product.product_type}</div> */}
-            <Swiper  className={`${item.product==null?"":(item.product.product_type=="normal"?"hidden":"block")}    w-32 h-50 `}   loop={true} spaceBetween={10} slidesPerView={1} autoplay={{ delay: 1000 }} pagination={{ clickable: true }} navigation>
-  {/* SwiperSlide Components */}
-  <SwiperSlide>
-  <img style={{height:"100%"}}  className={`${item.product==null?"hidden":""} bg-contain  md:h-28 h-full w-full `} src={item.product==null?"":item.product.image} />
-
-  </SwiperSlide>
-  <SwiperSlide>
-  <img style={{height:"100%"}} className={`${item.product==null?"hidden":""}   bg-contain md:h-10 h-full w-full`} src={item.product==null?"":item.personalize_image} />
-  {/* <img style={{height:"100%"}} className={`${item.product==null?"hidden":""}  bg-contain h-full w-full`} src={item.product==null?"":item.personalize_image} /> */}
-
-  </SwiperSlide>
-</Swiper>
-                <img style={{height:"100%"}}  className={`${item.product==null?"":(item.product.product_type=="normal"?"block":"hidden")}  bg-contain  md:h-28 h-full w-full `} src={item.product==null?"":item.product.image} />
-
-              
-            </div>
-            <img className='h-32 md:h-38 ' src={item.acrylic_final_preview}></img>
+              return (
 
 
-            <div className="product-info12">
-              <h2 className="product-name text-sm md:text-lg">{item.product==null?"Acrylic Photo Frame":item.product.name}</h2>
-              <div>
-              
-              <p className="product-description text-xs md:text-sm line-clamp-1 w-1/2">
-                {item.product==null?"":item.product.description}
-              </p>
-              </div>
-              <div  className="product-options">
-                <div onClick={()=>document.getElementById('my_modal_31').showModal()} className="option flex items-center">
-                <span  className="labe flex items-center w-20 justify-center gap-2 bg-gray-300/30 rounded-md">
-                  Size:<span>M</span> 
-                  <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
-                  {/* <div className=' r'><svg width={"20px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg></div> */}
-                  </span>
-                  <dialog id="my_modal_31" className="modal">
-  <div className="modal-box  w-80">
-    <form method="dialog">
-      {/* if there is a button in form, it will close the modal */}
-      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-    </form>
-    <div>
-      <p className=' font-bold text-lg my-3'>Select Size</p>
-      <hr/>
-      <div className='my-4'>
-        <p className='  border border-black w-7 h-7 p-4 flex items-center  justify-center rounded-full '>M</p>
-      </div>
-      <div className=' flex items-center justify-center'>
-      <div className='border p-1 bg-blue-800 flex items-center justify-center text-white rounded-md w-full'>Done</div>
-         
-      </div>
+                <div className="cart-container">
 
-    </div>
-  </div>
-</dialog>
+                  <div className="product">
+                    <div className="delete">
+                      <button className='hidden md:block' onClick={() => removeFromCart(item._id)}>
+                        <FontAwesomeIcon icon={faTimes} size="lg" />
+
+                      </button>
+
+                      <img onClick={() => removeFromCart()} className='w-3 md:hidden m-auto' src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"></img>
+                    </div>
+                    <div className={`product-imag   flex items-center gap-1 ${item.product == null ? "hidden" : "block"}  `}>
+                      {/* <div>{item.product==null?"":item.product.product_type}</div> */}
+                      <Swiper className={`${item.product == null ? "" : (item.product.product_type == "normal" ? "hidden" : "block")}    w-32 h-50 `} loop={true} spaceBetween={10} slidesPerView={1} autoplay={{ delay: 1000 }} pagination={{ clickable: true }} navigation>
+                        {/* SwiperSlide Components */}
+                        <SwiperSlide>
+                          <img style={{ height: "100%" }} className={`${item.product == null ? "hidden" : ""} bg-contain  md:h-28  h-full w-full `} src={item.product == null ? "" : item.product.image} />
+
+                        </SwiperSlide>
+                        <SwiperSlide>
+                          <img style={{ height: "100%" }} className={`${item.product == null ? "hidden" : ""}   bg-contain md:h-10 h-full w-full`} src={item.product == null ? "" : item.personalize_image} />
+                          {/* <img style={{height:"100%"}} className={`${item.product==null?"hidden":""}  bg-contain h-full w-full`} src={item.product==null?"":item.personalize_image} /> */}
+
+                        </SwiperSlide>
+                      </Swiper>
+                      <img style={{ height: "100%" }} className={`${item.product == null ? "" : (item.product.product_type == "normal" ? "block" : "hidden")}  bg-contain  md:h-28 h-full w-full `} src={item.product == null ? "" : item.product.image} />
+
+
+                    </div>
+                    <img className='h-32 md:h-38 ' src={item.acrylic_final_preview}></img>
+
+
+                    <div className="product-info12">
+                      <h2 className="product-name text-sm md:text-lg">{item.product == null ? "Acrylic Photo Frame" : item.product.name}</h2>
+                      <div>
+
+                        <p className="product-description text-xs md:text-sm line-clamp-1 w-1/2">
+                          {item.product == null ? "" : item.product.description}
+                        </p>
+                      </div>
+                      <div className="product-options">
+                        <div onClick={() => document.getElementById('my_modal_31').showModal()} className="option flex items-center">
+                          <span className="labe flex items-center w-20 justify-center gap-2 bg-gray-300/30 rounded-md">
+                            Size:<span>M</span>
+                            <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
+                            {/* <div className=' r'><svg width={"20px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg></div> */}
+                          </span>
+                          <dialog id="my_modal_31" className="modal">
+                            <div className="modal-box  w-80">
+                              <form method="dialog">
+                                {/* if there is a button in form, it will close the modal */}
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                              </form>
+                              <div>
+                                <p className=' font-bold text-lg my-3'>Select Size</p>
+                                <hr />
+                                <div className='my-4'>
+                                  <p className='  border border-black w-7 h-7 p-4 flex items-center  justify-center rounded-full '>M</p>
+                                </div>
+                                <div className=' flex items-center justify-center'>
+                                  <div className='border p-1 bg-blue-800 flex items-center justify-center text-white rounded-md w-full'>Done</div>
+
+                                </div>
+
+                              </div>
+                            </div>
+                          </dialog>
+                        </div>
+                        <div onClick={() => (document.getElementById(`my_modal_${index + 10}`).showModal())} className="option flex items-center">
+                          <span className="labe flex items-center justify-center w-20  gap-2 bg-gray-300/30 rounded-md">
+                            Qty:<span>{item.quantity}</span>
+                            <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
+                            {/* <div className=' r'><svg width={"20px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg></div> */}
+                          </span>
+
+                          {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                          {/* <button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}>open modal</button> */}
+                          <div>
+
+                            <dialog id={`my_modal_${index + 10}`} className="modal ">
+
+                              <div className="modal-box  w-80">
+
+                                <form method="dialog">
+                                  {/* if there is a button in form, it will close the modal */}
+                                  <button onClick={() => { setselected2(false) }} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+                                <div>
+                                  <p className=' font-bold text-lg my-3'>Select Quantity</p>
+                                  <hr />
+                                  {/* {item.product==null?"":item.product.stock} */}
+                                  <div className='my-4 flex flex-wrap  gap-2'>
+                                    {Array.from({ length: item.product == null ? 10 : item.product.stock }, (_, index) => (
+                                      <div key={index} className="item-div">
+
+
+                                        <button onClick={() => { handlequanlitymodel(index + 1) }} className={` ${selected2 == false ? (item.quantity == index + 1 ? "ring" : "") : "hover:ring focus:ring"}    cursor-pointer  border border-black w-7 h-7 p-4 flex items-center  justify-center rounded-full `}>
+                                          {index + 1}
+                                        </button>
+                                      </div>
+
+                                    ))}
+                                  </div>
+                                  <form method="dialog">
+                                    <div className=' flex items-center justify-center'>
+                                      <button onClick={() => { handlequanlity(item.product == null ? item._id : item._id) }} className='border p-1 bg-blue-800 flex items-center justify-center text-white rounded-md w-full'>Done</button>
+
+                                    </div>
+                                  </form>
+
+                                </div>
+                              </div>
+                            </dialog>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="product-price">
+                        &#8377;{item.product == null ? item.acrylic_price * quantity : item.product.price * item.quantity}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div onClick={()=>(document.getElementById(`my_modal_${index+10}`).showModal())} className="option flex items-center">
-                  <span  className="labe flex items-center justify-center w-20  gap-2 bg-gray-300/30 rounded-md">
-                  Qty:<span>{item.quantity}</span> 
-                  <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
-                  {/* <div className=' r'><svg width={"20px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg></div> */}
-                  </span>
-                 
-                  {/* You can open the modal using document.getElementById('ID').showModal() method */}
-{/* <button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}>open modal</button> */}
-<div>
+              )
+            }) : "sdfsd"
+          }
 
-<dialog id={`my_modal_${index+10}`} className="modal ">
-
-  <div className="modal-box  w-80">
-
-    <form method="dialog">
-      {/* if there is a button in form, it will close the modal */}
-      <button onClick={()=>{setselected2(false)}} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-    </form>
-    <div>
-      <p className=' font-bold text-lg my-3'>Select Quantity</p>
-      <hr/>
-      {/* {item.product==null?"":item.product.stock} */}
-      <div className='my-4 flex flex-wrap  gap-2'>
-      {Array.from({ length: item.product==null?10:item.product.stock }, (_, index) => (
-        <div key={index} className="item-div">
-        
-        
-        <button onClick={()=>{handlequanlitymodel(index+1)}} className={` ${selected2==false?(item.quantity==index+1?"ring":""):"hover:ring focus:ring"}    cursor-pointer  border border-black w-7 h-7 p-4 flex items-center  justify-center rounded-full `}>
-           {index+1}
-        </button>
         </div>
-    
-        ))}
-      </div>
-      <form method="dialog">
-      <div className=' flex items-center justify-center'>
-        <button onClick={()=>{handlequanlity(item.product==null?item._id:item._id)}} className='border p-1 bg-blue-800 flex items-center justify-center text-white rounded-md w-full'>Done</button>
-
-      </div>
-      </form>
-
-    </div>
-  </div>
-</dialog>
-</div>
-                </div>
-              </div>
-              <p className="product-price">
-                &#8377;{item.product==null?item.acrylic_price*quantity:item.product.price*item.quantity}
-              </p>
+        <div className="cart-summary">
+          <h2 className="cart-total">Cart Total</h2>
+          <div className="summary-box">
+            <div className="summary-item1">
+              <span>Subtotal</span>
+              <span>&#8377;{calculateSubtotal()}</span>
+            </div>
+            <hr />
+            <div className="summary-item2">
+              <span>Total</span>
+              <span>&#8377;{calculateTotal()}</span>
             </div>
           </div>
-        </div>
-        )
-      }):"sdfsd"
-        }
+          <Link to="/checkout">
+            <Ripples background={'rgb(150,150,150)'} color={'rgba(254, 242, 239 ,0.2)'} during={2000} className=''>
+              <button className="proceed-checkout-bt bg-blue-900 text-white p-3 rounded-md">Proceed to Checkout</button>
 
-      </div>
-      <div className="cart-summary">
-        <h2 className="cart-total">Cart Total</h2>
-        <div className="summary-box">
-          <div className="summary-item1">
-            <span>Subtotal</span>
-            <span>&#8377;{calculateSubtotal()}</span>
-          </div>
-          <hr/>
-          <div className="summary-item2">
-            <span>Total</span>
-            <span>&#8377;{calculateTotal()}</span>
-          </div>
+            </Ripples>
+          </Link>
         </div>
-        <Link to="/checkout">
-        <Ripples background	={'rgb(150,150,150)'} color={'rgba(254, 242, 239 ,0.2)'} during={2000} className=''>
-        <button className="proceed-checkout-bt bg-blue-900 text-white p-3 rounded-md">Proceed to Checkout</button>
-
-        </Ripples>
-        </Link>
-      </div>
-      {/* <div className="product-summary-container">
+        {/* <div className="product-summary-container">
   <div className="final">
     {cartItems.map(item => (
       <div className="product-container" key={item._id}>
@@ -566,7 +567,7 @@ const handlequanlitymodel =(quan)=>{
     </Link>
   </div>
 </div> */}
-</div>
+      </div>
       <Footer />
     </>
 

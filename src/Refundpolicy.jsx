@@ -49,7 +49,9 @@ const Privacy = () => {
     <>
       <Header />
       <div>
-        <div dangerouslySetInnerHTML={{ __html: refund }}></div>
+      <h1 className='top text-center '>Refund Policy</h1>
+
+        <div className='mt-4' dangerouslySetInnerHTML={{ __html: refund }}></div>
       </div>
       <Footer />
     </>

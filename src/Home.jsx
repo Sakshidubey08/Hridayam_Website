@@ -14,6 +14,8 @@ import image11 from './images/image15.png'
 import image12 from './images/image 13 (3).png'
 import image13 from './images/image15.png'
 import image14 from './images/image 16.png'
+import search from './images/search.png'
+
 import image15 from './images/transparent.png'
 import image16 from './images/image 15 1.png'
 import image17 from './images/image 124.png'
@@ -105,7 +107,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   // ];
   useEffect(() => {
 
-    const fetchData = async () => {
+    const fetchData = async () =>{
       try {
         const response = await fetch('https://api.hirdayam.com/api/getcategoryuser');
         const result = await response.json();
@@ -829,6 +831,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const [budgetPerGift, setBudgetPerGift] = useState('');
   const [quantityRequired, setQuantityRequired] = useState('');
   const [message, setMessage] = useState('');
+  const [searchinput2, setsearchinput2] = useState("");
+  const [latestcoupon,setlatestcoupon]=useState([]);
   // const handleSubmit = (e) => {
   //   e.preventDefault();
 
@@ -958,6 +962,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     };
 
     fetchSlides();
+    getcouponforuser();
   }, []);
   // const handleSlideClick = (slide) => {
   //   const { product_id, category_id } = slide;
@@ -1005,7 +1010,16 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     }
   };
   
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      // Navigate to the 'All Products' page, passing search text as query param
+      navigate(`/all-products?search=${searchinput2}`);
+    }
+  };
 
+  const handleSearch = (text) => {
+    setsearchinput2(text.target.value);
+  }
   
   const handleNext = () => {
     if (currentIndex + ITEMS_PER_PAGE < menuItems.length) {
@@ -1018,9 +1032,48 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       setCurrentIndex(currentIndex - ITEMS_PER_PAGE);
     }
   };
+
+  const getcouponforuser = async () => {
+    try {
+        const response = await axios.get('https://api.hirdayam.com/api/getlatestcouponalways', {
+            headers: {
+                // 'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${token}`
+            }
+        });
+        if (response && response.data && response.data.data) {
+        let coupondata=response.data;
+  
+          setlatestcoupon(coupondata);
+        
+        
+      
+        console.log('Addres get success:', response.data);
+        }
+       
+    } catch (error) {
+        console.error('Error during couopnlistfor user submission:', error);
+
+        if (error.response) {
+            console.error('Server couponlistforuser responded with:', error.response.data);
+            // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
+        } else {
+            // setError('Address submission failed. Please try again.');
+        }
+    }
+};
   return (
     <>
       <Header />
+      <div className="  my-3  flex items-center justify-center   md:hidden ">
+            <img onClick={()=>{navigate(`/all-products?search=${searchinput2}`)}} src={search} alt="Search Icon" className="search-icon ml-3 p-0" />
+            <input
+              onChange={handleSearch} // Call handleSearch on text input change
+              onKeyPress={handleKeyPress} // Call handleKeyPress on key press
+              type="text"
+              className="search-input"
+              placeholder="Search product..." />
+          </div>
       <div class="menu-container  hidden md:flex">
         {/* <div class="menu-item">
           <div class="menu-heading">Corporate Gifting</div>
@@ -1623,7 +1676,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 )}
 
         </div>
-      </div >
+      </div>
       <div className=' md:hidden'>
         <Catalog />
       </div>
@@ -1665,7 +1718,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={index} onClick={() => handleSlideClick(slide)}>
-          <div className="hidden md:block">
+          <div className="">
             <img
               src={slide.image}
               style={{ height: '100%', width: '100%', objectFit: 'cover' }}
@@ -1673,19 +1726,19 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               alt={`slide${index + 1}`}
             />
           </div>
-          <div className="md:hidden">
+          {/* <div className="md:hidden">
             <img
-              // src={headerslider} // Assuming headerslider is a fallback image for mobile
+               src={headerslider} // Assuming headerslider is a fallback image for mobile
               style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               className="hidden w-full h-[800px] md:h-auto object-cover"
               alt={`slide${index + 1}`}
             />
-          </div>
+          </div> */}
         </SwiperSlide>
       ))}
     </Swiper>
     
-          <div className='image-box  bg-white px-10  flex z-10 justify-around items-center absolute left-0 right-0  md:mx-auto md:left-auto md:right-auto  top-[20.3rem] md:top-[14.3rem]'>
+          <div className='image-box  bg-white px-10  flex z-10 justify-around items-center absolute left-0 right-0  md:mx-auto md:left-auto md:right-auto  top-[3.3rem] md:top-[14.3rem]'>
             <div className='image-item   text-wrap'>
               <img src={icon5} alt="" className='box-image' />
               <p className='image-description1     text-sm md:text-base mt-2'>1 Million <br className='block md:hidden'></br> + Customer</p>
@@ -1859,12 +1912,23 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
         <div className="promo-content  bg-[#9CA5C3] text-white p-6 md:p-8 lg:p-10 max-w-screen-lg mx-auto relative z-10">
           <div className="discount-text text-center text-2xl md:text-3xl lg:text-4xl md:text-left mb-4 md:mb-6 lg:mb-8">
-            Get Discount 20% off
+            Get Discount {latestcoupon&&latestcoupon.data?latestcoupon.data.discount||"id not found":"dfd"}% off
           </div>
-          <div className="subscribe-form flex  flex-col md:flex-row items-left justify-start gap-4 mb-4 md:mb-6">
-            <input type="email" placeholder="Enter your email address" className="w-full md:w-64 lg:w-80 h-10 px-4 border border-gray-300 text-gray-900" />
-            <button className="subscribe-button rounded-md md:rounded-none h-10 px-6 bg-[#23387A] text-white    hover:bg-[#1d2a5f]">
-              Subscribe
+          <div className="subscribe-form flex  flex-row md:flex-row items-left justify-start gap-2 mb-4 md:mb-6">
+            <input value={latestcoupon&&latestcoupon.data?latestcoupon.data.code||"id not found":"dfd"} disabled type="email" placeholder="Enter your email address" className="w-32 md:w-64 lg:w-80 h-10 px-4 border border-gray-300 text-white" />
+            <button
+            onClick={() => {
+      const couponCode = latestcoupon && latestcoupon.data ? latestcoupon.data.code : "dfd";
+      navigator.clipboard.writeText(couponCode)
+        .then(() => {
+          alert('Coupon code copied ');
+        })
+        .catch(err => {
+          console.error('Could not copy text: ', err);
+        });
+    }}
+              className="subscribe-button text-nowrap rounded-md md:rounded-none h-10 px-6 bg-[#23387A] text-white    hover:bg-[#1d2a5f]">
+              copy code
             </button>
           </div>
           <p className="promo-paragraph pt-32 text-center md:pt-0 text-sm md:text-base lg:text-lg leading-relaxed  md:ml-[32rem] md:text-left">
@@ -1992,8 +2056,6 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         <h3 className='best'>Limited Period Offer</h3>
         <h1 className='top'>Coming Soon - Pre Book Now!</h1>
 
-
-
         <div className="card-container">
           {cards3.map(card => (
             <Link
@@ -2107,7 +2169,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
         </div>
       </div>
       <div>
-        <h3 className='best3'>Offers</h3>
+        <h3 className='best3 mt-12'>Offers</h3>
         {/* <h1 className='top3'>Top Picks for Winters</h1> */}
         <h1 className='top3'>{title}</h1>
         <TopPick />

@@ -241,7 +241,7 @@ function Filter() {
                     </div>
                     <br/>
                     <div className="filter-option">
-                        <div className="section">
+                        <div className="section ">
                             <h3 className="section-title">Material</h3>
                             <div className="material-options">
                                 <div className="material-option">
@@ -307,7 +307,7 @@ function Filter() {
                     )}
                 </div>
 
-            </div >
+            </div>
             <Footer />
         </>
     );

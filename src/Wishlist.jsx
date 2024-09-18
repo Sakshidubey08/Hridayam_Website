@@ -225,7 +225,7 @@ const WishlistPage = () => {
         if(stock==0){
           alert("Product is out of stock")
         }
-        navigate(`/card/${id}`)
+        navigate(`/similar/${id}`)
         
          
       }
@@ -244,7 +244,7 @@ const WishlistPage = () => {
           <div className="wishlist-card-container flex  gap-2 md:gap-4 m-0 p-0 flex-wrap  ">
             {wishlistItems.data.data.map(item => (
               <div key={item.id} className="wishlist-card  w-40 md:w-64 ">
-              <Link  to={`/card/${item.product._id}`} className="card-link">
+              <Link  to={`/similar/${item.product._id}`} className="card-link">
                    
                 <img  src={item.product.image} alt={item.product.name} className="wishlist-card-image h-40 object-contain"/>
                 </Link>
