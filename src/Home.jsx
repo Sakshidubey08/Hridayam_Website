@@ -2178,8 +2178,6 @@ const fetchsearchdatalist = async () => {
         <h3 className='best'>Limited Period Offer</h3>
         <h1 className='top'>Coming Soon - Pre Book Now!</h1>
 
-
-
         <div className="card-container">
           {cards3.map(card => (
             <Link
@@ -2293,7 +2291,7 @@ const fetchsearchdatalist = async () => {
         </div>
       </div>
       <div>
-        <h3 className='best3'>Offers</h3>
+        <h3 className='best3 mt-12'>Offers</h3>
         {/* <h1 className='top3'>Top Picks for Winters</h1> */}
         <h1 className='top3'>{title}</h1>
         <TopPick />

@@ -238,7 +238,7 @@ const ProductDetailsPage = () => {
                     </div>
 
                     <div className="">
-                        <div className="thumbnail-list block md:hidden ">
+                        <div className="thumbnail-list flex md:hidden ">
                             {selectedProduct && (
                                 <img
                                     src={selectedProduct.image}

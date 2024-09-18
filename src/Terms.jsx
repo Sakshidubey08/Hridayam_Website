@@ -52,6 +52,7 @@
 // export default Privacy;
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Home.css'
 import DOMPurify from 'dompurify'; // Import dompurify for sanitizing HTML
 import Header from './Header';
 import Footer from './Footer';
@@ -101,7 +102,8 @@ const Privacy = () => {
     <>
       <Header />
       <div>
-        <div dangerouslySetInnerHTML={{ __html: terms }}></div>
+      <h1 className='top text-center '>Terms and Condition</h1>
+        <div className='mt-4' dangerouslySetInnerHTML={{ __html: terms }}></div>
       </div>
       <Footer />
     </>

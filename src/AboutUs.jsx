@@ -3,6 +3,7 @@ import axios from 'axios';
 import DOMPurify from 'dompurify'; // Import dompurify for sanitizing HTML
 import Header from './Header';
 import Footer from './Footer';
+import './Home.css'
 
 const Privacy = () => {
   const [about, setAbout] = useState('');
@@ -48,9 +49,10 @@ const Privacy = () => {
   return (
     <>
       <Header />
-      <div>
-        <div dangerouslySetInnerHTML={{ __html: about }}></div>
-      </div>
+      <>
+      <h1 className='top text-center '>About Hirdayam</h1>
+        <div className='mt-4' dangerouslySetInnerHTML={{ __html: about }}></div>
+      </>
       <Footer />
     </>
   );
