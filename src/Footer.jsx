@@ -5,10 +5,12 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { usePWAInstall } from 'react-use-pwa-install'
 
 import Locationlogo from "./images/location.png"
 import { NavLink } from 'react-router-dom';
 function Footer() {
+  const install = usePWAInstall()
     const [menuItems, setMenuItems] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [firstName, setFirstName] = useState('');
@@ -372,6 +374,8 @@ function Footer() {
           </li>
         ))}
       </ul>
+      {/* {install&&<button className='btn bg-blue-900 w-32 h-2 text-white' onClick={install}>install App<code>></code></button>} */}
+
     </div>
                 </div></div>
             <div className="footer-bottom1">

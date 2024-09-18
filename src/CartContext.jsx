@@ -785,7 +785,8 @@ if (product.acrylicfinalpreview) {
         const subtotal = calculateSubtotal();
         
         const total = subtotal - couponDiscount;
-        const gstamount=total*gst/100
+        const gstamount=parseInt(total*gst/100)
+
         return gstamount+total //> 0 ? total : 0;  // Ensure total is not negative
     };
 

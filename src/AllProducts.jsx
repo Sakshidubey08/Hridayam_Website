@@ -9,7 +9,7 @@ import { WishlistContext } from './WishlistContext';
 import Footer from './Footer';
 const STEP = 1;
 const MIN = 0;
-const MAX = 1000;
+const MAX = 1500;
 
 function Filter() {
     const [priceRange, setPriceRange] = useState([MIN, MAX]);
@@ -351,7 +351,7 @@ useEffect(()=>{
                 <div className="cards-container1 pt-10 md:pt-0">
                     {filteredCards.length > 0 ? (
                         filteredCards.map(card => (
-                            <Link key={card.id} to={`/card/${card.id}`} className="card-link">
+                            <Link key={card.id} to={`/similar/${card.id}`} className="card-link">
                                 <div className="card-wrapper">
                                     <div className='card1 w-40 md:w-full rounded-md'>
                                         <div className='card-header w-32 h-56 md:h-72   md:w-52'>

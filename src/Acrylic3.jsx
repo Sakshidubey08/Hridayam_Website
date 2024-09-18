@@ -1142,6 +1142,7 @@ function App() {
 
 
         fetchsize();
+        // fetchthikness();
     }, []);
 
     // Empty dependency array to run only once on mount
@@ -1150,22 +1151,18 @@ function App() {
 
 
         fetchthikness();
+        
 
     }, [sizeId]);
 
     const fetchthikness = async () => {
-        const fetchTokenFromLS = () => {
-            return localStorage.getItem('token');
-        };
+       
 
 
-        const token = fetchTokenFromLS();
-
-        if (token) {
             try {
                 const response2 = await axios.get(`https://api.hirdayam.com/api/getAcrylicThickness?size_id=${sizeId}`, {
                     headers: {
-                        Authorization: `Bearer ${token}`, // Fixed interpolation
+                        // Authorization: `Bearer ${token}`, // Fixed interpolation
                     },
                 });
 
@@ -1173,9 +1170,12 @@ function App() {
                     console.log('Get Acrylic Thikness:', response2);
                     let acrylicThiknessdata = response2.data.data;
                     setthicknessdata(acrylicThiknessdata);
-                    setthicknessprice(response2.data.data[0].price) // Update state
+                    setthicknessprice(response2.data.data[0].price)
+    
+                    setSelectedThickness(response2.data.data[0].thickness) // Update state
                     //     if(acrylicsize){
-
+                    console.log(response2.data.data[0].thickness+"thickness")
+                        setPrice(sizeprice + thicknessprice);
                     console.log("updated", thicknessdata);
 
                     // }
@@ -1191,9 +1191,7 @@ function App() {
             } catch (error) {
                 console.error('Acrylic thikeness item error:', error);
             }
-        } else {
-            console.error('Token not found in localStorage.');
-        }
+        
     };
 
 
@@ -1204,13 +1202,12 @@ function App() {
         };
 
 
-        const token = fetchTokenFromLS();
 
-        if (token) {
+        
             try {
                 const response = await axios.get('https://api.hirdayam.com/api/getAcrylicSize', {
                     headers: {
-                        Authorization: `Bearer ${token}`, // Fixed interpolation
+                       // Authorization: `Bearer ${token}`, // Fixed interpolation
                     },
                 });
 
@@ -1219,8 +1216,10 @@ function App() {
                     let acrylicSizedata = response.data.data;
                     setacrylicsize4(acrylicSizedata); // Update state
                     // if(acrylicsize){
-
+                    setSelectedSize(response.data.data[0].size);
+                    setsizeId(response.data.data[0]._id)
                     console.log("updated", acrylicsize4);
+                    setsizeprice(response.data.data[0].price)
 
                     // }
 
@@ -1235,9 +1234,9 @@ function App() {
             } catch (error) {
                 console.error('Acrylic size item error:', error);
             }
-        } else {
-            console.error('Token not found in localStorage.');
-        }
+        // } else {
+        //     console.error('Token not found in localStorage.');
+        // }
     };
 
 
@@ -1883,7 +1882,15 @@ function App() {
 
                                 );
 
-                            })) : ("sdfk")
+                            })) : (
+                                <div className=' flex gap-3 thickness-buttons'>
+                            <button className='btn skeleton p-6'></button>
+                            <button className='btn skeleton p-6'></button>
+                            <button className='btn skeleton p-6'></button>
+                            <button className='btn skeleton p-6'></button>
+                            <button className='btn skeleton p-6'></button>
+                        </div>
+                            )
                             }
                             </div>
                             {/* <div className="size-buttons">
@@ -1911,7 +1918,13 @@ function App() {
 
                             );
 
-                        })) : (<div>skdf</div>)
+                        })) : (<div className=' flex gap-3 thickness-buttons'>
+                            <button className='btn skeleton p-6'></button>
+                            <button className='btn skeleton p-6'></button>
+                            <button className='btn skeleton p-6'></button>
+                            <button className='btn skeleton p-6'></button>
+                            <button className='btn skeleton p-6'></button>
+                        </div>)
                         }
                         </div>
                         {/* <div className="thickness-buttons">
@@ -1924,7 +1937,7 @@ function App() {
 
                     <div className='sticky top-0'>
                         <div className="price1 text-sm">
-                            <span className='text-xl'>₹{sizeprice + thicknessprice} <span className=' line-through text-gray-300'>₹{price + 1000}</span></span>
+                            <span className='text-xl'>₹{sizeprice + thicknessprice} <span className=' line-through text-gray-300'>₹{sizeprice+thicknessprice + 1000}</span></span>
                             <p className='mt-6' style={{ fontWeight: "300" }}>  Photo quality for <span style={{ fontWeight: "600" }}>{selectedSize}</span> is <span className='text-green-500'>Good</span></p>
                             <p><span style={{ fontWeight: "300" }}>Quick mount:</span> <span className='text-bold text-balance'>Hridayam® Adhesive hooks (Included)</span></p>
                         </div>

@@ -29,10 +29,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons'; // Use this if thin is not available
 import { useClipboard } from 'use-clipboard-copy';
 import { CartContext } from './CartContext'
+import axios from 'axios'
 const Header = () => {
   const navigate = useNavigate();
   const { searchinput, handlesearch } = useContext(CartContext);
   const [searchinput2, setsearchinput2] = useState("");
+  const [latestcoupon,setlatestcoupon]=useState("");
   const clipboard = useClipboard({
     copiedTimeout: 9000,
   }
@@ -72,6 +74,7 @@ const Header = () => {
     };
 
     fetchData();
+    getcouponforuser();
   }, []);
   const [menuItems, setMenuItems] = useState([]);
   const [subcategories, setSubcategories] = useState({}); // Store subcategories by category ID
@@ -99,6 +102,37 @@ const Header = () => {
   const handleSubcategoryClick = async (subCategoryId) => {
     navigate(`/sub-category-products/${subCategoryId}`); // Navigate to products page
   };
+
+
+  const getcouponforuser = async () => {
+    try {
+        const response = await axios.get('https://api.hirdayam.com/api/getlatestcouponalways', {
+            headers: {
+                // 'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${token}`
+            }
+        });
+        if (response && response.data && response.data.data) {
+        let coupondata=response.data;
+  
+          setlatestcoupon(coupondata);
+        
+        
+      
+        console.log('Addres get success:', response.data);
+        }
+       
+    } catch (error) {
+        console.error('Error during couopnlistfor user submission:', error);
+
+        if (error.response) {
+            console.error('Server couponlistforuser responded with:', error.response.data);
+            // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
+        } else {
+            // setError('Address submission failed. Please try again.');
+        }
+    }
+};
 
 
   return (
@@ -141,7 +175,8 @@ const Header = () => {
                   </div>
 
                   <div className='p-4'>
-                    <img src={coming_soon}></img>
+                    <img className=' rounded-md' src={latestcoupon&&latestcoupon.data?"http://api.hirdayam.com/uploads/coupon_images/"+latestcoupon.data.image||"id not found":coming_soon}></img>
+                    {/* <div>{latestcoupon&&latestcoupon.data?latestcoupon.data._id||"id not found":"dfd"}</div> */}
                   </div>
                   <div className='flex px-4 py-3'>
                     <div style={{ backgroundImage: `url(${couponsvg2})` }} className=' flex   items-center gap-3 justify-center bg-contain   bg-no-repeat h-16 w-9/12  '>
@@ -155,7 +190,7 @@ const Header = () => {
                     </div>
                     <div className=' bg-contain mb-2 bg-no-repeat bg-center w-4/12 items-center justify-center flex text-center' style={{ backgroundImage: `url(${couponsvg1})` }}>
                       <span className=' text-[8px] text-nowrap'>use code<br></br>
-                        <input ref={clipboard.target} value={`${clipboard.copied ? 'Copied' : 'App 200'}`} onClick={clipboard.copy} readOnly className="text-[8px] p-1 w-10 text-center  outline-none rounded-md cursor-copy bg-blue-900 text-white"></input>
+                        <input ref={clipboard.target} value={`${clipboard.copied ? 'Copied' : latestcoupon&&latestcoupon.data?latestcoupon.data.code:"dfd"}`} onClick={clipboard.copy} readOnly className="text-[8px] p-1 w-10 text-center  outline-none rounded-md cursor-copy bg-blue-900 text-white"></input>
                       </span>
 
                     </div>

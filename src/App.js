@@ -73,8 +73,13 @@ import SubCategoryProducts from './SubCategoryProducts'
 import Couponlist from './Couponlist';
 import Reset from './Login-signup/Reset';
 import CategoryProducts from './CategoryProducts';
+
 const ScrollToTop = () => {
+   
     const { pathname } = useLocation();
+
+ 
+  
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -82,6 +87,7 @@ const ScrollToTop = () => {
 
     return null;
 };
+
 
 const App = () => {
     return (

@@ -333,7 +333,9 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   }, [favoriteCards]);
 
 
-
+ const handleProductClick = (productId) => {
+    navigate(`/similar/${productId}`); 
+  };
   const [favoriteCards1, setFavoriteCards1] = useState(() => {
     // Load favoriteCards from localStorage when the component mounts
     const storedFavorites1 = localStorage.getItem('favoriteCards');
@@ -834,7 +836,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const [quantityRequired, setQuantityRequired] = useState('');
   const [message, setMessage] = useState('');
   const [searchinput2, setsearchinput2] = useState("");
-
+  const [latestcoupon,setlatestcoupon]=useState([]);
   // const handleSubmit = (e) => {
   //   e.preventDefault();
 
@@ -964,6 +966,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     };
 
     fetchSlides();
+    getcouponforuser();
   }, []);
   // const handleSlideClick = (slide) => {
   //   const { product_id, category_id } = slide;
@@ -1033,6 +1036,36 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       setCurrentIndex(currentIndex - ITEMS_PER_PAGE);
     }
   };
+
+  const getcouponforuser = async () => {
+    try {
+        const response = await axios.get('https://api.hirdayam.com/api/getlatestcouponalways', {
+            headers: {
+                // 'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${token}`
+            }
+        });
+        if (response && response.data && response.data.data) {
+        let coupondata=response.data;
+  
+          setlatestcoupon(coupondata);
+        
+        
+      
+        console.log('Addres get success:', response.data);
+        }
+       
+    } catch (error) {
+        console.error('Error during couopnlistfor user submission:', error);
+
+        if (error.response) {
+            console.error('Server couponlistforuser responded with:', error.response.data);
+            // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
+        } else {
+            // setError('Address submission failed. Please try again.');
+        }
+    }
+};
   return (
     <>
       <Header />
@@ -1793,7 +1826,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
               <div className="card1-product rounded-md">
                 <div className="card-header w-36 h-56 md:h-72 md:w-full">
                   <Link
-                    to={`/card/${card.id}`}
+                    to={`/similar/${card.id}`}
                     className="card-link"
                     onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
                   >
@@ -1883,12 +1916,23 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
         <div className="promo-content  bg-[#9CA5C3] text-white p-6 md:p-8 lg:p-10 max-w-screen-lg mx-auto relative z-10">
           <div className="discount-text text-center text-2xl md:text-3xl lg:text-4xl md:text-left mb-4 md:mb-6 lg:mb-8">
-            Get Discount 20% off
+            Get Discount {latestcoupon&&latestcoupon.data?latestcoupon.data.discount||"id not found":"dfd"}% off
           </div>
-          <div className="subscribe-form flex  flex-col md:flex-row items-left justify-start gap-4 mb-4 md:mb-6">
-            <input type="email" placeholder="Enter your email address" className="w-full md:w-64 lg:w-80 h-10 px-4 border border-gray-300 text-gray-900" />
-            <button className="subscribe-button rounded-md md:rounded-none h-10 px-6 bg-[#23387A] text-white    hover:bg-[#1d2a5f]">
-              Subscribe
+          <div className="subscribe-form flex  flex-row md:flex-row items-left justify-start gap-2 mb-4 md:mb-6">
+            <input value={latestcoupon&&latestcoupon.data?latestcoupon.data.code||"id not found":"dfd"} disabled type="email" placeholder="Enter your email address" className="w-32 md:w-64 lg:w-80 h-10 px-4 border border-gray-300 text-white" />
+            <button
+            onClick={() => {
+      const couponCode = latestcoupon && latestcoupon.data ? latestcoupon.data.code : "dfd";
+      navigator.clipboard.writeText(couponCode)
+        .then(() => {
+          alert('Coupon code copied ');
+        })
+        .catch(err => {
+          console.error('Could not copy text: ', err);
+        });
+    }}
+              className="subscribe-button text-nowrap rounded-md md:rounded-none h-10 px-6 bg-[#23387A] text-white    hover:bg-[#1d2a5f]">
+              copy code
             </button>
           </div>
           <p className="promo-paragraph pt-32 text-center md:pt-0 text-sm md:text-base lg:text-lg leading-relaxed  md:ml-[32rem] md:text-left">
@@ -1908,7 +1952,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                 <div className="card-header w-36 h-56 md:h-72   md:w-full">
                   <Link
                     key={card.id}
-                    to={`/card6/${card.id}`}
+                    to={`/similar/${card.id}`}
                     className="card-link"
                     onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
                   > <div className=' w-full h-full flex items-center '>
@@ -1964,7 +2008,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
                   <div className="card-header w-36 h-56 md:h-72   md:w-full">
                     <Link
                       key={card.id}
-                      to={`/card8/${card.id}`}
+                      to={`/similar/${card.id}`}
                       className="card-link"
                       onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
                     > <div className=' w-full h-full flex items-center '>
@@ -2022,7 +2066,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
           {cards3.map(card => (
             <Link
               key={card.id}
-              to={`/card2/${card.id}`}
+              to={`/similar/${card.id}`}
               className="card-link"
               onClick={(e) => e.stopPropagation()} // Prevent click on Link from triggering card's default action
             >
