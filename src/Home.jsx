@@ -321,10 +321,6 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const handleFavoriteButtonClick = (id) => {
     console.log(id + "lksdsdjf")
     addToWishlist(id)
-
-    // setfavbutton(!favbutton)
-
-
   }
 
   useEffect(() => {

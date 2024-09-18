@@ -73,7 +73,8 @@ import SubCategoryProducts from './SubCategoryProducts'
 import Couponlist from './Couponlist';
 import Reset from './Login-signup/Reset';
 import CategoryProducts from './CategoryProducts';
-
+import AboutUs from './AboutUs'
+import Refundpolicy from './Refundpolicy'
 const ScrollToTop = () => {
    
     const { pathname } = useLocation();
@@ -160,6 +161,9 @@ const App = () => {
                     <Route path="/privacy-policy" element={<Privacy />} />
                     <Route path="/categories" element={<Category />} />
                     <Route path="/reset" element={<Reset />} />
+                    <Route path="/about-us" element={<AboutUs />} />
+
+                    <Route path="/refund-policy" element={<Refundpolicy />} />
 
                     <Route path="/terms-and-conditions" element={<Terms />} />
                     <Route path="/category-products/:category_id" element={<CategoryProducts />} />
@@ -175,6 +179,7 @@ const App = () => {
                     <Route path='/catalogproduct/:id' element={<Catalogproduct/>}></Route>
                     <Route path='/navbarlist' element={<Navbarlist></Navbarlist>}></Route>
                     <Route path='/Acrylic2' element={<TextEditer></TextEditer>}></Route>
+                    
                     <Route path='/Morecoupon' element={<Couponlist></Couponlist>}></Route>
                 <Route path="*" element={<Acrylic3 />}/>
                 </Routes>

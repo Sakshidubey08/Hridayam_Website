@@ -324,7 +324,7 @@ function Footer() {
                                 <NavLink to="/privacy-policy" className="footer-link1">Privacy Policy</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/refer-policy" className="footer-link1">Refer Policy</NavLink>
+                                <NavLink to="/refund-policy" className="footer-link1">Refund Policy</NavLink>
                             </li>
                         </ul>
                     </div>
@@ -332,7 +332,7 @@ function Footer() {
                         <h4 className="footer-title1 font-bold">Help</h4>
                         <ul className="footer-links1">
                             <li><a href="mailto:Lorem@gmail.com" className="footer-link1">Lorem@gmail.com</a></li>
-                            <li><a href="#" className="footer-link1">FAQ</a></li>
+                            {/* <li><a href="#" className="footer-link1">FAQ</a></li> */}
                         </ul>
                     </div>
                     {/* <div className="footer-section1 footer-section5 my-3">

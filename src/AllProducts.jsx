@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Range, getTrackBackground } from 'react-range';
 import axios from 'axios';
 import './AllP.css';
+import './Home.css';
+
 import Header from './Header';
 import { Link ,useLocation, useSearchParams} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +21,8 @@ function Filter() {
     const [favoriteCards, setFavoriteCards] = useState({});
     const [wishlist, setWishlist] = useState([]);
     const [mobileviewfiltter , setmobileviewfiltter] =useState(true);
-    
+    const [favbutton,setfavbutton]=useState(false);
+
     const [cards, setCards] = useState([]);
     const { addToWishlist, wishlistItems, removeFromWishlist } = useContext(WishlistContext);
     const navigate = useNavigate();
@@ -119,7 +122,7 @@ useEffect(()=>{
                     id: product._id,
                     imageUrl: product.image,
                     price: product.price,
-                    description: product.name,
+                    name: product.name,
                     imagesUrl: product.images,
                 }));
                 setCards(fetchedCards);
@@ -167,40 +170,49 @@ useEffect(()=>{
         }
         return 0;
     };
-
+    const handleFavoriteButtonClick = (id )=>{
+        console.log(id+"lksdsdjf")
+        addToWishlist(id)
+      
+        setfavbutton(!favbutton)
+      
+      
+      }
     
 
-    const handleFavoriteButtonClick = async (id, e) => {
-        e.stopPropagation(); // Prevent event propagation
-        e.preventDefault();
+    // const handleFavoriteButtonClick = async (id, e) => {
+    //     e.stopPropagation(); // Prevent event propagation
+    //     e.preventDefault();
 
-        const selectedCard = cards.find((card) => card.id === id);
-        if (!selectedCard) {
-            console.error('Card not found for id:', id);
-            return;
-        }
+    //     const selectedCard = cards.find((card) => card.id === id);
+    //     if (!selectedCard) {
+    //         console.error('Card not found for id:', id);
+    //         return;
+    //     }
 
-        const isFavorite = favoriteCards[id];
+    //     const isFavorite = favoriteCards[id];
 
-        try {
-            if (isFavorite) {
-                await removeFromWishlist(id);
-            } else {
-                await addToWishlist(selectedCard);
-            }
+    //     try {
+    //         if (isFavorite) {
+    //             await removeFromWishlist(id);
+    //         } else {
+    //             await addToWishlist(selectedCard);
+    //         }
 
-            setFavoriteCards((prev) => {
-                const updatedFavoriteCards = {
-                    ...prev,
-                    [id]: !prev[id],
-                };
-                localStorage.setItem('favoriteCards', JSON.stringify(updatedFavoriteCards));
-                return updatedFavoriteCards;
-            });
-        } catch (error) {
-            console.error('Error managing wishlist:', error);
-        }
-    };
+    //         setFavoriteCards((prev) => {
+    //             const updatedFavoriteCards = {
+    //                 ...prev,
+    //                 [id]: !prev[id],
+    //             };
+    //             localStorage.setItem('favoriteCards', JSON.stringify(updatedFavoriteCards));
+    //             return updatedFavoriteCards;
+    //         });
+    //     } catch (error) {
+    //         console.error('Error managing wishlist:', error);
+    //     }
+    // };
+
+
 
     const handleMaterialChange = (material) => {
         if (selectedMaterials.includes(material)) {
@@ -351,36 +363,46 @@ useEffect(()=>{
                 <div className="cards-container1 pt-10 md:pt-0">
                     {filteredCards.length > 0 ? (
                         filteredCards.map(card => (
-                            <Link key={card.id} to={`/similar/${card.id}`} className="card-link">
-                                <div className="card-wrapper">
-                                    <div className='card1 w-40 md:w-full rounded-md'>
-                                        <div className='card-header w-32 h-56 md:h-72   md:w-52'>
-                                           <div className='h-full w-full flex items-center justify-center'>
-                                            <img className='card-image1 rounded-xl  w-23 flex   object-contain m-0 p-0' src={card.imageUrl} alt={card.description} />
-                                            </div>
-                                            <button
-                                                className="favorite-btn"
-                                                onClick={(e) => handleFavoriteButtonClick(card.id, e)}
-                                                style={{
-                                                    cursor: 'pointer',
-                                                    border: 'none',
-                                                    background: 'none',
-                                                    padding: '5px',
-                                                }}
-                                            >
-                                                <i
-                                                    className={`fa-heart ${favoriteCards[card.id] ? 'fas' : 'far'}`}
-                                                    style={{ color: favoriteCards[card.id] ? 'red' : '#23387A', fontSize: '24px' }}
-                                                ></i>
-                                            </button>
-                                        </div>
-                                        <div className='card-info overflow-hidden my-3'>
-                                                <h3 className='image-descriptio  '>{card.description}</h3>
-                                            <p className='price'>{card.price}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
+                               
+                                <div  className="card-wrapper" style={{ cursor: 'pointer' }}>
+                <div className="card1">
+                  <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                  <Link key={card.id} to={`/similar/${card.id}`} className="card-link">
+
+                    <img
+                      src={card.imageUrl}
+                      alt="product"
+                      className="allProducts"
+                     
+                    />
+                    </Link>
+                    <button
+                      className="favorite-btn"
+                      onClick={(e) => handleFavoriteButtonClick(card.id)}
+                      style={{
+                        cursor: 'pointer',
+                        border: 'none',
+                        background: 'none',
+                        padding: '5px',
+                      }}
+                    >
+                      <i
+                        className={`fa-heart ${wishlistItems.data.data.some(item => item.product._id === card.id) ? 'fas' : 'far'}`}
+                        style={{ color: wishlistItems.data.data.some(item => item.product._id === card.id) ? 'red' : '#23387A', fontSize: '24px' }}
+
+                      ></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="card-info">
+                  <p className="image-description">{card.name}</p>
+                  <p className="price">
+                    ₹{card.price}
+                  </p>
+                </div>
+              </div>
+
                         ))
                     ) : (
                         <p>No products available in this price range.</p>
