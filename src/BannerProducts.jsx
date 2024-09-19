@@ -33,6 +33,8 @@ const ProductsPage = () => {
   const [selectedMaterials, setSelectedMaterials] = useState([]);
   const [selectedColor, setSelectedColor] = useState('');
   const [mobileviewfiltter, setmobileviewfiltter] = useState(true);
+  const [favbutton,setfavbutton]=useState(false);
+
   const handleMaterialChange = (material) => {
     if (selectedMaterials.includes(material)) {
       setSelectedMaterials(selectedMaterials.filter((m) => m !== material));
@@ -64,37 +66,46 @@ const ProductsPage = () => {
 
   //     fetchProducts();
   //   }, []);
-  const handleFavoriteButtonClick = async (id, e) => {
-    e.stopPropagation(); // Prevent event propagation
-    e.preventDefault();
+  // const handleFavoriteButtonClick = async (id, e) => {
+  //   e.stopPropagation(); // Prevent event propagation
+  //   e.preventDefault();
 
-    const selectedCard = cards.find((card) => card.id === id);
-    if (!selectedCard) {
-      console.error('Card not found for id:', id);
-      return;
-    }
+  //   const selectedCard = cards.find((card) => card.id === id);
+  //   if (!selectedCard) {
+  //     console.error('Card not found for id:', id);
+  //     return;
+  //   }
+  
+  //   const isFavorite = favoriteCards[id];
 
-    const isFavorite = favoriteCards[id];
+  //   try {
+  //     if (isFavorite) {
+  //       await removeFromWishlist(id);
+  //     } else {
+  //       await addToWishlist(selectedCard);
+  //     }
 
-    try {
-      if (isFavorite) {
-        await removeFromWishlist(id);
-      } else {
-        await addToWishlist(selectedCard);
-      }
+  //     setFavoriteCards((prev) => {
+  //       const updatedFavoriteCards = {
+  //         ...prev,
+  //         [id]: !prev[id],
+  //       };
+  //       localStorage.setItem('favoriteCards', JSON.stringify(updatedFavoriteCards));
+  //       return updatedFavoriteCards;
+  //     });
+  //   } catch (error) {
+  //     console.error('Error managing wishlist:', error);
+  //   }
+  // };
 
-      setFavoriteCards((prev) => {
-        const updatedFavoriteCards = {
-          ...prev,
-          [id]: !prev[id],
-        };
-        localStorage.setItem('favoriteCards', JSON.stringify(updatedFavoriteCards));
-        return updatedFavoriteCards;
-      });
-    } catch (error) {
-      console.error('Error managing wishlist:', error);
-    }
-  };
+  const handleFavoriteButtonClick = (id )=>{
+    console.log(id+"lksdsdjf")
+    addToWishlist(id)
+  
+    setfavbutton(!favbutton)
+  
+  
+  }
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -445,7 +456,7 @@ const ProductsPage = () => {
       )}
     </div> */}
         {/* <div className=" cards-container1  pt-20 md:pt-0"> */}
-        <div className={`cards-container1 ${filtersVisible ? 'pt-20 md:pt-0' : 'center-content'}`}>
+        {/* <div className={`cards-container1 ${filtersVisible ? 'pt-20 md:pt-0' : 'center-content'}`}>
           <div>
             {loading ? (
               <p>Loading products...</p>
@@ -483,7 +494,7 @@ const ProductsPage = () => {
                         />
                         <button
                           className="favorite-btn"
-                          onClick={(e) => handleFavoriteButtonClick(product._id, e)}
+                          onClick={(e) => handleFavoriteButtonClick(product._id)}
                           style={{
                             cursor: 'pointer',
                             border: 'none',
@@ -512,7 +523,49 @@ const ProductsPage = () => {
             )}
 
           </div>
-        </div>
+        </div> */}
+        <div className=" cards-container1  pt-20 md:pt-0">
+        {(filteredProducts && filteredProducts.products && filteredProducts.products.length > 0 ? filteredProducts.products : products).map((product) => (
+  <div key={product._id} className="card-wrapper" style={{ cursor: 'pointer' }}>
+    <div className="card1">
+      <div className="card-header w-32 h-56 md:h-72 md:w-full">
+        <Link to={`/similar/${product._id}`}>
+          <img
+            src={product.image}
+            alt="product"
+            className="card-image1"
+          />
+        </Link>
+        <button
+          className="favorite-btn"
+          onClick={(e) => handleFavoriteButtonClick(product._id)}
+          style={{
+            cursor: 'pointer',
+            border: 'none',
+            background: 'none',
+            padding: '5px',
+          }}
+        >
+          <i
+            className={`fa-heart ${wishlistItems.data.data.some(item => item.product._id === product._id) ? 'fas' : 'far'}`}
+            style={{
+              color: wishlistItems.data.data.some(item => item.product._id === product._id) ? 'red' : '#23387A',
+              fontSize: '24px',
+            }}
+          ></i>
+        </button>
+      </div>
+    </div>
+    <div className="card-info">
+      <p className="image-description">{product.name}</p>
+      <p className="price">₹{product.price}</p>
+    </div>
+  </div>
+))}
+
+
+
+</div>
       </div>
       <Footer />
     </>

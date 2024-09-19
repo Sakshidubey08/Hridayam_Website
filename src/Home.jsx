@@ -40,7 +40,7 @@ import image32 from './images/Rectangle.png'
 import group2 from './images/Group (8).png'
 import group4 from './images/Group4.png'
 import group5 from './images/group9.png'
-import headerslider from "./images/headerslide.svg"   
+import headerslider from "./images/headerslide.svg"
 import Footer from './Footer.jsx';
 import { Link } from 'react-router-dom';
 import group1 from './images/Group (5).png'
@@ -107,7 +107,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   // ];
   useEffect(() => {
 
-    const fetchData = async () =>{
+    const fetchData = async () => {
       try {
         const response = await fetch('https://api.hirdayam.com/api/getcategoryuser');
         const result = await response.json();
@@ -329,8 +329,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   }, [favoriteCards]);
 
 
- const handleProductClick = (productId) => {
-    navigate(`/similar/${productId}`); 
+  const handleProductClick = (productId) => {
+    navigate(`/similar/${productId}`);
   };
   const [favoriteCards1, setFavoriteCards1] = useState(() => {
     // Load favoriteCards from localStorage when the component mounts
@@ -832,8 +832,8 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   const [quantityRequired, setQuantityRequired] = useState('');
   const [message, setMessage] = useState('');
   const [searchinput2, setsearchinput2] = useState("");
-  const [latestcoupon,setlatestcoupon]=useState([]);
-  const [searchdatatext,setsearchdatatext]=useState("");
+  const [latestcoupon, setlatestcoupon] = useState([]);
+  const [searchdatatext, setsearchdatatext] = useState("");
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -854,7 +854,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   //   setError(null);
   //   setSuccess(false);
 
-   
+
 
   //   try {
   //     const response = await axios.post('https://api.hirdayam.com/api/createprebookEnquiry', submissionData);
@@ -882,39 +882,39 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
   // };
   const handleSubmit = async (e) => {
-   e.preventDefault();
+    e.preventDefault();
     // Collect form data from state variables
     const formData = {
-          first_name: firstName,
-          last_name: lastName,
-          phone_number: phoneNumber,
-          email ,
-          city,
-          gifting_for: giftingFor,
-          budget_per_gift: budgetPerGift,
-          quantity_required: quantityRequired,
-          message,
-        };
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phoneNumber,
+      email,
+      city,
+      gifting_for: giftingFor,
+      budget_per_gift: budgetPerGift,
+      quantity_required: quantityRequired,
+      message,
+    };
 
     console.log("Form Data being sent:", formData);
 
     try {
       const response = await axios.post('https://api.hirdayam.com/api/enquirenow', formData);
 
-      if (response.status === 200){
+      if (response.status === 200) {
         // setSuccess(true);
         setIsModalOpen(false);
-        
+
         // setFormData({ first_name: '', last_name: '', pho: '', message: '' });
       }
     } catch (error) {
-        console.log(error.response.data.message)
+      console.log(error.response.data.message)
     } finally {
       setLoading(false);
     }
   };
-  
-  
+
+
   const handleLoadMore2 = () => {
     setCardCount2(prevCount => prevCount + 8);
     setVisibleCards2(products14.slice(0, cardCount2 + 8));
@@ -980,7 +980,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   // };
   // const handleSlideClick = (slide) => {
   //   const { product_id, category_id } = slide;
-  
+
   //   if (Array.isArray(product_id) && product_id.length > 0) {
   //     const productIds = product_id.join(',');
   //     navigate(`/banner-products?ids=${productIds}`);
@@ -994,7 +994,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
   // };
   const handleSlideClick = (slide) => {
     const { product_id, category_id } = slide;
-  
+
     if (Array.isArray(product_id) && product_id.length > 0) {
       // Redirect to a page where multiple products are shown
       const productIds = product_id.join(',');
@@ -1011,7 +1011,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
       console.log('No valid product or category to navigate to.');
     }
   };
-  
+
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       // Navigate to the 'All Products' page, passing search text as query param
@@ -1023,7 +1023,7 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
     setsearchinput2(text.target.value);
     fetchsearchdatalist();
   }
-  
+
   const handleNext = () => {
     if (currentIndex + ITEMS_PER_PAGE < menuItems.length) {
       setCurrentIndex(currentIndex + ITEMS_PER_PAGE);
@@ -1038,63 +1038,63 @@ const Home = ({ handleFavoriteClick, handleFavoriteClick1, handleFavoriteClick2 
 
   const getcouponforuser = async () => {
     try {
-        const response = await axios.get('https://api.hirdayam.com/api/getlatestcouponalways', {
-            headers: {
-                // 'Content-Type': 'application/json',
-                // 'Authorization': `Bearer ${token}`
-            }
-        });
-        if (response && response.data && response.data.data) {
-        let coupondata=response.data;
-  
-          setlatestcoupon(coupondata);
-        
-        
-      
-        console.log('Addres get success:', response.data);
+      const response = await axios.get('https://api.hirdayam.com/api/getlatestcouponalways', {
+        headers: {
+          // 'Content-Type': 'application/json',
+          // 'Authorization': `Bearer ${token}`
         }
-       
-    } catch (error) {
-        console.error('Error during couopnlistfor user submission:', error);
-
-        if (error.response) {
-            console.error('Server couponlistforuser responded with:', error.response.data);
-            // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
-        } else {
-            // setError('Address submission failed. Please try again.');
-        }
-    }
-};
-
-const fetchsearchdatalist = async () => {
-  try {
-      const response = await axios.get(`https://api.hirdayam.com/api/universalSearch?search_key=${searchinput2}`, {
-          headers: {
-              // 'Content-Type': 'application/json',
-              // 'Authorization': `Bearer ${token}`
-          }
       });
       if (response && response.data && response.data.data) {
-      let searchhdata=response.data;
+        let coupondata = response.data;
+
+        setlatestcoupon(coupondata);
+
+
+
+        console.log('Addres get success:', response.data);
+      }
+
+    } catch (error) {
+      console.error('Error during couopnlistfor user submission:', error);
+
+      if (error.response) {
+        console.error('Server couponlistforuser responded with:', error.response.data);
+        // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
+      } else {
+        // setError('Address submission failed. Please try again.');
+      }
+    }
+  };
+
+  const fetchsearchdatalist = async () => {
+    try {
+      const response = await axios.get(`https://api.hirdayam.com/api/universalSearch?search_key=${searchinput2}`, {
+        headers: {
+          // 'Content-Type': 'application/json',
+          // 'Authorization': `Bearer ${token}`
+        }
+      });
+      if (response && response.data && response.data.data) {
+        let searchhdata = response.data;
 
         setsearchdatatext(searchhdata);
-      
-      
-    
-      console.log('searchdaralist success:', response.data);
+
+
+
+        console.log('searchdaralist success:', response.data);
       }
-     
-  } catch (error){
+
+    } catch (error) {
       console.error('Error during searchdaralist user submission:', error);
 
       if (error.response) {
-          console.error('searchdartalist:', error.response.data);
-          // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
+        console.error('searchdartalist:', error.response.data);
+        // setError(`Address submission failed: ${error.response.data.message || 'Unknown error'}`);
       } else {
-          // setError('Address submission failed. Please try again.');
+        // setError('Address submission failed. Please try again.');
       }
-  }
-};
+    }
+  };
   return (
     <>
       <Header />
@@ -1107,95 +1107,95 @@ const fetchsearchdatalist = async () => {
               className="search-input"
               placeholder="Search product..." />
           </div> */}
-          <div className='flex pl-8  items-center justify-center'>
-          <div className="dropdown dropdown-bottom  w-full mt-3 flex items-center justify-center      md:hidden ">
-  {/* <div tabIndex={0} role="button" className="btn m-1">Click</div> */}
-  <div tabIndex={0} role="button"  className=" w-full flex  items-center justify-between">
-            <img onClick={()=>{navigate(`/all-products?search=${searchinput2}`)}}  src={search} alt="Search Icon" className="search-icon" />
-            
+      <div className='flex pl-8  items-center justify-center'>
+        <div className="dropdown dropdown-bottom  w-full mt-3 flex items-center justify-center      md:hidden ">
+          {/* <div tabIndex={0} role="button" className="btn m-1">Click</div> */}
+          <div tabIndex={0} role="button" className=" w-full flex  items-center justify-between">
+            <img onClick={() => { navigate(`/all-products?search=${searchinput2}`) }} src={search} alt="Search Icon" className="search-icon" />
+
             <input
               onChange={handleSearch} // Call handleSearch on text input change
               onKeyPress={handleKeyPress} // Call handleKeyPress on key press
               type="text"
               className="search-input"
               placeholder="Search product..." />
-              
-              
+
+
           </div>
-  <ul tabIndex={0} className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.catelogs.length<1&&searchdatatext.data.categories.length<1&&searchdatatext.data.products.length<1?"hidden":"block"):""} ${searchinput2.length==0?"hidden":"block"} dropdown-content  my-2 mr-10 menu bg-base-100  rounded-box  z-[5000] w-11/12 shadow`}>
-  {/* <div>{searchdatatext&&searchdatatext.data?searchdatatext.data.products[0].name:"df"}</div>   */}
-  <div className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.products.length<1?"hidden":"block"):""} ml-3 font-semibold`}>
-  Products
+          <ul tabIndex={0} className={`${searchdatatext && searchdatatext.data ? (searchdatatext.data.catelogs.length < 1 && searchdatatext.data.categories.length < 1 && searchdatatext.data.products.length < 1 ? "hidden" : "block") : ""} ${searchinput2.length == 0 ? "hidden" : "block"} dropdown-content  my-2 mr-10 menu bg-base-100  rounded-box  z-[5000] w-11/12 shadow`}>
+            {/* <div>{searchdatatext&&searchdatatext.data?searchdatatext.data.products[0].name:"df"}</div>   */}
+            <div className={`${searchdatatext && searchdatatext.data ? (searchdatatext.data.products.length < 1 ? "hidden" : "block") : ""} ml-3 font-semibold`}>
+              Products
 
-  </div>
-  
-    {
-       
-      searchdatatext&&searchdatatext.data?searchdatatext.data.products.map((item,index)=>{
-          return(
-            <div key={index} onClick={()=>{navigate(`/similar/${item._id}`)}}>
-            <li className=''>
-
-            <a>
-            <img className='h-9 w-9  object-contain ' src={item.image||"not fount"}></img>
-
-            {item.name}</a></li>
             </div>
-          )
-      }):(<div className=' gap-3' >
-      <li ><a className=' skeleton h-4 my-1'></a></li>
-      <li ><a className=' skeleton h-4 my-1'></a></li>
-      <li><a className=' skeleton h-4 my-1'></a></li>
-      <li><a className=' skeleton h-4 my-1'></a></li>
-      </div>)
-    }
 
-    <div className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.categories.length<1?"hidden":"block"):""} ml-3 font-semibold`}>Category</div>
-    {
-       
-      searchdatatext&&searchdatatext.data?searchdatatext.data.categories.map((item,index)=>{
-          return(
-            <div key={index} onClick={()=>{navigate(`/sub-category-products/${item._id}`)}} >
-            <li className=''>
+            {
 
-            <a>
-            <img className='h-9 w-9  object-contain ' src={item.image||"not fount"}></img>
+              searchdatatext && searchdatatext.data ? searchdatatext.data.products.map((item, index) => {
+                return (
+                  <div key={index} onClick={() => { navigate(`/similar/${item._id}`) }}>
+                    <li className=''>
 
-            {item.name}</a></li>
-            </div>
-          )
-      }):(<div className=' gap-3' >
-      <li ><a className=' skeleton h-4 my-1'></a></li>
-      <li ><a className=' skeleton h-4 my-1'></a></li>
-      <li><a className=' skeleton h-4 my-1'></a></li>
-      <li><a className=' skeleton h-4 my-1'></a></li>
-      </div>)
-    }
-   
-    <div className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.catelogs.length<1?"hidden":"block"):""} ml-3 font-semibold`}>Catalog</div>
+                      <a>
+                        <img className='h-9 w-9  object-contain ' src={item.image || "not fount"}></img>
 
-    {
-      searchdatatext&&searchdatatext.data?searchdatatext.data.catelogs.map((item,index)=>{
-          return(
-            <div key={index} onClick={()=>{navigate(`/catalog/${item._id}`)}} >
-            <li className=''>
+                        {item.name}</a></li>
+                  </div>
+                )
+              }) : (<div className=' gap-3' >
+                <li ><a className=' skeleton h-4 my-1'></a></li>
+                <li ><a className=' skeleton h-4 my-1'></a></li>
+                <li><a className=' skeleton h-4 my-1'></a></li>
+                <li><a className=' skeleton h-4 my-1'></a></li>
+              </div>)
+            }
 
-            <a>
-            <img className='h-9 w-9 object-contain' src={item.image||"not fount"}></img>
+            <div className={`${searchdatatext && searchdatatext.data ? (searchdatatext.data.categories.length < 1 ? "hidden" : "block") : ""} ml-3 font-semibold`}>Category</div>
+            {
 
-            {item.title}</a></li>
-            </div>
-          )
-      }):(<div className=' gap-3' >
-      <li ><a className=' skeleton h-4 my-1'></a></li>
-      <li ><a className=' skeleton h-4 my-1'></a></li>
-      <li><a className=' skeleton h-4 my-1'></a></li>
-      <li><a className=' skeleton h-4 my-1'></a></li>
-      </div>)
-    }
-  </ul>
-</div>
-</div>
+              searchdatatext && searchdatatext.data ? searchdatatext.data.categories.map((item, index) => {
+                return (
+                  <div key={index} onClick={() => { navigate(`/sub-category-products/${item._id}`) }} >
+                    <li className=''>
+
+                      <a>
+                        <img className='h-9 w-9  object-contain ' src={item.image || "not fount"}></img>
+
+                        {item.name}</a></li>
+                  </div>
+                )
+              }) : (<div className=' gap-3' >
+                <li ><a className=' skeleton h-4 my-1'></a></li>
+                <li ><a className=' skeleton h-4 my-1'></a></li>
+                <li><a className=' skeleton h-4 my-1'></a></li>
+                <li><a className=' skeleton h-4 my-1'></a></li>
+              </div>)
+            }
+
+            <div className={`${searchdatatext && searchdatatext.data ? (searchdatatext.data.catelogs.length < 1 ? "hidden" : "block") : ""} ml-3 font-semibold`}>Catalog</div>
+
+            {
+              searchdatatext && searchdatatext.data ? searchdatatext.data.catelogs.map((item, index) => {
+                return (
+                  <div key={index} onClick={() => { navigate(`/catalog/${item._id}`) }} >
+                    <li className=''>
+
+                      <a>
+                        <img className='h-9 w-9 object-contain' src={item.image || "not fount"}></img>
+
+                        {item.title}</a></li>
+                  </div>
+                )
+              }) : (<div className=' gap-3' >
+                <li ><a className=' skeleton h-4 my-1'></a></li>
+                <li ><a className=' skeleton h-4 my-1'></a></li>
+                <li><a className=' skeleton h-4 my-1'></a></li>
+                <li><a className=' skeleton h-4 my-1'></a></li>
+              </div>)
+            }
+          </ul>
+        </div>
+      </div>
       <div class="menu-container  hidden md:flex">
         {/* <div class="menu-item">
           <div class="menu-heading">Corporate Gifting</div>
@@ -1371,54 +1371,54 @@ const fetchsearchdatalist = async () => {
             </div>
           ))}
         </div> */}
-      <div className='decoration'>
-      {/* Arrow for sliding left */}
-      <Rimpple color='gray' className=' bg-gray-300/40  font-semibold flex items-center justify-center p-1 w-6 h-6 m-auto rounded-full'>
-        <button className='' onClick={handlePrev} disabled={currentIndex === 0}>
-        <code>&#8592;</code> {/* Left arrow */}
-      </button>
-      </Rimpple>
-      
-      
-    
-     
-      <div className="menu-slider">
-      
-        {menuItems.slice(currentIndex, currentIndex + ITEMS_PER_PAGE).map((item) => (
-          <div key={item.id} className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
-            <div className="menu-heading">
-              {item.heading}
-            </div>
-            {dropdownOpen === item.id && subcategories[item.id] && (
-              <div className="dropdown15">
-                {subcategories[item.id].map((subCategory) => (
-                  <div
-                    key={subCategory._id}
-                    className="dropdown-item15"
-                    onClick={() => handleSubcategoryClick(subCategory._id)}
-                  >
-                    {subCategory.name}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-     
+        <div className='decoration'>
+          {/* Arrow for sliding left */}
+          <Rimpple color='gray' className=' bg-gray-300/40  font-semibold flex items-center justify-center p-1 w-6 h-6 m-auto rounded-full'>
+            <button className='' onClick={handlePrev} disabled={currentIndex === 0}>
+              <code>&#8592;</code> {/* Left arrow */}
+            </button>
+          </Rimpple>
 
-      {/* Arrow for sliding right */}
-      <Rimpple color="gray/30"  className=' bg-gray-300/40  flex items-center justify-center p-1 w-6 h-6 m-auto rounded-full'>
-         <button
-     
-        onClick={handleNext}
-        disabled={currentIndex + ITEMS_PER_PAGE >= menuItems.length}
-      >
-       <code>&#8594;</code>  {/* Right arrow */}
-      </button>
-      </Rimpple>
-     
-    </div>
+
+
+
+          <div className="menu-slider">
+
+            {menuItems.slice(currentIndex, currentIndex + ITEMS_PER_PAGE).map((item) => (
+              <div key={item.id} className="menu-item" onMouseEnter={() => handleHeadingClick(item.id)}>
+                <div className="menu-heading">
+                  {item.heading}
+                </div>
+                {dropdownOpen === item.id && subcategories[item.id] && (
+                  <div className="dropdown15">
+                    {subcategories[item.id].map((subCategory) => (
+                      <div
+                        key={subCategory._id}
+                        className="dropdown-item15"
+                        onClick={() => handleSubcategoryClick(subCategory._id)}
+                      >
+                        {subCategory.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+
+          {/* Arrow for sliding right */}
+          <Rimpple color="gray/30" className=' bg-gray-300/40  flex items-center justify-center p-1 w-6 h-6 m-auto rounded-full'>
+            <button
+
+              onClick={handleNext}
+              disabled={currentIndex + ITEMS_PER_PAGE >= menuItems.length}
+            >
+              <code>&#8594;</code>  {/* Right arrow */}
+            </button>
+          </Rimpple>
+
+        </div>
 
         {/* <div className='decoration'>
       <Swiper
@@ -1616,186 +1616,186 @@ const fetchsearchdatalist = async () => {
               </div>
             </div>
           )} */}
-           <div className="menu-heading" onClick={() => setIsModalOpen(true)}>Contact Us</div>
+          <div className="menu-heading" onClick={() => setIsModalOpen(true)}>Contact Us</div>
 
-{isModalOpen && (
-  <div className="fixed z-20 inset-0 overflow-y-auto">
-    <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-      <div className="fixed inset-0 transition-opacity">
-        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-      </div>
-      <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-      <div
-        className="inline-block align-bottom bg-white px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
-        style={{ maxWidth: '700px' }}
-      >
-        <div className="flex flex-col items-center justify-center">
-          <h1
-            className="leading-6 font-medium text-gray-900"
-            style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}
-          >
-            Talk to Our Experts
-            <button
-              type="button"
-              className="absolute right-[-5.2rem] top-6 text-gray-500 hover:text-gray-700 focus:outline-none"
-              onClick={() => setIsModalOpen(false)}
-            >
-              <FontAwesomeIcon icon={faTimes} size="lg" />
-            </button>
-          </h1>
-          <div className="mt-6 w-full">
-            <form className="w-full" onSubmit={handleSubmit}>
-              <div className="flex flex-col space-y-4">
-                <div className="flex space-x-4">
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="firstName"
-                    name='first_name'
-                    type="text"
-                    placeholder="Enter Your First name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                  />
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="lastName"
-                    name='last_name'
-                    type="text"
-                    placeholder="Enter Your Last name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                  />
+          {isModalOpen && (
+            <div className="fixed z-20 inset-0 overflow-y-auto">
+              <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
                 </div>
-                <div className="flex space-x-4">
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="email"
-                    name='email'
-                    placeholder="Enter Your Business Email Address*"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="phone"
-                    name='phone_number'
-                    type="text"
-                    placeholder="Enter Your Phone number*"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="flex space-x-4">
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="city"
-                    name='city'
-                    type="text"
-                    placeholder="Enter your city*"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                  />
-                  <select
-                    className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="giftingFor"
-                    name='gifting_for'
-                    value={giftingFor}
-                    onChange={(e) => setGiftingFor(e.target.value)}
-                    required
-                  >
-                    <option value="">Gifting For *</option>
-                    <option value="internalEmployees">Internal Employees</option>
-                    <option value="clientsCustomers">Clients/Customers</option>
-                    <option value="vipCeo">VIP/CEO</option>
-                    <option value="others">Others</option>
-                  </select>
-                </div>
-                <div className="flex space-x-4">
-                  <select
-                    className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="budget"
-                    name='budget'
-                    value={budgetPerGift}
-                    onChange={handleSelectChange1}
-                    required
-                  >
-                    <option value="">Budget Per Gift *</option>
-                    <option value="0-500">₹0 - ₹500</option>
-                    <option value="500-1000">₹500 -₹1000</option>
-                    <option value="2000-5000">₹2000-₹5000</option>
-                    <option value="5000-10000">₹5000-₹10000</option>
-                    <option value="other">Other</option>
-                  </select>
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                <div
+                  className="inline-block align-bottom bg-white px-4 pt-5 pb-4 text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+                  style={{ maxWidth: '700px' }}
+                >
+                  <div className="flex flex-col items-center justify-center">
+                    <h1
+                      className="leading-6 font-medium text-gray-900"
+                      style={{ fontFamily: 'Poppins', fontWeight: 'bolder', fontSize: '18px' }}
+                    >
+                      Talk to Our Experts
+                      <button
+                        type="button"
+                        className="absolute right-[-5.2rem] top-6 text-gray-500 hover:text-gray-700 focus:outline-none"
+                        onClick={() => setIsModalOpen(false)}
+                      >
+                        <FontAwesomeIcon icon={faTimes} size="lg" />
+                      </button>
+                    </h1>
+                    <div className="mt-6 w-full">
+                      <form className="w-full" onSubmit={handleSubmit}>
+                        <div className="flex flex-col space-y-4">
+                          <div className="flex space-x-4">
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="firstName"
+                              name='first_name'
+                              type="text"
+                              placeholder="Enter Your First name"
+                              value={firstName}
+                              onChange={(e) => setFirstName(e.target.value)}
+                              required
+                            />
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="lastName"
+                              name='last_name'
+                              type="text"
+                              placeholder="Enter Your Last name"
+                              value={lastName}
+                              onChange={(e) => setLastName(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <div className="flex space-x-4">
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="email"
+                              name='email'
+                              placeholder="Enter Your Business Email Address*"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                              required
+                            />
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="phone"
+                              name='phone_number'
+                              type="text"
+                              placeholder="Enter Your Phone number*"
+                              value={phoneNumber}
+                              onChange={(e) => setPhoneNumber(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <div className="flex space-x-4">
+                            <input
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="city"
+                              name='city'
+                              type="text"
+                              placeholder="Enter your city*"
+                              value={city}
+                              onChange={(e) => setCity(e.target.value)}
+                              required
+                            />
+                            <select
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="giftingFor"
+                              name='gifting_for'
+                              value={giftingFor}
+                              onChange={(e) => setGiftingFor(e.target.value)}
+                              required
+                            >
+                              <option value="">Gifting For *</option>
+                              <option value="internalEmployees">Internal Employees</option>
+                              <option value="clientsCustomers">Clients/Customers</option>
+                              <option value="vipCeo">VIP/CEO</option>
+                              <option value="others">Others</option>
+                            </select>
+                          </div>
+                          <div className="flex space-x-4">
+                            <select
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="budget"
+                              name='budget'
+                              value={budgetPerGift}
+                              onChange={handleSelectChange1}
+                              required
+                            >
+                              <option value="">Budget Per Gift *</option>
+                              <option value="0-500">₹0 - ₹500</option>
+                              <option value="500-1000">₹500 -₹1000</option>
+                              <option value="2000-5000">₹2000-₹5000</option>
+                              <option value="5000-10000">₹5000-₹10000</option>
+                              <option value="other">Other</option>
+                            </select>
 
-                  {showOther1 && (
-                    <input
-                      type="text"
-                      className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
-                      id="other-budget"
-                      name="other-budget"
-                      placeholder="Please specify your budget"
-                      value={budgetPerGift === 'other' ? '' : budgetPerGift}
-                      onChange={(e) => setBudgetPerGift(e.target.value)}
-                    />
-                  )}
-                  <select
-                    className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="quantity-select"
-                    name="quantity_required"
-                    value={quantityRequired}
-                    onChange={handleSelectChange}
-                    required
-                  >
-                    <option value="">Quantity Required *</option>
-                    <option value="10-50">10-50pcs</option>
-                    <option value="50-100">50-100pcs</option>
-                    <option value="100-200">100-200pcs</option>
-                    <option value="200-300">200-300pcs</option>
-                    <option value="other">Other</option>
-                  </select>
-                  {showOther && (
-                    <input
-                      type="text"
-                      id="other-quantity"
-                      name="other_quantity"
-                      placeholder="Please specify"
-                      className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
-                      value={quantityRequired === 'other' ? '' : quantityRequired}
-                      onChange={(e) => setQuantityRequired(e.target.value)}
-                    />
-                  )}
-                </div>
-                <div className="w-full">
-                  <textarea
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="wishingMessage"
-                    name='message'
-                    placeholder="Enter Your Message"
-                    rows="2"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
-                  ></textarea>
+                            {showOther1 && (
+                              <input
+                                type="text"
+                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+                                id="other-budget"
+                                name="other-budget"
+                                placeholder="Please specify your budget"
+                                value={budgetPerGift === 'other' ? '' : budgetPerGift}
+                                onChange={(e) => setBudgetPerGift(e.target.value)}
+                              />
+                            )}
+                            <select
+                              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="quantity-select"
+                              name="quantity_required"
+                              value={quantityRequired}
+                              onChange={handleSelectChange}
+                              required
+                            >
+                              <option value="">Quantity Required *</option>
+                              <option value="10-50">10-50pcs</option>
+                              <option value="50-100">50-100pcs</option>
+                              <option value="100-200">100-200pcs</option>
+                              <option value="200-300">200-300pcs</option>
+                              <option value="other">Other</option>
+                            </select>
+                            {showOther && (
+                              <input
+                                type="text"
+                                id="other-quantity"
+                                name="other_quantity"
+                                placeholder="Please specify"
+                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+                                value={quantityRequired === 'other' ? '' : quantityRequired}
+                                onChange={(e) => setQuantityRequired(e.target.value)}
+                              />
+                            )}
+                          </div>
+                          <div className="w-full">
+                            <textarea
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="wishingMessage"
+                              name='message'
+                              placeholder="Enter Your Message"
+                              rows="2"
+                              value={message}
+                              onChange={(e) => setMessage(e.target.value)}
+                              required
+                            ></textarea>
+                          </div>
+                        </div>
+                        <button
+                          type="submit"
+                          className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mt-6"
+                        >
+                          ENQUIRE NOW
+                        </button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <button
-                type="submit"
-                className="bg-[#23387A] w-full text-white font-medium py-3 px-4 rounded text-xs mt-6"
-              >
-                ENQUIRE NOW
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+            </div>
+          )}
 
         </div>
       </div>
@@ -1831,24 +1831,24 @@ const fetchsearchdatalist = async () => {
             ))}
           </Swiper> */}
           <Swiper
-      cssMode={true}
-      navigation={true}
-      pagination={true}
-      mousewheel={true}
-      keyboard={true}
-      className="mySwiper w-full"
-    >
-      {slides.map((slide, index) => (
-        <SwiperSlide key={index} onClick={() => handleSlideClick(slide)}>
-          <div className="">
-            <img
-              src={slide.image}
-              style={{ height: '100%', width: '100%', objectFit: 'cover' }}
-              className="block w-full h-[800px] md:h-auto object-cover"
-              alt={`slide${index + 1}`}
-            />
-          </div>
-          {/* <div className="md:hidden">
+            cssMode={true}
+            navigation={true}
+            pagination={true}
+            mousewheel={true}
+            keyboard={true}
+            className="mySwiper w-full"
+          >
+            {slides.map((slide, index) => (
+              <SwiperSlide key={index} onClick={() => handleSlideClick(slide)}>
+                <div className="">
+                  <img
+                    src={slide.image}
+                    style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+                    className="block w-full h-[800px] md:h-auto object-cover"
+                    alt={`slide${index + 1}`}
+                  />
+                </div>
+                {/* <div className="md:hidden">
             <img
                src={headerslider} // Assuming headerslider is a fallback image for mobile
               style={{ height: '100%', width: '100%', objectFit: 'cover' }}
@@ -1856,10 +1856,10 @@ const fetchsearchdatalist = async () => {
               alt={`slide${index + 1}`}
             />
           </div> */}
-        </SwiperSlide>
-      ))}
-    </Swiper>
-    
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
           <div className='image-box  bg-white px-10  flex z-10 justify-around items-center absolute left-0 right-0  md:mx-auto md:left-auto md:right-auto  top-[3.3rem] md:top-[14.3rem]'>
             <div className='image-item   text-wrap'>
               <img src={icon5} alt="" className='box-image' />
@@ -2029,32 +2029,32 @@ const fetchsearchdatalist = async () => {
         )}
       </div> */}
       <div>
-        <img src={group1} className="group1" alt="Group Image" /></div>
+      <img src={group1} className="group1" alt="Group Image" /></div>
       <div className="relative ">
 
         <div className="promo-content  bg-[#9CA5C3] text-white p-6 md:p-8 lg:p-10 max-w-screen-lg mx-auto relative z-10">
           <div className="discount-text text-center text-2xl md:text-3xl lg:text-4xl md:text-left mb-4 md:mb-6 lg:mb-8">
-            Get Discount {latestcoupon&&latestcoupon.data?latestcoupon.data.discount||"id not found":"dfd"}% off
+            Get Discount {latestcoupon && latestcoupon.data ? latestcoupon.data.discount || "id not found" : "dfd"}% off
           </div>
           <div className="subscribe-form flex  flex-row md:flex-row items-left justify-start gap-2 mb-4 md:mb-6">
-            <input value={latestcoupon&&latestcoupon.data?latestcoupon.data.code||"id not found":"dfd"} disabled type="email" placeholder="Enter your email address" className="w-32 md:w-64 lg:w-80 h-10 px-4 border border-gray-300 text-white" />
+            <input value={latestcoupon && latestcoupon.data ? latestcoupon.data.code || "id not found" : "dfd"} disabled type="email" placeholder="Enter your email address" className="w-32 md:w-64 lg:w-80 h-10 px-4 border border-gray-300 text-white" />
             <button
-            onClick={() => {
-      const couponCode = latestcoupon && latestcoupon.data ? latestcoupon.data.code : "dfd";
-      navigator.clipboard.writeText(couponCode)
-        .then(() => {
-          alert('Coupon code copied ');
-        })
-        .catch(err => {
-          console.error('Could not copy text: ', err);
-        });
-    }}
+              onClick={() => {
+                const couponCode = latestcoupon && latestcoupon.data ? latestcoupon.data.code : "dfd";
+                navigator.clipboard.writeText(couponCode)
+                  .then(() => {
+                    alert('Coupon code copied ');
+                  })
+                  .catch(err => {
+                    console.error('Could not copy text: ', err);
+                  });
+              }}
               className="subscribe-button text-nowrap rounded-md md:rounded-none h-10 px-6 bg-[#23387A] text-white    hover:bg-[#1d2a5f]">
               copy code
             </button>
           </div>
           <p className="promo-paragraph pt-32 text-center md:pt-0 text-sm md:text-base lg:text-lg leading-relaxed  md:ml-[32rem] md:text-left">
-            The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers.
+            {latestcoupon && latestcoupon.data ? latestcoupon.data.title || "id not found" : "dfd"}
           </p>
         </div>
       </div>

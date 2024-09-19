@@ -321,7 +321,7 @@ const SignupForm = () => {
 
   
   // const validatePassword = (password) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
-  const validatePassword = (password) => /^[a-zA-Z0-9]{8}$/.test(password);
+  const validatePassword = (password) => /^[A-Za-z\d]{8,}$/.test(password);
 
   // const handlePhoneChange = (e) => setPhone(e.target.value.trim());
   // const handleEmailChange = (e) => setEmail(e.target.value.trim());

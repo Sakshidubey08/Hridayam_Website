@@ -521,7 +521,7 @@ const CatalogProducts = () => {
       <div key={product._id} className="card-wrapper" style={{ cursor: 'pointer' }}>
                                 <div className="card1-product rounded-md">
                                     <div className="card-header w-32 h-56 md:h-72   md:w-full">
-                                    <Link to={`/similar/${product._id}`}>
+                                     <Link to={`/similar/${product._id}`}>
                                         <div className='w-full h-full flex items-center'>
 
                                         
