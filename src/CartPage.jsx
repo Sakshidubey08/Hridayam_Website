@@ -413,6 +413,7 @@ function App() {
                               <div>
                                 <p className=' font-bold text-lg my-3'>Select Size</p>
                                 <hr />
+                                
                                 <div className='my-4'>
                                   <p className='  border border-black w-7 h-7 p-4 flex items-center  justify-center rounded-full '>M</p>
                                 </div>
