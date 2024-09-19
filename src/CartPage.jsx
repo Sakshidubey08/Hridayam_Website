@@ -402,14 +402,12 @@ function App() {
                       <div className="product-options">
                         <div onClick={() => document.getElementById('my_modal_31').showModal()} className="option flex items-center">
                           <span className="labe flex items-center w-20 justify-center gap-2 bg-gray-300/30 rounded-md">
-                            Size:<span>M</span>
+                            Size:<span>{item.product.variation_size}</span>
                             <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
-                            {/* <div className=' r'><svg width={"20px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg></div> */}
                           </span>
                           <dialog id="my_modal_31" className="modal">
                             <div className="modal-box  w-80">
                               <form method="dialog">
-                                {/* if there is a button in form, it will close the modal */}
                                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                               </form>
                               <div>

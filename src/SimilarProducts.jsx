@@ -18,6 +18,7 @@ const ProductDetailsPage = () => {
     const { addToCart } = useContext(CartContext);
     const navigate = useNavigate(); // For programmatic navigation
     const [selectedColor, setSelectedColor] = useState(null); // State to track selected color
+    const [selectedVariation, setSelectedVariation] = useState(null);
 
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -36,7 +37,11 @@ const ProductDetailsPage = () => {
         line4: "Easy 14 days returns and exchanges."
     });
     const [checkButtonText, setCheckButtonText] = useState('Check');
-
+    const handleVariationClick = (variation) => {
+        setSelectedVariation(variation); // Store the selected variation in the state
+        console.log('Selected Variation:', variation);
+    };
+    
 
     useEffect(() => {
         const fetchProductDetails = async () => {
@@ -140,8 +145,12 @@ const ProductDetailsPage = () => {
                 name: selectedProduct.name,
                 price: parseFloat(selectedProduct.price),
                 image: file, // Use uploaded image or main image
-                color: selectedProduct.colors[0],
-                variation: selectedProduct.variations[0],
+                // color: selectedProduct.colors[0],
+                color: selectedColor?._id,
+
+                // variation: selectedProduct.variations[0],
+                variation: selectedVariation?._id,
+
                 text: personalizeText
             };
 
@@ -282,7 +291,10 @@ const ProductDetailsPage = () => {
                     <div className="scrollable-content4">
                         <div className="product-info">
                             <h1 className='product-name'>{selectedProduct?.name}</h1>
-                            <p className="price1">&#8377;{selectedProduct?.price}</p>
+                            {/* <p className="price1">&#8377;{selectedProduct?.price}</p> */}
+                            <p className="price1">
+                &#8377;{selectedVariation ? selectedVariation.size_price : selectedProduct?.price}
+            </p>
                             <h3 className='selected1'>Selected Quantity</h3>
                             <div className="quantity-selector">
                                 <button onClick={handleDecrement} className="quantity-btn">-</button>
@@ -352,8 +364,6 @@ const ProductDetailsPage = () => {
                                         type='text'
                                         className='border w-96 mr-20 px-3 my-4 py-2 rounded-md'
                                         placeholder='Enter Your Text here'
-                                    // Bind the state to the input value
-                                    // Update state on change
                                     />
 
                                     <div>
@@ -388,6 +398,28 @@ const ProductDetailsPage = () => {
                                     </div>
                                 )}
                             </div>
+                            <div>
+    
+    {selectedProduct && selectedProduct.variations && selectedProduct.variations.length > 0 && (
+        <div>
+            <h3 className='free'>Available Sizes</h3>
+            <div style={{ display: 'flex', flexDirection: 'row', }}>
+                {selectedProduct.variations.map((variation) => (
+                    <div key={variation._id} style={{ marginBottom: '10px' }}>
+                        <h3
+                            className="variation-size border"
+                            onClick={() => handleVariationClick(variation)}  // Optional: Add onClick for selecting variation
+                            style={{ cursor: 'pointer',marginRight:'6px' }}
+                        >
+                            {variation.size || "No size"}
+                        </h3>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )}
+    </div>
+
 
                             <div className="buttons">
                                 {/* <button className="wishlist-btn">
