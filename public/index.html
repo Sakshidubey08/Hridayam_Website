@@ -46,6 +46,21 @@
   display: none;             /* Safari and Chrome */
 }
 
+.scrollbar-none2 {
+  /*-ms-overflow-style: none;   Internet Explorer 10+ */
+  scrollbar-width:thin;
+       /* Firefox */
+  border-radius: 20px;
+}
+.scrollbar-none::-webkit-scrollbar-thumb{
+  width: 2px;
+  border-radius: 5px;
+}
+
+.scrollbar-none2::-webkit-scrollbar {
+  display: none;            
+}
+
 .selectDisable {
     -webkit-user-select: none;
     -khtml-user-select: none;
