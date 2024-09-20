@@ -63,7 +63,8 @@ const ProductDetailsPage = () => {
                     setSelectedImage(product.image || null); // Set the main image
                     console.log("Product Colors:", product.colors); // Debug colors data
 
-                } else {
+                } 
+                 else {
                     console.error("API response does not contain expected data:", data);
                     setProduct(null);
                     setSelectedProduct(null);
@@ -154,9 +155,13 @@ const ProductDetailsPage = () => {
 
                 text: personalizeText
             };
-
+               
             // addToCart(productToAdd, quantity);
             // navigate('/cart');
+            if(selectedProduct.stock==0){
+                alert("Product is out of stock")
+                return;
+            }
 
             if (file == null && selectedProduct?.product_type == "personalize") {
                 alert("Please Select Image")

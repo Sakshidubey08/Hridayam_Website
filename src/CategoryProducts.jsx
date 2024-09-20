@@ -45,37 +45,42 @@ const ProductsPage = () => {
     return 0;
 };
 
-const handleFavoriteButtonClick = async (id, e) => {
-  e.stopPropagation(); // Prevent event propagation
-  e.preventDefault();
+// const handleFavoriteButtonClick = async (id, e) => {
+//   e.stopPropagation(); // Prevent event propagation
+//   e.preventDefault();
 
-  const selectedCard = cards.find((card) => card.id === id);
-  if (!selectedCard) {
-      console.error('Card not found for id:', id);
-      return;
-  }
+//   const selectedCard = cards.find((card) => card.id === id);
+//   if (!selectedCard) {
+//       console.error('Card not found for id:', id);
+//       return;
+//   }
 
-  const isFavorite = favoriteCards[id];
+//   const isFavorite = favoriteCards[id];
 
-  try {
-      if (isFavorite) {
-          await removeFromWishlist(id);
-      } else {
-          await addToWishlist(selectedCard);
-      }
+//   try {
+//       if (isFavorite) {
+//           await removeFromWishlist(id);
+//       } else {
+//           await addToWishlist(selectedCard);
+//       }
 
-      setFavoriteCards((prev) => {
-          const updatedFavoriteCards = {
-              ...prev,
-              [id]: !prev[id],
-          };
-          localStorage.setItem('favoriteCards', JSON.stringify(updatedFavoriteCards));
-          return updatedFavoriteCards;
-      });
-  } catch (error) {
-      console.error('Error managing wishlist:', error);
-  }
-};
+//       setFavoriteCards((prev) => {
+//           const updatedFavoriteCards = {
+//               ...prev,
+//               [id]: !prev[id],
+//           };
+//           localStorage.setItem('favoriteCards', JSON.stringify(updatedFavoriteCards));
+//           return updatedFavoriteCards;
+//       });
+//   } catch (error) {
+//       console.error('Error managing wishlist:', error);
+//   }
+// };
+const handleFavoriteButtonClick = (id) => {
+  console.log(id + "lksdsdjf")
+  addToWishlist(id)
+}
+
 const handleIconClick = () => {
   setFiltersVisible(!filtersVisible);
 };
@@ -140,7 +145,7 @@ const handleIconClick = () => {
         <div className="main-container">
         {/* Toggle Filters Section */}
         {filtersVisible ? (
-          <div className="filter-container">
+          <div className="filter-container hidden md:block ">
             <div className="filter-header">
               <h2>Filters</h2>
               {/* <div className="filter-toggle-icon" onClick={handleIconClick}>
@@ -293,16 +298,19 @@ const handleIconClick = () => {
             
               <div key={product._id} className="card-wrapper" style={{ cursor: 'pointer' }}>
                 <div className="card1">
-                  <div className="card-header w-32 h-56 md:h-72   md:w-full" onClick={() => handleProductClick(product._id)}>
+                  <div className="card-header w-32 h-56 md:h-72   md:w-full">
+                  <Link to={`/similar/${product._id}`}>
+
                     <img
                       src={product.image}
                       alt="product"
                       className="card-image1"
                      
                     />
+                    </Link>
                     <button
                       className="favorite-btn"
-                      onClick={(e) => handleFavoriteButtonClick(product._id, e)}
+                      onClick={(e) => handleFavoriteButtonClick(product._id)}
                       style={{
                         cursor: 'pointer',
                         border: 'none',
@@ -310,10 +318,14 @@ const handleIconClick = () => {
                         padding: '5px',
                       }}
                     >
-                      <i
+                      {/* <i
                         className={`fa-heart ${favoriteCards[product.id] ? 'fas' : 'far'}`}
                         style={{ color: favoriteCards[product.id] ? 'red' : '#23387A', fontSize: '24px' }}
-                      ></i>
+                      ></i> */}
+                        <i
+                          className={`fa-heart ${wishlistItems.data.data.some(item=>item.product._id==product._id) ? 'fas' : 'far'} `}
+                          style={{ color: wishlistItems.data.data.some(item=>item.product._id==product._id) ? 'red' : '#23387A', fontSize: '24px' }}
+                                            ></i>
                     </button>
                   </div>
                 </div>

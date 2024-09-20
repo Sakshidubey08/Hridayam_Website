@@ -859,8 +859,8 @@ import Header from './Header';
 import rect1 from './images/rect6.png'
 import PreviewImg from "./images/Preview.png"
 import circle1 from "./images/GOLDEN CIRCLE FRAME.jpg"
-import square from './images/SQUARE FRAME.jpg'
-import square1 from './images/GOLDEN SQUARE RAME.jpg'
+import square from './images/Square1.png'
+import square1 from './images/Square.png'
 import rect2 from './images/RECTANGLE FEAME(1).jpg'
 import rect7 from './images/rect7.jpg'
 import oval from './images/oval.png'
@@ -1377,8 +1377,7 @@ function App() {
             <div className="rectangle-section gap-1 md:gap-6 mt-4" style={{ display: 'flex', flexDirection: 'column' }}>
                 <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
                 <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
-                <img src={rect1} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect1)} />
-                <img src={rect7} style={{ height: '60px', width: '60px' }} onClick={() => handleImageClick(rect7)} />
+
             </div>
         )}
 

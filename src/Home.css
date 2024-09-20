@@ -682,7 +682,8 @@ body {
 .promo-content {
   background-color: #9CA5C3;
   padding: 20px;
-  max-width: 1072px; /* Adjust as needed */
+  max-width: 1072px;
+  height: 230px; 
   position: absolute;
   top: 12rem;
   z-index: 1;
