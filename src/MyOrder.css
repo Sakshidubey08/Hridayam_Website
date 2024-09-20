@@ -28,7 +28,7 @@
     font-size: 16px;
     color: #777;
   }
-/* 
+ 
   @media only screen and (max-width: 600px) {
     .order-table-container {
       width: 90%;
@@ -45,51 +45,4 @@
       text-align: center;
       color: white;
     }
-  } */
-
-  @media only screen and (max-width: 600px) {
-    .order-table-container {
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        margin-top: 20px;
-    }
-
-    .header-cell, .table-body td {
-        font-weight: lighter;
-        font-size: 10px;
-        text-align: center;
-    }
-
-    .wishlist-table {
-        width: 100%;
-        font-size: 10px;
-    }
-
-    .modal-box {
-        width: 90%; /* Adjust modal size */
-    }
-
-    /* Adjust input and button alignment for mobile */
-    .mx-14 {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    .flex {
-        flex-direction: column; /* Stack elements vertically on small screens */
-    }
-
-    .gap-3 {
-        gap: 10px;
-    }
-
-    .wishlist-table th, .wishlist-table td {
-        padding: 5px; /* Reduce padding for mobile */
-    }
-
-    .btn {
-        font-size: 12px;
-        padding: 6px 8px;
-    }
-}
+  } 
