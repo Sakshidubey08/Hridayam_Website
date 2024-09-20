@@ -145,7 +145,7 @@ const handleIconClick = () => {
         <div className="main-container">
         {/* Toggle Filters Section */}
         {filtersVisible ? (
-          <div className="filter-container">
+          <div className="filter-container hidden md:block ">
             <div className="filter-header">
               <h2>Filters</h2>
               {/* <div className="filter-toggle-icon" onClick={handleIconClick}>

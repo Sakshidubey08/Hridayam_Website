@@ -6,13 +6,16 @@ import Header from '../Header';
 import '../Signup.css';
 import { useAuth } from '../store/auth';
 import Footer from '../Footer';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const { storeTokenInLS } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSubmit = async (event) =>{
@@ -37,7 +40,8 @@ const Login = () => {
       
      
       navigate('/');
-      
+      window.location.reload(); // Refresh the page
+
       setEmail('');
       setPassword('');
     } catch (error) {
@@ -78,7 +82,9 @@ const Login = () => {
           </div>
           <div className="input-container">
             <input
-              type="password"
+              // type="password"
+              type={showPassword ? 'text' : 'password'}
+
               id="password"
               name="password"
               value={password}
@@ -86,12 +92,18 @@ const Login = () => {
               placeholder="Password"
               required
             />
+             <span
+        className="toggle-password2"
+        onClick={() => setShowPassword(!showPassword)}
+      >
+        <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+      </span>
             <span className="forgot-password">
               <Link to="/forgot">Forgot Password?</Link>
             </span>
           </div>
           <div className="button-container">
-            <button type="submit" className="login-button">Login</button>
+            <button type="submit" className= "login-button">Login</button>
           </div>
           <h1 type="button" className="create-account ml-28 md:ml-32 ">
             <Link to="/signup">Create Account</Link>

@@ -70,7 +70,7 @@ const EditProfile = () => {
     event.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('user_id'); // Retrieve the user_id from localStorage
+      const userId = localStorage.getItem('user_id'); 
       
       if (!token) {
         throw new Error('No token found in localStorage.');
@@ -159,9 +159,7 @@ const EditProfile = () => {
           <div className="button-container">
             <button type="submit" className="login-button">Submit</button>
           </div>
-          <div className="button-container">
-            <button onClick={handleLogout} type="submit" className="login-button">Logout</button>
-          </div>
+          
         </form>
         {error && <p className="error-text">{error}</p>}
         {success && <p className="success-text">{success}</p>}

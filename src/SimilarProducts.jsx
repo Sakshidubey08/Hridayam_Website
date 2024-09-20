@@ -199,7 +199,7 @@ const ProductDetailsPage = () => {
     };
     return (
         <>
-            <Header />
+            <Header/>
             <div className="breadcrumb1">Home / {selectedProduct?.name || 'Product'}</div>
             <div className="product-detail1 mt-1">
                 <div className="content">
@@ -408,7 +408,7 @@ const ProductDetailsPage = () => {
     {selectedProduct && selectedProduct.variations && selectedProduct.variations.length > 0 && (
         <div>
             <h3 className='free'>Available Sizes</h3>
-            <div style={{ display: 'flex', flexDirection: 'row', }}>
+            <div style={{ display: 'flex', flexDirection: 'row',}}>
                 {selectedProduct.variations.map((variation) => (
                     <div key={variation._id} style={{ marginBottom: '10px' }}>
                         <h3

@@ -278,7 +278,7 @@
 // };
 
 // export default CartPage;
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import './CartPage.css';
 import Header from './Header';
 import { CartContext } from './CartContext';
@@ -304,7 +304,47 @@ function App() {
   const [selected, setSelected] = useState(false);
   const [quantity, setquantity] = useState(1);
   const [quantitymodel, setquantitymodel] = useState(1);
-  const [selected2, setselected2] = useState(false)
+  const [selected2, setselected2] = useState(false);
+  const [id,setid]=useState();
+  const [product,setProduct]=useState([]);
+
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+        try {
+            console.log("Fetching product details...");
+            const response = await fetch(`https://api.hirdayam.com/api/productDetails?product_id=${id}`);
+            if (!response.ok) {
+                throw new Error(`Error fetching product details: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log("API Response:", data); // Debug API response
+
+            if (data && data.data) {
+                const product = data.data;
+                console.log("Product Data:", product); // Debug product data
+                setProduct(product); // Set the entire product data if needed
+               // setSelectedProduct(product); // Set the selected product
+               // setSelectedImage(product.image || null); // Set the main image
+                console.log("Product Colors:", product.colors); // Debug colors data
+
+            } else {
+                console.error("API response does not contain expected data:", data);
+                setProduct(null);
+               // setSelectedProduct(null);
+              //  setSelectedImage(null);
+            }
+
+        } catch (error) {
+            console.error('Failed to fetch product details:', error);
+            // setError(error.message);
+        } finally {
+            // setLoading(false);
+        }
+    };
+
+    fetchProductDetails();
+}, [id]);
   if (cartItems.length === 0) {
     return (
       <>
@@ -347,6 +387,8 @@ function App() {
   const calculateTotal = () => {
     return calculateSubtotal();
   };
+
+ 
   return (
     <>
       <Header />
@@ -400,9 +442,9 @@ function App() {
                         </p>
                       </div>
                       <div className="product-options">
-                        <div onClick={() => document.getElementById('my_modal_31').showModal()} className="option flex items-center">
+                        <div onClick={() =>{ setid(item.product._id); document.getElementById('my_modal_31').showModal()}} className="option flex items-center">
                           <span className="labe flex items-center w-20 justify-center gap-2 bg-gray-300/30 rounded-md">
-                            Size:<span>{item.product.variation_size}</span>
+                            Size:<span>{item.product.default_size||"size not found"}</span>
                             <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
                           </span>
                           <dialog id="my_modal_31" className="modal">
@@ -413,9 +455,22 @@ function App() {
                               <div>
                                 <p className=' font-bold text-lg my-3'>Select Size</p>
                                 <hr />
-                                <div className='my-4'>
-                                  <p className='  border border-black w-7 h-7 p-4 flex items-center  justify-center rounded-full '>M</p>
+                               <div className='flex gap-4'>
+                               {
+                            
+                                 product&&product.variations? product.variations.map((variation)=>{
+                                   return(
+                                    <div className='my-4  flex'>
+                                  <p className='  border border-black w-7 text-xs  h-7 p-4 flex items-center  justify-center rounded-full '>{variation.size}</p>
                                 </div>
+                                   )
+                                }):""
+                                }
+                                </div>
+                               
+                               
+                                
+                               
                                 <div className=' flex items-center justify-center'>
                                   <div className='border p-1 bg-blue-800 flex items-center justify-center text-white rounded-md w-full'>Done</div>
 

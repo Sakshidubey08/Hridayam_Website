@@ -177,13 +177,17 @@ const fetchsearchdatalist = async () => {
       <div className='home-container'>
         <div className="blue-background">
           <div className="images-container">
-            <img src={pinterest} alt="Image 1" className="image"/>
-            <img src={instagram} alt="Image 2" className="image"/>
-            <img src={facebook} alt="Image 3" className="image"/>
-            <img src={XLogo} alt="Image 4" className="image"/>
+          <a href='https://in.pinterest.com/' target='_blank' rel='noopener noreferrer'> <img src={pinterest} alt="Image 1" className="image"/></a> 
+            {/* <img src={instagram} alt="Image 2" className="image"/> */}
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+  <img src={instagram} alt="Instagram" className="image" />
+</a>
+
+        <a href='https://www.facebook.com/' target='_blank' rel='noopener noreferrer'>   <img src={facebook} alt="Image 3" className="image"/></a> 
+        <a href='https://x.com/' target='_blank' rel='noopener noreferrer'>       <img src={XLogo} alt="Image 4" className="image"/></a> 
           </div>
-          <div style={{ color: ' #F3F3F3', fontFamily: 'Poppins' }} className="  center-text">
-            Free Shipping On All Us Orders Over Rs 499
+          <div style={{ color: ' #F3F3F3', fontFamily: 'Poppins',fontSize:'14px' }} className="center-text">
+            Free Shipping On All Orders Over Rs 499
           </div>
           <div className="locate-store">
             <img src={location} alt="Locate Icon" className="icon" />
@@ -221,7 +225,7 @@ const fetchsearchdatalist = async () => {
                         <img width={"20px"} src={couponsvg3}></img>
                       </div>
                       <div className='text-[10px]'>
-                        <p className='font-bold'>Haridayam Fashion</p>
+                        <p className='font-bold'>Hirdayam Fashion</p>
                         <p>Redeem Coupon Save ₹200</p>
                       </div>
                     </div>
@@ -316,13 +320,13 @@ const fetchsearchdatalist = async () => {
             <input
               onChange={handleSearch} // Call handleSearch on text input change
               onKeyPress={handleKeyPress} // Call handleKeyPress on key press
-              type="text"
+              type="search"
               className="search-input"
               placeholder="Search product..." />
               
               
           </div>
-  <ul tabIndex={0} className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.catelogs.length<1&&searchdatatext.data.categories.length<1&&searchdatatext.data.products.length<1?"hidden":"block"):""} ${searchinput2.length==0?"hidden":"block"} dropdown-content  my-2 mr-10 menu bg-base-100 overflow-y-scroll h-96  rounded-box  z-[5000] w-3/5 shadow`}>
+  <ul tabIndex={0} className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.catelogs.length<1&&searchdatatext.data.categories.length<1&&searchdatatext.data.products.length<1?"hidden":"block"):""} ${searchinput2.length==0?"hidden":"block"} dropdown-content  my-2 mr-10 menu bg-base-100 overflow-y-scroll h-96 scrollbar-none2  rounded-box  z-[5000] w-3/5 shadow`}>
   {/* <div>{searchdatatext&&searchdatatext.data?searchdatatext.data.products[0].name:"df"}</div>   */}
   <div className={`${searchdatatext&&searchdatatext.data?(searchdatatext.data.products.length<1?"hidden":"block"):""} ml-3 font-semibold`}>
   Products

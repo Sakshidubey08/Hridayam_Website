@@ -172,14 +172,12 @@ function Dropdown() {
       {showDropdown && (
         <div className="dropdown1">
           <div className="dropdown-header">
-            <div className="dropdown-item1">Welcome </div>
+            <div className="dropdown-item1">Welcome <span className=''>{userprofiledata && userprofiledata.data && userprofiledata.data.name?userprofiledata.data.name.split(' ')[0]:""}</span>
+            </div>
             
-            {/* <span className="close-icon" onClick={handleCloseClick}>&times;</span> */}
             <FontAwesomeIcon icon={faTimes} onClick={handleCloseClick} size="lg" className="wishlist-delete-icon3" />
 
           </div>
-          {/* <div>{userprofiledata.length}</div> */}
-          {/* <span className=''>{userprofiledata && userprofiledata.data && userprofiledata.data.name?userprofiledata.data.name.split(' ')[0]:""}</span> */}
           <p className="dropdown-item6">To access account and manage order</p>
 
           {!isAuthenticated ? (
@@ -203,7 +201,10 @@ function Dropdown() {
               <Link to="/manage-address" className="dropdown-item7 dropdown-line-text">Manage Address</Link>
               <div className=' h-1  rounded-r-md dropdownline  bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'></div>
 
-              <button className="dropdown-item2" onClick={logout}>Logout</button>
+              <button className="dropdown-item2" onClick={() => {
+        logout(); 
+         window.location.reload();}}>
+              Logout</button>
             </>
           )}
         </div>

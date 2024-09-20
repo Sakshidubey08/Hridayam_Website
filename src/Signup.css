@@ -17,7 +17,7 @@
   display: flex;
   margin-bottom: 20px;
   gap: 20px;
-  flex-wrap: wrap; /* Allow wrapping for responsiveness */
+  flex-wrap: wrap; 
 }
 
 .form-row input {
@@ -235,4 +235,19 @@
 
 .submit-button:hover {
   background-color: #218838;
+}
+.toggle-password {
+  position: absolute;
+  right: 255px;
+  top: 51.2%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.toggle-password2 {
+  position: absolute;
+  right: 404px;
+  top: 51.2%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }

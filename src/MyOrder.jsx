@@ -177,7 +177,6 @@ const cancelOrder = () => {
               <tr>
                 {/* <th>Select</th> */}
                 {/* <th>{orderdetails.data.message}</th> */}
-                <th>Order Id</th>
               
                 <th>Order Date</th>
                  <th>Payment</th>
@@ -191,7 +190,6 @@ const cancelOrder = () => {
             
             
                 <tr>
-                  <td></td>
                   <td className=' font-semibold'>{formattedDate}</td>
                   <td>{payment}</td>
 

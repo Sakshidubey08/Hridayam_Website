@@ -302,6 +302,8 @@ import axios from 'axios';
 import '../Home.css';
 import Header from '../Header';
 import '../Signup.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const SignupForm = () => {
   const [name, setName] = useState('');
@@ -525,7 +527,7 @@ const SignupForm = () => {
               placeholder="Email Id"
               required
             />
-            <input
+            {/* <input
               type={showPassword ? 'text' : 'password'}
               id="password"
               value={password}
@@ -539,7 +541,21 @@ const SignupForm = () => {
               className="toggle-password"
               onClick={() => setShowPassword(!showPassword)}
             >
-            </span>
+            </span> */}
+            <input
+        type={showPassword ? 'text' : 'password'}
+        id="password"
+        value={password}
+        onChange={handlePasswordChange}
+        placeholder="Password"
+        required
+      />
+      <span
+        className="toggle-password"
+        onClick={() => setShowPassword(!showPassword)}
+      >
+        <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+      </span>
           </div>
           <div className="form-row">
             <button type="submit" className="signup-button">Signup</button>
