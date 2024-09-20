@@ -578,7 +578,7 @@ if (product.acrylicfinalpreview) {
             quantity:item.quantity, // item._id === product._id ? newQuantity : item.quantity, // Update quantity if it's the current product
             user_id: item.user_id,
             product_color_image_id: item.product_color_image_id,
-            product_variation_id: item.product_variation_id,
+            product_variation_id:  item.product_variation_id,
             personalize_image: item.personalize_image,
             createdAt: item.createdAt,
             updatedAt: item.updatedAt,
@@ -783,7 +783,6 @@ if (product.acrylicfinalpreview) {
 
  const calculateTotal = () => {
         const subtotal = calculateSubtotal();
-        
         const total = subtotal - couponDiscount;
         const gstamount=parseInt(total*gst/100)
 

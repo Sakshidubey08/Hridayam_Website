@@ -36,10 +36,11 @@ const ProductDetailsPage = () => {
         line3: "Try & Buy might be available.",
         line4: "Easy 14 days returns and exchanges."
     });
-    const [checkButtonText, setCheckButtonText] = useState('Check');
+    const [checkButtonText, setCheckButtonText] = useState('Check');    
     const handleVariationClick = (variation) => {
         setSelectedVariation(variation); // Store the selected variation in the state
         console.log('Selected Variation:', variation);
+
     };
     
 

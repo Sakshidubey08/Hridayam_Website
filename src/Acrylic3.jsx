@@ -1255,6 +1255,7 @@ function App() {
             // color:"" ,
             // variation: "",
             id:null,
+            
         
             acrylicsizeid:sizeId,
             acrylicsizename:selectedSize,
@@ -1262,6 +1263,7 @@ function App() {
             acrylicthicknessname:selectedThickness,
             acrylicprice:sizeprice+thicknessprice,
             acrylicfinalpreview:screenshot,
+
           };
           console.log(productToAdd.acrylicsizename+"new Acylic")
 

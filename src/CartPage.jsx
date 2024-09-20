@@ -348,7 +348,7 @@ function App() {
   if (cartItems.length === 0) {
     return (
       <>
-        <Header />
+        <Header/>
         <div className='empty-wishlist-card mt-20 md:mt-10'>Your cart is empty</div>
       </>
     );
@@ -444,7 +444,7 @@ function App() {
                       <div className="product-options">
                         <div onClick={() =>{ setid(item.product._id); document.getElementById('my_modal_31').showModal()}} className="option flex items-center">
                           <span className="labe flex items-center w-20 justify-center gap-2 bg-gray-300/30 rounded-md">
-                            Size:<span>{item.product.default_size||"size not found"}</span>
+                            Size:<span>{item.product?(item.product.default_size||"size not found"):""}</span>
                             <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
                           </span>
                           <dialog id="my_modal_31" className="modal">
