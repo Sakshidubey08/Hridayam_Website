@@ -314,7 +314,7 @@ if (product.acrylicthicknessid) {
 }
 
 if (product.acrylicthicknessname) {
-  formData.append('product_variation_id', product.acrylicthicknessname);
+  formData.append('acrylic_thickness_name', product.acrylicthicknessname);
 }
 
 if (product.acrylicprice) {

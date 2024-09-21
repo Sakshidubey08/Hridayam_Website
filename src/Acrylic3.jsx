@@ -1254,7 +1254,7 @@ function App() {
             // text:"",
             // color:"" ,
             // variation: "",
-            id:null,
+
             
         
             acrylicsizeid:sizeId,

@@ -414,7 +414,7 @@ function App() {
                     </div>
                     <div className={`product-imag   flex items-center gap-1 ${item.product == null ? "hidden" : "block"}  `}>
                       {/* <div>{item.product==null?"":item.product.product_type}</div> */}
-                      <Swiper className={`${item.product == null ? "" : (item.product.product_type == "normal" ? "hidden" : "block")}    w-32 h-50 `} loop={true} spaceBetween={10} slidesPerView={1} autoplay={{ delay: 1000 }} pagination={{ clickable: true }} navigation>
+                      <Swiper className={`${item.product == null ? "" : (item.product.product_type == "normal"||item.product.product_type=="pre_book" ? "hidden" : "block")}    w-32 h-50 `} loop={true} spaceBetween={10} slidesPerView={1} autoplay={{ delay: 1000 }} pagination={{ clickable: true }} navigation>
                         {/* SwiperSlide Components */}
                         <SwiperSlide>
                           <img style={{ height: "100%" }} className={`${item.product == null ? "hidden" : ""} bg-contain  md:h-28  h-full w-full `} src={item.product == null ? "" : item.product.image} />
@@ -426,7 +426,7 @@ function App() {
 
                         </SwiperSlide>
                       </Swiper>
-                      <img style={{ height: "100%" }} className={`${item.product == null ? "" : (item.product.product_type == "normal" ? "block" : "hidden")}  bg-contain  md:h-28 h-full w-full `} src={item.product == null ? "" : item.product.image} />
+                      <img  style={{ height: "20%",objectFit:"contain" }} className={`${item.product == null ? "" : (item.product.product_type == "normal"||item.product.product_type=="pre_book" ? "block" : "hidden")}  bg-contain md:w-60 md:h-60 h-full w-full `} src={item.product == null ? "" : item.product.image} />
 
 
                     </div>
@@ -442,8 +442,8 @@ function App() {
                         </p>
                       </div>
                       <div className="product-options">
-                        <div onClick={() =>{ setid(item.product._id); document.getElementById('my_modal_31').showModal()}} className="option flex items-center">
-                          <span className="labe flex items-center w-20 justify-center gap-2 bg-gray-300/30 rounded-md">
+                        <div  onClick={() =>{ setid(item.product?item.product._id:""); document.getElementById('my_modal_31').showModal()}} className="option flex items-center">
+                          <span className={`${item.product?"block":"hidden"} labe flex px-2 items-center  justify-center gap-2 bg-gray-300/30 rounded-md`}>
                             Size:<span>{item.product?(item.product.default_size||"size not found"):""}</span>
                             <img className='w-3' src='https://cdn-icons-png.flaticon.com/128/6850/6850779.png'></img>
                           </span>
