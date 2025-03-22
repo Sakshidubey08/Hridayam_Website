@@ -172,7 +172,7 @@ function Dropdown() {
       {showDropdown && (
         <div className="dropdown1">
           <div className="dropdown-header">
-            <div className="dropdown-item1">Welcome <span className=''>{userprofiledata && userprofiledata.data && userprofiledata.data.name?userprofiledata.data.name.split(' ')[0]:""}</span>
+            <div className="dropdown-item1">Welcome, <span className=''>{userprofiledata && userprofiledata.data && userprofiledata.data.name?userprofiledata.data.name.split(' ')[0]:""}</span>
             </div>
             
             <FontAwesomeIcon icon={faTimes} onClick={handleCloseClick} size="lg" className="wishlist-delete-icon3" />
